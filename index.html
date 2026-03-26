@@ -402,7 +402,7 @@
       <div class="signup-panel-title" id="hsp-title">¡Bienvenido, Miembro Fundador!</div>
       <p class="signup-panel-sub" id="hsp-sub">Estás en la lista. Invita a tu red ahora — cada colega verificado que traes te sube de tier.</p>
       <div class="ref-link-row">
-        <input class="ref-link-input" value="noduspro.com/ref/TUCODIGO" readonly/>
+        <input class="ref-link-input" value="noduspro.net/ref/TUCODIGO" readonly/>
         <button class="ref-copy-btn" id="hero-copy-btn" onclick="copyRefHero()">Copiar link</button>
       </div>
       <div class="share-label" id="hshare-label">Comparte ahora</div>
@@ -680,7 +680,7 @@
     <p class="signup-panel-sub" id="sp-sub">Estás en la lista. Mientras esperamos el lanzamiento, invita a tu red — cada colega que traes fortalece el ecosistema y te sube de tier.</p>
 
     <div class="ref-link-row">
-      <input class="ref-link-input" id="ref-link-val" value="noduspro.com/ref/TUCODIGO" readonly/>
+      <input class="ref-link-input" id="ref-link-val" value="noduspro.net/ref/TUCODIGO" readonly/>
       <button class="ref-copy-btn" id="ref-copy-btn" onclick="copyRef()">Copiar link</button>
     </div>
 
@@ -693,7 +693,7 @@
     </div>
 
     <div class="copy-text-box" id="share-text-box">
-      "Acabo de unirme a NodusPro como miembro fundador — el primer marketplace profesional del ecosistema petrolero venezolano. Si tienes experiencia en O&G y quieres que el sector te encuentre, únete: noduspro.com/ref/TUCODIGO"
+      "Acabo de unirme a NodusPro como miembro fundador — el primer marketplace profesional del ecosistema petrolero venezolano. Si tienes experiencia en O&G y quieres que el sector te encuentre, únete: noduspro.net/ref/TUCODIGO"
     </div>
     <button class="copy-text-btn" onclick="copyShareText()" id="copy-text-btn">↗ Copiar este texto para LinkedIn / WhatsApp</button>
 
@@ -701,7 +701,7 @@
       <div class="profile-avatar" id="profile-initials">NP</div>
       <div class="profile-card-info">
         <h4 id="profile-name">Tu Nombre · O&G Venezuela</h4>
-        <p>noduspro.com · Perfil Verificado</p>
+        <p>noduspro.net · Perfil Verificado</p>
       </div>
       <div class="profile-card-badge" id="profile-badge">MIEMBRO FUNDADOR</div>
     </div>
@@ -939,13 +939,13 @@ function updatePricing() {
   document.getElementById('ps3').textContent = per;
 }
 
-const shareTextES = `Acabo de unirme a NodusPro como miembro fundador — el primer marketplace profesional del ecosistema petrolero venezolano. Si tienes experiencia en O&G y quieres que el sector te encuentre, únete: noduspro.com/ref/TUCODIGO`;
-const shareTextEN = `I just joined NodusPro as a founding member — the first professional marketplace for Venezuela's O&G ecosystem. If you have O&G experience and want the sector to find you, join here: noduspro.com/ref/TUCODIGO`;
+const shareTextES = `Acabo de unirme a NodusPro como miembro fundador — el primer marketplace profesional del ecosistema petrolero venezolano. Si tienes experiencia en O&G y quieres que el sector te encuentre, únete: noduspro.net/ref/TUCODIGO`;
+const shareTextEN = `I just joined NodusPro as a founding member — the first professional marketplace for Venezuela's O&G ecosystem. If you have O&G experience and want the sector to find you, join here: noduspro.net/ref/TUCODIGO`;
 
 function getShareText() { return currentLang === 'es' ? shareTextES : shareTextEN; }
 
 function copyRef() {
-  navigator.clipboard.writeText('https://noduspro.com/ref/TUCODIGO').catch(()=>{});
+  navigator.clipboard.writeText('https://noduspro.net/ref/TUCODIGO').catch(()=>{});
   const btn = document.getElementById('ref-copy-btn');
   const orig = btn.textContent;
   btn.textContent = currentLang === 'es' ? '✓ Copiado' : '✓ Copied';
@@ -954,7 +954,7 @@ function copyRef() {
 }
 
 function copyRefHero() {
-  navigator.clipboard.writeText('https://noduspro.com/ref/TUCODIGO').catch(()=>{});
+  navigator.clipboard.writeText('https://noduspro.net/ref/TUCODIGO').catch(()=>{});
   const btn = document.getElementById('hero-copy-btn');
   const orig = btn.textContent;
   btn.textContent = currentLang === 'es' ? '✓ Copiado' : '✓ Copied';
@@ -971,7 +971,7 @@ function copyShareText() {
 }
 
 function shareLinkedIn() {
-  const url = encodeURIComponent('https://noduspro.com/ref/TUCODIGO');
+  const url = encodeURIComponent('https://noduspro.net/ref/TUCODIGO');
   const text = encodeURIComponent(getShareText());
   window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&summary=${text}`,'_blank');
 }
@@ -1017,7 +1017,7 @@ async function saveToWaitlist(email, source) {
 
 function showSuccessPanel(email, successId) {
   const code = email.split('@')[0].toUpperCase().replace(/[^A-Z0-9]/g,'').substring(0,8);
-  document.querySelectorAll('.ref-link-input').forEach(el => el.value = `noduspro.com/ref/${code}`);
+  document.querySelectorAll('.ref-link-input').forEach(el => el.value = `noduspro.net/ref/${code}`);
   document.querySelectorAll('#share-text-box').forEach(el => {
     el.textContent = (currentLang==='es' ? shareTextES : shareTextEN).replace(/TUCODIGO/g, code);
   });
