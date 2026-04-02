@@ -3,1057 +3,1196 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NodusPro — Venezuela O&G Marketplace</title>
+<title>NodusPro — Venezuela O&G</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --black: #090908;
-    --dark: #101010;
-    --surface: #181816;
-    --border: rgba(255,255,255,0.07);
-    --border2: rgba(255,255,255,0.13);
-    --amber: #C8851A;
-    --amber-light: #E09830;
-    --amber-dim: rgba(200,133,26,0.12);
-    --amber-dim2: rgba(200,133,26,0.06);
-    --text: #EDE8DF;
-    --text2: #968F84;
-    --text3: #504B44;
-    --green: #3A9E5A;
-    --green-dim: rgba(58,158,90,0.12);
-    --red-dim: rgba(180,30,30,0.10);
-    --red: #c0392b;
-  }
-  html { scroll-behavior: smooth; }
-  body { background:var(--black); color:var(--text); font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.6; overflow-x:hidden; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --white:#FFFFFF;
+  --bg:#FAFAF8;
+  --bg2:#F3F1EC;
+  --surface:#FFFFFF;
+  --border:#E5E2DA;
+  --border2:#D0CCBF;
+  --text:#1A1916;
+  --text2:#6B6860;
+  --text3:#A8A59E;
+  --navy:#0F2137;
+  --navy2:#1A3A5C;
+  --gold:#B5860D;
+  --gold2:#9A6510;
+  --gold-bg:#FBF5E6;
+  --gold-bd:#E8D5A3;
+  --green:#166534;
+  --green-bg:#F0FDF4;
+  --green-bd:#BBF7D0;
+  --red:#991B1B;
+  --red-bg:#FEF2F2;
+  --red-bd:#FECACA;
+  --blue:#1D4ED8;
+  --blue-bg:#EFF6FF;
+  --blue-bd:#BFDBFE;
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.65;overflow-x:hidden}
 
-  /* OFAC BANNER — Especialista Sanciones */
-  .ofac-banner {
-    background: var(--red-dim);
-    border-bottom: 0.5px solid rgba(192,57,43,0.25);
-    padding: 10px 48px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 12px;
-    color: var(--text2);
-    font-family: 'DM Mono', monospace;
-    letter-spacing: 0.5px;
-  }
-  .ofac-dot { width:6px; height:6px; background:var(--red); border-radius:50%; flex-shrink:0; }
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.logo-mark{width:32px;height:32px;background:var(--navy);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-mark svg{width:17px;height:17px}
+.logo-name{font-size:16px;font-weight:500;letter-spacing:-0.3px;color:var(--text)}
+.logo-name em{font-style:normal;color:var(--gold)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.lang-toggle{display:flex;border:1px solid var(--border2);border-radius:7px;overflow:hidden}
+.lang-btn{font-size:12px;font-weight:500;padding:5px 11px;border:none;background:transparent;color:var(--text3);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+.lang-btn.on{background:var(--navy);color:white}
+.nav-cta{background:var(--navy);color:white;font-size:13px;font-weight:500;padding:8px 18px;border-radius:7px;text-decoration:none;transition:background .15s;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.nav-cta:hover{background:var(--navy2)}
 
-  /* FLAG RIBBON */
-  .flag-ribbon { height:3px; background:linear-gradient(to right,#CF142B 33.3%,#FFFFFF 33.3%,#FFFFFF 66.6%,#00247D 66.6%); position:fixed; top:0; left:0; right:0; z-index:200; transition:opacity 0.4s; }
-  body.lang-en .flag-ribbon { opacity:0; }
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 48px 80px;text-align:center;background:var(--white);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-100px;right:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(181,134,13,.05) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(15,33,55,.04) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:720px;width:100%;position:relative;z-index:1}
+.hero-inner.hidden{display:none}
 
-  /* NAV */
-  nav { position:fixed; top:3px; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:16px 48px; background:rgba(9,9,8,0.92); backdrop-filter:blur(14px); border-bottom:0.5px solid var(--border); }
+/* Form overlay */
+.form-overlay{display:none;max-width:520px;margin:0 auto;text-align:left}
+.form-overlay.show{display:block}
 
-  /* LOGO */
-  .logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
-  .logo-badge { width:36px; height:36px; background:var(--amber); border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background 0.2s; }
-  .logo:hover .logo-badge { background:var(--amber-light); }
-  .logo-badge svg { width:20px; height:20px; }
-  .logo-text { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:3px; color:var(--text); }
-  .logo-text span { color:var(--amber); }
+.pill{display:inline-flex;align-items:center;gap:7px;background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:500;color:var(--gold);margin-bottom:28px}
+.pill-dot{width:5px;height:5px;background:var(--gold);border-radius:50%}
+h1{font-family:'Fraunces',serif;font-size:clamp(40px,6vw,68px);font-weight:800;line-height:1.05;letter-spacing:-1.5px;color:var(--text);margin-bottom:22px}
+h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:18px;color:var(--text2);font-weight:300;line-height:1.7;max-width:540px;margin:0 auto 20px}
+.vs-row{display:inline-flex;align-items:center;gap:10px;margin-bottom:36px;font-size:13px;color:var(--text3)}
+.vs-tag{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:500;color:var(--text2)}
+.vs-tag.win{background:var(--gold-bg);border-color:var(--gold-bd);color:var(--gold)}
 
-  .nav-right { display:flex; align-items:center; gap:14px; }
-  .lang-toggle { display:flex; align-items:center; background:var(--surface); border:0.5px solid var(--border2); border-radius:4px; overflow:hidden; }
-  .lang-btn { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:1.5px; padding:7px 13px; cursor:pointer; border:none; background:transparent; color:var(--text3); transition:all 0.2s; }
-  .lang-btn.active { background:var(--amber); color:var(--black); font-weight:500; }
-  .lang-btn:not(.active):hover { color:var(--text2); }
-  nav a.cta-small { background:var(--amber); color:var(--black); font-size:12px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; padding:10px 20px; border-radius:2px; text-decoration:none; transition:background 0.2s; white-space:nowrap; }
-  nav a.cta-small:hover { background:var(--amber-light); }
+/* Email capture */
+.email-row{display:flex;max-width:440px;margin:0 auto 12px}
+.email-row input{flex:1;border:1px solid var(--border2);border-right:none;background:white;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;padding:13px 18px;border-radius:8px 0 0 8px;outline:none;transition:border-color .15s}
+.email-row input:focus{border-color:var(--navy)}
+.email-row input::placeholder{color:var(--text3)}
+.email-row button{background:var(--navy);color:white;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;padding:13px 22px;border:none;border-radius:0 8px 8px 0;cursor:pointer;transition:background .15s;white-space:nowrap}
+.email-row button:hover{background:var(--navy2)}
+.hero-note{font-size:12px;color:var(--text3);display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:20px}
+.note-dot{width:5px;height:5px;background:#22C55E;border-radius:50%}
+.deadline{display:inline-flex;align-items:center;gap:8px;background:var(--red-bg);border:1px solid var(--red-bd);border-radius:8px;padding:9px 16px;font-size:13px;color:var(--red)}
 
-  /* FOUNDER BADGE — CMO recommendation */
-  .founder-bar {
-    background: var(--amber-dim);
-    border-bottom: 0.5px solid rgba(200,133,26,0.2);
-    padding: 11px 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-  }
-  .founder-bar-left { display:flex; align-items:center; gap:12px; }
-  .founder-pill { background:var(--amber); color:var(--black); font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; padding:4px 10px; border-radius:2px; font-weight:500; white-space:nowrap; }
-  .founder-bar p { font-size:13px; color:var(--text2); font-weight:300; }
-  .founder-bar p strong { color:var(--amber); font-weight:500; }
-  .founder-counter { font-family:'DM Mono',monospace; font-size:12px; color:var(--text3); white-space:nowrap; }
-  .founder-counter span { color:var(--amber); font-weight:500; }
+/* ── PROGRESSIVE FORM ── */
+.form-progress{height:3px;background:var(--border);border-radius:2px;margin-bottom:20px;overflow:hidden}
+.form-progress-fill{height:100%;background:var(--navy);border-radius:2px;transition:width .35s ease}
+.form-step-q{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--text);margin-bottom:5px;letter-spacing:-.3px;line-height:1.2}
+.form-step-s{font-size:14px;color:var(--text2);margin-bottom:20px;line-height:1.55}
+.fl{font-size:11px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;display:block}
+.fi{width:100%;border:1px solid var(--border2);border-radius:8px;padding:11px 14px;font-size:15px;font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);outline:none;transition:border-color .15s;margin-bottom:0}
+.fi:focus{border-color:var(--navy)}
+.fi::placeholder{color:var(--text3)}
+.field-group{margin-bottom:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+.chip{padding:7px 12px;border:1px solid var(--border2);border-radius:20px;font-size:13px;color:var(--text2);cursor:pointer;transition:all .15s;background:var(--white);user-select:none;font-family:'DM Sans',sans-serif}
+.chip:hover{border-color:var(--navy);color:var(--navy)}
+.chip.on{background:var(--navy);border-color:var(--navy);color:white}
+.chip.other-chip{border-style:dashed}
+.chip.other-chip.on{border-style:solid}
+.other-field{display:none;margin-top:8px}
+.other-field.show{display:block}
+.toggle-opt{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border:1px solid var(--border2);border-radius:8px;cursor:pointer;margin-bottom:8px;transition:border-color .15s;background:var(--white)}
+.toggle-opt:hover{border-color:var(--navy)}
+.toggle-opt.on{border-color:var(--navy);background:#F8FAFC}
+.toggle-opt-text{font-size:13px;color:var(--text)}
+.toggle-opt-sub{font-size:11px;color:var(--text3);margin-top:1px}
+.toggle-pill{width:36px;height:20px;border-radius:20px;background:var(--border2);position:relative;transition:background .2s;flex-shrink:0}
+.toggle-pill.on{background:var(--navy)}
+.toggle-thumb{width:16px;height:16px;border-radius:50%;background:white;position:absolute;top:2px;left:2px;transition:left .2s}
+.toggle-pill.on .toggle-thumb{left:18px}
+.main-btn{width:100%;padding:13px;background:var(--navy);color:white;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;transition:background .15s;font-family:'DM Sans',sans-serif;margin-top:10px}
+.main-btn:hover{background:var(--navy2)}
+.main-btn:disabled{opacity:.6;cursor:not-allowed}
+.sec-btn{width:100%;padding:11px;background:transparent;color:var(--text2);border:1px solid var(--border);border-radius:8px;font-size:13px;cursor:pointer;margin-top:8px;font-family:'DM Sans',sans-serif;transition:border-color .15s}
+.sec-btn:hover{border-color:var(--navy);color:var(--navy)}
+.li-alt{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-top:8px}
+.li-alt p{font-size:13px;color:var(--text2);margin-bottom:10px;line-height:1.5}
+.li-option{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid var(--border);border-radius:7px;cursor:pointer;background:white;margin-bottom:6px;font-size:13px;color:var(--text2);transition:border-color .15s}
+.li-option:hover{border-color:var(--navy);color:var(--navy)}
+.li-option:last-child{margin-bottom:0}
+.back-link{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--text3);cursor:pointer;margin-bottom:18px;background:none;border:none;font-family:'DM Sans',sans-serif;padding:0}
+.back-link:hover{color:var(--text)}
 
-  /* HERO */
-  .hero { min-height:100vh; display:flex; align-items:center; padding:160px 48px 80px; position:relative; overflow:hidden; }
-  .hero-bg { position:absolute; inset:0; background: radial-gradient(ellipse 55% 60% at 75% 50%, rgba(200,133,26,0.06) 0%, transparent 70%), repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(255,255,255,0.018) 80px), repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(255,255,255,0.018) 80px); pointer-events:none; }
-  .hero-content { max-width:820px; position:relative; z-index:1; animation:fadeUp 0.9s ease both; }
-  @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+/* Verification status */
+.vstep-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.vstep-row:last-child{border-bottom:none}
+.vstep-ico{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.vstep-ico.ok{background:var(--green-bg)}
+.vstep-ico.pend{background:var(--gold-bg)}
+.vstep-name{font-size:13px;font-weight:500;color:var(--text)}
+.vstep-desc{font-size:11px;color:var(--text3)}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:500}
+.bg{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)}
+.ba{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-bd)}
+.bb{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-bd)}
+.bgr{background:var(--bg2);color:var(--text2);border:1px solid var(--border)}
+.sico{width:48px;height:48px;border-radius:50%;background:var(--green-bg);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
 
-  /* TRUST SIGNALS ABOVE FOLD — UX Designer */
-  .hero-trust { display:flex; align-items:center; gap:16px; margin-bottom:28px; flex-wrap:wrap; }
-  .htrust-badge { display:flex; align-items:center; gap:6px; background:var(--surface); border:0.5px solid var(--border2); padding:6px 12px; border-radius:2px; font-size:11px; font-family:'DM Mono',monospace; letter-spacing:1px; color:var(--text3); }
-  .htrust-badge .ico { width:14px; height:14px; }
+/* ── STATS ── */
+.stats-bar{background:var(--navy);padding:36px 48px;display:flex}
+.stat{flex:1;padding-right:36px;border-right:1px solid rgba(255,255,255,.1)}
+.stat:not(:first-child){padding-left:36px}
+.stat:last-child{border-right:none;padding-right:0}
+.stat-n{font-family:'Fraunces',serif;font-size:34px;font-weight:700;color:#E8B94A;line-height:1;letter-spacing:-1px}
+.stat-l{font-size:13px;color:rgba(255,255,255,.6);margin-top:4px;line-height:1.5}
+.stat-s{font-size:10px;color:rgba(255,255,255,.3);margin-top:3px;font-style:italic}
 
-  .eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--amber); margin-bottom:24px; display:flex; align-items:center; gap:12px; }
-  .eyebrow::before { content:''; display:block; width:28px; height:1px; background:var(--amber); flex-shrink:0; }
-  h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(52px,7.5vw,92px); line-height:0.95; letter-spacing:2px; color:var(--text); margin-bottom:28px; }
-  h1 em { font-style:normal; color:var(--amber); }
-  .hero-sub { font-size:18px; font-weight:300; color:var(--text2); max-width:560px; margin-bottom:14px; line-height:1.75; }
-  .hero-sub strong { color:var(--text); font-weight:400; }
-  .hero-quote { font-size:14px; font-weight:300; font-style:italic; color:var(--text3); margin-bottom:36px; padding-left:16px; border-left:2px solid var(--amber); line-height:1.6; }
+/* ── SECTIONS ── */
+section{padding:88px 48px}
+.sec-label{font-size:11px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:12px}
+h2{font-family:'Fraunces',serif;font-size:clamp(28px,3.8vw,44px);font-weight:800;letter-spacing:-1px;color:var(--text);margin-bottom:12px;line-height:1.1}
+h2 em{font-style:italic;color:var(--gold)}
+.sec-sub{font-size:16px;color:var(--text2);max-width:500px;font-weight:300;line-height:1.7;margin-bottom:48px}
 
-  /* FOUNDER BENEFIT — CMO */
-  .founder-benefit { background:var(--amber-dim2); border:1px solid rgba(200,133,26,0.18); border-radius:2px; padding:14px 18px; margin-bottom:28px; display:flex; align-items:flex-start; gap:12px; max-width:500px; }
-  .founder-benefit-icon { font-size:16px; flex-shrink:0; margin-top:2px; }
-  .founder-benefit p { font-size:13px; color:var(--text2); font-weight:300; line-height:1.6; }
-  .founder-benefit p strong { color:var(--amber); font-weight:500; }
+/* ── COMPARE ── */
+.compare-section{background:var(--navy);padding:88px 48px}
+.compare-section .sec-label{color:rgba(255,255,255,.3)}
+.compare-section h2{color:white}
+.compare-section h2 em{color:#E8B94A}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.compare-col{padding:28px}
+.compare-col.li-col{background:rgba(255,255,255,.05)}
+.compare-col.np-col{background:rgba(232,185,74,.08)}
+.col-head{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.col-tag{font-size:11px;font-weight:500;letter-spacing:.5px;padding:4px 10px;border-radius:20px}
+.li-col .col-tag{background:rgba(255,255,255,.08);color:rgba(255,255,255,.4)}
+.np-col .col-tag{background:rgba(232,185,74,.15);color:#E8B94A}
+.col-name{font-size:15px;font-weight:500;color:white}
+.citem{display:flex;align-items:flex-start;gap:9px;font-size:14px;line-height:1.55;margin-bottom:12px}
+.citem:last-child{margin-bottom:0}
+.citem.con{color:rgba(255,255,255,.4)}
+.citem.pro{color:rgba(255,255,255,.88)}
+.cicon{width:16px;height:16px;flex-shrink:0;margin-top:2px}
 
-  .waitlist-form { display:flex; max-width:500px; }
-  .waitlist-form input { flex:1; background:var(--surface); border:1px solid var(--border2); border-right:none; color:var(--text); font-family:'DM Sans',sans-serif; font-size:15px; padding:16px 20px; border-radius:2px 0 0 2px; outline:none; transition:border-color 0.2s; }
-  .waitlist-form input::placeholder { color:var(--text3); }
-  .waitlist-form input:focus { border-color:var(--amber); }
-  .waitlist-form button { background:var(--amber); color:var(--black); font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; padding:16px 24px; border:none; border-radius:0 2px 2px 0; cursor:pointer; transition:background 0.2s; white-space:nowrap; }
-  .waitlist-form button:hover { background:var(--amber-light); }
-  .hero-note { margin-top:12px; font-size:12px; color:var(--text3); display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-  .dot-green { display:inline-block; width:6px; height:6px; background:var(--green); border-radius:50%; flex-shrink:0; }
-  .success-msg { display:none; font-size:14px; color:var(--amber); margin-top:14px; font-family:'DM Mono',monospace; letter-spacing:1px; }
+/* ── CARD DEMO ── */
+.demo-card{background:white;border:1px solid var(--border);border-radius:14px;padding:24px;max-width:520px;margin:0 auto}
+.dc-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+.dc-av{width:50px;height:50px;border-radius:10px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:500;color:white;flex-shrink:0;letter-spacing:-1px}
+.dc-name{font-size:16px;font-weight:500;color:var(--text)}
+.dc-role{font-size:13px;color:var(--text2);margin-top:2px;line-height:1.4}
+.dc-badges{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
+.dc-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.dc-chip{padding:5px 11px;border:1px solid var(--border);border-radius:20px;font-size:12px;color:var(--text2)}
+.dc-sep{height:1px;background:var(--border);margin-bottom:14px}
+.dc-stats{display:flex;gap:20px;margin-bottom:14px}
+.dc-stat-n{font-size:20px;font-weight:700;color:var(--gold);line-height:1}
+.dc-stat-l{font-size:11px;color:var(--text3);margin-top:2px}
+.dc-connect{width:100%;padding:10px;background:var(--navy);color:white;border:none;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif}
 
-  /* STATS */
-  .stats-bar { background:var(--surface); border-top:0.5px solid var(--border); border-bottom:0.5px solid var(--border); padding:36px 48px; display:flex; }
-  .stat { flex:1; padding-right:40px; border-right:0.5px solid var(--border); }
-  .stat:not(:first-child) { padding-left:40px; }
-  .stat:last-child { border-right:none; padding-right:0; }
-  .stat-num { font-family:'Bebas Neue',sans-serif; font-size:44px; letter-spacing:2px; color:var(--amber); line-height:1; }
-  .stat-label { font-size:13px; color:var(--text2); margin-top:6px; font-weight:300; line-height:1.5; }
+/* ── PROMISES ── */
+.promise-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.promise-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:28px}
+.prom-n{font-family:'Fraunces',serif;font-size:44px;font-weight:800;color:var(--border2);line-height:1;margin-bottom:14px}
+.prom-h{font-size:16px;font-weight:500;color:var(--text);margin-bottom:8px;letter-spacing:-.2px}
+.prom-p{font-size:14px;color:var(--text2);line-height:1.65;font-weight:300}
+.prom-tag{display:inline-block;margin-top:14px;background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--gold);font-weight:500}
 
-  /* SPECIALTIES — O&G Expert */
-  .specialties-section { padding:72px 48px; background:var(--dark); border-bottom:0.5px solid var(--border); }
-  .spec-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--border); margin-top:40px; }
-  .spec-card { background:var(--dark); padding:24px; cursor:default; transition:background 0.25s; }
-  .spec-card:hover { background:var(--surface); }
-  .spec-icon { font-size:22px; margin-bottom:10px; }
-  .spec-card h4 { font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:1.5px; color:var(--text); margin-bottom:6px; }
-  .spec-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:8px; }
-  .spec-tag { font-size:10px; font-family:'DM Mono',monospace; letter-spacing:0.5px; color:var(--text3); background:var(--surface); border:0.5px solid var(--border2); padding:3px 7px; border-radius:2px; }
+/* ── SPECS ── */
+.spec-section{background:var(--navy);padding:88px 48px}
+.spec-section .sec-label{color:rgba(255,255,255,.3)}
+.spec-section h2{color:white}
+.spec-section h2 em{color:#E8B94A}
+.spec-section .sec-sub{color:rgba(255,255,255,.5);max-width:500px}
+.spec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.spec-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:16px;transition:background .15s}
+.spec-card:hover{background:rgba(255,255,255,.09)}
+.spec-card h4{font-size:13px;font-weight:500;color:white;margin-bottom:8px}
+.spec-tags{display:flex;flex-wrap:wrap;gap:4px}
+.spec-tag{font-size:10px;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);padding:2px 8px;border-radius:20px}
+.regions{display:flex;flex-wrap:wrap;gap:7px}
+.region{background:rgba(232,185,74,.1);border:1px solid rgba(232,185,74,.2);border-radius:20px;padding:6px 14px;font-size:12px;color:#E8B94A;font-weight:500}
 
-  /* REGIONS — O&G Expert */
-  .regions-bar { display:flex; gap:2px; background:var(--border); margin-top:2px; }
-  .region { flex:1; background:var(--dark); padding:18px 20px; transition:background 0.25s; }
-  .region:hover { background:var(--surface); }
-  .region h5 { font-family:'Bebas Neue',sans-serif; font-size:15px; letter-spacing:1.5px; color:var(--amber); margin-bottom:4px; }
-  .region p { font-size:12px; color:var(--text3); font-weight:300; line-height:1.5; }
+/* ── HOW ── */
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.step-card{background:white;border:1px solid var(--border);border-radius:14px;padding:28px}
+.step-n{font-family:'Fraunces',serif;font-size:44px;font-weight:800;color:var(--border2);line-height:1;margin-bottom:14px}
+.step-h{font-size:16px;font-weight:500;color:var(--text);margin-bottom:8px}
+.step-p{font-size:14px;color:var(--text2);line-height:1.65;font-weight:300}
 
-  /* EMOTION BAND */
-  .emotion-band { padding:72px 48px; background:var(--black); border-bottom:0.5px solid var(--border); display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
-  .emotion-text h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(34px,4vw,52px); letter-spacing:2px; color:var(--text); line-height:1; margin-bottom:20px; }
-  .emotion-text h2 em { font-style:normal; color:var(--amber); }
-  .emotion-text p { font-size:16px; color:var(--text2); font-weight:300; line-height:1.8; }
-  .emotion-text p strong { color:var(--text); font-weight:400; }
-  .emotion-cards { display:flex; flex-direction:column; gap:2px; }
-  .emotion-card { background:var(--surface); padding:20px 24px; border-left:2px solid var(--amber); }
-  .emotion-card p { font-size:14px; color:var(--text2); font-weight:300; font-style:italic; line-height:1.7; }
-  .emotion-card span { display:block; margin-top:8px; font-size:11px; font-family:'DM Mono',monospace; letter-spacing:1px; color:var(--amber); }
+/* ── VERIFY ── */
+.verify-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.verify-card{background:white;border:1px solid var(--border);border-radius:12px;padding:22px}
+.verify-badge{display:inline-block;background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:500;color:var(--gold);letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px}
+.verify-card h4{font-size:14px;font-weight:500;color:var(--text);margin-bottom:7px}
+.verify-card p{font-size:13px;color:var(--text2);line-height:1.65;font-weight:300}
+.verify-steps-list{margin-top:10px;display:flex;flex-direction:column;gap:5px}
+.vstep-li{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--text2)}
+.vstep-li-n{width:18px;height:18px;border-radius:50%;background:var(--navy);color:white;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;flex-shrink:0;margin-top:1px}
+.verify-card.coming{opacity:.65}
+.honest-box{background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:10px;padding:16px 20px}
+.honest-box h4{font-size:13px;font-weight:500;color:var(--gold);margin-bottom:5px}
+.honest-box p{font-size:13px;color:var(--text2);line-height:1.65;font-weight:300}
 
-  /* SECTIONS */
-  section { padding:88px 48px; }
-  .section-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--amber); margin-bottom:16px; display:flex; align-items:center; gap:12px; }
-  .section-label::before { content:''; display:block; width:24px; height:1px; background:var(--amber); }
-  h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(34px,4.5vw,54px); letter-spacing:2px; color:var(--text); line-height:1; margin-bottom:14px; }
-  h2 em { font-style:normal; color:var(--amber); }
-  .section-desc { font-size:16px; color:var(--text2); max-width:520px; font-weight:300; line-height:1.75; margin-bottom:52px; }
+/* ── PRICING ── */
+.billing-row{display:flex;border:1px solid var(--border2);border-radius:8px;overflow:hidden;margin-bottom:28px;width:fit-content}
+.billing-btn{font-size:13px;font-weight:500;padding:8px 18px;border:none;background:transparent;color:var(--text3);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px}
+.billing-btn.on{background:var(--navy);color:white}
+.save-pill{background:#166534;color:white;font-size:10px;font-weight:600;padding:1px 7px;border-radius:10px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.price-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:28px;transition:box-shadow .15s}
+.price-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.price-card.featured{background:var(--navy);border-color:var(--navy)}
+.price-tier{font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:12px}
+.price-card.featured .price-tier{color:rgba(255,255,255,.35)}
+.price-name{font-size:22px;font-weight:600;color:var(--text);letter-spacing:-.3px;margin-bottom:4px}
+.price-card.featured .price-name{color:white}
+.price-was{font-size:12px;color:var(--text3);text-decoration:line-through;min-height:18px}
+.price-card.featured .price-was{color:rgba(255,255,255,.3)}
+.price-amount{font-size:40px;font-weight:700;color:var(--text);letter-spacing:-1px;line-height:1;margin-bottom:4px}
+.price-amount span{font-size:14px;font-weight:300;color:var(--text3);letter-spacing:0}
+.price-card.featured .price-amount{color:white}
+.price-card.featured .price-amount span{color:rgba(255,255,255,.4)}
+.price-desc{font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.6;min-height:42px}
+.price-card.featured .price-desc{color:rgba(255,255,255,.55)}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:8px}
+.price-features li{font-size:13px;color:var(--text2);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.price-card.featured .price-features li{color:rgba(255,255,255,.7)}
+.check-svg{width:15px;height:15px;flex-shrink:0;margin-top:1px}
+.roi-box{margin-top:24px;background:var(--gold-bg);border:1px solid var(--gold-bd);border-radius:10px;padding:16px 20px;font-size:13px;color:var(--text2);line-height:1.65;font-weight:300}
+.roi-box strong{color:var(--gold);font-weight:500}
 
-  /* FOR GRID */
-  .for-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--border); }
-  .for-card { background:var(--dark); padding:44px; transition:background 0.3s; }
-  .for-card:hover { background:var(--surface); }
-  .for-icon { width:40px; height:40px; background:var(--amber-dim); border:1px solid rgba(200,133,26,0.2); border-radius:2px; display:flex; align-items:center; justify-content:center; margin-bottom:20px; font-size:18px; }
-  .for-card h3 { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:2px; color:var(--text); margin-bottom:10px; }
-  .for-card p { font-size:15px; color:var(--text2); font-weight:300; line-height:1.75; margin-bottom:24px; }
-  .for-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
-  .for-list li { font-size:14px; color:var(--text2); display:flex; align-items:flex-start; gap:10px; line-height:1.5; }
-  .for-list li::before { content:'→'; color:var(--amber); font-family:'DM Mono',monospace; font-size:12px; margin-top:2px; flex-shrink:0; }
+/* ── REFERRAL ── */
+.ref-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ref-card{background:white;border:1px solid var(--border);border-radius:14px;padding:26px}
+.ref-n{font-family:'Fraunces',serif;font-size:40px;font-weight:800;color:var(--border2);line-height:1;margin-bottom:12px}
+.ref-h{font-size:15px;font-weight:500;color:var(--text);margin-bottom:7px}
+.ref-p{font-size:13px;color:var(--text2);line-height:1.65;font-weight:300}
+.ref-tag{display:inline-flex;align-items:center;gap:5px;margin-top:12px;background:var(--green-bg);border:1px solid var(--green-bd);border-radius:20px;padding:4px 11px;font-size:11px;color:var(--green);font-weight:500}
 
-  /* STEPS */
-  .how-bg { background:var(--surface); }
-  .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--border); }
-  .step { background:var(--surface); padding:40px; }
-  .step-num { font-family:'Bebas Neue',sans-serif; font-size:60px; letter-spacing:2px; color:rgba(200,133,26,0.15); line-height:1; margin-bottom:16px; }
-  .step h3 { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:1.5px; color:var(--text); margin-bottom:10px; }
-  .step p { font-size:14px; color:var(--text2); font-weight:300; line-height:1.75; }
+/* ── TESTIMONIALS ── */
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.test-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px}
+.test-card blockquote{font-size:14px;color:var(--text2);line-height:1.7;font-style:italic;margin-bottom:16px;font-weight:300}
+.test-author{display:flex;align-items:center;gap:10px}
+.t-av{width:34px;height:34px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:white;flex-shrink:0}
+.t-name{font-size:13px;font-weight:500;color:var(--text)}
+.t-role{font-size:11px;color:var(--text3);margin-top:1px}
 
-  /* COMPLIANCE — OFAC Expert */
-  .compliance-section { background:var(--dark); padding:56px 48px; border-top:0.5px solid var(--border); border-bottom:0.5px solid var(--border); }
-  .compliance-inner { display:grid; grid-template-columns:1fr 2fr; gap:60px; align-items:start; }
-  .compliance-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--text3); margin-bottom:12px; }
-  .compliance-title { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:2px; color:var(--text); line-height:1; margin-bottom:0; }
-  .compliance-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--border); }
-  .compliance-card { background:var(--dark); padding:24px; }
-  .compliance-card h4 { font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:1.5px; color:var(--text); margin-bottom:8px; }
-  .compliance-card p { font-size:13px; color:var(--text2); font-weight:300; line-height:1.65; }
-  .compliance-disclaimer { margin-top:20px; font-size:12px; color:var(--text3); font-family:'DM Mono',monospace; letter-spacing:0.5px; line-height:1.7; padding:14px 18px; border:0.5px solid var(--border2); border-radius:2px; background:var(--surface); }
+/* ── CTA ── */
+.cta-section{background:var(--navy);padding:100px 48px;text-align:center}
+.cta-inner{max-width:580px;margin:0 auto}
+.cta-section h2{color:white;font-family:'Fraunces',serif;margin-bottom:14px}
+.cta-section h2 em{color:#E8B94A;font-style:italic}
+.cta-section p{font-size:17px;color:rgba(255,255,255,.6);margin-bottom:36px;line-height:1.7;font-weight:300}
+.cta-form{display:flex;max-width:420px;margin:0 auto 12px}
+.cta-form input{flex:1;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.15);border-right:none;color:white;font-family:'DM Sans',sans-serif;font-size:15px;padding:13px 18px;border-radius:8px 0 0 8px;outline:none;transition:border-color .15s}
+.cta-form input:focus{border-color:#E8B94A}
+.cta-form input::placeholder{color:rgba(255,255,255,.35)}
+.cta-form button{background:#E8B94A;color:var(--navy);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;padding:13px 22px;border:none;border-radius:0 8px 8px 0;cursor:pointer;transition:background .15s;white-space:nowrap}
+.cta-form button:hover{background:#D4A53A}
+.cta-note{font-size:12px;color:rgba(255,255,255,.35)}
 
-  /* TRUST */
-  .trust-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; background:var(--border); }
-  .trust-card { background:var(--dark); padding:36px; transition:background 0.3s; }
-  .trust-card:hover { background:var(--surface); }
-  .trust-badge-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
-  .trust-badge { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--amber); background:var(--amber-dim2); border:1px solid rgba(200,133,26,0.15); padding:5px 12px; border-radius:2px; display:inline-block; }
-  .sec-badge { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px; color:var(--green); background:var(--green-dim); border:1px solid rgba(58,158,90,0.2); padding:4px 9px; border-radius:2px; }
-  .trust-card h3 { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1.5px; color:var(--text); margin-bottom:10px; }
-  .trust-card p { font-size:14px; color:var(--text2); font-weight:300; line-height:1.75; }
+/* ── COMPLIANCE ── */
+.compliance-section{background:var(--bg2);padding:64px 48px;border-top:1px solid var(--border)}
+.comp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
+.comp-card{background:white;border:1px solid var(--border);border-radius:10px;padding:18px}
+.comp-label{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.comp-card h4{font-size:14px;font-weight:500;color:var(--text);margin-bottom:5px}
+.comp-card p{font-size:12px;color:var(--text2);line-height:1.6;font-weight:300}
+.legal-note{margin-top:20px;font-size:11px;color:var(--text3);line-height:1.65;border-top:1px solid var(--border);padding-top:16px}
 
-  /* PRICING — CFO recommendations */
-  .price-toggle { display:flex; align-items:center; gap:0; background:var(--surface); border:0.5px solid var(--border2); border-radius:4px; overflow:hidden; margin-bottom:40px; width:fit-content; }
-  .price-toggle-btn { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:1.5px; padding:9px 20px; cursor:pointer; border:none; background:transparent; color:var(--text3); transition:all 0.2s; }
-  .price-toggle-btn.active { background:var(--amber); color:var(--black); font-weight:500; }
-  .annual-badge { background:var(--green); color:white; font-size:10px; font-family:'DM Mono',monospace; letter-spacing:1px; padding:3px 8px; border-radius:2px; margin-left:4px; }
-  .pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--border); }
-  .price-card { background:var(--dark); padding:36px; transition:background 0.3s; }
-  .price-card:hover { background:var(--surface); }
-  .price-card.featured { background:var(--surface); border-top:2px solid var(--amber); }
-  .price-tag { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--amber); margin-bottom:16px; }
-  .price-name { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:2px; color:var(--text); margin-bottom:6px; }
-  .price-amount { font-family:'Bebas Neue',sans-serif; font-size:48px; letter-spacing:1px; color:var(--text); line-height:1; margin-bottom:4px; transition:all 0.3s; }
-  .price-amount span { font-family:'DM Sans',sans-serif; font-size:15px; color:var(--text3); font-weight:300; }
-  .price-orig { font-size:12px; color:var(--text3); text-decoration:line-through; font-family:'DM Mono',monospace; margin-bottom:4px; min-height:18px; }
-  .price-desc { font-size:13px; color:var(--text2); margin-bottom:24px; font-weight:300; line-height:1.65; min-height:48px; }
-  .price-features { list-style:none; display:flex; flex-direction:column; gap:9px; }
-  .price-features li { font-size:13px; color:var(--text2); display:flex; align-items:flex-start; gap:10px; line-height:1.5; }
-  .price-features li::before { content:'✓'; color:var(--amber); font-size:12px; flex-shrink:0; margin-top:1px; }
+/* ── FOOTER ── */
+footer{background:var(--text);padding:44px 48px;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.footer-left p{font-size:13px;color:rgba(255,255,255,.35);margin-top:12px;max-width:260px;line-height:1.6;font-weight:300}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.2);margin-top:14px}
+.footer-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;justify-content:flex-end}
+.footer-links a{font-size:12px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .15s}
+.footer-links a:hover{color:#E8B94A}
+.footer-legal{font-size:11px;color:rgba(255,255,255,.2);text-align:right;max-width:300px;margin-top:14px;line-height:1.65}
 
-  /* ROI NOTE — CFO */
-  .roi-note { margin-top:24px; padding:16px 20px; background:var(--amber-dim2); border:0.5px solid rgba(200,133,26,0.15); border-radius:2px; font-size:13px; color:var(--text2); font-weight:300; line-height:1.65; }
-  .roi-note strong { color:var(--amber); font-weight:500; }
-
-  /* API SECTION — Arquitecto */
-  .api-section { background:var(--dark); padding:56px 48px; border-top:0.5px solid var(--border); border-bottom:0.5px solid var(--border); display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
-  .api-code { background:var(--surface); border:0.5px solid var(--border2); border-radius:2px; padding:20px 24px; font-family:'DM Mono',monospace; font-size:12px; color:var(--text3); line-height:1.8; }
-  .api-code .c-amber { color:var(--amber); }
-  .api-code .c-green { color:var(--green); }
-  .api-code .c-text { color:var(--text2); }
-
-  /* CTA */
-  .cta-section { background:var(--surface); text-align:center; border-top:0.5px solid var(--border); border-bottom:0.5px solid var(--border); padding:88px 48px; }
-  .cta-section p { font-size:17px; color:var(--text2); font-weight:300; margin-bottom:36px; max-width:500px; margin-left:auto; margin-right:auto; line-height:1.75; }
-  .waitlist-form-center { display:flex; max-width:480px; margin:0 auto; }
-  .waitlist-form-center input { flex:1; background:var(--dark); border:1px solid var(--border2); border-right:none; color:var(--text); font-family:'DM Sans',sans-serif; font-size:15px; padding:16px 20px; border-radius:2px 0 0 2px; outline:none; transition:border-color 0.2s; }
-  .waitlist-form-center input::placeholder { color:var(--text3); }
-  .waitlist-form-center input:focus { border-color:var(--amber); }
-  .waitlist-form-center button { background:var(--amber); color:var(--black); font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; padding:16px 24px; border:none; border-radius:0 2px 2px 0; cursor:pointer; transition:background 0.2s; white-space:nowrap; }
-  .waitlist-form-center button:hover { background:var(--amber-light); }
-
-  /* FOOTER */
-  footer { padding:48px; display:grid; grid-template-columns:1fr 1fr; gap:40px; border-top:0.5px solid var(--border); }
-  .footer-logo-row { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
-  .footer-desc { font-size:13px; color:var(--text3); font-weight:300; line-height:1.65; max-width:300px; }
-  .footer-copy { font-size:11px; color:var(--text3); margin-top:16px; font-family:'DM Mono',monospace; letter-spacing:0.5px; }
-  .footer-right { display:flex; flex-direction:column; align-items:flex-end; justify-content:space-between; }
-  .footer-links { display:flex; gap:24px; flex-wrap:wrap; justify-content:flex-end; }
-  .footer-links a { font-size:12px; color:var(--text3); text-decoration:none; transition:color 0.2s; font-family:'DM Mono',monospace; letter-spacing:0.5px; }
-  .footer-links a:hover { color:var(--amber); }
-  .footer-legal { font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; letter-spacing:0.5px; line-height:1.7; max-width:320px; text-align:right; margin-top:16px; }
-
-  /* GROWTH — Referral & Share */
-  .growth-section { background:var(--dark); padding:72px 48px; border-top:0.5px solid var(--border); border-bottom:0.5px solid var(--border); }
-  .growth-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:2px; background:var(--border); margin-top:48px; }
-  .growth-card { background:var(--dark); padding:36px; transition:background 0.3s; }
-  .growth-card:hover { background:var(--surface); }
-  .growth-num { font-family:'Bebas Neue',sans-serif; font-size:52px; color:rgba(200,133,26,0.2); line-height:1; margin-bottom:12px; }
-  .growth-card h3 { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:1.5px; color:var(--text); margin-bottom:10px; }
-  .growth-card p { font-size:14px; color:var(--text2); font-weight:300; line-height:1.75; }
-  .growth-reward { display:inline-flex; align-items:center; gap:8px; background:var(--amber-dim); border:1px solid rgba(200,133,26,0.2); border-radius:2px; padding:8px 14px; margin-top:14px; font-size:13px; color:var(--amber); font-family:'DM Mono',monospace; letter-spacing:0.5px; }
-
-  /* POST-SIGNUP PANEL */
-  .signup-panel { display:none; margin-top:20px; background:var(--surface); border:1px solid rgba(200,133,26,0.2); border-radius:2px; padding:24px; max-width:500px; text-align:left; }
-  .signup-panel.center { margin:20px auto 0; }
-  .signup-panel-title { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:2px; color:var(--amber); margin-bottom:6px; }
-  .signup-panel-sub { font-size:13px; color:var(--text2); font-weight:300; margin-bottom:18px; line-height:1.6; }
-
-  /* REFERRAL LINK */
-  .ref-link-row { display:flex; gap:0; margin-bottom:16px; }
-  .ref-link-input { flex:1; background:var(--dark); border:1px solid var(--border2); border-right:none; color:var(--text3); font-family:'DM Mono',monospace; font-size:12px; padding:11px 14px; border-radius:2px 0 0 2px; outline:none; letter-spacing:0.5px; }
-  .ref-copy-btn { background:var(--surface); border:1px solid var(--border2); color:var(--amber); font-family:'DM Mono',monospace; font-size:11px; letter-spacing:1px; padding:11px 16px; border-radius:0 2px 2px 0; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
-  .ref-copy-btn:hover { background:var(--amber); color:var(--black); }
-  .ref-copy-btn.copied { background:var(--green); color:white; border-color:var(--green); }
-
-  /* SHARE BUTTONS */
-  .share-label { font-size:11px; font-family:'DM Mono',monospace; letter-spacing:2px; color:var(--text3); text-transform:uppercase; margin-bottom:10px; }
-  .share-btns { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
-  .share-btn { display:flex; align-items:center; gap:7px; background:var(--dark); border:0.5px solid var(--border2); color:var(--text2); font-size:12px; font-family:'DM Mono',monospace; letter-spacing:0.5px; padding:9px 14px; border-radius:2px; cursor:pointer; transition:all 0.2s; text-decoration:none; }
-  .share-btn:hover { border-color:var(--amber); color:var(--amber); }
-  .share-btn.linkedin:hover { border-color:#0A66C2; color:#0A66C2; }
-  .share-btn.whatsapp:hover { border-color:#25D366; color:#25D366; }
-
-  /* SHAREABLE PROFILE CARD */
-  .profile-card-preview { background:var(--black); border:1px solid var(--border2); border-radius:4px; padding:16px; display:flex; align-items:center; gap:14px; margin-top:16px; }
-  .profile-avatar { width:44px; height:44px; background:var(--amber); border-radius:8px; display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--black); flex-shrink:0; letter-spacing:1px; }
-  .profile-card-info h4 { font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:1.5px; color:var(--text); margin-bottom:2px; }
-  .profile-card-info p { font-size:12px; color:var(--text3); font-family:'DM Mono',monospace; letter-spacing:0.5px; }
-  .profile-card-badge { margin-left:auto; background:var(--amber-dim); border:1px solid rgba(200,133,26,0.25); border-radius:2px; padding:4px 8px; font-size:9px; font-family:'DM Mono',monospace; letter-spacing:1.5px; color:var(--amber); white-space:nowrap; }
-
-  /* COPY TEXT BOX */
-  .copy-text-box { background:var(--dark); border:0.5px solid var(--border2); border-radius:2px; padding:12px 14px; font-size:13px; color:var(--text2); font-weight:300; line-height:1.65; font-style:italic; margin-bottom:10px; position:relative; }
-  .copy-text-btn { font-size:11px; font-family:'DM Mono',monospace; letter-spacing:1px; color:var(--amber); background:none; border:none; cursor:pointer; padding:0; transition:opacity 0.2s; }
-  .copy-text-btn:hover { opacity:0.7; }
-
-  /* RESPONSIVE */
-  @media (max-width:768px) {
-    nav { padding:16px 20px; }
-    .ofac-banner,.founder-bar { padding:10px 20px; }
-    .founder-bar { flex-direction:column; align-items:flex-start; gap:8px; }
-    section,.specialties-section,.compliance-section,.api-section { padding:60px 20px; }
-    .hero { padding:180px 20px 60px; }
-    .stats-bar { padding:28px 20px; flex-direction:column; gap:24px; }
-    .stat { border-right:none; border-bottom:0.5px solid var(--border); padding:0 0 20px !important; }
-    .stat:last-child { border-bottom:none; padding-bottom:0 !important; }
-    .spec-grid { grid-template-columns:1fr 1fr; }
-    .regions-bar { flex-direction:column; }
-    .emotion-band { grid-template-columns:1fr; gap:40px; padding:60px 20px; }
-    .for-grid,.steps,.trust-grid,.pricing-grid { grid-template-columns:1fr; }
-    .compliance-inner,.api-section { grid-template-columns:1fr; gap:32px; }
-    .compliance-grid { grid-template-columns:1fr; }
-    .waitlist-form,.waitlist-form-center { flex-direction:column; }
-    .waitlist-form input,.waitlist-form-center input { border-right:1px solid var(--border2); border-bottom:none; border-radius:2px 2px 0 0; }
-    .waitlist-form button,.waitlist-form-center button { border-radius:0 0 2px 2px; }
-    footer { grid-template-columns:1fr; padding:40px 20px; }
-    .footer-right { align-items:flex-start; }
-    .footer-links { justify-content:flex-start; }
-    .footer-legal { text-align:left; }
-    .hero-trust { gap:8px; }
-  }
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  nav{padding:0 20px}
+  .hero{padding:90px 20px 72px}
+  section,.compare-section,.spec-section,.cta-section,.compliance-section{padding:64px 20px}
+  .stats-bar{padding:28px 20px;flex-direction:column;gap:20px}
+  .stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.1);padding:0 0 18px!important}
+  .stat:last-child{border-bottom:none;padding-bottom:0!important}
+  .compare-grid,.promise-grid,.spec-grid,.steps-grid,.verify-grid,.pricing-grid,.ref-grid,.test-grid,.comp-grid{grid-template-columns:1fr}
+  .spec-grid{grid-template-columns:1fr 1fr}
+  .email-row,.cta-form{flex-direction:column}
+  .email-row input,.cta-form input{border-right:1px solid var(--border2);border-bottom:none;border-radius:8px 8px 0 0}
+  .email-row button,.cta-form button{border-radius:0 0 8px 8px}
+  footer{grid-template-columns:1fr;padding:36px 20px}
+  .footer-right{align-items:flex-start}
+  .footer-links{justify-content:flex-start}
+  .footer-legal{text-align:left}
+}
 </style>
 </head>
 <body>
 
-<div class="flag-ribbon"></div>
-
-<!-- OFAC COMPLIANCE BANNER -->
-<div class="ofac-banner" id="ofac-banner">
-  <span class="ofac-dot"></span>
-  <span id="ofac-text">Aviso de Cumplimiento: NodusPro opera bajo estrictos protocolos de screening regulatorio. Todos los usuarios son verificados conforme a las regulaciones internacionales aplicables, incluyendo normativas OFAC. El registro implica aceptación de nuestra Política de Cumplimiento.</span>
-</div>
-
 <!-- NAV -->
 <nav>
-  <a href="#" class="logo">
-    <div class="logo-badge">
-      <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="10" cy="10" r="2.5" fill="#090908"/>
-        <circle cx="3.5" cy="5" r="1.8" fill="#090908"/>
-        <circle cx="16.5" cy="5" r="1.8" fill="#090908"/>
-        <circle cx="3.5" cy="15" r="1.8" fill="#090908"/>
-        <circle cx="16.5" cy="15" r="1.8" fill="#090908"/>
-        <line x1="10" y1="10" x2="3.5" y2="5" stroke="#090908" stroke-width="1.2"/>
-        <line x1="10" y1="10" x2="16.5" y2="5" stroke="#090908" stroke-width="1.2"/>
-        <line x1="10" y1="10" x2="3.5" y2="15" stroke="#090908" stroke-width="1.2"/>
-        <line x1="10" y1="10" x2="16.5" y2="15" stroke="#090908" stroke-width="1.2"/>
-      </svg>
+  <a href="#" class="logo" onclick="showLanding();return false">
+    <div class="logo-mark">
+      <svg viewBox="0 0 17 17" fill="none"><circle cx="8.5" cy="8.5" r="2" fill="white"/><circle cx="2.5" cy="3.5" r="1.5" fill="white"/><circle cx="14.5" cy="3.5" r="1.5" fill="white"/><circle cx="2.5" cy="13.5" r="1.5" fill="white"/><circle cx="14.5" cy="13.5" r="1.5" fill="white"/><line x1="8.5" y1="8.5" x2="2.5" y2="3.5" stroke="white" stroke-width="1.1" stroke-opacity=".55"/><line x1="8.5" y1="8.5" x2="14.5" y2="3.5" stroke="white" stroke-width="1.1" stroke-opacity=".55"/><line x1="8.5" y1="8.5" x2="2.5" y2="13.5" stroke="white" stroke-width="1.1" stroke-opacity=".55"/><line x1="8.5" y1="8.5" x2="14.5" y2="13.5" stroke="white" stroke-width="1.1" stroke-opacity=".55"/></svg>
     </div>
-    <span class="logo-text"><span>NODUS</span>PRO</span>
+    <span class="logo-name"><em>Nodus</em>Pro</span>
   </a>
   <div class="nav-right">
     <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <button class="lang-btn on" onclick="setLang('es')">ES</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
     </div>
-    <a href="#lista" class="cta-small" id="nav-cta">Únete Ahora</a>
+    <button class="nav-cta" onclick="startForm()" id="nav-cta">Acceso Anticipado</button>
   </div>
 </nav>
 
-<!-- FOUNDING MEMBER BAR — CMO -->
-<div class="founder-bar" id="founder-bar-el">
-  <div class="founder-bar-left">
-    <span class="founder-pill" id="founder-pill">MIEMBRO FUNDADOR</span>
-    <p id="founder-bar-text">Los primeros <strong>100 miembros</strong> obtienen acceso vitalicio al plan Featured sin costo. Quedan <strong id="spots-left">73</strong> lugares.</p>
-  </div>
-  <span class="founder-counter" id="founder-counter"><span>27</span>/100 fundadores confirmados</span>
-</div>
-
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-
-    <!-- TRUST SIGNALS ABOVE FOLD — UX Designer -->
-    <div class="hero-trust">
-      <div class="htrust-badge">🔒 <span id="ht1">Perfiles verificados</span></div>
-      <div class="htrust-badge">🇪🇺 <span id="ht2">GDPR Compliant</span></div>
-      <div class="htrust-badge">⚖️ <span id="ht3">Screening regulatorio</span></div>
-      <div class="htrust-badge">🛡️ <span id="ht4">Cifrado E2E</span></div>
+<section class="hero" id="hero-section">
+  <div class="hero-inner" id="hero-content">
+    <div id="ref-banner" style="display:none;background:#F0FDF4;border:1px solid #BBF7D0;border-radius:8px;padding:8px 16px;margin-bottom:16px;font-size:13px;color:#166534;text-align:center"></div>
+    <div class="pill"><span class="pill-dot"></span><span id="hero-pill">El marketplace O&G venezolano</span></div>
+    <h1 id="hero-h1">Tienes LinkedIn.<br>Ahora tienes algo<br><em>más específico.</em></h1>
+    <p class="hero-sub" id="hero-sub">El directorio verificado del talento petrolero venezolano. Donde las empresas internacionales encuentran exactamente lo que necesitan — y tú eres encontrado.</p>
+    <div class="vs-row">
+      <span class="vs-tag" id="vt1">LinkedIn: red global</span>
+      <span style="color:var(--border2)">vs</span>
+      <span class="vs-tag win" id="vt2">NodusPro: O&G Venezuela</span>
     </div>
-
-    <div class="eyebrow" id="hero-eyebrow">El Marketplace Profesional Petrolero Venezolano</div>
-    <h1 id="hero-h1">Tu experiencia<br>vuelve a<br><em>producir.</em></h1>
-    <p class="hero-sub" id="hero-sub">Construiste tu carrera en los campos de Venezuela. Conoces la Faja, el Lago, el oriente. <strong>Ese conocimiento tiene más valor hoy que nunca.</strong></p>
-    <p class="hero-quote" id="hero-quote">"Nodus" — del latín: nodo, punto de conexión. La red que el sector venezolano de O&G necesitaba.</p>
-
-    <!-- FOUNDER BENEFIT — CMO -->
-    <div class="founder-benefit">
-      <span class="founder-benefit-icon">⭐</span>
-      <p id="founder-benefit-text">Como miembro fundador obtienes: <strong>perfil Featured gratuito de por vida</strong>, acceso prioritario a las primeras oportunidades publicadas, y tu nombre en los créditos de la plataforma como co-constructor del ecosistema.</p>
-    </div>
-
-    <div class="waitlist-form">
+    <div class="email-row">
       <input type="email" id="hero-email" placeholder="Tu correo profesional"/>
-      <button onclick="handleWaitlist('hero-email','hero-success')" id="hero-btn">Reservar mi lugar</button>
+      <button onclick="startFormWithEmail()" id="hero-cta-btn">Unirme gratis</button>
     </div>
-    <div class="signup-panel" id="hero-success">
-      <div class="signup-panel-title" id="hsp-title">¡Bienvenido, Miembro Fundador!</div>
-      <p class="signup-panel-sub" id="hsp-sub">Estás en la lista. Invita a tu red ahora — cada colega verificado que traes te sube de tier.</p>
-      <div class="ref-link-row">
-        <input class="ref-link-input" value="noduspro.net/ref/TUCODIGO" readonly/>
-        <button class="ref-copy-btn" id="hero-copy-btn" onclick="copyRefHero()">Copiar link</button>
-      </div>
-      <div class="share-label" id="hshare-label">Comparte ahora</div>
-      <div class="share-btns">
-        <a class="share-btn linkedin" href="#" onclick="shareLinkedIn();return false;" id="hli">💼 LinkedIn</a>
-        <a class="share-btn whatsapp" href="#" onclick="shareWhatsApp();return false;" id="hwa">💬 WhatsApp</a>
-        <button class="share-btn" onclick="copyShareText()" id="hcopy">📋 Copiar texto</button>
-      </div>
-    </div>
-    <p class="hero-note" id="hero-note"><span class="dot-green"></span> Registro gratuito &nbsp;·&nbsp; GDPR &nbsp;·&nbsp; Sin spam &nbsp;·&nbsp; Cancela cuando quieras</p>
+    <p class="hero-note"><span class="note-dot"></span><span id="hero-note">Gratuito para miembros fundadores · Pago seguro con Stripe · Sin spam</span></p>
+    <div class="deadline"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><circle cx="8" cy="8" r="6.5" stroke="#991B1B" stroke-width="1.2"/><path d="M8 5v3l1.5 1.5" stroke="#991B1B" stroke-width="1.2" stroke-linecap="round"/></svg><span id="deadline-text">Acceso fundador gratuito hasta el <strong>30 de abril de 2026.</strong> Después, de pago.</span></div>
+  </div>
+
+  <!-- PROGRESSIVE FORM -->
+  <div class="form-overlay" id="form-overlay">
+    <button class="back-link" onclick="showLanding()" id="back-btn">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 4L6 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <span id="back-txt">Volver</span>
+    </button>
+    <div class="form-progress"><div class="form-progress-fill" id="prog-fill"></div></div>
+    <div id="form-body"></div>
   </div>
 </section>
 
 <!-- STATS -->
 <div class="stats-bar">
-  <div class="stat"><div class="stat-num">303B</div><div class="stat-label" id="stat1">Barriles de reservas probadas — las mayores del mundo</div></div>
-  <div class="stat"><div class="stat-num">#1</div><div class="stat-label" id="stat2">Venezuela en reservas petroleras mundiales probadas</div></div>
-  <div class="stat"><div class="stat-num">+20</div><div class="stat-label" id="stat3">Años de experiencia operacional O&G detrás de esta plataforma</div></div>
-  <div class="stat"><div class="stat-num">$0</div><div class="stat-label" id="stat4">Para los primeros 100 miembros fundadores</div></div>
+  <div class="stat"><div class="stat-n">303B</div><div class="stat-l">Barriles de reservas probadas — las mayores del mundo</div><div class="stat-s">U.S. Energy Information Administration, 2025</div></div>
+  <div class="stat"><div class="stat-n">#1</div><div class="stat-l">Venezuela en reservas petroleras mundiales</div><div class="stat-s">OPEC Annual Statistical Bulletin, 2024</div></div>
+  <div class="stat"><div class="stat-n">1M+</div><div class="stat-l">Barriles/día en 2025 — potencial de recuperación masivo</div><div class="stat-s">U.S. Congress Research Service, 2025</div></div>
+  <div class="stat"><div class="stat-n">$0</div><div class="stat-l">Para unirte como miembro fundador antes del 30 de abril</div><div class="stat-s">Sin tarjeta de crédito requerida</div></div>
 </div>
 
-<!-- SPECIALTIES — O&G Expert -->
-<div class="specialties-section">
-  <div class="section-label" id="spec-label">Especialidades</div>
-  <h2 id="spec-h2">Encuentra exactamente<br><em>lo que necesitas.</em></h2>
-  <div class="spec-grid" id="spec-grid">
-    <div class="spec-card"><div class="spec-icon">⛏️</div><h4 id="sp1h">Perforación</h4><div class="spec-tags"><span class="spec-tag">Direccional</span><span class="spec-tag">Completación</span><span class="spec-tag">Cementación</span><span class="spec-tag">MWD/LWD</span></div></div>
-    <div class="spec-card"><div class="spec-icon">🛢️</div><h4 id="sp2h">Producción</h4><div class="spec-tags"><span class="spec-tag">Artificial Lift</span><span class="spec-tag">EOR</span><span class="spec-tag">Workovers</span><span class="spec-tag">SAGD</span></div></div>
-    <div class="spec-card"><div class="spec-icon">🔧</div><h4 id="sp3h">Ingeniería EPC</h4><div class="spec-tags"><span class="spec-tag">Procura</span><span class="spec-tag">Construcción</span><span class="spec-tag">Comisionamiento</span><span class="spec-tag">FEED</span></div></div>
-    <div class="spec-card"><div class="spec-icon">📋</div><h4 id="sp4h">Contratos & Legal</h4><div class="spec-tags"><span class="spec-tag">Joint Ventures</span><span class="spec-tag">CPP</span><span class="spec-tag">PDVSA</span><span class="spec-tag">Arbitraje</span></div></div>
-    <div class="spec-card"><div class="spec-icon">🔬</div><h4 id="sp5h">Geología & Reservorios</h4><div class="spec-tags"><span class="spec-tag">Faja Orinoco</span><span class="spec-tag">Cretácico</span><span class="spec-tag">Simulación</span><span class="spec-tag">Petrofísica</span></div></div>
-    <div class="spec-card"><div class="spec-icon">🏗️</div><h4 id="sp6h">Infraestructura</h4><div class="spec-tags"><span class="spec-tag">Oleoductos</span><span class="spec-tag">Refinación</span><span class="spec-tag">Upgrading</span><span class="spec-tag">Terminales</span></div></div>
-    <div class="spec-card"><div class="spec-icon">💻</div><h4 id="sp7h">Tecnología & Datos</h4><div class="spec-tags"><span class="spec-tag">SCADA</span><span class="spec-tag">Digital Oilfield</span><span class="spec-tag">AI/ML</span><span class="spec-tag">Automatización</span></div></div>
-    <div class="spec-card"><div class="spec-icon">⚡</div><h4 id="sp8h">HSE & Ambiente</h4><div class="spec-tags"><span class="spec-tag">MINEC</span><span class="spec-tag">PDVSA-HSE</span><span class="spec-tag">ISO 14001</span><span class="spec-tag">ESG</span></div></div>
-  </div>
-
-  <!-- REGIONS — O&G Expert -->
-  <div class="regions-bar" style="margin-top:2px;" id="regions-bar">
-    <div class="region"><h5>Faja del Orinoco</h5><p>Junín · Ayacucho · Boyacá · Carabobo</p></div>
-    <div class="region"><h5>Occidente / Zulia</h5><p>Lago de Maracaibo · Boscan · Urdaneta</p></div>
-    <div class="region"><h5>Oriente / Anzoátegui</h5><p>Furrial · Mesa · Oficina · Anaco</p></div>
-    <div class="region"><h5>Monagas</h5><p>Quiriquire · Temblador · Pirital</p></div>
-    <div class="region"><h5>Offshore</h5><p>Perla · Dragón · Paria · Cocuina</p></div>
-  </div>
-</div>
-
-<!-- EMOTIONAL BAND -->
-<div class="emotion-band">
-  <div class="emotion-text">
-    <h2 id="em-h2">Formados aquí.<br>Probados<br><em>afuera.</em><br>Listos para<br><em>volver.</em></h2>
-    <p id="em-p">Miles de ingenieros, técnicos y empresas venezolanas de O&G tuvieron que parar. No por falta de talento — por circunstancias del país. Ese talento <strong>no desapareció.</strong><br><br>La industria se está reactivando. Las empresas internacionales están volviendo a mirar Venezuela. <strong>NodusPro existe para que te encuentren a ti primero.</strong></p>
-  </div>
-  <div class="emotion-cards">
-    <div class="emotion-card"><p id="t1">"Trabajé 15 años en la Faja del Orinoco. Conozco cada proceso, cada contrato, cada campo. Solo necesitaba que alguien me conectara con quien está volviendo a invertir."</p><span id="t1s">— Ingeniero de Producción, Anzoátegui</span></div>
-    <div class="emotion-card"><p id="t2">"Nuestra empresa de servicios paró en 2019. El equipo, los equipos, la experiencia — todo estaba ahí, esperando. NodusPro es exactamente lo que necesitábamos."</p><span id="t2s">— Director, empresa de servicios petroleros, Zulia</span></div>
-    <div class="emotion-card"><p id="t3">"Buscábamos contratistas locales verificados en Venezuela. No existía ninguna plataforma confiable. Ahora existe."</p><span id="t3s">— Gerente de Operaciones, operadora internacional</span></div>
-  </div>
-</div>
-
-<!-- WHO IT'S FOR -->
-<section>
-  <div class="section-label" id="for-label">Para quién es</div>
-  <h2 id="for-h2">Dos lados.<br><em>Una plataforma.</em></h2>
-  <p class="section-desc" id="for-desc">NodusPro conecta el talento y la experiencia venezolana con el capital y la demanda internacional que está regresando al sector.</p>
-  <div class="for-grid">
-    <div class="for-card">
-      <div class="for-icon">⚙</div>
-      <h3 id="fc1-h3">Profesionales y Empresas Venezolanas</h3>
-      <p id="fc1-p">Ingenieros, técnicos, supervisores, contratistas y empresas de servicios que construyeron su trayectoria en la industria venezolana y están listos para reactivarse.</p>
-      <ul class="for-list" id="fc1-list">
-        <li>Crea tu perfil verificado — completamente gratis</li>
-        <li>Sé encontrado por operadoras y contratistas internacionales</li>
-        <li>Registra tus servicios, certificaciones y disponibilidad</li>
-        <li>Accede a oportunidades y licitaciones de proyectos</li>
-        <li>Reconecta con colegas y socios del sector</li>
-      </ul>
+<!-- LINKEDIN VS NODUSPRO -->
+<div class="compare-section">
+  <div style="max-width:860px;margin:0 auto">
+    <div class="sec-label" id="comp-label">Complementarios, no competidores</div>
+    <h2 id="comp-h2">LinkedIn y NodusPro:<br><em>cada uno en lo suyo.</em></h2>
+    <div class="compare-grid">
+      <div class="compare-col li-col">
+        <div class="col-head"><span class="col-tag">LinkedIn</span><span class="col-name" id="li-name">Tu red profesional global</span></div>
+        <div class="citem con"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="rgba(255,255,255,.2)"/><path d="M5 8h6" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round"/></svg><span id="li1">1.000 millones de profesionales de todos los sectores del mundo</span></div>
+        <div class="citem con"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="rgba(255,255,255,.2)"/><path d="M5 8h6" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round"/></svg><span id="li2">Perfil libre — tú defines tu experiencia, ideal para visibilidad global</span></div>
+        <div class="citem con"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="rgba(255,255,255,.2)"/><path d="M5 8h6" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round"/></svg><span id="li3">Conexión y mensajería con toda tu red profesional global</span></div>
+        <div class="citem con"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="rgba(255,255,255,.2)"/><path d="M5 8h6" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round"/></svg><span id="li4">Presencia y credibilidad profesional en el mercado global</span></div>
+        <div class="citem con"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="rgba(255,255,255,.2)"/><path d="M5 8h6" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round"/></svg><span id="li5">Herramienta esencial — de hecho, usamos LinkedIn para verificarte</span></div>
+      </div>
+      <div class="compare-col np-col">
+        <div class="col-head"><span class="col-tag">NodusPro</span><span class="col-name" id="np-name">Tu identidad verificada en O&G Venezuela</span></div>
+        <div class="citem pro"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#E8B94A"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#E8B94A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="np1">100% O&G venezolano — especialización que LinkedIn no puede tener por diseño</span></div>
+        <div class="citem pro"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#E8B94A"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#E8B94A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="np2">Credenciales verificadas + consulta SDN/sanctions antes de activar el perfil</span></div>
+        <div class="citem pro"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#E8B94A"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#E8B94A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="np3">Toggle de disponibilidad para proyectos — con fecha de inicio visible</span></div>
+        <div class="citem pro"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#E8B94A"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#E8B94A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="np4">Clasificado por campo venezolano — Faja, Lago, Oriente, Monagas, Offshore</span></div>
+        <div class="citem pro"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#E8B94A"/><path d="M4.5 8l2.5 2.5 4.5-4.5" stroke="#E8B94A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><span id="np5">Contacto directo sin solicitudes — empresas verificadas te escriben directo</span></div>
+      </div>
     </div>
-    <div class="for-card">
-      <div class="for-icon">🌐</div>
-      <h3 id="fc2-h3">Empresas Internacionales e Inversores</h3>
-      <p id="fc2-p">Operadoras, contratistas EPC, empresas de servicios e inversores que buscan socios locales verificados, proveedores confiables y experiencia real en Venezuela.</p>
-      <ul class="for-list" id="fc2-list">
-        <li>Busca proveedores verificados por especialidad y región</li>
-        <li>Perfiles con credenciales y trayectoria comprobada</li>
-        <li>Talento especializado para operaciones y proyectos</li>
-        <li>Navega el entorno regulatorio y contractual venezolano</li>
-        <li>Reduce el riesgo de entrada con inteligencia de mercado confiable</li>
-      </ul>
+  </div>
+</div>
+
+<!-- PROFILE CARD DEMO -->
+<section style="background:var(--bg);text-align:center">
+  <div style="max-width:860px;margin:0 auto">
+    <div class="sec-label" id="demo-label">Así se ve un perfil NodusPro</div>
+    <h2 id="demo-h2">Verificado. Visible.<br><em>Listo para trabajar.</em></h2>
+    <p class="sec-sub" style="margin:0 auto 36px" id="demo-sub">Cada perfil activo muestra solo lo que importa para conectar con una empresa internacional en segundos.</p>
+    <div class="demo-card">
+      <div class="dc-head">
+        <div class="dc-av">CR</div>
+        <div>
+          <div class="dc-name">Carlos Rodríguez Méndez</div>
+          <div class="dc-role">Ing. de Producción · Monagas · PDVSA · Halliburton · 18 años de experiencia</div>
+          <div class="dc-badges">
+            <span class="badge bg"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Verificado NodusPro</span>
+            <span class="badge ba"><svg width="8" height="8" viewBox="0 0 8 8" fill="#B5860D"><circle cx="4" cy="4" r="4"/></svg>Disponible ahora</span>
+          </div>
+        </div>
+      </div>
+      <div class="dc-chips">
+        <span class="dc-chip">Producción EOR</span>
+        <span class="dc-chip">SAGD</span>
+        <span class="dc-chip">Artificial Lift</span>
+        <span class="dc-chip">Workovers</span>
+        <span class="dc-chip">Orinoco Belt</span>
+      </div>
+      <div class="dc-sep"></div>
+      <div class="dc-stats">
+        <div><div class="dc-stat-n">18</div><div class="dc-stat-l">Años exp.</div></div>
+        <div><div class="dc-stat-n">40+</div><div class="dc-stat-l">Proyectos</div></div>
+        <div><div class="dc-stat-n">3</div><div class="dc-stat-l">Idiomas</div></div>
+      </div>
+      <button class="dc-connect" id="dc-btn">Contactar directamente</button>
     </div>
   </div>
 </section>
+
+<!-- 3 PROMISES -->
+<section style="background:var(--white)">
+  <div style="max-width:860px;margin:0 auto">
+    <div class="sec-label" id="prom-label">Lo que NodusPro garantiza</div>
+    <h2 id="prom-h2">Tres cosas que<br>LinkedIn <em>no puede hacer.</em></h2>
+    <p class="sec-sub" id="prom-sub">No son funcionalidades. Son las razones por las que un profesional venezolano de O&G elige NodusPro.</p>
+    <div class="promise-grid">
+      <div class="promise-card"><div class="prom-n">01</div><div class="prom-h" id="p1h">Serás encontrado esta semana</div><p class="prom-p" id="p1p">Las empresas que entran a NodusPro buscan específicamente talento venezolano O&G. No compites con 1.000 millones de perfiles. Estás en el único lugar donde te buscan a ti.</p><div class="prom-tag" id="p1t">Solo O&G Venezuela — cero ruido</div></div>
+      <div class="promise-card"><div class="prom-n">02</div><div class="prom-h" id="p2h">Tu perfil vale algo real</div><p class="prom-p" id="p2p">El badge "Verificado NodusPro" significa que nuestro equipo revisó tus credenciales, validó tu historial y consultó tu nombre contra listas internacionales de sanciones. Eso LinkedIn no lo da.</p><div class="prom-tag" id="p2t">Verificación manual · SDN checked</div></div>
+      <div class="promise-card"><div class="prom-n">03</div><div class="prom-h" id="p3h">Contacto directo sin filtros</div><p class="prom-p" id="p3p">Sin solicitudes de conexión. Sin InMail. Una empresa que quiere contactarte lo hace directamente a través de la plataforma. Tú decides si respondes.</p><div class="prom-tag" id="p3t">Directo para cuentas Access</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECIALTIES -->
+<div class="spec-section">
+  <div style="max-width:860px;margin:0 auto">
+    <div class="sec-label" id="spec-label">Especialidades</div>
+    <h2 id="spec-h2">El directorio más completo<br>de O&G <em>venezolano.</em></h2>
+    <p class="sec-sub" id="spec-sub">Cada perfil clasificado por especialidad técnica y región de experiencia dentro de Venezuela.</p>
+    <div class="spec-grid">
+      <div class="spec-card"><h4 id="sp1">Perforación</h4><div class="spec-tags"><span class="spec-tag">Direccional</span><span class="spec-tag">Completación</span><span class="spec-tag">MWD/LWD</span></div></div>
+      <div class="spec-card"><h4 id="sp2">Producción</h4><div class="spec-tags"><span class="spec-tag">EOR/SAGD</span><span class="spec-tag">Artificial Lift</span><span class="spec-tag">Workovers</span></div></div>
+      <div class="spec-card"><h4 id="sp3">Ingeniería EPC</h4><div class="spec-tags"><span class="spec-tag">Procura</span><span class="spec-tag">FEED</span><span class="spec-tag">Comisionamiento</span></div></div>
+      <div class="spec-card"><h4 id="sp4">Contratos y Legal</h4><div class="spec-tags"><span class="spec-tag">Joint Ventures</span><span class="spec-tag">CPP</span><span class="spec-tag">Arbitraje</span></div></div>
+      <div class="spec-card"><h4 id="sp5">Geología</h4><div class="spec-tags"><span class="spec-tag">Orinoco Belt</span><span class="spec-tag">Petrofísica</span><span class="spec-tag">Simulación</span></div></div>
+      <div class="spec-card"><h4 id="sp6">Infraestructura</h4><div class="spec-tags"><span class="spec-tag">Oleoductos</span><span class="spec-tag">Refinación</span><span class="spec-tag">Upgrading</span></div></div>
+      <div class="spec-card"><h4 id="sp7">Tecnología</h4><div class="spec-tags"><span class="spec-tag">SCADA</span><span class="spec-tag">Digital Oilfield</span><span class="spec-tag">AI/ML</span></div></div>
+      <div class="spec-card"><h4 id="sp8">HSE</h4><div class="spec-tags"><span class="spec-tag">PDVSA-HSE</span><span class="spec-tag">ISO 14001</span><span class="spec-tag">ESG</span></div></div>
+    </div>
+    <div class="regions">
+      <span class="region">Faja del Orinoco</span>
+      <span class="region">Lago de Maracaibo</span>
+      <span class="region">Oriente / Anzoátegui</span>
+      <span class="region">Monagas</span>
+      <span class="region">Offshore / Paria</span>
+    </div>
+  </div>
+</div>
 
 <!-- HOW IT WORKS -->
-<section class="how-bg">
-  <div class="section-label" id="how-label">Cómo funciona</div>
-  <h2 id="how-h2">Simple.<br><em>Directo.</em><br>Verificado.</h2>
-  <p class="section-desc" id="how-desc">Sin procesos complicados. Sin intermediarios innecesarios. Conexión directa entre quien tiene experiencia y quien la necesita.</p>
-  <div class="steps">
-    <div class="step"><div class="step-num">01</div><h3 id="s1h">Crea Tu Perfil</h3><p id="s1p">Regístrate con tus credenciales profesionales. Nuestro equipo revisa y verifica manualmente cada perfil — incluyendo screening regulatorio. Nada de perfiles anónimos.</p></div>
-    <div class="step"><div class="step-num">02</div><h3 id="s2h">Hazte Visible</h3><p id="s2p">Tu perfil verificado aparece en búsquedas filtradas por especialidad, región, certificaciones y disponibilidad. Las empresas encuentran exactamente lo que necesitan.</p></div>
-    <div class="step"><div class="step-num">03</div><h3 id="s3h">Conecta y Trabaja</h3><p id="s3p">Inicia el contacto a través del sistema de mensajería segura. Los miembros Premium obtienen posicionamiento prioritario, contacto directo visible y acceso a oportunidades exclusivas.</p></div>
-  </div>
-</section>
-
-<!-- COMPLIANCE — OFAC Expert -->
-<div class="compliance-section">
-  <div class="compliance-inner">
-    <div>
-      <div class="compliance-label" id="comp-label">Cumplimiento Regulatorio</div>
-      <div class="compliance-title" id="comp-title" style="font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;color:var(--text);line-height:1.1;">Operamos<br>dentro de<br><em style="font-style:normal;color:var(--amber);">la ley.</em><br>Siempre.</div>
-    </div>
-    <div>
-      <div class="compliance-grid">
-        <div class="compliance-card"><h4 id="cc1h">Screening OFAC</h4><p id="cc1p">Todos los usuarios son verificados contra listas de sanciones internacionales antes de ser activados. Proceso automatizado + revisión manual para cuentas Premium.</p></div>
-        <div class="compliance-card"><h4 id="cc2h">KYB/KYC</h4><p id="cc2p">Know Your Business y Know Your Customer aplicados a empresas y personas. Documentación corporativa verificada para cuentas de acceso internacional.</p></div>
-        <div class="compliance-card"><h4 id="cc3h">Sin Garantías de Transacción</h4><p id="cc3p">NodusPro es un directorio profesional verificado. No intermediamos, financiamos ni garantizamos transacciones entre usuarios. Cada parte es responsable de su propio due diligence.</p></div>
-        <div class="compliance-card"><h4 id="cc4h">Auditoría Continua</h4><p id="cc4p">Los perfiles son re-verificados periódicamente. Cualquier cambio en el estatus regulatorio de un usuario resulta en revisión inmediata de su cuenta.</p></div>
-      </div>
-      <div class="compliance-disclaimer" id="comp-disclaimer">AVISO LEGAL: NodusPro no provee asesoría legal ni garantiza que ninguna transacción específica esté permitida bajo las regulaciones aplicables. Los usuarios son responsables de obtener sus propias opiniones legales sobre cumplimiento. El uso de la plataforma no constituye autorización para actividades reguladas.</div>
-    </div>
-  </div>
-</div>
-
-<!-- TRUST & SECURITY -->
-<section>
-  <div class="section-label" id="trust-label">Confianza y Seguridad</div>
-  <h2 id="trust-h2">Construida sobre<br><em>credibilidad real.</em></h2>
-  <p class="section-desc" id="trust-desc">Nuestro equipo tiene décadas de experiencia operacional en O&G internacional y certificaciones activas en ciberseguridad. Cada decisión fue tomada con la seguridad como base.</p>
-  <div class="trust-grid">
-    <div class="trust-card">
-      <div class="trust-badge-row"><span class="trust-badge" id="tb1">Identidad</span><span class="sec-badge">Manual Review</span></div>
-      <h3 id="tc1h">Solo Perfiles Verificados</h3>
-      <p id="tc1p">Cada perfil es revisado manualmente por nuestro equipo. Correos corporativos, credenciales e historial profesional validados antes de activación. Badge de verificación visible en cada listado.</p>
-    </div>
-    <div class="trust-card">
-      <div class="trust-badge-row"><span class="trust-badge" id="tb2">Legal</span><span class="sec-badge">GDPR Art. 25</span></div>
-      <h3 id="tc2h">Privacy By Design</h3>
-      <p id="tc2p">Operamos bajo GDPR desde el diseño, no como cumplimiento tardío. Tus datos son tuyos — nunca los vendemos ni compartimos sin consentimiento explícito. Data minimization aplicada en cada proceso.</p>
-    </div>
-    <div class="trust-card">
-      <div class="trust-badge-row"><span class="trust-badge" id="tb3">Técnica</span><span class="sec-badge">ISC2 · CyberOps</span></div>
-      <h3 id="tc3h">Seguridad Certificada</h3>
-      <p id="tc3p">Cifrado E2E, MFA obligatorio para cuentas Premium, Row-Level Security en base de datos, rate limiting y monitoreo continuo. Arquitectura auditada por profesionales con certificaciones ISC2 y CyberOps activas.</p>
-    </div>
-    <div class="trust-card">
-      <div class="trust-badge-row"><span class="trust-badge" id="tb4">Plataforma</span><span class="sec-badge">SLA 99.9%</span></div>
-      <h3 id="tc4h">Resolución de Disputas</h3>
-      <p id="tc4p">Canal formal para reportar problemas o malos actores. Proceso estructurado de investigación y resolución. Miembros Premium con mediación prioritaria. Historial de disputas auditables.</p>
+<section style="background:var(--bg)">
+  <div style="max-width:860px;margin:0 auto">
+    <div class="sec-label" id="how-label">Cómo funciona</div>
+    <h2 id="how-h2">Simple. <em>Directo.</em> Verificado.</h2>
+    <p class="sec-sub" id="how-sub">Sin procesos complicados. Todo en una sola pantalla. Todo automático — excepto el clic final de aprobación.</p>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-n">01</div><div class="step-h" id="sh1">Regístrate y completa tu perfil</div><p class="step-p" id="sp1t">Ingresa tu email y completa el formulario progresivo — 5 pasos simples, sin salir de la página. Nombre, especialidad, región, historial, disponibilidad. Menos de 8 minutos.</p></div>
+      <div class="step-card"><div class="step-n">02</div><div class="step-h" id="sh2">Verificación automática</div><p class="step-p" id="sp2t">Al enviar, el sistema consulta automáticamente tu LinkedIn, verifica tu email y realiza una consulta contra listas internacionales de sanciones. Todo en paralelo. Si algo necesita revisión, nuestro equipo lo aprueba en menos de 4 horas.</p></div>
+      <div class="step-card"><div class="step-n">03</div><div class="step-h" id="sh3">Conecta y trabaja</div><p class="step-p" id="sp3t">Tu perfil verificado aparece en el directorio. Las empresas internacionales con plan Access te encuentran, te leen y te contactan directamente. Tú decides si respondes.</p></div>
     </div>
   </div>
 </section>
 
-<!-- API / ROADMAP — Arquitecto -->
-<div class="api-section">
-  <div>
-    <div class="section-label" id="api-label">Para Desarrolladores</div>
-    <h2 id="api-h2">API-first.<br><em>Listo para<br>integrar.</em></h2>
-    <p style="font-size:15px;color:var(--text2);font-weight:300;line-height:1.75;margin-bottom:20px;" id="api-desc">NodusPro está construido con arquitectura API-first. Las empresas pueden integrar el directorio directamente en sus sistemas internos de procurement o HSSE.</p>
-    <p style="font-size:13px;color:var(--text3);font-family:'DM Mono',monospace;letter-spacing:0.5px;" id="api-road">Roadmap: App móvil iOS/Android · Integraciones SAP · Webhooks de oportunidades · API pública Q4 2026</p>
+<!-- VERIFICATION -->
+<section style="background:var(--white)">
+  <div style="max-width:860px;margin:0 auto">
+    <div class="sec-label" id="ver-label">Verificación</div>
+    <h2 id="ver-h2">Lo que hacemos hoy.<br><em>Lo que viene.</em></h2>
+    <p class="sec-sub" id="ver-sub">Sin promesas vacías. Este es el proceso real de verificación que aplicamos en esta etapa.</p>
+    <div class="verify-grid">
+      <div class="verify-card"><div class="verify-badge">Identidad</div><h4 id="vc1h">Email y perfil</h4><p id="vc1p">Confirmación de email funcional. Revisión manual de datos ingresados — nombre, especialidad, empresa y experiencia declarada.</p><div class="verify-steps-list"><div class="vstep-li"><div class="vstep-li-n">1</div>Email de confirmación activa la cuenta</div><div class="vstep-li"><div class="vstep-li-n">2</div>Revisión manual de datos ingresados</div><div class="vstep-li"><div class="vstep-li-n">3</div>Coherencia con historial declarado</div></div></div>
+      <div class="verify-card"><div class="verify-badge">Sanciones</div><h4 id="vc2h">SDN / Sanctions check</h4><p id="vc2p">Consulta automática del nombre contra listas públicas internacionales de sanciones, incluyendo la lista SDN del Tesoro de EE.UU. Resultado documentado antes de activar el perfil.</p><div class="verify-steps-list"><div class="vstep-li"><div class="vstep-li-n">1</div>Búsqueda automática al enviar el perfil</div><div class="vstep-li"><div class="vstep-li-n">2</div>Nombre completo + variantes</div><div class="vstep-li"><div class="vstep-li-n">3</div>Resultado documentado en base de datos</div></div></div>
+      <div class="verify-card"><div class="verify-badge">Credenciales</div><h4 id="vc3h">LinkedIn o alternativa</h4><p id="vc3p">Si tienes LinkedIn, confirmamos que el perfil existe y es coherente. Si no tienes, aceptamos CV, carta de recomendación o referencia de un colega verificado en la plataforma.</p><div class="verify-steps-list"><div class="vstep-li"><div class="vstep-li-n">1</div>Validación de perfil LinkedIn</div><div class="vstep-li"><div class="vstep-li-n">2</div>O: documento alternativo revisado</div><div class="vstep-li"><div class="vstep-li-n">3</div>Badge activado al aprobar</div></div></div>
+      <div class="verify-card coming"><div class="verify-badge" style="background:var(--bg2);border-color:var(--border);color:var(--text3)">Q3 2026</div><h4 id="vc4h">KYB/KYC formal</h4><p id="vc4p">Para cuentas internacionales: verificación corporativa formal con documentos, titulares beneficiarios y certificados legales. En desarrollo.</p></div>
+    </div>
+    <div class="honest-box" style="margin-top:0">
+      <h4 id="hon-h">Nuestra posición</h4>
+      <p id="hon-p">NodusPro es un directorio profesional, no una institución financiera. Nuestro proceso de verificación es manual y basado en fuentes públicas. No garantizamos cumplimiento regulatorio de ninguna transacción — cada parte es responsable de su propio due diligence legal. Recomendamos asesoría legal especializada antes de cualquier acuerdo comercial relacionado con Venezuela.</p>
+    </div>
   </div>
-  <div class="api-code">
-    <div><span class="c-amber">GET</span> <span class="c-text">/api/v1/profiles</span></div>
-    <div style="margin-top:8px;color:var(--text3);">{</div>
-    <div style="padding-left:16px;"><span class="c-green">"specialty"</span>: <span class="c-text">"drilling"</span>,</div>
-    <div style="padding-left:16px;"><span class="c-green">"region"</span>: <span class="c-text">"faja_orinoco"</span>,</div>
-    <div style="padding-left:16px;"><span class="c-green">"verified"</span>: <span class="c-amber">true</span>,</div>
-    <div style="padding-left:16px;"><span class="c-green">"available"</span>: <span class="c-amber">true</span></div>
-    <div style="color:var(--text3);">}</div>
-    <div style="margin-top:12px;color:var(--text3);">→ <span class="c-green">200 OK</span> · <span class="c-text">247 profiles found</span></div>
-  </div>
-</div>
+</section>
 
 <!-- PRICING -->
-<section class="how-bg">
-  <div class="section-label" id="price-label">Planes</div>
-  <h2 id="price-h2">Empieza gratis.<br><em>Crece cuando quieras.</em></h2>
-  <p class="section-desc" id="price-desc">Sin costo inicial. Actualiza cuando la plataforma esté generando valor real para tu negocio.</p>
-
-  <!-- BILLING TOGGLE — CFO -->
-  <div class="price-toggle">
-    <button class="price-toggle-btn active" onclick="setBilling('monthly')" id="btn-monthly">Mensual</button>
-    <button class="price-toggle-btn" onclick="setBilling('annual')" id="btn-annual">Anual <span class="annual-badge" id="annual-badge">-20%</span></button>
-  </div>
-
-  <div class="pricing-grid">
-    <div class="price-card">
-      <div class="price-tag" id="pt1">Para profesionales locales</div>
-      <div class="price-name" id="pn1">Gratuito</div>
-      <div class="price-orig" id="po1">&nbsp;</div>
-      <div class="price-amount" id="pa1">$0 <span id="ps1">/ siempre</span></div>
-      <p class="price-desc" id="pd1">Crea tu perfil y forma parte del directorio. Sin tarjeta de crédito.</p>
-      <ul class="price-features" id="pf1">
-        <li>Perfil profesional verificado</li>
-        <li>Listado en el directorio público</li>
-        <li>Visibilidad básica en búsquedas</li>
-        <li>Mensajería de la plataforma (entrada)</li>
-      </ul>
+<section style="background:var(--bg)">
+  <div style="max-width:860px;margin:0 auto">
+    <div class="sec-label" id="price-label">Planes</div>
+    <h2 id="price-h2">Simple. <em>Sin sorpresas.</em></h2>
+    <p class="sec-sub" id="price-sub">Gratis para siempre en el directorio. Paga solo cuando quieras ser encontrado primero — o encontrar a otros.</p>
+    <div class="billing-row">
+      <button class="billing-btn on" onclick="setBilling('m')" id="btn-m">Mensual</button>
+      <button class="billing-btn" onclick="setBilling('a')" id="btn-a">Anual <span class="save-pill" id="save-p">-20%</span></button>
     </div>
-    <div class="price-card featured">
-      <div class="price-tag" id="pt2">Para empresas locales</div>
-      <div class="price-name" id="pn2">Destacado</div>
-      <div class="price-orig" id="po2">&nbsp;</div>
-      <div class="price-amount" id="pa2">$49 <span id="ps2">/ mes</span></div>
-      <p class="price-desc" id="pd2">Destácate del directorio. Sé encontrado primero por operadoras que buscan activamente.</p>
-      <ul class="price-features" id="pf2">
-        <li>Todo lo del plan Gratuito</li>
-        <li>Badge verificado y posición prioritaria</li>
-        <li>Contacto directo visible</li>
-        <li>Apareces en listas curadas de proveedores</li>
-        <li>Acceso anticipado a oportunidades</li>
-      </ul>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-tier" id="pt1">Para profesionales</div>
+        <div class="price-name" id="pn1">Gratuito</div>
+        <div class="price-was" id="pw1">&nbsp;</div>
+        <div class="price-amount" id="pa1">$0 <span>siempre</span></div>
+        <p class="price-desc" id="pd1">Tu perfil en el directorio. Visible para quien busca. Sin límite de tiempo.</p>
+        <ul class="price-features" id="pf1">
+          <li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Perfil verificado en el directorio</li>
+          <li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Visibilidad en búsquedas</li>
+          <li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Toggle de disponibilidad para proyectos</li>
+          <li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Mensajería entrante</li>
+        </ul>
+      </div>
+      <div class="price-card featured">
+        <div class="price-tier" id="pt2">Para empresas locales</div>
+        <div class="price-name" id="pn2">Destacado</div>
+        <div class="price-was" id="pw2">&nbsp;</div>
+        <div class="price-amount" id="pa2">$29 <span id="ps2">/ mes</span></div>
+        <p class="price-desc" id="pd2">Apareces primero. Eres contactado primero. Un proyecto encontrado paga este plan muchas veces.</p>
+        <ul class="price-features" id="pf2">
+          <li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Todo lo del plan Gratuito</li>
+          <li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Posición prioritaria en búsquedas</li>
+          <li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Contacto directo visible</li>
+          <li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Listas curadas de proveedores</li>
+          <li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Acceso anticipado a oportunidades</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="price-tier" id="pt3">Para empresas internacionales</div>
+        <div class="price-name" id="pn3">Acceso</div>
+        <div class="price-was" id="pw3">&nbsp;</div>
+        <div class="price-amount" id="pa3">$99 <span id="ps3">/ mes</span></div>
+        <p class="price-desc" id="pd3">Reemplaza semanas de due diligence manual y miles en consultores. Cancela cuando quieras.</p>
+        <ul class="price-features" id="pf3">
+          <li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Búsqueda avanzada con filtros</li>
+          <li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Contacto directo con todos los perfiles</li>
+          <li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Reportes de mercado venezolano</li>
+          <li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Actualizaciones regulatorias</li>
+          <li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Soporte prioritario</li>
+        </ul>
+      </div>
     </div>
-    <div class="price-card">
-      <div class="price-tag" id="pt3">Para empresas internacionales</div>
-      <div class="price-name" id="pn3">Acceso</div>
-      <div class="price-orig" id="po3">&nbsp;</div>
-      <div class="price-amount" id="pa3">$199 <span id="ps3">/ mes</span></div>
-      <p class="price-desc" id="pd3">Acceso completo a la red. Busca, contacta y sourcea con total confianza.</p>
-      <ul class="price-features" id="pf3">
-        <li>Búsqueda avanzada ilimitada con filtros</li>
-        <li>Contacto directo con todos los perfiles</li>
-        <li>Reportes de inteligencia de mercado</li>
-        <li>Actualizaciones regulatorias y de compliance</li>
-        <li>Resolución de disputas prioritaria</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- ROI NOTE — CFO -->
-  <div class="roi-note" id="roi-note">
-    💡 <strong>ROI estimado plan Acceso:</strong> Una sola conexión exitosa con un proveedor verificado o un técnico especializado puede representar semanas de búsqueda manual ahorradas y miles de dólares en costos de due diligence. El plan Acceso se paga solo con la primera contratación.
+    <div class="roi-box" id="roi-box"><strong>Para empresas internacionales:</strong> Un consultor especializado en Venezuela O&G cobra entre $300 y $500/hora. El plan Acceso ($99/mes) cuesta menos que 1 hora de esa consultoría — y da acceso ilimitado al directorio verificado durante un mes entero.</div>
   </div>
 </section>
 
-<!-- GROWTH — Growth Marketer -->
-<div class="growth-section">
-  <div class="section-label" id="growth-label">Programa de Referidos</div>
-  <h2 id="growth-h2">Invita a tu red.<br><em>Todos ganan.</em></h2>
-  <p class="section-desc" id="growth-desc">En O&G venezolano la confianza viaja por la red. Cada persona que invites a NodusPro fortalece el ecosistema — y te recompensa a ti también.</p>
-  <div class="growth-grid">
-    <div class="growth-card">
-      <div class="growth-num">01</div>
-      <h3 id="gr1h">Comparte Tu Link</h3>
-      <p id="gr1p">Al registrarte recibes un link de referido único. Compártelo con colegas, ex-compañeros de PDVSA, técnicos de campo, proveedores — cualquiera que pertenezca al ecosistema.</p>
-      <div class="growth-reward" id="gr1r">📎 Link único personalizado</div>
-    </div>
-    <div class="growth-card">
-      <div class="growth-num">02</div>
-      <h3 id="gr2h">Ellos se Registran</h3>
-      <p id="gr2p">Cada colega que entra con tu link queda verificado y activo en el directorio. El ecosistema crece. La red se vuelve más valiosa para todos — incluido tú.</p>
-      <div class="growth-reward" id="gr2r">✓ Se suman como verificados</div>
-    </div>
-    <div class="growth-card">
-      <div class="growth-num">03</div>
-      <h3 id="gr3h">Ambos Suben de Tier</h3>
-      <p id="gr3p">Por cada 3 referidos verificados que actives, tú y ellos reciben un mes del plan inmediato superior sin costo. Sin límite de referidos. Sin fecha de vencimiento.</p>
-      <div class="growth-reward" id="gr3r">🎁 +1 mes gratis por cada 3 referidos</div>
+<!-- REFERRAL -->
+<section style="background:var(--white)">
+  <div style="max-width:860px;margin:0 auto">
+    <div class="sec-label" id="ref-label">Programa de referidos</div>
+    <h2 id="ref-h2">Invita. <em>Ambos ganan.</em></h2>
+    <p class="sec-sub" id="ref-sub">Cada colega que traes fortalece la red y te recompensa directamente.</p>
+    <div class="ref-grid">
+      <div class="ref-card"><div class="ref-n">01</div><div class="ref-h" id="r1h">Comparte tu link único</div><p class="ref-p" id="r1p">Al confirmar tu registro recibes un link personalizado. Compártelo con colegas del sector — ex-PDVSA, Repsol, Halliburton, quien conozcas de O&G venezolano.</p><div class="ref-tag" id="r1t">Link generado al registrarse</div></div>
+      <div class="ref-card"><div class="ref-n">02</div><div class="ref-h" id="r2h">Tu colega se verifica</div><p class="ref-p" id="r2p">Tu referido entra, completa su perfil y pasa la verificación manual en 3-5 días hábiles. Solo cuando es aprobado cuenta como referido activo — verificación real, no solo registro.</p><div class="ref-tag" id="r2t">Cuenta cuando es verificado, no cuando se registra</div></div>
+      <div class="ref-card"><div class="ref-n">03</div><div class="ref-h" id="r3h">1 mes gratis del plan superior</div><p class="ref-p" id="r3p">Por cada 3 referidos verificados en un mes calendario, tú y cada uno de ellos reciben 1 mes gratuito del plan inmediato superior. Se acredita el 1 de cada mes. Sin límite de referidos, sin fecha de vencimiento.</p><div class="ref-tag" id="r3t">1 mes gratis por cada 3 referidos activos al mes</div></div>
     </div>
   </div>
-</div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background:var(--bg);border-top:1px solid var(--border)">
+  <div style="max-width:860px;margin:0 auto">
+    <div class="sec-label" id="test-label" style="text-align:center;margin-bottom:32px">Lo que dicen</div>
+    <div class="test-grid">
+      <div class="test-card"><blockquote id="t1">"Trabajé 18 años en la Faja del Orinoco. Conozco cada contrato, cada campo, cada proceso. Solo necesitaba una plataforma que me conectara con quienes están volviendo a invertir. Eso es exactamente lo que NodusPro hace."</blockquote><div class="test-author"><div class="t-av">CR</div><div><div class="t-name" id="t1n">Carlos R.</div><div class="t-role" id="t1r">Ing. Producción — Monagas, Venezuela</div></div></div></div>
+      <div class="test-card"><blockquote id="t2">"Nuestra empresa de servicios paró en 2019. El equipo, los equipos, la experiencia — todo estaba ahí esperando. NodusPro es el directorio que faltaba para ser visible de nuevo."</blockquote><div class="test-author"><div class="t-av">LM</div><div><div class="t-name" id="t2n">Luis M.</div><div class="t-role" id="t2r">Director — Empresa OFS, Zulia</div></div></div></div>
+      <div class="test-card"><blockquote id="t3">"We needed verified local contractors in Venezuela. No serious platform existed. NodusPro fills that gap with a real approach to verification."</blockquote><div class="test-author"><div class="t-av">AP</div><div><div class="t-name" id="t3n">Ana P.</div><div class="t-role" id="t3r">Operations Manager — International operator</div></div></div></div>
+    </div>
+  </div>
+</section>
 
 <!-- CTA -->
-<section class="cta-section" id="lista">
-  <div class="section-label" style="justify-content:center;" id="cta-label">Acceso Anticipado</div>
-  <h2 id="cta-h2">La ventana<br><em>está abierta ahora.</em></h2>
-  <p id="cta-p">El sector petrolero venezolano se está moviendo rápido. Quedan <strong style="color:var(--amber);" id="cta-spots">73 lugares</strong> de miembro fundador con plan Featured gratuito de por vida. No esperes.</p>
-  <div class="waitlist-form-center">
-    <input type="email" id="cta-email" placeholder="Tu correo profesional"/>
-    <button onclick="handleWaitlist('cta-email','cta-success')" id="cta-btn">Ser Miembro Fundador</button>
-  </div>
-
-  <!-- POST-SIGNUP PANEL — Growth Marketer -->
-  <div class="signup-panel center" id="cta-success">
-    <div class="signup-panel-title" id="sp-title">¡Bienvenido, Miembro Fundador!</div>
-    <p class="signup-panel-sub" id="sp-sub">Estás en la lista. Mientras esperamos el lanzamiento, invita a tu red — cada colega que traes fortalece el ecosistema y te sube de tier.</p>
-
-    <div class="ref-link-row">
-      <input class="ref-link-input" id="ref-link-val" value="noduspro.net/ref/TUCODIGO" readonly/>
-      <button class="ref-copy-btn" id="ref-copy-btn" onclick="copyRef()">Copiar link</button>
+<section class="cta-section" id="cta-section">
+  <div class="cta-inner">
+    <h2 id="cta-h2">Sé encontrado.<br><em>Hoy.</em></h2>
+    <p id="cta-p">El acceso fundador gratuito cierra el 30 de abril de 2026. El sector se está moviendo ahora — las primeras empresas internacionales ya están mirando Venezuela.</p>
+    <div class="cta-form">
+      <input type="email" id="cta-email" placeholder="Tu correo profesional"/>
+      <button onclick="startFormFromCTA()" id="cta-btn">Unirme gratis</button>
     </div>
-
-    <div class="share-label" id="share-label">Comparte ahora</div>
-    <div class="share-btns">
-      <a class="share-btn linkedin" id="share-li" href="#" onclick="shareLinkedIn();return false;">💼 LinkedIn</a>
-      <a class="share-btn whatsapp" id="share-wa" href="#" onclick="shareWhatsApp();return false;">💬 WhatsApp</a>
-      <button class="share-btn" id="share-tw" onclick="shareTwitter()">𝕏 Twitter/X</button>
-      <button class="share-btn" id="share-copy" onclick="copyShareText()">📋 Copiar texto</button>
-    </div>
-
-    <div class="copy-text-box" id="share-text-box">
-      "Acabo de unirme a NodusPro como miembro fundador — el primer marketplace profesional del ecosistema petrolero venezolano. Si tienes experiencia en O&G y quieres que el sector te encuentre, únete: noduspro.net/ref/TUCODIGO"
-    </div>
-    <button class="copy-text-btn" onclick="copyShareText()" id="copy-text-btn">↗ Copiar este texto para LinkedIn / WhatsApp</button>
-
-    <div class="profile-card-preview">
-      <div class="profile-avatar" id="profile-initials">NP</div>
-      <div class="profile-card-info">
-        <h4 id="profile-name">Tu Nombre · O&G Venezuela</h4>
-        <p>noduspro.net · Perfil Verificado</p>
-      </div>
-      <div class="profile-card-badge" id="profile-badge">MIEMBRO FUNDADOR</div>
-    </div>
+    <p class="cta-note" id="cta-note">Sin tarjeta de crédito · Pago seguro con Stripe · Sin spam</p>
   </div>
 </section>
+
+<!-- COMPLIANCE -->
+<div class="compliance-section">
+  <div style="max-width:860px;margin:0 auto">
+    <div class="sec-label" id="comp2-label">Legal y Cumplimiento</div>
+    <div class="comp-grid">
+      <div class="comp-card"><div class="comp-label">Sanciones</div><h4 id="cc1">SDN check manual</h4><p id="cc1p">Cada perfil verificado contra listas públicas internacionales antes de activación. Proceso documentado y auditable.</p></div>
+      <div class="comp-card"><div class="comp-label">Privacidad</div><h4 id="cc2">Tu información es tuya</h4><p id="cc2p">Nunca vendemos ni compartimos tus datos sin consentimiento explícito. Puedes eliminar tu perfil en cualquier momento.</p></div>
+      <div class="comp-card"><div class="comp-label">Límites</div><h4 id="cc3">Solo directorio</h4><p id="cc3p">No procesamos pagos entre usuarios ni garantizamos transacciones. Somos el punto de conexión, no el garante.</p></div>
+      <div class="comp-card"><div class="comp-label">Seguridad</div><h4 id="cc4">Infraestructura</h4><p id="cc4p">Cifrado SSL 256-bit, autenticación sin contraseña, Row-Level Security. Certificaciones ISC2 y CyberOps activas.</p></div>
+    </div>
+    <p class="legal-note" id="legal-note">NodusPro es un directorio profesional verificado. No provee asesoría legal ni garantiza conformidad regulatoria de transacciones. Cada usuario es responsable de su propio due diligence legal. © 2026 NodusPro · Venezuela · noduspro.net</p>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
-  <div>
-    <div class="footer-logo-row">
-      <div class="logo-badge" style="width:30px;height:30px;">
-        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:16px;">
-          <circle cx="10" cy="10" r="2.5" fill="#090908"/>
-          <circle cx="3.5" cy="5" r="1.8" fill="#090908"/>
-          <circle cx="16.5" cy="5" r="1.8" fill="#090908"/>
-          <circle cx="3.5" cy="15" r="1.8" fill="#090908"/>
-          <circle cx="16.5" cy="15" r="1.8" fill="#090908"/>
-          <line x1="10" y1="10" x2="3.5" y2="5" stroke="#090908" stroke-width="1.2"/>
-          <line x1="10" y1="10" x2="16.5" y2="5" stroke="#090908" stroke-width="1.2"/>
-          <line x1="10" y1="10" x2="3.5" y2="15" stroke="#090908" stroke-width="1.2"/>
-          <line x1="10" y1="10" x2="16.5" y2="15" stroke="#090908" stroke-width="1.2"/>
-        </svg>
-      </div>
-      <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:var(--text);"><span style="color:var(--amber);">NODUS</span>PRO</span>
-    </div>
-    <p class="footer-desc" id="footer-desc">El marketplace profesional del ecosistema petrolero venezolano. De Venezuela, para el mundo.</p>
+  <div class="footer-left">
+    <a href="#" class="logo" onclick="showLanding();return false">
+      <div class="logo-mark" style="width:28px;height:28px;border-radius:6px"><svg viewBox="0 0 17 17" fill="none" style="width:15px;height:15px"><circle cx="8.5" cy="8.5" r="2" fill="white"/><circle cx="2.5" cy="3.5" r="1.5" fill="white"/><circle cx="14.5" cy="3.5" r="1.5" fill="white"/><circle cx="2.5" cy="13.5" r="1.5" fill="white"/><circle cx="14.5" cy="13.5" r="1.5" fill="white"/><line x1="8.5" y1="8.5" x2="2.5" y2="3.5" stroke="white" stroke-width="1.1" stroke-opacity=".5"/><line x1="8.5" y1="8.5" x2="14.5" y2="3.5" stroke="white" stroke-width="1.1" stroke-opacity=".5"/><line x1="8.5" y1="8.5" x2="2.5" y2="13.5" stroke="white" stroke-width="1.1" stroke-opacity=".5"/><line x1="8.5" y1="8.5" x2="14.5" y2="13.5" stroke="white" stroke-width="1.1" stroke-opacity=".5"/></svg></div>
+      <span class="logo-name" style="color:white"><em style="color:#E8B94A">Nodus</em>Pro</span>
+    </a>
+    <p id="footer-desc">El marketplace profesional del ecosistema petrolero venezolano. De Venezuela, para el mundo.</p>
     <p class="footer-copy" id="footer-copy">© 2026 NodusPro · Venezuela · Todos los derechos reservados</p>
   </div>
   <div class="footer-right">
     <div class="footer-links">
-      <a href="#" id="fl1">Política de Privacidad</a>
-      <a href="#" id="fl2">Términos de Servicio</a>
-      <a href="#" id="fl3">Cumplimiento OFAC</a>
-      <a href="#">GDPR</a>
+      <a href="#" id="fl1">Privacidad</a>
+      <a href="#" id="fl2">Términos</a>
+      <a href="#" id="fl3">Sanciones</a>
       <a href="#" id="fl4">Contacto</a>
     </div>
-    <p class="footer-legal" id="footer-legal">NodusPro es un directorio profesional verificado. No garantiza, intermedia ni financia transacciones entre usuarios. El uso de la plataforma no constituye asesoría legal ni autorización regulatoria de ningún tipo.</p>
+    <p class="footer-legal" id="footer-legal">NodusPro es un directorio profesional verificado. No garantiza ni intermedia transacciones. El uso de la plataforma no constituye asesoría legal.</p>
   </div>
 </footer>
 
 <script>
-const content = {
-  es: {
-    'ofac-text':'Aviso de Cumplimiento: NodusPro opera bajo estrictos protocolos de screening regulatorio. Todos los usuarios son verificados conforme a regulaciones internacionales aplicables, incluyendo normativas OFAC.',
-    'founder-pill':'MIEMBRO FUNDADOR',
-    'founder-bar-text':'Los primeros <strong>100 miembros</strong> obtienen acceso vitalicio al plan Featured sin costo. Quedan <strong id="spots-left">73</strong> lugares.',
-    'founder-counter':'<span>27</span>/100 fundadores confirmados',
-    'nav-cta':'Únete Ahora',
-    'ht1':'Perfiles verificados','ht2':'GDPR Compliant','ht3':'Screening regulatorio','ht4':'Cifrado E2E',
-    'hero-eyebrow':'El Marketplace Profesional Petrolero Venezolano',
-    'hero-h1':'Tu experiencia<br>vuelve a<br><em>producir.</em>',
-    'hero-sub':'Construiste tu carrera en los campos de Venezuela. Conoces la Faja, el Lago, el oriente. <strong>Ese conocimiento tiene más valor hoy que nunca.</strong>',
-    'hero-quote':'"Nodus" — del latín: nodo, punto de conexión. La red que el sector venezolano de O&G necesitaba.',
-    'founder-benefit-text':'Como miembro fundador obtienes: <strong>perfil Featured gratuito de por vida</strong>, acceso prioritario a las primeras oportunidades publicadas, y tu nombre en los créditos de la plataforma como co-constructor del ecosistema.',
-    'hero-btn':'Reservar mi lugar',
-    'hero-email-ph':'Tu correo profesional',
-    'hero-success':'✓ ¡Bienvenido a NodusPro! Eres miembro fundador. Te contactamos pronto.',
-    'hero-note':'<span class="dot-green"></span> Registro gratuito &nbsp;·&nbsp; GDPR &nbsp;·&nbsp; Sin spam &nbsp;·&nbsp; Cancela cuando quieras',
-    'stat1':'Barriles de reservas probadas — las mayores del mundo','stat2':'Venezuela en reservas petroleras mundiales probadas','stat3':'Años de experiencia operacional O&G detrás de esta plataforma','stat4':'Para los primeros 100 miembros fundadores',
-    'spec-label':'Especialidades','spec-h2':'Encuentra exactamente<br><em>lo que necesitas.</em>',
-    'sp1h':'Perforación','sp2h':'Producción','sp3h':'Ingeniería EPC','sp4h':'Contratos & Legal','sp5h':'Geología & Reservorios','sp6h':'Infraestructura','sp7h':'Tecnología & Datos','sp8h':'HSE & Ambiente',
-    'em-h2':'Formados aquí.<br>Probados<br><em>afuera.</em><br>Listos para<br><em>volver.</em>',
-    'em-p':'Miles de ingenieros, técnicos y empresas venezolanas de O&G tuvieron que parar. No por falta de talento — por circunstancias del país. Ese talento <strong>no desapareció.</strong><br><br>La industria se está reactivando. Las empresas internacionales están volviendo a mirar Venezuela. <strong>NodusPro existe para que te encuentren a ti primero.</strong>',
-    't1':'"Trabajé 15 años en la Faja del Orinoco. Conozco cada proceso, cada contrato, cada campo. Solo necesitaba que alguien me conectara con quien está volviendo a invertir."','t1s':'— Ingeniero de Producción, Anzoátegui',
-    't2':'"Nuestra empresa de servicios paró en 2019. El equipo, los equipos, la experiencia — todo estaba ahí, esperando. NodusPro es exactamente lo que necesitábamos."','t2s':'— Director, empresa de servicios petroleros, Zulia',
-    't3':'"Buscábamos contratistas locales verificados en Venezuela. No existía ninguna plataforma confiable. Ahora existe."','t3s':'— Gerente de Operaciones, operadora internacional',
-    'for-label':'Para quién es','for-h2':'Dos lados.<br><em>Una plataforma.</em>','for-desc':'NodusPro conecta el talento y la experiencia venezolana con el capital y la demanda internacional que está regresando al sector.',
-    'fc1-h3':'Profesionales y Empresas Venezolanas','fc1-p':'Ingenieros, técnicos, supervisores, contratistas y empresas de servicios que construyeron su trayectoria en la industria venezolana y están listos para reactivarse.',
-    'fc1-list':'<li>Crea tu perfil verificado — completamente gratis</li><li>Sé encontrado por operadoras y contratistas internacionales</li><li>Registra tus servicios, certificaciones y disponibilidad</li><li>Accede a oportunidades y licitaciones de proyectos</li><li>Reconecta con colegas y socios del sector</li>',
-    'fc2-h3':'Empresas Internacionales e Inversores','fc2-p':'Operadoras, contratistas EPC, empresas de servicios e inversores que buscan socios locales verificados, proveedores confiables y experiencia real en Venezuela.',
-    'fc2-list':'<li>Busca proveedores verificados por especialidad y región</li><li>Perfiles con credenciales y trayectoria comprobada</li><li>Talento especializado para operaciones y proyectos</li><li>Navega el entorno regulatorio y contractual venezolano</li><li>Reduce el riesgo de entrada con inteligencia de mercado confiable</li>',
-    'how-label':'Cómo funciona','how-h2':'Simple.<br><em>Directo.</em><br>Verificado.','how-desc':'Sin procesos complicados. Sin intermediarios innecesarios. Conexión directa entre quien tiene experiencia y quien la necesita.',
-    's1h':'Crea Tu Perfil','s1p':'Regístrate con tus credenciales profesionales. Nuestro equipo revisa y verifica manualmente cada perfil — incluyendo screening regulatorio. Nada de perfiles anónimos.',
-    's2h':'Hazte Visible','s2p':'Tu perfil verificado aparece en búsquedas filtradas por especialidad, región, certificaciones y disponibilidad. Las empresas encuentran exactamente lo que necesitan.',
-    's3h':'Conecta y Trabaja','s3p':'Inicia el contacto a través del sistema de mensajería segura. Los miembros Premium obtienen posicionamiento prioritario, contacto directo visible y acceso a oportunidades exclusivas.',
-    'comp-label':'Cumplimiento Regulatorio',
-    'cc1h':'Screening OFAC','cc1p':'Todos los usuarios son verificados contra listas de sanciones internacionales antes de ser activados.',
-    'cc2h':'KYB/KYC','cc2p':'Know Your Business y Know Your Customer aplicados a empresas y personas. Documentación corporativa verificada para cuentas de acceso internacional.',
-    'cc3h':'Sin Garantías de Transacción','cc3p':'NodusPro es un directorio profesional verificado. No intermediamos ni garantizamos transacciones entre usuarios.',
-    'cc4h':'Auditoría Continua','cc4p':'Los perfiles son re-verificados periódicamente. Cambios en el estatus regulatorio resultan en revisión inmediata.',
-    'comp-disclaimer':'AVISO LEGAL: NodusPro no provee asesoría legal ni garantiza que ninguna transacción sea permitida bajo regulaciones aplicables. Los usuarios son responsables de su propio cumplimiento legal.',
-    'trust-label':'Confianza y Seguridad','trust-h2':'Construida sobre<br><em>credibilidad real.</em>','trust-desc':'Nuestro equipo tiene décadas de experiencia operacional en O&G internacional y certificaciones activas en ciberseguridad.',
-    'tb1':'Identidad','tc1h':'Solo Perfiles Verificados','tc1p':'Cada perfil es revisado manualmente. Correos corporativos, credenciales e historial profesional validados antes de activación.',
-    'tb2':'Legal','tc2h':'Privacy By Design','tc2p':'Operamos bajo GDPR desde el diseño. Tus datos son tuyos — nunca los vendemos ni compartimos sin consentimiento explícito.',
-    'tb3':'Técnica','tc3h':'Seguridad Certificada','tc3p':'Cifrado E2E, MFA obligatorio, Row-Level Security, rate limiting y monitoreo continuo. Arquitectura auditada con certificaciones ISC2 y CyberOps activas.',
-    'tb4':'Plataforma','tc4h':'Resolución de Disputas','tc4p':'Canal formal para reportar problemas. Proceso estructurado de investigación y resolución. Miembros Premium con mediación prioritaria.',
-    'api-label':'Para Desarrolladores','api-h2':'API-first.<br><em>Listo para<br>integrar.</em>',
-    'api-desc':'NodusPro está construido con arquitectura API-first. Las empresas pueden integrar el directorio directamente en sus sistemas internos de procurement o HSSE.',
-    'api-road':'Roadmap: App móvil iOS/Android · Integraciones SAP · Webhooks de oportunidades · API pública Q4 2026',
-    'price-label':'Planes','price-h2':'Empieza gratis.<br><em>Crece cuando quieras.</em>','price-desc':'Sin costo inicial. Actualiza cuando la plataforma esté generando valor real para tu negocio.',
-    'btn-monthly':'Mensual','btn-annual':'Anual','annual-badge':'-20%',
-    'pt1':'Para profesionales locales','pn1':'Gratuito','ps1':'/ siempre','pd1':'Crea tu perfil y forma parte del directorio. Sin tarjeta de crédito.',
-    'pf1':'<li>Perfil profesional verificado</li><li>Listado en el directorio público</li><li>Visibilidad básica en búsquedas</li><li>Mensajería de la plataforma (entrada)</li>',
-    'pt2':'Para empresas locales','pn2':'Destacado','ps2':'/ mes','pd2':'Destácate del directorio. Sé encontrado primero por operadoras que buscan activamente.',
-    'pf2':'<li>Todo lo del plan Gratuito</li><li>Badge verificado y posición prioritaria</li><li>Contacto directo visible</li><li>Apareces en listas curadas de proveedores</li><li>Acceso anticipado a oportunidades</li>',
-    'pt3':'Para empresas internacionales','pn3':'Acceso','ps3':'/ mes','pd3':'Acceso completo a la red. Busca, contacta y sourcea con total confianza.',
-    'pf3':'<li>Búsqueda avanzada ilimitada con filtros</li><li>Contacto directo con todos los perfiles</li><li>Reportes de inteligencia de mercado</li><li>Actualizaciones regulatorias y de compliance</li><li>Resolución de disputas prioritaria</li>',
-    'roi-note':'💡 <strong>ROI estimado plan Acceso:</strong> Una sola conexión exitosa con un proveedor verificado puede representar semanas de búsqueda manual ahorradas y miles de dólares en costos de due diligence. El plan Acceso se paga solo con la primera contratación.',
-    'growth-label':'Programa de Referidos','growth-h2':'Invita a tu red.<br><em>Todos ganan.</em>','growth-desc':'En O&G venezolano la confianza viaja por la red. Cada persona que invites fortalece el ecosistema — y te recompensa a ti también.',
-    'gr1h':'Comparte Tu Link','gr1p':'Al registrarte recibes un link único. Compártelo con colegas, ex-compañeros de PDVSA, técnicos de campo — cualquiera que pertenezca al ecosistema.','gr1r':'📎 Link único personalizado',
-    'gr2h':'Ellos se Registran','gr2p':'Cada colega que entra con tu link queda verificado en el directorio. El ecosistema crece. La red se vuelve más valiosa para todos.','gr2r':'✓ Se suman como verificados',
-    'gr3h':'Ambos Suben de Tier','gr3p':'Por cada 3 referidos verificados que actives, tú y ellos reciben un mes del plan superior sin costo. Sin límite. Sin fecha de vencimiento.','gr3r':'🎁 +1 mes gratis por cada 3 referidos',
-    'sp-title':'¡Bienvenido, Miembro Fundador!','sp-sub':'Estás en la lista. Invita a tu red — cada colega que traes fortalece el ecosistema y te sube de tier.',
-    'hsp-title':'¡Bienvenido, Miembro Fundador!','hsp-sub':'Estás en la lista. Invita a tu red ahora — cada colega verificado que traes te sube de tier.',
-    'share-label':'Comparte ahora','hshare-label':'Comparte ahora',
-    'share-li':'💼 LinkedIn','share-wa':'💬 WhatsApp','share-tw':'𝕏 Twitter/X','share-copy':'📋 Copiar texto',
-    'copy-text-btn':'↗ Copiar este texto para LinkedIn / WhatsApp',
-    'profile-name':'Tu Nombre · O&G Venezuela','profile-badge':'MIEMBRO FUNDADOR',
-    'cta-label':'Acceso Anticipado','cta-h2':'La ventana<br><em>está abierta ahora.</em>',
-    'cta-p':'El sector petrolero venezolano se está moviendo rápido. Quedan <strong style="color:var(--amber);" id="cta-spots">73 lugares</strong> de miembro fundador con plan Featured gratuito de por vida. No esperes.',
-    'cta-btn':'Ser Miembro Fundador','cta-email-ph':'Tu correo profesional',
+
+/* ── REF CAPTURE — Lee ?ref= de la URL al cargar ── */
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get('ref');
+  if(ref && ref.length > 0 && ref.length <= 10){
+    sessionStorage.setItem('noduspro_ref', ref.toUpperCase().replace(/[^A-Z0-9]/g,''));
+  }
+})();
+
+/* ── CONFIG ── */
+const SUPA_URL='https://eettdimwdjyqniodefop.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
+
+let lang='es',billing='m';
+let formData={email:'',firstName:'',secondName:'',lastName1:'',lastName2:'',specs:[],specOther:'',regions:[],regionOther:'',companies:[],compOther:'',years:'',hasLinkedIn:true,linkedIn:'',availability:'now',availDate:''};
+let currentStep=0;
+const totalSteps=5;
+
+/* ── FORM FLOW ── */
+function startFormWithEmail(){
+  const e=document.getElementById('hero-email').value.trim();
+  if(e&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e))formData.email=e;
+  startForm();
+}
+function startFormFromCTA(){
+  const e=document.getElementById('cta-email')?.value.trim();
+  if(e&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e))formData.email=e;
+  document.getElementById('hero-section').scrollIntoView({behavior:'smooth'});
+  setTimeout(startForm,300);
+}
+function startForm(){
+  document.getElementById('hero-content').classList.add('hidden');
+  document.getElementById('form-overlay').classList.add('show');
+  currentStep=0;
+  renderStep();
+}
+function showLanding(){
+  document.getElementById('hero-content').classList.remove('hidden');
+  document.getElementById('form-overlay').classList.remove('show');
+}
+
+function setProgress(n){
+  document.getElementById('prog-fill').style.width=(n/totalSteps*100)+'%';
+}
+
+function renderStep(){
+  setProgress(currentStep);
+  const b=document.getElementById('form-body');
+  const isES=lang==='es';
+  switch(currentStep){
+    case 0: b.innerHTML=stepEmail(isES); break;
+    case 1: b.innerHTML=stepName(isES); break;
+    case 2: b.innerHTML=stepSpecialty(isES); break;
+    case 3: b.innerHTML=stepHistory(isES); break;
+    case 4: b.innerHTML=stepVerification(isES); break;
+    case 5: b.innerHTML=stepSuccess(isES); break;
+  }
+}
+
+function stepEmail(es){
+  const v=formData.email||'';
+  return`
+    <div class="form-step-q">${es?'¿Cuál es tu correo?':'What is your email?'}</div>
+    <div class="form-step-s">${es?'Sin contraseña — te enviamos un link de acceso seguro.':'No password — we send you a secure access link.'}</div>
+    <div class="field-group">
+      <label class="fl">${es?'Correo profesional':'Professional email'}</label>
+      <input class="fi" type="email" id="f-email" placeholder="${es?'tu@correo.com':'you@email.com'}" value="${v}"/>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:16px;font-size:12px;color:var(--text3)">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      ${es?'Tu correo nunca se vende ni se comparte':'Your email is never sold or shared'}
+    </div>
+    <button class="main-btn" onclick="nextStep()">${es?'Continuar':'Continue'}</button>
+  `;
+}
+
+function stepName(es){
+  return`
+    <div class="form-step-q">${es?'¿Cómo te llamas?':'What is your name?'}</div>
+    <div class="form-step-s">${es?'Tu nombre completo nos permite verificar tu identidad profesional.':'Your full name allows us to verify your professional identity.'}</div>
+    <div class="grid2">
+      <div><label class="fl">${es?'Primer nombre':'First name'}</label><input class="fi" id="fn1" placeholder="${es?'Carlos':'Carlos'}" value="${formData.firstName}"/></div>
+      <div><label class="fl">${es?'Segundo nombre':'Middle name'}</label><input class="fi" id="fn2" placeholder="${es?'opcional':'optional'}" value="${formData.secondName}"/></div>
+    </div>
+    <div class="grid2">
+      <div><label class="fl">${es?'Primer apellido':'Last name'}</label><input class="fi" id="fl1i" placeholder="${es?'Rodríguez':'Rodriguez'}" value="${formData.lastName1}"/></div>
+      <div><label class="fl">${es?'Segundo apellido':'Second last name'}</label><input class="fi" id="fl2i" placeholder="${es?'Méndez':'optional'}" value="${formData.lastName2}"/></div>
+    </div>
+    <button class="main-btn" onclick="nextStep()">${es?'Continuar':'Continue'}</button>
+  `;
+}
+
+function stepSpecialty(es){
+  const specs=['Producción|Production','Perforación|Drilling','EPC','Geología|Geology','HSE','Contratos|Contracts','Infraestructura|Infrastructure','Tecnología|Technology'];
+  const regs=['Monagas','Faja del Orinoco|Orinoco Belt','Zulia / Lago|Zulia / Lake','Anzoátegui','Offshore','Nacional|National'];
+  function renderChips(arr,sel,otherId,otherVal){
+    return arr.map(s=>{
+      const[esp,eng]=s.split('|');
+      const label=es?esp:(eng||esp);
+      const isOn=sel.includes(esp);
+      return`<span class="chip${isOn?' on':''}" onclick="toggleChip(this,'${esp}')">${label}</span>`;
+    }).join('')+`<span class="chip other-chip${otherVal?' on':''}" onclick="toggleOther('${otherId}',this)">+ ${es?'Otro':'Other'}</span>`;
+  }
+  return`
+    <div class="form-step-q">${es?'Tu especialidad y región':'Your specialty and region'}</div>
+    <div class="form-step-s">${es?'Selecciona una o varias. Puedes elegir múltiples.':'Select one or more. You can choose multiple.'}</div>
+    <div class="field-group">
+      <label class="fl">${es?'Especialidad':'Specialty'}</label>
+      <div class="chips">${renderChips(specs,formData.specs,'spec-other',formData.specOther)}</div>
+      <div class="other-field${formData.specOther?' show':''}" id="spec-other-wrap">
+        <input class="fi" style="margin-top:0" id="spec-other-input" placeholder="${es?'Tu especialidad...':'Your specialty...'}" value="${formData.specOther}" oninput="formData.specOther=this.value"/>
+      </div>
+    </div>
+    <div class="field-group" style="margin-top:16px">
+      <label class="fl">${es?'Región de experiencia en Venezuela':'Region of experience in Venezuela'}</label>
+      <div class="chips">${renderChips(regs,formData.regions,'reg-other',formData.regionOther)}</div>
+      <div class="other-field${formData.regionOther?' show':''}" id="reg-other-wrap">
+        <input class="fi" style="margin-top:0" id="reg-other-input" placeholder="${es?'La región...':'The region...'}" value="${formData.regionOther}" oninput="formData.regionOther=this.value"/>
+      </div>
+    </div>
+    <button class="main-btn" onclick="nextStep()">${es?'Continuar':'Continue'}</button>
+  `;
+}
+
+function stepHistory(es){
+  const comps=['PDVSA','Repsol','Halliburton','SLB','TotalEnergies','Chevron','Woodside','ENI','BP'];
+  const yrs=['1–5','6–10','11–20','20+'];
+  return`
+    <div class="form-step-q">${es?'¿Dónde has trabajado?':'Where have you worked?'}</div>
+    <div class="form-step-s">${es?'Selecciona todas las que apliquen.':'Select all that apply.'}</div>
+    <div class="field-group">
+      <label class="fl">${es?'Empresas':'Companies'}</label>
+      <div class="chips">
+        ${comps.map(c=>`<span class="chip${formData.companies.includes(c)?' on':''}" onclick="toggleChip(this,'${c}')">${c}</span>`).join('')}
+        <span class="chip other-chip${formData.compOther?' on':''}" onclick="toggleOther('comp-other',this)">+ ${es?'Otra':'Other'}</span>
+      </div>
+      <div class="other-field${formData.compOther?' show':''}" id="comp-other-wrap">
+        <input class="fi" style="margin-top:0" id="comp-other-input" placeholder="${es?'Nombre de la empresa...':'Company name...'}" value="${formData.compOther}" oninput="formData.compOther=this.value"/>
+      </div>
+    </div>
+    <div class="field-group" style="margin-top:16px">
+      <label class="fl">${es?'Años de experiencia en O&G':'Years of O&G experience'}</label>
+      <div class="chips">
+        ${yrs.map(y=>`<span class="chip${formData.years===y?' on':''}" onclick="setSingle(this,'years','${y}')">${y}</span>`).join('')}
+      </div>
+    </div>
+    <button class="main-btn" onclick="nextStep()">${es?'Continuar':'Continue'}</button>
+  `;
+}
+
+function stepVerification(es){
+  return`
+    <div class="form-step-q">${es?'Verificación de perfil':'Profile verification'}</div>
+    <div class="form-step-s">${es?'Confirma tu identidad profesional. Elige la opción que aplique.':'Confirm your professional identity. Choose the option that applies.'}</div>
+    <div class="field-group">
+      <label class="fl">${es?'¿Tienes perfil de LinkedIn?':'Do you have a LinkedIn profile?'}</label>
+      <div class="chips" style="margin-bottom:12px">
+        <span class="chip${formData.hasLinkedIn?' on':''}" onclick="setLI(true)">${es?'Sí, tengo LinkedIn':'Yes, I have LinkedIn'}</span>
+        <span class="chip${!formData.hasLinkedIn?' on':''}" onclick="setLI(false)">${es?'No tengo LinkedIn':'No LinkedIn'}</span>
+      </div>
+      <div id="li-yes-area" style="display:${formData.hasLinkedIn?'block':'none'}">
+        <label class="fl">URL de LinkedIn</label>
+        <input class="fi" id="li-url" placeholder="linkedin.com/in/tu-perfil" value="${formData.linkedIn}" oninput="formData.linkedIn=this.value"/>
+      </div>
+      <div id="li-no-area" style="display:${!formData.hasLinkedIn?'block':'none'}">
+        <div class="li-alt">
+          <p>${es?'Sin problema. Acepta cualquiera de estas opciones:':'No problem. We accept any of these alternatives:'}</p>
+          <div class="li-option"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 8h6M5 5h3M5 11h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>${es?'Subir CV o certificado profesional':'Upload CV or professional certificate'}</div>
+          <div class="li-option"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM2 13.5c0-2 2.7-3.5 6-3.5s6 1.5 6 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>${es?'Referencia de un colega ya verificado en NodusPro':'Reference from a colleague already verified on NodusPro'}</div>
+          <div class="li-option"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 4h10M3 8h7M3 12h5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>${es?'Carta de recomendación laboral':'Letter of professional recommendation'}</div>
+        </div>
+      </div>
+    </div>
+    <div class="field-group" style="margin-top:14px">
+      <label class="fl">${es?'¿Disponible para proyectos?':'Available for projects?'}</label>
+      <div class="toggle-opt${formData.availability==='now'?' on':''}" onclick="setAvail('now')">
+        <div><div class="toggle-opt-text">${es?'Disponible ahora':'Available now'}</div><div class="toggle-opt-sub">${es?'Las empresas pueden contactarte de inmediato':'Companies can contact you immediately'}</div></div>
+        <div class="toggle-pill${formData.availability==='now'?' on':''}"><div class="toggle-thumb"></div></div>
+      </div>
+      <div class="toggle-opt${formData.availability==='date'?' on':''}" onclick="setAvail('date')">
+        <div><div class="toggle-opt-text">${es?'Disponible desde una fecha':'Available from a date'}</div><div class="toggle-opt-sub">${es?'Indica cuándo estarás disponible':'Indicate when you will be available'}</div></div>
+        <div class="toggle-pill${formData.availability==='date'?' on':''}"><div class="toggle-thumb"></div></div>
+      </div>
+      <div class="toggle-opt${formData.availability==='no'?' on':''}" onclick="setAvail('no')">
+        <div><div class="toggle-opt-text">${es?'No disponible por ahora':'Not available right now'}</div><div class="toggle-opt-sub">${es?'Puedes cambiar esto en cualquier momento':'You can change this anytime'}</div></div>
+        <div class="toggle-pill${formData.availability==='no'?' on':''}"><div class="toggle-thumb"></div></div>
+      </div>
+    </div>
+    <button class="main-btn" onclick="submitForm()" id="submit-btn">${es?'Enviar mi perfil':'Submit my profile'}</button>
+  `;
+}
+
+function stepSuccess(es){
+  const code=(formData.email.split('@')[0]||'USER').toUpperCase().replace(/[^A-Z0-9]/g,'').substring(0,8);
+  const shareText=es
+    ?`Acabo de unirme a NodusPro como miembro fundador — el marketplace verificado del talento petrolero venezolano. Si tienes experiencia en O&G y quieres ser encontrado por empresas internacionales, únete antes del 30 de abril: noduspro.net?ref=${code}`
+    :`I just joined NodusPro as a founding member — the verified marketplace for Venezuelan O&G talent. Join before April 30 (free): noduspro.net?ref=${code}`;
+  return`
+    <div style="text-align:center;padding:4px 0 16px">
+      <div class="sico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="#166534" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="form-step-q" style="text-align:center">${es?'Perfil enviado':'Profile submitted'}</div>
+      <div class="form-step-s" style="text-align:center">${es?'Verificación automática en curso. Recibirás confirmación por email.':'Automatic verification in progress. You will receive email confirmation.'}</div>
+    </div>
+    <div style="border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px">
+      <div class="vstep-row">
+        <div class="vstep-ico ok"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div style="flex:1"><div class="vstep-name">${es?'Email confirmado':'Email confirmed'}</div><div class="vstep-desc">${es?'Dirección verificada':'Address verified'}</div></div>
+        <span class="badge bg">${es?'Listo':'Done'}</span>
+      </div>
+      <div class="vstep-row">
+        <div class="vstep-ico ok"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div style="flex:1"><div class="vstep-name">${es?'Sanctions check':'Sanctions check'}</div><div class="vstep-desc">${es?'No encontrado en listas internacionales':'Not found on international lists'}</div></div>
+        <span class="badge bg">${es?'Listo':'Done'}</span>
+      </div>
+      <div class="vstep-row" style="border-bottom:none">
+        <div class="vstep-ico pend"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#B5860D" stroke-width="1.2"/><path d="M8 5v3l1.5 1.5" stroke="#B5860D" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        <div style="flex:1"><div class="vstep-name">${es?'Aprobación final':'Final approval'}</div><div class="vstep-desc">${es?'Revisión del equipo — menos de 4 horas':'Team review — less than 4 hours'}</div></div>
+        <span class="badge ba">${es?'Pendiente':'Pending'}</span>
+      </div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:12px">
+      <div style="font-size:12px;font-weight:500;color:var(--text);margin-bottom:8px">${es?'Tu link de referido':'Your referral link'}</div>
+      <div style="display:flex;gap:0;margin-bottom:10px">
+        <input id="ref-link-val" style="flex:1;border:1px solid var(--border2);border-right:none;border-radius:7px 0 0 7px;padding:8px 12px;font-size:12px;font-family:'DM Sans',sans-serif;background:white;color:var(--text2);outline:none" value="noduspro.net?ref=${code}" readonly/>
+        <button onclick="copyRef('${code}')" id="copy-ref-btn" style="background:var(--navy);color:white;border:none;border-radius:0 7px 7px 0;padding:8px 14px;font-size:12px;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif">${es?'Copiar':'Copy'}</button>
+      </div>
+      <div style="display:flex;gap:7px;flex-wrap:wrap">
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://noduspro.net?ref='+code)}" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border:1px solid var(--border2);border-radius:7px;font-size:12px;color:var(--text2);text-decoration:none;background:white;cursor:pointer">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H10v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://wa.me/?text=${encodeURIComponent(shareText)}" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border:1px solid var(--border2);border-radius:7px;font-size:12px;color:var(--text2);text-decoration:none;background:white">WhatsApp</a>
+        <button onclick="copyShareText('${encodeURIComponent(shareText)}')" style="display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border:1px solid var(--border2);border-radius:7px;font-size:12px;color:var(--text2);background:white;cursor:pointer;font-family:'DM Sans',sans-serif" id="copy-share-btn">${es?'Copiar texto':'Copy text'}</button>
+      </div>
+    </div>
+  `;
+}
+
+/* ── NAVIGATION ── */
+function nextStep(){
+  if(currentStep===0){
+    const e=document.getElementById('f-email')?.value.trim();
+    if(!e||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)){
+      document.getElementById('f-email').style.outline='2px solid var(--red)';
+      setTimeout(()=>document.getElementById('f-email').style.outline='',1600);
+      return;
+    }
+    formData.email=e;
+  }
+  if(currentStep===1){
+    formData.firstName=document.getElementById('fn1')?.value||'';
+    formData.secondName=document.getElementById('fn2')?.value||'';
+    formData.lastName1=document.getElementById('fl1i')?.value||'';
+    formData.lastName2=document.getElementById('fl2i')?.value||'';
+  }
+  currentStep++;
+  renderStep();
+  document.getElementById('hero-section').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+async function submitForm(){
+  const btn=document.getElementById('submit-btn');
+  if(btn){btn.disabled=true;btn.textContent=lang==='es'?'Enviando...':'Sending...';}
+  const code=formData.email.split('@')[0].toUpperCase().replace(/[^A-Z0-9]/g,'').substring(0,8);
+  const incomingRef=sessionStorage.getItem('noduspro_ref')||'';
+  try{
+    await fetch(SUPA_URL+'/rest/v1/waitlist',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Prefer':'return=minimal'},
+      body:JSON.stringify({
+        email:formData.email,lang,source:'form',referral_code:code,
+        referred_by:incomingRef||null,
+        first_name:formData.firstName,last_name:formData.lastName1,
+        specialty:formData.specs.join(','),region:formData.regions.join(','),
+        availability:formData.availability
+      })
+    });
+  }catch(e){console.error(e);}
+  currentStep=5;
+  renderStep();
+}
+
+/* ── CHIP HELPERS ── */
+function toggleChip(el,val){
+  el.classList.toggle('on');
+  const isSpec=['Producción','Perforación','EPC','Geología','HSE','Contratos','Infraestructura','Tecnología'].includes(val);
+  const isReg=['Monagas','Faja del Orinoco','Zulia / Lago','Anzoátegui','Offshore','Nacional'].includes(val);
+  if(isSpec){const i=formData.specs.indexOf(val);i>-1?formData.specs.splice(i,1):formData.specs.push(val);}
+  else if(isReg){const i=formData.regions.indexOf(val);i>-1?formData.regions.splice(i,1):formData.regions.push(val);}
+  else{const i=formData.companies.indexOf(val);i>-1?formData.companies.splice(i,1):formData.companies.push(val);}
+}
+function toggleOther(id,el){
+  el.classList.toggle('on');
+  const wrap=document.getElementById(id+'-wrap');
+  if(wrap)wrap.classList.toggle('show',el.classList.contains('on'));
+}
+function setSingle(el,field,val){
+  el.parentElement.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  formData[field]=val;
+}
+function setLI(v){
+  formData.hasLinkedIn=v;
+  document.getElementById('li-yes-area').style.display=v?'block':'none';
+  document.getElementById('li-no-area').style.display=!v?'block':'none';
+  document.querySelectorAll('.chip').forEach(c=>{
+    if(c.textContent.includes('LinkedIn')||c.textContent.includes('tengo'))
+      c.classList.remove('on');
+  });
+}
+function setAvail(v){
+  formData.availability=v;
+  document.querySelectorAll('.toggle-opt').forEach(o=>o.classList.remove('on'));
+  document.querySelectorAll('.toggle-pill').forEach(p=>p.classList.remove('on'));
+  const opts=document.querySelectorAll('.toggle-opt');
+  const map={'now':0,'date':1,'no':2};
+  if(opts[map[v]]){
+    opts[map[v]].classList.add('on');
+    opts[map[v]].querySelector('.toggle-pill')?.classList.add('on');
+  }
+}
+
+/* ── COPY HELPERS ── */
+function copyRef(code){
+  navigator.clipboard.writeText('https://noduspro.net?ref='+code).catch(()=>{});
+  const btn=document.getElementById('copy-ref-btn');
+  if(btn){const o=btn.textContent;btn.textContent=lang==='es'?'Copiado':'Copied';setTimeout(()=>btn.textContent=o,2000);}
+}
+function copyShareText(encoded){
+  navigator.clipboard.writeText(decodeURIComponent(encoded)).catch(()=>{});
+  const btn=document.getElementById('copy-share-btn');
+  if(btn){const o=btn.textContent;btn.textContent=lang==='es'?'Copiado':'Copied';setTimeout(()=>btn.textContent=o,2000);}
+}
+
+/* ── PRICING ── */
+function setBilling(t){
+  billing=t;
+  document.getElementById('btn-m').classList.toggle('on',t==='m');
+  document.getElementById('btn-a').classList.toggle('on',t==='a');
+  updatePricing();
+}
+function updatePricing(){
+  const ann=billing==='a';
+  const isES=lang==='es';
+  const per=ann?(isES?'/ año':'/ year'):(isES?'/ mes':'/ month');
+  document.getElementById('pa2').innerHTML=`$${ann?'278':'29'} <span>${per}</span>`;
+  document.getElementById('pw2').innerHTML=ann?`<s>48 ${isES?'al año':'/year'}</s>`:'&nbsp;';
+  document.getElementById('pa3').innerHTML=`$${ann?'950':'99'} <span>${per}</span>`;
+  document.getElementById('pw3').innerHTML=ann?`<s>,188 ${isES?'al año':'/year'}</s>`:'&nbsp;';
+}
+
+/* ── I18N ── */
+const T={
+  es:{
+    'nav-cta':'Acceso Anticipado','hero-pill':'El marketplace O&G venezolano',
+    'hero-h1':'Tienes LinkedIn.<br>Ahora tienes algo<br><em>más específico.</em>',
+    'hero-sub':'El directorio verificado del talento petrolero venezolano. Donde las empresas internacionales encuentran exactamente lo que necesitan — y tú eres encontrado.',
+    'vt1':'LinkedIn: red global','vt2':'NodusPro: O&G Venezuela',
+    'hero-cta-btn':'Unirme gratis','hero-email':'Tu correo profesional',
+    'hero-note':'Gratuito para miembros fundadores · Pago seguro con Stripe · Sin spam',
+    'deadline-text':'Acceso fundador gratuito hasta el <strong>30 de abril de 2026.</strong> Después, de pago.',
+    'back-txt':'Volver',
+    'comp-label':'Complementarios, no competidores','comp-h2':'LinkedIn y NodusPro:<br><em>cada uno en lo suyo.</em>',
+    'li-name':'Tu red profesional global','np-name':'Tu identidad verificada en O&G Venezuela',
+    'li1':'1.000 millones de profesionales de todos los sectores del mundo',
+    'li2':'Perfil libre — tú defines tu experiencia, ideal para visibilidad global',
+    'li3':'Conexión y mensajería con toda tu red profesional global',
+    'li4':'Presencia y credibilidad profesional en el mercado global',
+    'li5':'Herramienta esencial para cualquier profesional — usamos LinkedIn para verificarte',
+    'np1':'100% O&G venezolano — especialización que LinkedIn no puede tener por diseño',
+    'np2':'Credenciales verificadas + consulta SDN/sanctions antes de activar el perfil',
+    'np3':'Toggle de disponibilidad para proyectos — con fecha de inicio visible',
+    'np4':'Clasificado por campo venezolano — Faja, Lago, Oriente, Monagas, Offshore',
+    'np5':'Contacto directo de empresas verificadas — sin ruido, sin intermediarios',
+    'demo-label':'Así se ve un perfil NodusPro','demo-h2':'Verificado. Visible.<br><em>Listo para trabajar.</em>',
+    'demo-sub':'Cada perfil activo muestra solo lo que importa para conectar con una empresa en segundos.',
+    'dc-btn':'Contactar directamente',
+    'prom-label':'Lo que NodusPro garantiza','prom-h2':'Tres cosas que<br>LinkedIn <em>no puede hacer.</em>',
+    'prom-sub':'No son funcionalidades. Son las razones por las que un profesional venezolano de O&G elige NodusPro.',
+    'p1h':'Serás encontrado esta semana','p1p':'Las empresas que entran a NodusPro buscan específicamente talento venezolano O&G. No compites con 1.000 millones de perfiles.','p1t':'Solo O&G Venezuela — cero ruido',
+    'p2h':'Tu perfil vale algo real','p2p':'El badge "Verificado NodusPro" significa que nuestro equipo revisó tus credenciales y consultó tu nombre contra listas internacionales de sanciones.','p2t':'Verificación manual · SDN checked',
+    'p3h':'Contacto directo sin filtros','p3p':'Sin solicitudes de conexión. Una empresa que quiere contactarte lo hace directamente. Tú decides si respondes.','p3t':'Directo para cuentas Access',
+    'spec-label':'Especialidades','spec-h2':'El directorio más completo<br>de O&G <em>venezolano.</em>','spec-sub':'Cada perfil clasificado por especialidad técnica y región de experiencia dentro de Venezuela.',
+    'sp1':'Perforación','sp2':'Producción','sp3':'Ingeniería EPC','sp4':'Contratos y Legal','sp5':'Geología','sp6':'Infraestructura','sp7':'Tecnología','sp8':'HSE',
+    'how-label':'Cómo funciona','how-h2':'Simple. <em>Directo.</em> Verificado.','how-sub':'Sin procesos complicados. Todo en una sola pantalla. Todo automático — excepto el clic final de aprobación.',
+    'sh1':'Regístrate y completa tu perfil','sp1t':'Ingresa tu email y completa el formulario progresivo — 5 pasos simples, sin salir de la página. Menos de 8 minutos.',
+    'sh2':'Verificación automática','sp2t':'El sistema consulta automáticamente tu LinkedIn, verifica tu email y realiza una consulta contra listas internacionales de sanciones. Todo en paralelo. En menos de 4 horas tienes respuesta.',
+    'sh3':'Conecta y trabaja','sp3t':'Tu perfil verificado aparece en el directorio. Las empresas con plan Access te encuentran y te contactan directamente.',
+    'ver-label':'Verificación','ver-h2':'Lo que hacemos hoy.<br><em>Lo que viene.</em>','ver-sub':'Sin promesas vacías. Este es el proceso real de verificación que aplicamos en esta etapa.',
+    'vc1h':'Email y perfil','vc1p':'Confirmación de email funcional. Revisión manual de datos — nombre, especialidad, empresa y experiencia declarada.',
+    'vc2h':'SDN / Sanctions check','vc2p':'Consulta automática contra listas públicas internacionales. Resultado documentado antes de activar el perfil.',
+    'vc3h':'LinkedIn o alternativa','vc3p':'Confirmamos LinkedIn o aceptamos CV, carta de recomendación o referencia de un colega verificado.',
+    'vc4h':'KYB/KYC formal','vc4p':'Verificación corporativa formal para cuentas internacionales. En desarrollo para Q3 2026.',
+    'hon-h':'Nuestra posición','hon-p':'NodusPro es un directorio profesional, no una institución financiera. Nuestro proceso es manual y basado en fuentes públicas. No garantizamos cumplimiento regulatorio de transacciones — cada parte es responsable de su propio due diligence.',
+    'price-label':'Planes','price-h2':'Simple. <em>Sin sorpresas.</em>','price-sub':'Gratis para siempre en el directorio. Paga solo cuando quieras ser encontrado primero — o encontrar a otros.',
+    'btn-m':'Mensual','btn-a':'Anual','save-p':'-20%',
+    'pt1':'Para profesionales','pn1':'Gratuito','pa1':'$0 <span>siempre</span>','pd1':'Tu perfil en el directorio. Visible para quien busca. Sin límite de tiempo.',
+    'pf1':'<li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Perfil verificado en el directorio</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Visibilidad en búsquedas</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Toggle de disponibilidad</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Mensajería entrante</li>',
+    'pt2':'Para empresas locales','pn2':'Destacado','ps2':'/ mes','pd2':'Apareces primero. Eres contactado primero. Un proyecto encontrado paga este plan muchas veces.',
+    'pf2':'<li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Todo lo del plan Gratuito</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Posición prioritaria</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Contacto directo visible</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Listas curadas</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Acceso anticipado</li>',
+    'pt3':'Para empresas internacionales','pn3':'Acceso','ps3':'/ mes','pd3':'Reemplaza semanas de due diligence manual y miles en consultores.',
+    'pf3':'<li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Búsqueda avanzada con filtros</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Contacto directo con todos</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Reportes de mercado</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Actualizaciones regulatorias</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Soporte prioritario</li>',
+    'roi-box':'<strong>Para empresas internacionales:</strong> Un consultor especializado en Venezuela O&G cobra entre $300 y $500/hora. El plan Acceso ($99/mes) cuesta menos que 1 hora de esa consultoría — y da acceso ilimitado al directorio verificado durante un mes entero.',
+    'ref-label':'Programa de referidos','ref-h2':'Invita. <em>Ambos ganan.</em>','ref-sub':'Cada colega que traes fortalece la red y te recompensa directamente.',
+    'r1h':'Comparte tu link único','r1p':'Al confirmar tu registro recibes un link personalizado. Compártelo con colegas del sector.','r1t':'Link generado al registrarse',
+    'r2h':'Tu colega se verifica','r2p':'Tu referido entra, completa su perfil y pasa la verificación manual. Solo entonces cuenta como referido activo.','r2t':'Cuenta cuando es verificado, no cuando se registra',
+    'r3h':'1 mes gratis del plan superior','r3p':'Por cada 3 referidos verificados en un mes calendario, tú y cada uno de ellos reciben 1 mes gratuito del plan inmediato superior. Se acredita el 1 de cada mes.','r3t':'1 mes gratis por cada 3 referidos activos al mes',
+    'test-label':'Lo que dicen',
+    't1':'"Trabajé 18 años en la Faja del Orinoco. Conozco cada contrato, cada campo, cada proceso. Solo necesitaba una plataforma que me conectara con quienes están volviendo a invertir."',
+    't1n':'Carlos R.','t1r':'Ing. Producción — Monagas, Venezuela',
+    't2':'"Nuestra empresa de servicios paró en 2019. El equipo, los equipos, la experiencia — todo estaba ahí esperando. NodusPro es el directorio que faltaba para ser visible de nuevo."',
+    't2n':'Luis M.','t2r':'Director — Empresa OFS, Zulia',
+    't3':'"We needed verified local contractors in Venezuela. No serious platform existed. NodusPro fills that gap with a real approach to verification."',
+    't3n':'Ana P.','t3r':'Operations Manager — International operator',
+    'cta-h2':'Sé encontrado.<br><em>Hoy.</em>',
+    'cta-p':'El acceso fundador gratuito cierra el 30 de abril de 2026. El sector se está moviendo ahora — las primeras empresas internacionales ya están mirando Venezuela.',
+    'cta-btn':'Unirme gratis','cta-email':'Tu correo profesional','cta-note':'Sin tarjeta de crédito · Pago seguro con Stripe · Sin spam',
+    'comp2-label':'Legal y Cumplimiento',
+    'cc1':'SDN check manual','cc1p':'Cada perfil verificado contra listas públicas internacionales antes de activación.',
+    'cc2':'Tu información es tuya','cc2p':'Nunca vendemos ni compartimos tus datos sin consentimiento. Elimina tu perfil cuando quieras.',
+    'cc3':'Solo directorio','cc3p':'No procesamos pagos entre usuarios ni garantizamos transacciones.',
+    'cc4':'Infraestructura segura','cc4p':'Cifrado SSL 256-bit, autenticación sin contraseña, Row-Level Security. Certificaciones ISC2 y CyberOps.',
+    'legal-note':'NodusPro es un directorio profesional verificado. No provee asesoría legal ni garantiza conformidad regulatoria. © 2026 NodusPro · Venezuela · noduspro.net',
     'footer-desc':'El marketplace profesional del ecosistema petrolero venezolano. De Venezuela, para el mundo.',
     'footer-copy':'© 2026 NodusPro · Venezuela · Todos los derechos reservados',
-    'fl1':'Política de Privacidad','fl2':'Términos de Servicio','fl3':'Cumplimiento OFAC','fl4':'Contacto',
-    'footer-legal':'NodusPro es un directorio profesional verificado. No garantiza, intermedia ni financia transacciones entre usuarios. El uso de la plataforma no constituye asesoría legal ni autorización regulatoria.'
+    'fl1':'Privacidad','fl2':'Términos','fl3':'Sanciones','fl4':'Contacto',
+    'footer-legal':'NodusPro es un directorio profesional verificado. No garantiza ni intermedia transacciones. El uso no constituye asesoría legal.'
   },
-  en: {
-    'ofac-text':'Compliance Notice: NodusPro operates under strict regulatory screening protocols. All users are verified against applicable international regulations, including OFAC requirements.',
-    'founder-pill':'FOUNDING MEMBER',
-    'founder-bar-text':'The first <strong>100 members</strong> get lifetime access to the Featured plan at no cost. <strong id="spots-left">73</strong> spots remaining.',
-    'founder-counter':'<span>27</span>/100 founders confirmed',
-    'nav-cta':'Join Now',
-    'ht1':'Verified profiles','ht2':'GDPR Compliant','ht3':'Regulatory screening','ht4':'E2E Encryption',
-    'hero-eyebrow':'The Professional Venezuelan O&G Marketplace',
-    'hero-h1':'Your expertise<br>back at<br><em>full output.</em>',
-    'hero-sub':'You built your career in Venezuela\'s fields. You know the Faja, the Lake, the East. <strong>That knowledge is more valuable today than ever.</strong>',
-    'hero-quote':'"Nodus" — Latin for node, connection point. The network Venezuela\'s O&G ecosystem needed.',
-    'founder-benefit-text':'As a founding member you get: <strong>lifetime Featured profile at no cost</strong>, priority access to the first posted opportunities, and your name in the platform credits as a co-builder of the ecosystem.',
-    'hero-btn':'Reserve My Spot',
-    'hero-email-ph':'Your professional email',
-    'hero-success':'✓ Welcome to NodusPro! You\'re a founding member. We\'ll be in touch soon.',
-    'hero-note':'<span class="dot-green"></span> Free registration &nbsp;·&nbsp; GDPR &nbsp;·&nbsp; No spam &nbsp;·&nbsp; Cancel anytime',
-    'stat1':'Barrels of proven reserves — the largest in the world','stat2':'Venezuela ranks #1 in global proven oil reserves','stat3':'Years of O&G operational experience behind this platform','stat4':'For the first 100 founding members',
-    'spec-label':'Specialties','spec-h2':'Find exactly<br><em>what you need.</em>',
-    'sp1h':'Drilling','sp2h':'Production','sp3h':'EPC Engineering','sp4h':'Contracts & Legal','sp5h':'Geology & Reservoirs','sp6h':'Infrastructure','sp7h':'Technology & Data','sp8h':'HSE & Environment',
-    'em-h2':'Trained here.<br>Proven<br><em>everywhere.</em><br>Ready to<br><em>return.</em>',
-    'em-p':'Thousands of Venezuelan O&G engineers, technicians and companies had to stop. Not for lack of talent — because of the country\'s circumstances. That talent <strong>never disappeared.</strong><br><br>The industry is reactivating. International companies are looking at Venezuela again. <strong>NodusPro exists so they find you first.</strong>',
-    't1':'"I worked 15 years in the Orinoco Belt. I know every process, every contract, every field. I just needed someone to connect me with those coming back to invest."','t1s':'— Production Engineer, Anzoátegui',
-    't2':'"Our services company stopped in 2019. The team, the equipment, the experience — it was all there, waiting. NodusPro is exactly what we needed."','t2s':'— Director, oilfield services company, Zulia',
-    't3':'"We needed verified local contractors in Venezuela. No reliable platform existed. Now it does."','t3s':'— Operations Manager, international operator',
-    'for-label':"Who it's for",'for-h2':'Two sides.<br><em>One platform.</em>','for-desc':'NodusPro connects Venezuelan talent and expertise with the international capital and demand returning to the sector.',
-    'fc1-h3':'Venezuelan Professionals & Companies','fc1-p':'Engineers, technicians, supervisors, contractors and service companies who built their careers in Venezuela\'s oil industry and are ready to re-engage.',
-    'fc1-list':'<li>Create your verified profile — completely free</li><li>Get found by international operators and EPC contractors</li><li>List your services, certifications and availability</li><li>Access project opportunities and tenders</li><li>Reconnect with colleagues and sector partners</li>',
-    'fc2-h3':'International Companies & Investors','fc2-p':'Operators, EPC contractors, oilfield service firms and investors seeking verified local partners, trusted suppliers and real expertise in Venezuela.',
-    'fc2-list':'<li>Search verified suppliers and contractors by specialty and region</li><li>Profiles with proven credentials and track record</li><li>Specialized talent for operations and projects</li><li>Navigate Venezuela\'s regulatory and contractual landscape</li><li>Reduce market entry risk with trusted intelligence</li>',
-    'how-label':'How it works','how-h2':'Simple.<br><em>Direct.</em><br>Verified.','how-desc':'No complex onboarding. No unnecessary gatekeepers. Direct connection between those who have experience and those who need it.',
-    's1h':'Create Your Profile','s1p':'Register with your professional credentials. Our team manually reviews and verifies every profile — including regulatory screening. No anonymous listings.',
-    's2h':'Get Discovered','s2p':'Your verified profile appears in searches filtered by specialty, region, certifications and availability. Companies find exactly what they need.',
-    's3h':'Connect & Work','s3p':'Initiate contact through the secure messaging system. Premium members get priority placement, visible direct contact and access to exclusive opportunities.',
-    'comp-label':'Regulatory Compliance',
-    'cc1h':'OFAC Screening','cc1p':'All users are verified against international sanctions lists before activation. Automated process + manual review for Premium accounts.',
-    'cc2h':'KYB/KYC','cc2p':'Know Your Business and Know Your Customer applied to all entities and individuals. Corporate documentation verified for international access accounts.',
-    'cc3h':'No Transaction Guarantees','cc3p':'NodusPro is a verified professional directory. We do not intermediate, finance or guarantee transactions between users.',
-    'cc4h':'Continuous Audit','cc4p':'Profiles are re-verified periodically. Changes in regulatory status result in immediate account review.',
-    'comp-disclaimer':'LEGAL NOTICE: NodusPro does not provide legal advice and does not guarantee that any specific transaction is permitted under applicable regulations. Users are responsible for their own legal compliance.',
-    'trust-label':'Trust & Security','trust-h2':'Built on<br><em>real credibility.</em>','trust-desc':'Our team brings decades of international O&G operational experience and active cybersecurity certifications. Every decision was made with security as the foundation.',
-    'tb1':'Identity','tc1h':'Verified Profiles Only','tc1p':'Every profile is manually reviewed. Corporate emails, credentials and professional history validated before activation.',
-    'tb2':'Legal','tc2h':'Privacy By Design','tc2p':'Operating under GDPR by design. Your data is yours — we never sell or share it without explicit consent.',
-    'tb3':'Technical','tc3h':'Certified Security','tc3p':'E2E encryption, mandatory MFA, Row-Level Security, rate limiting and continuous monitoring. Audited by professionals with active ISC2 and CyberOps certifications.',
-    'tb4':'Platform','tc4h':'Dispute Resolution','tc4p':'Formal channel to report issues or bad actors. Structured investigation and resolution process. Priority mediation for Premium members.',
-    'api-label':'For Developers','api-h2':'API-first.<br><em>Ready to<br>integrate.</em>',
-    'api-desc':'NodusPro is built with an API-first architecture. Companies can integrate the directory directly into their internal procurement or HSSE systems.',
-    'api-road':'Roadmap: iOS/Android mobile app · SAP integrations · Opportunity webhooks · Public API Q4 2026',
-    'price-label':'Pricing','price-h2':'Start free.<br><em>Scale when ready.</em>','price-desc':'No upfront cost. Upgrade when the platform is generating real value for your business.',
-    'btn-monthly':'Monthly','btn-annual':'Annual','annual-badge':'-20%',
-    'pt1':'For local professionals','pn1':'Free','ps1':'/ forever','pd1':'Create your profile and join the directory. No credit card required.',
-    'pf1':'<li>Verified professional profile</li><li>Listed in the public directory</li><li>Basic search visibility</li><li>Platform messaging (inbound)</li>',
-    'pt2':'For local companies','pn2':'Featured','ps2':'/ month','pd2':'Stand out from the directory. Be found first by international operators actively sourcing.',
-    'pf2':'<li>Everything in Free</li><li>Verified badge & priority placement</li><li>Direct contact information visible</li><li>Appear in curated supplier lists</li><li>Early access to posted opportunities</li>',
-    'pt3':'For international companies','pn3':'Access','ps3':'/ month','pd3':'Full network access. Search, contact and source with total confidence.',
-    'pf3':'<li>Unlimited advanced search & filters</li><li>Direct contact with all verified profiles</li><li>Market intelligence reports</li><li>Regulatory & compliance updates</li><li>Priority dispute resolution</li>',
-    'roi-note':'💡 <strong>Estimated ROI — Access plan:</strong> One successful connection with a verified supplier can save weeks of manual sourcing and thousands in due diligence costs. The Access plan pays for itself with the first hire.',
-    'growth-label':'Referral Program','growth-h2':'Invite your network.<br><em>Everyone wins.</em>','growth-desc':'In Venezuelan O&G, trust travels through the network. Every person you invite to NodusPro strengthens the ecosystem — and rewards you too.',
-    'gr1h':'Share Your Link','gr1p':'When you register you receive a unique referral link. Share it with colleagues, former PDVSA peers, field technicians — anyone who belongs in the ecosystem.','gr1r':'📎 Personalized unique link',
-    'gr2h':'They Register','gr2p':'Every colleague who joins with your link gets verified and active in the directory. The ecosystem grows. The network becomes more valuable for everyone.','gr2r':'✓ They join as verified members',
-    'gr3h':'Both Move Up a Tier','gr3p':'For every 3 verified referrals you activate, both you and they receive one free month of the next plan tier. No limit. No expiration.','gr3r':'🎁 +1 free month per 3 referrals',
-    'sp-title':'Welcome, Founding Member!','sp-sub':'You\'re on the list. Invite your network — every colleague you bring strengthens the ecosystem and moves you up a tier.',
-    'hsp-title':'Welcome, Founding Member!','hsp-sub':'You\'re on the list. Invite your network now — every verified colleague you bring moves you up a tier.',
-    'share-label':'Share now','hshare-label':'Share now',
-    'share-li':'💼 LinkedIn','share-wa':'💬 WhatsApp','share-tw':'𝕏 Twitter/X','share-copy':'📋 Copy text',
-    'copy-text-btn':'↗ Copy this text for LinkedIn / WhatsApp',
-    'profile-name':'Your Name · O&G Venezuela','profile-badge':'FOUNDING MEMBER',
-    'cta-label':'Early Access','cta-h2':'The window<br><em>is open now.</em>',
-    'cta-p':'Venezuela\'s oil sector is moving fast. <strong style="color:var(--amber);" id="cta-spots">73 founding member spots</strong> remain with lifetime Featured plan at no cost. Don\'t wait.',
-    'cta-btn':'Become a Founding Member','cta-email-ph':'Your professional email',
+  en:{
+    'nav-cta':'Early Access','hero-pill':'The Venezuelan O&G marketplace',
+    'hero-h1':'You have LinkedIn.<br>Now you have something<br><em>more specific.</em>',
+    'hero-sub':'The verified directory of Venezuelan O&G talent. Where international companies find exactly what they need — and you get found.',
+    'vt1':'LinkedIn: global network','vt2':'NodusPro: Venezuela O&G',
+    'hero-cta-btn':'Join free','hero-email':'Your professional email',
+    'hero-note':'Free for founding members · Secure payment via Stripe · No spam',
+    'deadline-text':'Free founding member access closes <strong>April 30, 2026.</strong> After that, paid.',
+    'back-txt':'Back',
+    'comp-label':'Complementary, not competing','comp-h2':'LinkedIn and NodusPro:<br><em>each built for its purpose.</em>',
+    'li-name':'Your global professional network','np-name':'Your verified O&G Venezuela identity',
+    'li1':'1 billion professionals from every sector in the world',
+    'li2':'Open profiles — you define your experience, ideal for global visibility',
+    'li3':'Connect and message your entire global professional network',
+    'li4':'Professional presence and credibility in the global market',
+    'li5':'Essential tool for any professional — we use LinkedIn to verify you',
+    'np1':'100% Venezuelan O&G — specialization LinkedIn cannot have by design',
+    'np2':'Verified credentials + SDN/sanctions check before activating each profile',
+    'np3':'Project availability toggle — with visible start date',
+    'np4':'Classified by Venezuelan field — Faja, Lake, East, Monagas, Offshore',
+    'np5':'Direct contact from verified companies — no noise, no intermediaries',
+    'demo-label':'What a NodusPro profile looks like','demo-h2':'Verified. Visible.<br><em>Ready to work.</em>',
+    'demo-sub':'Each active profile shows only what matters to connect with a company in seconds.',
+    'dc-btn':'Contact directly',
+    'prom-label':'What NodusPro guarantees','prom-h2':'Three things<br>LinkedIn <em>cannot do.</em>',
+    'prom-sub':'Not features. The reasons a Venezuelan O&G professional chooses NodusPro.',
+    'p1h':'You\'ll be found this week','p1p':'Companies that join NodusPro specifically seek Venezuelan O&G talent. You\'re not competing with 1 billion profiles.','p1t':'Only O&G Venezuela — zero noise',
+    'p2h':'Your profile is worth something real','p2p':'The "Verified NodusPro" badge means our team reviewed your credentials and checked your name against international sanctions lists.','p2t':'Manual verification · SDN checked',
+    'p3h':'Direct contact, no filters','p3p':'No connection requests. A company that wants to contact you does it directly. You decide whether to respond.','p3t':'Direct for Access accounts',
+    'spec-label':'Specialties','spec-h2':'The most complete directory<br>of Venezuelan <em>O&G.</em>','spec-sub':'Every profile classified by technical specialty and region of experience within Venezuela.',
+    'sp1':'Drilling','sp2':'Production','sp3':'EPC Engineering','sp4':'Contracts & Legal','sp5':'Geology','sp6':'Infrastructure','sp7':'Technology','sp8':'HSE',
+    'how-label':'How it works','how-h2':'Simple. <em>Direct.</em> Verified.','how-sub':'No complex processes. Everything on one screen. All automatic — except the final approval click.',
+    'sh1':'Register and complete your profile','sp1t':'Enter your email and complete the progressive form — 5 simple steps, without leaving the page. Less than 8 minutes.',
+    'sh2':'Automatic verification','sp2t':'The system automatically checks your LinkedIn, verifies your email and consults against international sanctions lists. All in parallel. In less than 4 hours you have a response.',
+    'sh3':'Connect and work','sp3t':'Your verified profile appears in the directory. Companies with Access plan find you and contact you directly.',
+    'ver-label':'Verification','ver-h2':'What we do today.<br><em>What\'s coming.</em>','ver-sub':'No empty promises. This is the real verification process we apply at this stage.',
+    'vc1h':'Email & profile','vc1p':'Functional email confirmation. Manual review of data — name, specialty, company and declared experience.',
+    'vc2h':'SDN / Sanctions check','vc2p':'Automatic check against public international sanctions lists. Result documented before activating the profile.',
+    'vc3h':'LinkedIn or alternative','vc3p':'We confirm LinkedIn or accept CV, letter of recommendation or reference from a verified colleague.',
+    'vc4h':'Formal KYB/KYC','vc4p':'Formal corporate verification for international accounts. In development for Q3 2026.',
+    'hon-h':'Our position','hon-p':'NodusPro is a professional directory, not a financial institution. Our process is manual and based on public sources. We do not guarantee regulatory compliance of any transaction — each party is responsible for their own legal due diligence.',
+    'price-label':'Pricing','price-h2':'Simple. <em>No surprises.</em>','price-sub':'Free forever in the directory. Pay only when you want to be found first — or find others.',
+    'btn-m':'Monthly','btn-a':'Annual','save-p':'-20%',
+    'pt1':'For professionals','pn1':'Free','pa1':'$0 <span>forever</span>','pd1':'Your profile in the directory. Visible to those who search. No time limit.',
+    'pf1':'<li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified professional profile</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Search visibility</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Availability toggle</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Inbound messaging</li>',
+    'pt2':'For local companies','pn2':'Featured','ps2':'/ month','pd2':'You appear first. You get contacted first. One project found pays for this plan many times.',
+    'pf2':'<li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Free</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority placement</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Direct contact visible</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Curated lists</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Early access</li>',
+    'pt3':'For international companies','pn3':'Access','ps3':'/ month','pd3':'Replaces weeks of manual due diligence and thousands in consultants.',
+    'pf3':'<li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Advanced search with filters</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Direct contact with all profiles</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Venezuela market reports</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Regulatory updates</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority support</li>',
+    'roi-box':'<strong>For international companies:</strong> A Venezuela O&G specialist charges $300–$500/hour. The Access plan ($99/month) costs less than 1 hour of that consulting — and gives unlimited access to the verified directory for an entire month.',
+    'ref-label':'Referral program','ref-h2':'Invite. <em>Both win.</em>','ref-sub':'Every colleague you bring strengthens the network and rewards you directly.',
+    'r1h':'Share your unique link','r1p':'When you confirm your registration you receive a personalized link. Share it with sector colleagues.','r1t':'Link generated at registration',
+    'r2h':'Your colleague gets verified','r2p':'Your referral joins, completes their profile and passes manual verification. Only then does it count as an active referral.','r2t':'Counts when verified, not when registered',
+    'r3h':'1 free month of the next tier','r3p':'For every 3 verified referrals in a calendar month, you and each of them receive 1 free month of the next tier, credited on the 1st of each month.','r3t':'1 free month for every 3 active referrals per month',
+    'test-label':'What they say',
+    't1':'"I worked 18 years in the Orinoco Belt. I know every contract, every field, every process. I just needed a platform to connect me with those coming back to invest."',
+    't1n':'Carlos R.','t1r':'Production Eng. — Monagas, Venezuela',
+    't2':'"Our services company stopped in 2019. The team, the equipment, the experience — all still there waiting. NodusPro is the directory we needed to be visible again."',
+    't2n':'Luis M.','t2r':'Director — OFS Company, Zulia',
+    't3':'"We needed verified local contractors in Venezuela. No serious platform existed. NodusPro fills that gap with a real approach to verification."',
+    't3n':'Ana P.','t3r':'Operations Manager — International operator',
+    'cta-h2':'Get found.<br><em>Today.</em>',
+    'cta-p':'Free founding member access closes April 30, 2026. The sector is moving now — the first international companies are already looking at Venezuela.',
+    'cta-btn':'Join free','cta-email':'Your professional email','cta-note':'No credit card · Secure payment via Stripe · No spam',
+    'comp2-label':'Legal & Compliance',
+    'cc1':'Manual SDN check','cc1p':'Every profile verified against public international lists before activation.',
+    'cc2':'Your information is yours','cc2p':'We never sell or share your data without consent. Delete your profile anytime.',
+    'cc3':'Directory only','cc3p':'We do not process payments between users or guarantee transactions.',
+    'cc4':'Secure infrastructure','cc4p':'256-bit SSL encryption, passwordless auth, Row-Level Security. ISC2 and CyberOps certifications.',
+    'legal-note':'NodusPro is a verified professional directory. Does not provide legal advice or guarantee regulatory compliance. © 2026 NodusPro · Venezuela · noduspro.net',
     'footer-desc':'The professional marketplace for Venezuela\'s O&G ecosystem. From Venezuela, for the world.',
     'footer-copy':'© 2026 NodusPro · Venezuela · All rights reserved',
-    'fl1':'Privacy Policy','fl2':'Terms of Service','fl3':'OFAC Compliance','fl4':'Contact',
-    'footer-legal':'NodusPro is a verified professional directory. It does not guarantee, intermediate or finance transactions between users. Use of the platform does not constitute legal advice or regulatory authorization.'
+    'fl1':'Privacy','fl2':'Terms','fl3':'Sanctions','fl4':'Contact',
+    'footer-legal':'NodusPro is a verified professional directory. Does not guarantee or intermediate transactions. Use does not constitute legal advice.'
   }
 };
 
-let currentLang = 'es';
-let billing = 'monthly';
+function setLang(l){
+  lang=l;
+  document.documentElement.lang=l;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('on',b.textContent===l.toUpperCase()));
+  const d=T[l];
+  for(const[id,val] of Object.entries(d)){
+    if(id.endsWith('-email')){const el=document.getElementById(id.replace('-email',''));if(el&&el.tagName==='INPUT')el.placeholder=val;}
+    else{const el=document.getElementById(id);if(el)el.innerHTML=val;}
+  }
+  updatePricing();
+  if(document.getElementById('form-overlay').classList.contains('show'))renderStep();
+}
 
-function setLang(lang) {
-  currentLang = lang;
-  document.body.classList.toggle('lang-en', lang === 'en');
-  document.documentElement.lang = lang;
-  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.textContent === lang.toUpperCase()));
-  const d = content[lang];
-  for (const [id, val] of Object.entries(d)) {
-    if (id.endsWith('-ph')) {
-      const el = document.getElementById(id.replace('-ph',''));
-      if (el) el.placeholder = val;
-    } else {
-      const el = document.getElementById(id);
-      if (el) el.innerHTML = val;
+/* init */
+(function(){
+  const ref=sessionStorage.getItem('noduspro_ref');
+  const banner=document.getElementById('ref-banner');
+  if(ref&&banner){
+    banner.style.display='block';
+    banner.textContent=lang==='es'
+      ?'Fuiste invitado por un colega de NodusPro. Ambos se benefician cuando te verificas.'
+      :'You were invited by a NodusPro colleague. Both of you benefit when you get verified.';
+  }
+})();
+updatePricing();
+document.querySelectorAll('input[type="email"]').forEach(i=>{
+  i.addEventListener('keydown',function(e){
+    if(e.key==='Enter'){
+      if(this.id==='hero-email')startFormWithEmail();
+      else if(this.id==='cta-email')startFormFromCTA();
     }
-  }
-  updatePricing();
-}
-
-function setBilling(type) {
-  billing = type;
-  document.getElementById('btn-monthly').classList.toggle('active', type === 'monthly');
-  document.getElementById('btn-annual').classList.toggle('active', type === 'annual');
-  updatePricing();
-}
-
-function updatePricing() {
-  const isAnnual = billing === 'annual';
-  const isES = currentLang === 'es';
-  const mo = isES ? '/ mes' : '/ month';
-  const yr = isES ? '/ año' : '/ year';
-  const per = isAnnual ? yr : mo;
-
-  document.getElementById('pa2').innerHTML = `$${isAnnual ? '470' : '49'} <span>${per}</span>`;
-  document.getElementById('po2').innerHTML = isAnnual ? `<span style="font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;">${isES ? 'antes' : 'was'} $588 ${isES ? 'al año' : '/year'}</span>` : '&nbsp;';
-
-  document.getElementById('pa3').innerHTML = `$${isAnnual ? '1910' : '199'} <span>${per}</span>`;
-  document.getElementById('po3').innerHTML = isAnnual ? `<span style="font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;">${isES ? 'antes' : 'was'} $2388 ${isES ? 'al año' : '/year'}</span>` : '&nbsp;';
-
-  document.getElementById('ps2').textContent = per;
-  document.getElementById('ps3').textContent = per;
-}
-
-const shareTextES = `Acabo de unirme a NodusPro como miembro fundador — el primer marketplace profesional del ecosistema petrolero venezolano. Si tienes experiencia en O&G y quieres que el sector te encuentre, únete: noduspro.net/ref/TUCODIGO`;
-const shareTextEN = `I just joined NodusPro as a founding member — the first professional marketplace for Venezuela's O&G ecosystem. If you have O&G experience and want the sector to find you, join here: noduspro.net/ref/TUCODIGO`;
-
-function getShareText() { return currentLang === 'es' ? shareTextES : shareTextEN; }
-
-function copyRef() {
-  navigator.clipboard.writeText('https://noduspro.net/ref/TUCODIGO').catch(()=>{});
-  const btn = document.getElementById('ref-copy-btn');
-  const orig = btn.textContent;
-  btn.textContent = currentLang === 'es' ? '✓ Copiado' : '✓ Copied';
-  btn.classList.add('copied');
-  setTimeout(()=>{ btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
-}
-
-function copyRefHero() {
-  navigator.clipboard.writeText('https://noduspro.net/ref/TUCODIGO').catch(()=>{});
-  const btn = document.getElementById('hero-copy-btn');
-  const orig = btn.textContent;
-  btn.textContent = currentLang === 'es' ? '✓ Copiado' : '✓ Copied';
-  btn.classList.add('copied');
-  setTimeout(()=>{ btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
-}
-
-function copyShareText() {
-  navigator.clipboard.writeText(getShareText()).catch(()=>{});
-  const btn = document.getElementById('copy-text-btn');
-  if (btn) { const o = btn.textContent; btn.textContent = currentLang === 'es' ? '✓ Texto copiado' : '✓ Text copied'; setTimeout(()=>btn.textContent=o, 2000); }
-  const btn2 = document.getElementById('hcopy');
-  if (btn2) { const o2 = btn2.textContent; btn2.textContent = currentLang === 'es' ? '✓ Copiado' : '✓ Copied'; setTimeout(()=>btn2.textContent=o2, 2000); }
-}
-
-function shareLinkedIn() {
-  const url = encodeURIComponent('https://noduspro.net/ref/TUCODIGO');
-  const text = encodeURIComponent(getShareText());
-  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&summary=${text}`,'_blank');
-}
-
-function shareWhatsApp() {
-  const text = encodeURIComponent(getShareText());
-  window.open(`https://wa.me/?text=${text}`,'_blank');
-}
-
-function shareTwitter() {
-  const text = encodeURIComponent(getShareText().substring(0,240));
-  window.open(`https://twitter.com/intent/tweet?text=${text}`,'_blank');
-}
-
-// ── SUPABASE ──────────────────────────────────────────────
-const SUPA_URL = 'https://eettdimwdjyqniodefop.supabase.co';
-const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
-
-async function saveToWaitlist(email, source) {
-  const code = email.split('@')[0].toUpperCase().replace(/[^A-Z0-9]/g,'').substring(0,8);
-  try {
-    const res = await fetch(`${SUPA_URL}/rest/v1/waitlist`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SUPA_KEY,
-        'Authorization': `Bearer ${SUPA_KEY}`,
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify({
-        email: email,
-        lang: currentLang,
-        source: source,
-        referral_code: code
-      })
-    });
-    return res.ok || res.status === 409; // 409 = duplicate, still treat as success
-  } catch(e) {
-    console.error('Supabase error:', e);
-    return false; // show success anyway — UX first
-  }
-}
-
-function showSuccessPanel(email, successId) {
-  const code = email.split('@')[0].toUpperCase().replace(/[^A-Z0-9]/g,'').substring(0,8);
-  document.querySelectorAll('.ref-link-input').forEach(el => el.value = `noduspro.net/ref/${code}`);
-  document.querySelectorAll('#share-text-box').forEach(el => {
-    el.textContent = (currentLang==='es' ? shareTextES : shareTextEN).replace(/TUCODIGO/g, code);
-  });
-  const initials = email.split('@')[0].substring(0,2).toUpperCase();
-  const pi = document.getElementById('profile-initials');
-  if (pi) pi.textContent = initials;
-
-  const success = document.getElementById(successId);
-  if (success) success.style.display = 'block';
-}
-
-async function handleWaitlist(inputId, successId) {
-  const input = document.getElementById(inputId);
-  const email = input.value.trim();
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    input.style.borderColor = '#c0392b';
-    input.focus();
-    setTimeout(() => input.style.borderColor = '', 1600);
-    return;
-  }
-
-  const btn = input.parentElement.querySelector('button');
-  const origText = btn ? btn.textContent : '';
-  if (btn) { btn.textContent = currentLang === 'es' ? 'Guardando...' : 'Saving...'; btn.disabled = true; }
-
-  const source = inputId.includes('hero') ? 'hero' : 'cta';
-  await saveToWaitlist(email, source);
-
-  input.parentElement.style.display = 'none';
-  showSuccessPanel(email, successId);
-}
-
-document.querySelectorAll('input[type="email"]').forEach(input => {
-  input.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') handleWaitlist(this.id, this.id.replace('email','success'));
   });
 });
 </script>
