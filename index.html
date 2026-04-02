@@ -667,9 +667,15 @@ const SUPA_URL='https://eettdimwdjyqniodefop.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
 
 let lang='es',billing='m';
-let formData={email:'',firstName:'',secondName:'',lastName1:'',lastName2:'',specs:[],specOther:'',regions:[],regionOther:'',companies:[],compOther:'',years:'',hasLinkedIn:true,linkedIn:'',availability:'now',availDate:''};
+let formData={
+  email:'',firstName:'',secondName:'',lastName1:'',lastName2:'',
+  specs:[],specOther:'',regions:[],regionOther:'',
+  companies:[],compOther:'',years:'',
+  hasLinkedIn:true,profileUrl:'',cvFileName:'',
+  availability:'now',availDate:''
+};
 let currentStep=0;
-const totalSteps=5;
+const totalSteps=4;
 
 /* ── FORM FLOW ── */
 function startFormWithEmail(){
@@ -693,98 +699,114 @@ function showLanding(){
   document.getElementById('hero-content').classList.remove('hidden');
   document.getElementById('form-overlay').classList.remove('show');
 }
-
 function setProgress(n){
-  document.getElementById('prog-fill').style.width=(n/totalSteps*100)+'%';
+  document.getElementById('prog-fill').style.width=((n+1)/(totalSteps+1)*100)+'%';
+}
+
+/* ── VALIDATION ── */
+function showError(msg){
+  let el=document.getElementById('form-error');
+  if(!el){
+    el=document.createElement('div');
+    el.id='form-error';
+    el.style.cssText='background:var(--red-bg);border:1px solid var(--red-bd);border-radius:7px;padding:9px 14px;font-size:13px;color:var(--red);margin-bottom:12px;display:flex;align-items:center;gap:7px';
+    document.getElementById('form-body').prepend(el);
+  }
+  el.innerHTML='<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#991B1B" stroke-width="1.2"/><path d="M8 5v4M8 11v.5" stroke="#991B1B" stroke-width="1.3" stroke-linecap="round"/></svg>'+msg;
+  el.scrollIntoView({behavior:'smooth',block:'nearest'});
+  setTimeout(()=>{if(el)el.remove();},4000);
 }
 
 function renderStep(){
   setProgress(currentStep);
   const b=document.getElementById('form-body');
-  const isES=lang==='es';
+  const es=lang==='es';
   switch(currentStep){
-    case 0: b.innerHTML=stepEmail(isES); break;
-    case 1: b.innerHTML=stepName(isES); break;
-    case 2: b.innerHTML=stepSpecialty(isES); break;
-    case 3: b.innerHTML=stepHistory(isES); break;
-    case 4: b.innerHTML=stepVerification(isES); break;
-    case 5: b.innerHTML=stepSuccess(isES); break;
+    case 0: b.innerHTML=stepEmail(es); break;
+    case 1: b.innerHTML=stepName(es); break;
+    case 2: b.innerHTML=stepCombined(es); break;
+    case 3: b.innerHTML=stepVerification(es); break;
+    case 4: b.innerHTML=stepSuccess(es); break;
   }
 }
 
 function stepEmail(es){
-  const v=formData.email||'';
   return`
     <div class="form-step-q">${es?'¿Cuál es tu correo?':'What is your email?'}</div>
-    <div class="form-step-s">${es?'Sin contraseña — te enviamos un link de acceso seguro.':'No password — we send you a secure access link.'}</div>
+    <div class="form-step-s">${es?'Sin contraseña — recibirás un link de acceso seguro.':'No password — you will receive a secure access link.'}</div>
     <div class="field-group">
-      <label class="fl">${es?'Correo profesional':'Professional email'}</label>
-      <input class="fi" type="email" id="f-email" placeholder="${es?'tu@correo.com':'you@email.com'}" value="${v}"/>
+      <label class="fl">${es?'Correo profesional <span style="color:var(--red)">*</span>':'Professional email <span style="color:var(--red)">*</span>'}</label>
+      <input class="fi" type="email" id="f-email" placeholder="${es?'tu@correo.com':'you@email.com'}" value="${formData.email}"/>
     </div>
     <div style="display:flex;align-items:center;gap:6px;margin-bottom:16px;font-size:12px;color:var(--text3)">
       <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       ${es?'Tu correo nunca se vende ni se comparte':'Your email is never sold or shared'}
     </div>
-    <button class="main-btn" onclick="nextStep()">${es?'Continuar':'Continue'}</button>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+      <div style="flex:1;height:1px;background:var(--border)"></div>
+      <span style="font-size:12px;color:var(--text3)">${es?'o continúa con':'or continue with'}</span>
+      <div style="flex:1;height:1px;background:var(--border)"></div>
+    </div>
+    <button onclick="loginWithGoogle()" style="width:100%;padding:11px 16px;background:white;border:1px solid var(--border2);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;transition:border-color .15s" onmouseover="this.style.borderColor='var(--navy)'" onmouseout="this.style.borderColor='var(--border2)'">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      Google
+    </button>
+    <button class="main-btn" onclick="nextStep()">${es?'Continuar con email':'Continue with email'}</button>
   `;
 }
 
 function stepName(es){
   return`
     <div class="form-step-q">${es?'¿Cómo te llamas?':'What is your name?'}</div>
-    <div class="form-step-s">${es?'Tu nombre completo nos permite verificar tu identidad profesional.':'Your full name allows us to verify your professional identity.'}</div>
+    <div class="form-step-s">${es?'Tu nombre completo permite verificar tu identidad profesional. Los campos con <span style="color:var(--red)">*</span> son obligatorios.':'Your full name helps verify your professional identity. Fields marked <span style="color:var(--red)">*</span> are required.'}</div>
     <div class="grid2">
-      <div><label class="fl">${es?'Primer nombre':'First name'}</label><input class="fi" id="fn1" placeholder="${es?'Carlos':'Carlos'}" value="${formData.firstName}"/></div>
+      <div><label class="fl">${es?'Primer nombre <span style="color:var(--red)">*</span>':'First name <span style="color:var(--red)">*</span>'}</label><input class="fi" id="fn1" placeholder="Carlos" value="${formData.firstName}"/></div>
       <div><label class="fl">${es?'Segundo nombre':'Middle name'}</label><input class="fi" id="fn2" placeholder="${es?'opcional':'optional'}" value="${formData.secondName}"/></div>
     </div>
     <div class="grid2">
-      <div><label class="fl">${es?'Primer apellido':'Last name'}</label><input class="fi" id="fl1i" placeholder="${es?'Rodríguez':'Rodriguez'}" value="${formData.lastName1}"/></div>
+      <div><label class="fl">${es?'Primer apellido <span style="color:var(--red)">*</span>':'Last name <span style="color:var(--red)">*</span>'}</label><input class="fi" id="fl1i" placeholder="Rodríguez" value="${formData.lastName1}"/></div>
       <div><label class="fl">${es?'Segundo apellido':'Second last name'}</label><input class="fi" id="fl2i" placeholder="${es?'Méndez':'optional'}" value="${formData.lastName2}"/></div>
     </div>
     <button class="main-btn" onclick="nextStep()">${es?'Continuar':'Continue'}</button>
   `;
 }
 
-function stepSpecialty(es){
+function stepCombined(es){
   const specs=['Producción|Production','Perforación|Drilling','EPC','Geología|Geology','HSE','Contratos|Contracts','Infraestructura|Infrastructure','Tecnología|Technology'];
   const regs=['Monagas','Faja del Orinoco|Orinoco Belt','Zulia / Lago|Zulia / Lake','Anzoátegui','Offshore','Nacional|National'];
-  function renderChips(arr,sel,otherId,otherVal){
+  const comps=['PDVSA','Repsol','Halliburton','SLB','TotalEnergies','Chevron','Woodside','ENI','BP'];
+  const yrs=['1–5','6–10','11–20','20+'];
+  function chips(arr,sel,otherId,otherVal){
     return arr.map(s=>{
       const[esp,eng]=s.split('|');
       const label=es?esp:(eng||esp);
-      const isOn=sel.includes(esp);
-      return`<span class="chip${isOn?' on':''}" onclick="toggleChip(this,'${esp}')">${label}</span>`;
+      return`<span class="chip${sel.includes(esp)?' on':''}" onclick="toggleChip(this,'${esp}')">${label}</span>`;
     }).join('')+`<span class="chip other-chip${otherVal?' on':''}" onclick="toggleOther('${otherId}',this)">+ ${es?'Otro':'Other'}</span>`;
   }
   return`
-    <div class="form-step-q">${es?'Tu especialidad y región':'Your specialty and region'}</div>
-    <div class="form-step-s">${es?'Selecciona una o varias. Puedes elegir múltiples.':'Select one or more. You can choose multiple.'}</div>
+    <div class="form-step-q">${es?'Tu experiencia':'Your experience'}</div>
+    <div class="form-step-s">${es?'Selecciona al menos una especialidad y región. Los campos con <span style="color:var(--red)">*</span> son obligatorios.':'Select at least one specialty and region. Fields with <span style="color:var(--red)">*</span> are required.'}</div>
+
     <div class="field-group">
-      <label class="fl">${es?'Especialidad':'Specialty'}</label>
-      <div class="chips">${renderChips(specs,formData.specs,'spec-other',formData.specOther)}</div>
+      <label class="fl">${es?'Especialidad <span style="color:var(--red)">*</span>':'Specialty <span style="color:var(--red)">*</span>'}</label>
+      <div class="chips" id="spec-chips">${chips(specs,formData.specs,'spec-other',formData.specOther)}</div>
       <div class="other-field${formData.specOther?' show':''}" id="spec-other-wrap">
         <input class="fi" style="margin-top:0" id="spec-other-input" placeholder="${es?'Tu especialidad...':'Your specialty...'}" value="${formData.specOther}" oninput="formData.specOther=this.value"/>
       </div>
     </div>
-    <div class="field-group" style="margin-top:16px">
-      <label class="fl">${es?'Región de experiencia en Venezuela':'Region of experience in Venezuela'}</label>
-      <div class="chips">${renderChips(regs,formData.regions,'reg-other',formData.regionOther)}</div>
+
+    <div class="field-group" style="margin-top:14px">
+      <label class="fl">${es?'Región en Venezuela <span style="color:var(--red)">*</span>':'Region in Venezuela <span style="color:var(--red)">*</span>'}</label>
+      <div class="chips" id="reg-chips">${chips(regs,formData.regions,'reg-other',formData.regionOther)}</div>
       <div class="other-field${formData.regionOther?' show':''}" id="reg-other-wrap">
         <input class="fi" style="margin-top:0" id="reg-other-input" placeholder="${es?'La región...':'The region...'}" value="${formData.regionOther}" oninput="formData.regionOther=this.value"/>
       </div>
     </div>
-    <button class="main-btn" onclick="nextStep()">${es?'Continuar':'Continue'}</button>
-  `;
-}
 
-function stepHistory(es){
-  const comps=['PDVSA','Repsol','Halliburton','SLB','TotalEnergies','Chevron','Woodside','ENI','BP'];
-  const yrs=['1–5','6–10','11–20','20+'];
-  return`
-    <div class="form-step-q">${es?'¿Dónde has trabajado?':'Where have you worked?'}</div>
-    <div class="form-step-s">${es?'Selecciona todas las que apliquen.':'Select all that apply.'}</div>
+    <div style="height:1px;background:var(--border);margin:18px 0"></div>
+
     <div class="field-group">
-      <label class="fl">${es?'Empresas':'Companies'}</label>
+      <label class="fl">${es?'Empresas donde trabajaste':'Companies you have worked for'}</label>
       <div class="chips">
         ${comps.map(c=>`<span class="chip${formData.companies.includes(c)?' on':''}" onclick="toggleChip(this,'${c}')">${c}</span>`).join('')}
         <span class="chip other-chip${formData.compOther?' on':''}" onclick="toggleOther('comp-other',this)">+ ${es?'Otra':'Other'}</span>
@@ -793,125 +815,115 @@ function stepHistory(es){
         <input class="fi" style="margin-top:0" id="comp-other-input" placeholder="${es?'Nombre de la empresa...':'Company name...'}" value="${formData.compOther}" oninput="formData.compOther=this.value"/>
       </div>
     </div>
-    <div class="field-group" style="margin-top:16px">
+
+    <div class="field-group" style="margin-top:14px">
       <label class="fl">${es?'Años de experiencia en O&G':'Years of O&G experience'}</label>
       <div class="chips">
         ${yrs.map(y=>`<span class="chip${formData.years===y?' on':''}" onclick="setSingle(this,'years','${y}')">${y}</span>`).join('')}
       </div>
     </div>
-    <button class="main-btn" onclick="nextStep()">${es?'Continuar':'Continue'}</button>
+
+    <button class="main-btn" onclick="nextStep()" style="margin-top:18px">${es?'Continuar':'Continue'}</button>
   `;
 }
 
 function stepVerification(es){
+  const today=new Date().toISOString().split('T')[0];
   return`
-    <div class="form-step-q">${es?'Verificación de perfil':'Profile verification'}</div>
-    <div class="form-step-s">${es?'Confirma tu identidad profesional. Elige la opción que aplique.':'Confirm your professional identity. Choose the option that applies.'}</div>
+    <div class="form-step-q">${es?'Último paso':'Last step'}</div>
+    <div class="form-step-s">${es?'Confirma tu identidad y disponibilidad. Solo toma 1 minuto.':'Confirm your identity and availability. Takes just 1 minute.'}</div>
+
     <div class="field-group">
-      <label class="fl">${es?'¿Tienes perfil en la red corporativa?':'Do you have a corporate network profile?'}</label>
-      <div class="chips" style="margin-bottom:12px">
-        <span class="chip${formData.hasLinkedIn?' on':''}" onclick="setLI(true)">${es?'Sí, tengo perfil':'Yes, I have a profile'}</span>
-        <span class="chip${!formData.hasLinkedIn?' on':''}" onclick="setLI(false)">${es?'No tengo perfil':'No profile'}</span>
+      <label class="fl">${es?'Perfil profesional en red corporativa <span style="color:var(--red)">*</span>':'Professional profile on corporate network <span style="color:var(--red)">*</span>'}</label>
+      <div class="chips" style="margin-bottom:10px">
+        <span class="chip${formData.hasLinkedIn?' on':''}" onclick="setLI(true)">${es?'Tengo perfil':'I have a profile'}</span>
+        <span class="chip${!formData.hasLinkedIn?' on':''}" onclick="setLI(false)">${es?'No tengo':'I don\'t have one'}</span>
       </div>
       <div id="li-yes-area" style="display:${formData.hasLinkedIn?'block':'none'}">
-        <label class="fl">URL de tu perfil profesional</label>
-        <input class="fi" id="li-url" placeholder="red-corporativa.com/in/tu-nombre" value="${formData.profileUrl||formData.linkedIn||''}" oninput="formData.profileUrl=this.value;formData.linkedIn=this.value"/>
+        <input class="fi" id="li-url" placeholder="linkedin.com/in/tu-nombre" value="${formData.profileUrl||''}" oninput="formData.profileUrl=this.value"/>
+        <p style="font-size:11px;color:var(--text3);margin-top:5px">${es?'Pega la URL de tu perfil en la red corporativa global.':'Paste your URL from the main corporate network.'}</p>
       </div>
       <div id="li-no-area" style="display:${!formData.hasLinkedIn?'block':'none'}">
         <div class="li-alt">
-          <p>${es?'Sin problema. Acepta cualquiera de estas opciones:':'No problem. We accept any of these alternatives:'}</p>
+          <p>${es?'Sin problema — elige una alternativa:':'No problem — choose an alternative:'}</p>
           <label class="li-option" for="cv-upload" style="cursor:pointer">
             <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 8h6M5 5h3M5 11h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-            <span id="cv-label">${es?'Subir CV o certificado profesional (PDF, máx 5MB)':'Upload CV or certificate (PDF, max 5MB)'}</span>
+            <span id="cv-label">${es?'Subir CV o certificado (PDF, máx 5MB)':'Upload CV or certificate (PDF, max 5MB)'}</span>
           </label>
-          <input type="file" id="cv-upload" accept=".pdf,.doc,.docx" style="display:none" onchange="handleCVUpload(this,${es?'true':'false'})"/>
-          <div id="cv-status" style="font-size:11px;color:var(--green);margin-top:4px;display:none"></div>
-          <div class="li-option"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM2 13.5c0-2 2.7-3.5 6-3.5s6 1.5 6 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>${es?'Referencia de un colega ya verificado en NodusPro':'Reference from a colleague already verified on NodusPro'}</div>
-          <div class="li-option"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 4h10M3 8h7M3 12h5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>${es?'Carta de recomendación laboral':'Letter of professional recommendation'}</div>
+          <input type="file" id="cv-upload" accept=".pdf,.doc,.docx" style="display:none" onchange="handleCVUpload(this,${es})"/>
+          <div id="cv-status" style="font-size:11px;color:var(--green);margin-top:4px;padding-left:4px;display:none"></div>
+          <div class="li-option" onclick="setAltMethod('colleague',this)">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM2 13.5c0-2 2.7-3.5 6-3.5s6 1.5 6 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            ${es?'Referencia de un colega ya verificado en NodusPro':'Reference from a verified NodusPro colleague'}
+          </div>
+          <div class="li-option" onclick="setAltMethod('letter',this)">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 4h10M3 8h7M3 12h5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            ${es?'Carta de recomendación laboral':'Letter of professional recommendation'}
+          </div>
         </div>
       </div>
     </div>
-    <div class="field-group" style="margin-top:14px">
-      <label class="fl">${es?'¿Disponible para proyectos?':'Available for projects?'}</label>
+
+    <div class="field-group" style="margin-top:16px">
+      <label class="fl">${es?'Disponibilidad para proyectos <span style="color:var(--red)">*</span>':'Project availability <span style="color:var(--red)">*</span>'}</label>
       <div class="toggle-opt${formData.availability==='now'?' on':''}" onclick="setAvail('now')">
-        <div><div class="toggle-opt-text">${es?'Disponible ahora':'Available now'}</div><div class="toggle-opt-sub">${es?'Las empresas pueden contactarte de inmediato':'Companies can contact you immediately'}</div></div>
+        <div><div class="toggle-opt-text">${es?'Disponible ahora':'Available now'}</div><div class="toggle-opt-sub">${es?'Las empresas pueden contactarte de inmediato':'Companies can contact you right away'}</div></div>
         <div class="toggle-pill${formData.availability==='now'?' on':''}"><div class="toggle-thumb"></div></div>
       </div>
       <div class="toggle-opt${formData.availability==='date'?' on':''}" onclick="setAvail('date')">
-        <div><div class="toggle-opt-text">${es?'Disponible desde una fecha':'Available from a date'}</div><div class="toggle-opt-sub">${es?'Indica cuándo estarás disponible':'Indicate when you will be available'}</div></div>
+        <div><div class="toggle-opt-text">${es?'Disponible desde una fecha':'Available from a specific date'}</div><div class="toggle-opt-sub">${es?'Indica tu fecha de disponibilidad':'Specify your start date'}</div></div>
         <div class="toggle-pill${formData.availability==='date'?' on':''}"><div class="toggle-thumb"></div></div>
       </div>
+      <div id="avail-date-wrap" style="display:${formData.availability==='date'?'block':'none'};margin:6px 0 8px">
+        <input type="date" class="fi" id="avail-date-input"
+          min="${today}"
+          value="${formData.availDate||''}"
+          onchange="formData.availDate=this.value"
+          style="margin-bottom:0"/>
+      </div>
       <div class="toggle-opt${formData.availability==='no'?' on':''}" onclick="setAvail('no')">
-        <div><div class="toggle-opt-text">${es?'No disponible por ahora':'Not available right now'}</div><div class="toggle-opt-sub">${es?'Puedes cambiar esto en cualquier momento':'You can change this anytime'}</div></div>
+        <div><div class="toggle-opt-text">${es?'No disponible por ahora':'Not available right now'}</div><div class="toggle-opt-sub">${es?'Puedes cambiarlo en cualquier momento':'You can update this anytime'}</div></div>
         <div class="toggle-pill${formData.availability==='no'?' on':''}"><div class="toggle-thumb"></div></div>
       </div>
     </div>
-    <button class="main-btn" onclick="submitForm()" id="submit-btn">${es?'Enviar mi perfil':'Submit my profile'}</button>
-  `;
-}
 
-function stepSuccess(es){
-  const code=(formData.email.split('@')[0]||'USER').toUpperCase().replace(/[^A-Z0-9]/g,'').substring(0,8);
-  const shareText=es
-    ?`Acabo de unirme a NodusPro como miembro fundador — el marketplace verificado del talento petrolero venezolano. Si tienes experiencia en O&G y quieres ser encontrado por empresas internacionales, únete antes del 30 de abril: noduspro.net?ref=${code}`
-    :`I just joined NodusPro as a founding member — the verified marketplace for Venezuelan O&G talent. Join before April 30 (free): noduspro.net?ref=${code}`;
-  return`
-    <div style="text-align:center;padding:4px 0 16px">
-      <div class="sico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="#166534" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="form-step-q" style="text-align:center">${es?'Perfil enviado':'Profile submitted'}</div>
-      <div class="form-step-s" style="text-align:center">${es?'Verificación automática en curso. Recibirás confirmación por email.':'Automatic verification in progress. You will receive email confirmation.'}</div>
-    </div>
-    <div style="border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px">
-      <div class="vstep-row">
-        <div class="vstep-ico ok"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div style="flex:1"><div class="vstep-name">${es?'Email confirmado':'Email confirmed'}</div><div class="vstep-desc">${es?'Dirección verificada':'Address verified'}</div></div>
-        <span class="badge bg">${es?'Listo':'Done'}</span>
-      </div>
-      <div class="vstep-row">
-        <div class="vstep-ico ok"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div style="flex:1"><div class="vstep-name">${es?'Sanctions check':'Sanctions check'}</div><div class="vstep-desc">${es?'No encontrado en listas internacionales':'Not found on international lists'}</div></div>
-        <span class="badge bg">${es?'Listo':'Done'}</span>
-      </div>
-      <div class="vstep-row" style="border-bottom:none">
-        <div class="vstep-ico pend"><svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#B5860D" stroke-width="1.2"/><path d="M8 5v3l1.5 1.5" stroke="#B5860D" stroke-width="1.2" stroke-linecap="round"/></svg></div>
-        <div style="flex:1"><div class="vstep-name">${es?'Aprobación final':'Final approval'}</div><div class="vstep-desc">${es?'Revisión del equipo — menos de 4 horas':'Team review — less than 4 hours'}</div></div>
-        <span class="badge ba">${es?'Pendiente':'Pending'}</span>
-      </div>
-    </div>
-    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:12px">
-      <div style="font-size:12px;font-weight:500;color:var(--text);margin-bottom:8px">${es?'Tu link de referido':'Your referral link'}</div>
-      <div style="display:flex;gap:0;margin-bottom:10px">
-        <input id="ref-link-val" style="flex:1;border:1px solid var(--border2);border-right:none;border-radius:7px 0 0 7px;padding:8px 12px;font-size:12px;font-family:'DM Sans',sans-serif;background:white;color:var(--text2);outline:none" value="noduspro.net?ref=${code}" readonly/>
-        <button onclick="copyRef('${code}')" id="copy-ref-btn" style="background:var(--navy);color:white;border:none;border-radius:0 7px 7px 0;padding:8px 14px;font-size:12px;cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif">${es?'Copiar':'Copy'}</button>
-      </div>
-      <div style="display:flex;gap:7px;flex-wrap:wrap">
-        <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://noduspro.net?ref='+code)}" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border:1px solid var(--border2);border-radius:7px;font-size:12px;color:var(--text2);text-decoration:none;background:white;cursor:pointer">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7H10v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </a>
-        <a href="https://wa.me/?text=${encodeURIComponent(shareText)}" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border:1px solid var(--border2);border-radius:7px;font-size:12px;color:var(--text2);text-decoration:none;background:white">WhatsApp</a>
-        <button onclick="copyShareText('${encodeURIComponent(shareText)}')" style="display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border:1px solid var(--border2);border-radius:7px;font-size:12px;color:var(--text2);background:white;cursor:pointer;font-family:'DM Sans',sans-serif" id="copy-share-btn">${es?'Copiar texto':'Copy text'}</button>
-      </div>
-    </div>
+    <button class="main-btn" onclick="submitForm()" id="submit-btn">${es?'Enviar mi perfil':'Submit my profile'}</button>
   `;
 }
 
 /* ── NAVIGATION ── */
 function nextStep(){
+  const es=lang==='es';
   if(currentStep===0){
     const e=document.getElementById('f-email')?.value.trim();
     if(!e||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)){
-      document.getElementById('f-email').style.outline='2px solid var(--red)';
-      setTimeout(()=>document.getElementById('f-email').style.outline='',1600);
+      showError(es?'Por favor ingresa un correo válido.':'Please enter a valid email address.');
+      document.getElementById('f-email')?.focus();
       return;
     }
     formData.email=e;
   }
   if(currentStep===1){
-    formData.firstName=document.getElementById('fn1')?.value||'';
-    formData.secondName=document.getElementById('fn2')?.value||'';
-    formData.lastName1=document.getElementById('fl1i')?.value||'';
-    formData.lastName2=document.getElementById('fl2i')?.value||'';
+    const fn=document.getElementById('fn1')?.value.trim();
+    const ln=document.getElementById('fl1i')?.value.trim();
+    if(!fn){showError(es?'El primer nombre es obligatorio.':'First name is required.');return;}
+    if(!ln){showError(es?'El primer apellido es obligatorio.':'Last name is required.');return;}
+    formData.firstName=fn;
+    formData.secondName=document.getElementById('fn2')?.value.trim()||'';
+    formData.lastName1=ln;
+    formData.lastName2=document.getElementById('fl2i')?.value.trim()||'';
+  }
+  if(currentStep===2){
+    const allSpecs=[...formData.specs,formData.specOther].filter(Boolean);
+    const allRegs=[...formData.regions,formData.regionOther].filter(Boolean);
+    if(allSpecs.length===0){
+      showError(es?'Selecciona al menos una especialidad.':'Please select at least one specialty.');
+      return;
+    }
+    if(allRegs.length===0){
+      showError(es?'Selecciona al menos una región.':'Please select at least one region.');
+      return;
+    }
   }
   currentStep++;
   renderStep();
@@ -951,8 +963,17 @@ async function handleCVUpload(input, isES){
 }
 
 async function submitForm(){
+  const es=lang==='es';
+  if(formData.hasLinkedIn && !formData.profileUrl.trim()){
+    showError(es?'Por favor ingresa la URL de tu perfil profesional.':'Please enter your professional profile URL.');
+    return;
+  }
+  if(formData.availability==='date' && !formData.availDate){
+    showError(es?'Por favor selecciona tu fecha de disponibilidad.':'Please select your availability date.');
+    return;
+  }
   const btn=document.getElementById('submit-btn');
-  if(btn){btn.disabled=true;btn.textContent=lang==='es'?'Enviando...':'Sending...';}
+  if(btn){btn.disabled=true;btn.textContent=es?'Enviando...':'Sending...';}
   const code=formData.email.split('@')[0].toUpperCase().replace(/[^A-Z0-9]/g,'').substring(0,8);
   const incomingRef=sessionStorage.getItem('noduspro_ref')||'';
   try{
@@ -1020,6 +1041,26 @@ function setAvail(v){
   }
   const dateWrap=document.getElementById('avail-date-wrap');
   if(dateWrap) dateWrap.style.display=v==='date'?'block':'none';
+  if(v==='date'){
+    setTimeout(()=>document.getElementById('avail-date-input')?.focus(),100);
+  }
+}
+
+function setAltMethod(method, el){
+  document.querySelectorAll('.li-option').forEach(o=>o.style.borderColor='');
+  el.style.borderColor='var(--navy)';
+  formData.profileUrl='alt:'+method;
+}
+
+async function loginWithGoogle(){
+  try{
+    const {data,error}=await fetch(SUPA_URL+'/auth/v1/authorize?provider=google&redirect_to='+encodeURIComponent(window.location.origin+'?google=1'),{
+      headers:{'apikey':SUPA_KEY}
+    });
+    window.location.href=SUPA_URL+'/auth/v1/authorize?provider=google&redirect_to='+encodeURIComponent(window.location.origin+'?google=1');
+  }catch(e){
+    window.location.href=SUPA_URL+'/auth/v1/authorize?provider=google&redirect_to='+encodeURIComponent(window.location.origin+'?google=1');
+  }
 }
 
 /* ── COPY HELPERS ── */
