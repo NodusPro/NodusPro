@@ -357,17 +357,13 @@ footer{background:var(--text);padding:44px 48px;display:grid;grid-template-colum
     <div class="pill"><span class="pill-dot"></span><span id="hero-pill">El marketplace O&G venezolano</span></div>
     <h1 id="hero-h1">Tienes LinkedIn.<br>Ahora tienes algo<br><em>más específico.</em></h1>
     <p class="hero-sub" id="hero-sub">El directorio verificado del talento petrolero venezolano. Donde las empresas internacionales encuentran exactamente lo que necesitan — y tú eres encontrado.</p>
-    <div class="vs-row">
-      <span class="vs-tag" id="vt1">LinkedIn: red global</span>
-      <span style="color:var(--border2)">vs</span>
-      <span class="vs-tag win" id="vt2">NodusPro: O&G Venezuela</span>
-    </div>
+
     <div class="email-row">
       <input type="email" id="hero-email" placeholder="Tu correo profesional"/>
       <button onclick="startFormWithEmail()" id="hero-cta-btn">Unirme gratis</button>
     </div>
     <p class="hero-note"><span class="note-dot"></span><span id="hero-note">Gratuito para miembros fundadores · Pago seguro con Stripe · Sin spam</span></p>
-    <div class="deadline"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><circle cx="8" cy="8" r="6.5" stroke="#991B1B" stroke-width="1.2"/><path d="M8 5v3l1.5 1.5" stroke="#991B1B" stroke-width="1.2" stroke-linecap="round"/></svg><span id="deadline-text">Acceso fundador gratuito hasta el <strong>30 de abril de 2026.</strong> Después, de pago.</span></div>
+    <div class="deadline" id="deadline-banner" style="display:none"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><circle cx="8" cy="8" r="6.5" stroke="#991B1B" stroke-width="1.2"/><path d="M8 5v3l1.5 1.5" stroke="#991B1B" stroke-width="1.2" stroke-linecap="round"/></svg><span id="deadline-text"></span></div>
   </div>
 
   <!-- PROGRESSIVE FORM -->
@@ -396,12 +392,12 @@ footer{background:var(--text);padding:44px 48px;display:grid;grid-template-colum
     <h2 id="comp-h2">LinkedIn y NodusPro:<br><em>cada uno en lo suyo.</em></h2>
     <div class="compare-grid">
       <div class="compare-col li-col">
-        <div class="col-head"><span class="col-tag">LinkedIn</span><span class="col-name" id="li-name">Tu red profesional global</span></div>
-        <div class="citem con"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="rgba(255,255,255,.2)"/><path d="M5 8h6" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round"/></svg><span id="li1">1.000 millones de profesionales de todos los sectores del mundo</span></div>
-        <div class="citem con"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="rgba(255,255,255,.2)"/><path d="M5 8h6" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round"/></svg><span id="li2">Perfil libre — tú defines tu experiencia, ideal para visibilidad global</span></div>
-        <div class="citem con"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="rgba(255,255,255,.2)"/><path d="M5 8h6" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round"/></svg><span id="li3">Conexión y mensajería con toda tu red profesional global</span></div>
-        <div class="citem con"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="rgba(255,255,255,.2)"/><path d="M5 8h6" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round"/></svg><span id="li4">Presencia y credibilidad profesional en el mercado global</span></div>
-        <div class="citem con"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="rgba(255,255,255,.2)"/><path d="M5 8h6" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round"/></svg><span id="li5">Herramienta esencial — de hecho, usamos LinkedIn para verificarte</span></div>
+        <div class="col-head"><span class="col-tag">LinkedIn</span><span class="col-name" id="li-name">La red corporativa global</span></div>
+        <div class="citem con"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="rgba(255,255,255,.2)"/><path d="M5 8h6" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round"/></svg><span id="li1">1.000 millones de perfiles de todos los sectores — un océano de ruido</span></div>
+        <div class="citem con"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="rgba(255,255,255,.2)"/><path d="M5 8h6" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round"/></svg><span id="li2">Perfil auto-declarado — sin verificación de credenciales técnicas</span></div>
+        <div class="citem con"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="rgba(255,255,255,.2)"/><path d="M5 8h6" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round"/></svg><span id="li3">Sin toggle de disponibilidad para proyectos — no sabes quién está libre</span></div>
+        <div class="citem con"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="rgba(255,255,255,.2)"/><path d="M5 8h6" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round"/></svg><span id="li4">Sin clasificación por campo o región específica</span></div>
+        <div class="citem con"><svg class="cicon" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="rgba(255,255,255,.2)"/><path d="M5 8h6" stroke="rgba(255,255,255,.4)" stroke-width="1.2" stroke-linecap="round"/></svg><span id="li5">Encontrar un especialista O&G venezolano toma semanas de búsqueda manual</span></div>
       </div>
       <div class="compare-col np-col">
         <div class="col-head"><span class="col-tag">NodusPro</span><span class="col-name" id="np-name">Tu identidad verificada en O&G Venezuela</span></div>
@@ -455,11 +451,11 @@ footer{background:var(--text);padding:44px 48px;display:grid;grid-template-colum
 <section style="background:var(--white)">
   <div style="max-width:860px;margin:0 auto">
     <div class="sec-label" id="prom-label">Lo que NodusPro garantiza</div>
-    <h2 id="prom-h2">Tres cosas que<br>LinkedIn <em>no puede hacer.</em></h2>
+    <h2 id="prom-h2">Tres cosas que<br><em>ninguna red global puede hacer.</em></h2>
     <p class="sec-sub" id="prom-sub">No son funcionalidades. Son las razones por las que un profesional venezolano de O&G elige NodusPro.</p>
     <div class="promise-grid">
       <div class="promise-card"><div class="prom-n">01</div><div class="prom-h" id="p1h">Serás encontrado esta semana</div><p class="prom-p" id="p1p">Las empresas que entran a NodusPro buscan específicamente talento venezolano O&G. No compites con 1.000 millones de perfiles. Estás en el único lugar donde te buscan a ti.</p><div class="prom-tag" id="p1t">Solo O&G Venezuela — cero ruido</div></div>
-      <div class="promise-card"><div class="prom-n">02</div><div class="prom-h" id="p2h">Tu perfil vale algo real</div><p class="prom-p" id="p2p">El badge "Verificado NodusPro" significa que nuestro equipo revisó tus credenciales, validó tu historial y consultó tu nombre contra listas internacionales de sanciones. Eso LinkedIn no lo da.</p><div class="prom-tag" id="p2t">Verificación manual · SDN checked</div></div>
+      <div class="promise-card"><div class="prom-n">02</div><div class="prom-h" id="p2h">Tu perfil vale algo real</div><p class="prom-p" id="p2p">El badge "Verificado NodusPro" significa que nuestro equipo revisó tus credenciales, validó tu historial y consultó tu nombre contra listas internacionales de sanciones. Eso LinkedIn no lo da.</p><div class="prom-tag" id="p2t">Verificación automatizada · Sanctions checked</div></div>
       <div class="promise-card"><div class="prom-n">03</div><div class="prom-h" id="p3h">Contacto directo sin filtros</div><p class="prom-p" id="p3p">Sin solicitudes de conexión. Sin InMail. Una empresa que quiere contactarte lo hace directamente a través de la plataforma. Tú decides si respondes.</p><div class="prom-tag" id="p3t">Directo para cuentas Access</div></div>
     </div>
   </div>
@@ -499,7 +495,7 @@ footer{background:var(--text);padding:44px 48px;display:grid;grid-template-colum
     <p class="sec-sub" id="how-sub">Sin procesos complicados. Todo en una sola pantalla. Todo automático — excepto el clic final de aprobación.</p>
     <div class="steps-grid">
       <div class="step-card"><div class="step-n">01</div><div class="step-h" id="sh1">Regístrate y completa tu perfil</div><p class="step-p" id="sp1t">Ingresa tu email y completa el formulario progresivo — 5 pasos simples, sin salir de la página. Nombre, especialidad, región, historial, disponibilidad. Menos de 8 minutos.</p></div>
-      <div class="step-card"><div class="step-n">02</div><div class="step-h" id="sh2">Verificación automática</div><p class="step-p" id="sp2t">Al enviar, el sistema consulta automáticamente tu LinkedIn, verifica tu email y realiza una consulta contra listas internacionales de sanciones. Todo en paralelo. Si algo necesita revisión, nuestro equipo lo aprueba en menos de 4 horas.</p></div>
+      <div class="step-card"><div class="step-n">02</div><div class="step-h" id="sh2">Verificación automática</div><p class="step-p" id="sp2t">Al enviar, el sistema verifica automáticamente tu perfil profesional, confirma tu email y consulta listas internacionales de sanciones. Todo en paralelo, sin intervención manual. Si algo requiere revisión, nuestro equipo responde en menos de 4 horas.</p></div>
       <div class="step-card"><div class="step-n">03</div><div class="step-h" id="sh3">Conecta y trabaja</div><p class="step-p" id="sp3t">Tu perfil verificado aparece en el directorio. Las empresas internacionales con plan Access te encuentran, te leen y te contactan directamente. Tú decides si respondes.</p></div>
     </div>
   </div>
@@ -513,8 +509,8 @@ footer{background:var(--text);padding:44px 48px;display:grid;grid-template-colum
     <p class="sec-sub" id="ver-sub">Sin promesas vacías. Este es el proceso real de verificación que aplicamos en esta etapa.</p>
     <div class="verify-grid">
       <div class="verify-card"><div class="verify-badge">Identidad</div><h4 id="vc1h">Email y perfil</h4><p id="vc1p">Confirmación de email funcional. Revisión manual de datos ingresados — nombre, especialidad, empresa y experiencia declarada.</p><div class="verify-steps-list"><div class="vstep-li"><div class="vstep-li-n">1</div>Email de confirmación activa la cuenta</div><div class="vstep-li"><div class="vstep-li-n">2</div>Revisión manual de datos ingresados</div><div class="vstep-li"><div class="vstep-li-n">3</div>Coherencia con historial declarado</div></div></div>
-      <div class="verify-card"><div class="verify-badge">Sanciones</div><h4 id="vc2h">SDN / Sanctions check</h4><p id="vc2p">Consulta automática del nombre contra listas públicas internacionales de sanciones, incluyendo la lista SDN del Tesoro de EE.UU. Resultado documentado antes de activar el perfil.</p><div class="verify-steps-list"><div class="vstep-li"><div class="vstep-li-n">1</div>Búsqueda automática al enviar el perfil</div><div class="vstep-li"><div class="vstep-li-n">2</div>Nombre completo + variantes</div><div class="vstep-li"><div class="vstep-li-n">3</div>Resultado documentado en base de datos</div></div></div>
-      <div class="verify-card"><div class="verify-badge">Credenciales</div><h4 id="vc3h">LinkedIn o alternativa</h4><p id="vc3p">Si tienes LinkedIn, confirmamos que el perfil existe y es coherente. Si no tienes, aceptamos CV, carta de recomendación o referencia de un colega verificado en la plataforma.</p><div class="verify-steps-list"><div class="vstep-li"><div class="vstep-li-n">1</div>Validación de perfil LinkedIn</div><div class="vstep-li"><div class="vstep-li-n">2</div>O: documento alternativo revisado</div><div class="vstep-li"><div class="vstep-li-n">3</div>Badge activado al aprobar</div></div></div>
+      <div class="verify-card"><div class="verify-badge">Sanciones</div><h4 id="vc2h">Verificación de sanciones — automática</h4><p id="vc2p">Consulta automática del nombre contra listas públicas internacionales de sanciones, incluyendo la lista SDN del Tesoro de EE.UU. Resultado documentado antes de activar el perfil.</p><div class="verify-steps-list"><div class="vstep-li"><div class="vstep-li-n">1</div>Búsqueda automática al enviar el perfil</div><div class="vstep-li"><div class="vstep-li-n">2</div>Nombre completo + variantes</div><div class="vstep-li"><div class="vstep-li-n">3</div>Resultado documentado en base de datos</div></div></div>
+      <div class="verify-card"><div class="verify-badge">Credenciales</div><h4 id="vc3h">Perfil profesional verificado</h4><p id="vc3p">Si tienes LinkedIn, confirmamos que el perfil existe y es coherente. Si no tienes, aceptamos CV, carta de recomendación o referencia de un colega verificado en la plataforma.</p><div class="verify-steps-list"><div class="vstep-li"><div class="vstep-li-n">1</div>Validación de perfil LinkedIn</div><div class="vstep-li"><div class="vstep-li-n">2</div>O: documento alternativo revisado</div><div class="vstep-li"><div class="vstep-li-n">3</div>Badge activado al aprobar</div></div></div>
       <div class="verify-card coming"><div class="verify-badge" style="background:var(--bg2);border-color:var(--border);color:var(--text3)">Q3 2026</div><h4 id="vc4h">KYB/KYC formal</h4><p id="vc4p">Para cuentas internacionales: verificación corporativa formal con documentos, titulares beneficiarios y certificados legales. En desarrollo.</p></div>
     </div>
     <div class="honest-box" style="margin-top:0">
@@ -549,11 +545,11 @@ footer{background:var(--text);padding:44px 48px;display:grid;grid-template-colum
         </ul>
       </div>
       <div class="price-card featured">
-        <div class="price-tier" id="pt2">Para empresas locales</div>
+        <div style="display:inline-block;background:#E8B94A;color:#0F2137;font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;margin-bottom:8px;letter-spacing:0.5px">OFERTA INTRODUCTORIA 2026</div><div class="price-tier" id="pt2">Para empresas locales</div>
         <div class="price-name" id="pn2">Destacado</div>
         <div class="price-was" id="pw2">&nbsp;</div>
-        <div class="price-amount" id="pa2">$29 <span id="ps2">/ mes</span></div>
-        <p class="price-desc" id="pd2">Apareces primero. Eres contactado primero. Un proyecto encontrado paga este plan muchas veces.</p>
+        <div class="price-amount" id="pa2">$9.90 <span id="ps2">/ mes</span></div>
+        <p class="price-desc" id="pd2">Precio introductorio todo el 2026. Apareces primero y eres contactado primero.</p>
         <ul class="price-features" id="pf2">
           <li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Todo lo del plan Gratuito</li>
           <li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Posición prioritaria en búsquedas</li>
@@ -625,7 +621,7 @@ footer{background:var(--text);padding:44px 48px;display:grid;grid-template-colum
   <div style="max-width:860px;margin:0 auto">
     <div class="sec-label" id="comp2-label">Legal y Cumplimiento</div>
     <div class="comp-grid">
-      <div class="comp-card"><div class="comp-label">Sanciones</div><h4 id="cc1">SDN check manual</h4><p id="cc1p">Cada perfil verificado contra listas públicas internacionales antes de activación. Proceso documentado y auditable.</p></div>
+      <div class="comp-card"><div class="comp-label">Sanciones</div><h4 id="cc1">Verificación de sanciones</h4><p id="cc1p">Cada perfil verificado contra listas públicas internacionales antes de activación. Proceso documentado y auditable.</p></div>
       <div class="comp-card"><div class="comp-label">Privacidad</div><h4 id="cc2">Tu información es tuya</h4><p id="cc2p">Nunca vendemos ni compartimos tus datos sin consentimiento explícito. Puedes eliminar tu perfil en cualquier momento.</p></div>
       <div class="comp-card"><div class="comp-label">Límites</div><h4 id="cc3">Solo directorio</h4><p id="cc3p">No procesamos pagos entre usuarios ni garantizamos transacciones. Somos el punto de conexión, no el garante.</p></div>
       <div class="comp-card"><div class="comp-label">Seguridad</div><h4 id="cc4">Infraestructura</h4><p id="cc4p">Cifrado SSL 256-bit, autenticación sin contraseña, Row-Level Security. Certificaciones ISC2 y CyberOps activas.</p></div>
@@ -812,19 +808,24 @@ function stepVerification(es){
     <div class="form-step-q">${es?'Verificación de perfil':'Profile verification'}</div>
     <div class="form-step-s">${es?'Confirma tu identidad profesional. Elige la opción que aplique.':'Confirm your professional identity. Choose the option that applies.'}</div>
     <div class="field-group">
-      <label class="fl">${es?'¿Tienes perfil de LinkedIn?':'Do you have a LinkedIn profile?'}</label>
+      <label class="fl">${es?'¿Tienes perfil en la red corporativa?':'Do you have a corporate network profile?'}</label>
       <div class="chips" style="margin-bottom:12px">
-        <span class="chip${formData.hasLinkedIn?' on':''}" onclick="setLI(true)">${es?'Sí, tengo LinkedIn':'Yes, I have LinkedIn'}</span>
-        <span class="chip${!formData.hasLinkedIn?' on':''}" onclick="setLI(false)">${es?'No tengo LinkedIn':'No LinkedIn'}</span>
+        <span class="chip${formData.hasLinkedIn?' on':''}" onclick="setLI(true)">${es?'Sí, tengo perfil':'Yes, I have a profile'}</span>
+        <span class="chip${!formData.hasLinkedIn?' on':''}" onclick="setLI(false)">${es?'No tengo perfil':'No profile'}</span>
       </div>
       <div id="li-yes-area" style="display:${formData.hasLinkedIn?'block':'none'}">
-        <label class="fl">URL de LinkedIn</label>
-        <input class="fi" id="li-url" placeholder="linkedin.com/in/tu-perfil" value="${formData.linkedIn}" oninput="formData.linkedIn=this.value"/>
+        <label class="fl">URL de tu perfil profesional</label>
+        <input class="fi" id="li-url" placeholder="red-corporativa.com/in/tu-nombre" value="${formData.profileUrl||formData.linkedIn||''}" oninput="formData.profileUrl=this.value;formData.linkedIn=this.value"/>
       </div>
       <div id="li-no-area" style="display:${!formData.hasLinkedIn?'block':'none'}">
         <div class="li-alt">
           <p>${es?'Sin problema. Acepta cualquiera de estas opciones:':'No problem. We accept any of these alternatives:'}</p>
-          <div class="li-option"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 8h6M5 5h3M5 11h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>${es?'Subir CV o certificado profesional':'Upload CV or professional certificate'}</div>
+          <label class="li-option" for="cv-upload" style="cursor:pointer">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 8h6M5 5h3M5 11h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <span id="cv-label">${es?'Subir CV o certificado profesional (PDF, máx 5MB)':'Upload CV or certificate (PDF, max 5MB)'}</span>
+          </label>
+          <input type="file" id="cv-upload" accept=".pdf,.doc,.docx" style="display:none" onchange="handleCVUpload(this,${es?'true':'false'})"/>
+          <div id="cv-status" style="font-size:11px;color:var(--green);margin-top:4px;display:none"></div>
           <div class="li-option"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM2 13.5c0-2 2.7-3.5 6-3.5s6 1.5 6 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>${es?'Referencia de un colega ya verificado en NodusPro':'Reference from a colleague already verified on NodusPro'}</div>
           <div class="li-option"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 4h10M3 8h7M3 12h5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>${es?'Carta de recomendación laboral':'Letter of professional recommendation'}</div>
         </div>
@@ -917,6 +918,38 @@ function nextStep(){
   document.getElementById('hero-section').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
+/* CV Upload handler */
+async function handleCVUpload(input, isES){
+  const file = input.files[0];
+  if(!file) return;
+  if(file.size > 5*1024*1024){
+    alert(isES?'El archivo es muy grande. Máximo 5MB.':'File too large. Max 5MB.');
+    return;
+  }
+  const label = document.getElementById('cv-label');
+  const status = document.getElementById('cv-status');
+  if(label) label.textContent = isES?'Subiendo...':'Uploading...';
+
+  try{
+    const fileName = `cv_${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.]/g,'_')}`;
+    const res = await fetch(`${SUPA_URL}/storage/v1/object/cvs/${fileName}`, {
+      method:'POST',
+      headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':file.type},
+      body: file
+    });
+    if(res.ok){
+      formData.cvFileName = fileName;
+      formData.profileUrl = formData.profileUrl || 'cv:'+fileName;
+      if(label) label.textContent = file.name;
+      if(status){ status.textContent = isES?'✓ Archivo subido correctamente':'✓ File uploaded successfully'; status.style.display='block'; }
+    } else {
+      if(label) label.textContent = isES?'Error al subir. Intenta de nuevo.':'Upload error. Please retry.';
+    }
+  } catch(e){
+    if(label) label.textContent = isES?'Error de conexión.':'Connection error.';
+  }
+}
+
 async function submitForm(){
   const btn=document.getElementById('submit-btn');
   if(btn){btn.disabled=true;btn.textContent=lang==='es'?'Enviando...':'Sending...';}
@@ -929,9 +962,17 @@ async function submitForm(){
       body:JSON.stringify({
         email:formData.email,lang,source:'form',referral_code:code,
         referred_by:incomingRef||null,
-        first_name:formData.firstName,last_name:formData.lastName1,
-        specialty:formData.specs.join(','),region:formData.regions.join(','),
-        availability:formData.availability
+        first_name:formData.firstName,
+        second_name:formData.secondName,
+        last_name:formData.lastName1,
+        second_last_name:formData.lastName2,
+        specialty:[...formData.specs,formData.specOther].filter(Boolean).join(','),
+        region:[...formData.regions,formData.regionOther].filter(Boolean).join(','),
+        companies:[...formData.companies,formData.compOther].filter(Boolean).join(','),
+        years_experience:formData.years,
+        availability:formData.availability,
+        avail_date:formData.availDate||null,
+        profile_url:formData.profileUrl||null
       })
     });
   }catch(e){console.error(e);}
@@ -963,7 +1004,7 @@ function setLI(v){
   document.getElementById('li-yes-area').style.display=v?'block':'none';
   document.getElementById('li-no-area').style.display=!v?'block':'none';
   document.querySelectorAll('.chip').forEach(c=>{
-    if(c.textContent.includes('LinkedIn')||c.textContent.includes('tengo'))
+    if(c.textContent.includes('perfil')||c.textContent.includes('tengo')||c.textContent.includes('profile'))
       c.classList.remove('on');
   });
 }
@@ -977,6 +1018,8 @@ function setAvail(v){
     opts[map[v]].classList.add('on');
     opts[map[v]].querySelector('.toggle-pill')?.classList.add('on');
   }
+  const dateWrap=document.getElementById('avail-date-wrap');
+  if(dateWrap) dateWrap.style.display=v==='date'?'block':'none';
 }
 
 /* ── COPY HELPERS ── */
@@ -1002,7 +1045,7 @@ function updatePricing(){
   const ann=billing==='a';
   const isES=lang==='es';
   const per=ann?(isES?'/ año':'/ year'):(isES?'/ mes':'/ month');
-  document.getElementById('pa2').innerHTML=`$${ann?'278':'29'} <span>${per}</span>`;
+  document.getElementById('pa2').innerHTML=`$${ann?'95':'9.90'} <span>${per}</span>`;
   document.getElementById('pw2').innerHTML=ann?`<s>48 ${isES?'al año':'/year'}</s>`:'&nbsp;';
   document.getElementById('pa3').innerHTML=`$${ann?'950':'99'} <span>${per}</span>`;
   document.getElementById('pw3').innerHTML=ann?`<s>,188 ${isES?'al año':'/year'}</s>`:'&nbsp;';
@@ -1014,19 +1057,19 @@ const T={
     'nav-cta':'Acceso Anticipado','hero-pill':'El marketplace O&G venezolano',
     'hero-h1':'Tienes LinkedIn.<br>Ahora tienes algo<br><em>más específico.</em>',
     'hero-sub':'El directorio verificado del talento petrolero venezolano. Donde las empresas internacionales encuentran exactamente lo que necesitan — y tú eres encontrado.',
-    'vt1':'LinkedIn: red global','vt2':'NodusPro: O&G Venezuela',
+    
     'hero-cta-btn':'Unirme gratis','hero-email':'Tu correo profesional',
     'hero-note':'Gratuito para miembros fundadores · Pago seguro con Stripe · Sin spam',
     'deadline-text':'Acceso fundador gratuito hasta el <strong>30 de abril de 2026.</strong> Después, de pago.',
     'back-txt':'Volver',
     'comp-label':'Complementarios, no competidores','comp-h2':'LinkedIn y NodusPro:<br><em>cada uno en lo suyo.</em>',
-    'li-name':'Tu red profesional global','np-name':'Tu identidad verificada en O&G Venezuela',
-    'li1':'1.000 millones de profesionales de todos los sectores del mundo',
-    'li2':'Perfil libre — tú defines tu experiencia, ideal para visibilidad global',
-    'li3':'Conexión y mensajería con toda tu red profesional global',
-    'li4':'Presencia y credibilidad profesional en el mercado global',
-    'li5':'Herramienta esencial para cualquier profesional — usamos LinkedIn para verificarte',
-    'np1':'100% O&G venezolano — especialización que LinkedIn no puede tener por diseño',
+    'li-name':'La red corporativa global','np-name':'Tu identidad verificada en O&G Venezuela',
+    'li1':'1.000 millones de perfiles de todos los sectores — un océano de ruido',
+    'li2':'Perfil auto-declarado — sin verificación de credenciales técnicas',
+    'li3':'Sin toggle de disponibilidad para proyectos — no sabes quién está libre',
+    'li4':'Sin clasificación por campo o región específica',
+    'li5':'Encontrar un especialista O&G venezolano toma semanas de búsqueda manual',
+    'np1':'100% O&G venezolano — especialización que ninguna red global puede lograr',
     'np2':'Credenciales verificadas + consulta SDN/sanctions antes de activar el perfil',
     'np3':'Toggle de disponibilidad para proyectos — con fecha de inicio visible',
     'np4':'Clasificado por campo venezolano — Faja, Lago, Oriente, Monagas, Offshore',
@@ -1034,28 +1077,28 @@ const T={
     'demo-label':'Así se ve un perfil NodusPro','demo-h2':'Verificado. Visible.<br><em>Listo para trabajar.</em>',
     'demo-sub':'Cada perfil activo muestra solo lo que importa para conectar con una empresa en segundos.',
     'dc-btn':'Contactar directamente',
-    'prom-label':'Lo que NodusPro garantiza','prom-h2':'Tres cosas que<br>LinkedIn <em>no puede hacer.</em>',
+    'prom-label':'Lo que NodusPro garantiza','prom-h2':'Tres cosas que<br><em>ninguna red global puede hacer.</em>',
     'prom-sub':'No son funcionalidades. Son las razones por las que un profesional venezolano de O&G elige NodusPro.',
     'p1h':'Serás encontrado esta semana','p1p':'Las empresas que entran a NodusPro buscan específicamente talento venezolano O&G. No compites con 1.000 millones de perfiles.','p1t':'Solo O&G Venezuela — cero ruido',
-    'p2h':'Tu perfil vale algo real','p2p':'El badge "Verificado NodusPro" significa que nuestro equipo revisó tus credenciales y consultó tu nombre contra listas internacionales de sanciones.','p2t':'Verificación manual · SDN checked',
+    'p2h':'Tu perfil vale algo real','p2p':'El badge "Verificado NodusPro" significa que nuestro equipo revisó tus credenciales y consultó tu nombre contra listas internacionales de sanciones.','p2t':'Verificación automatizada · Sanctions checked',
     'p3h':'Contacto directo sin filtros','p3p':'Sin solicitudes de conexión. Una empresa que quiere contactarte lo hace directamente. Tú decides si respondes.','p3t':'Directo para cuentas Access',
     'spec-label':'Especialidades','spec-h2':'El directorio más completo<br>de O&G <em>venezolano.</em>','spec-sub':'Cada perfil clasificado por especialidad técnica y región de experiencia dentro de Venezuela.',
     'sp1':'Perforación','sp2':'Producción','sp3':'Ingeniería EPC','sp4':'Contratos y Legal','sp5':'Geología','sp6':'Infraestructura','sp7':'Tecnología','sp8':'HSE',
     'how-label':'Cómo funciona','how-h2':'Simple. <em>Directo.</em> Verificado.','how-sub':'Sin procesos complicados. Todo en una sola pantalla. Todo automático — excepto el clic final de aprobación.',
     'sh1':'Regístrate y completa tu perfil','sp1t':'Ingresa tu email y completa el formulario progresivo — 5 pasos simples, sin salir de la página. Menos de 8 minutos.',
-    'sh2':'Verificación automática','sp2t':'El sistema consulta automáticamente tu LinkedIn, verifica tu email y realiza una consulta contra listas internacionales de sanciones. Todo en paralelo. En menos de 4 horas tienes respuesta.',
+    'sh2':'Verificación automática','sp2t':'El sistema verifica automáticamente tu perfil profesional, tu email y realiza una consulta contra listas internacionales de sanciones. Todo en paralelo, sin intervención manual.',
     'sh3':'Conecta y trabaja','sp3t':'Tu perfil verificado aparece en el directorio. Las empresas con plan Access te encuentran y te contactan directamente.',
     'ver-label':'Verificación','ver-h2':'Lo que hacemos hoy.<br><em>Lo que viene.</em>','ver-sub':'Sin promesas vacías. Este es el proceso real de verificación que aplicamos en esta etapa.',
     'vc1h':'Email y perfil','vc1p':'Confirmación de email funcional. Revisión manual de datos — nombre, especialidad, empresa y experiencia declarada.',
-    'vc2h':'SDN / Sanctions check','vc2p':'Consulta automática contra listas públicas internacionales. Resultado documentado antes de activar el perfil.',
-    'vc3h':'LinkedIn o alternativa','vc3p':'Confirmamos LinkedIn o aceptamos CV, carta de recomendación o referencia de un colega verificado.',
+    'vc2h':'Verificación de sanciones — automática','vc2p':'Al registrarse, el sistema consulta automáticamente listas internacionales de sanciones incluyendo OFAC SDN. El resultado queda documentado. Sin intervención manual.',
+    'vc3h':'Perfil profesional verificado','vc3p':'Verificamos tu perfil en la principal red corporativa global o aceptamos CV, carta de recomendación o referencia de un colega verificado en NodusPro.',
     'vc4h':'KYB/KYC formal','vc4p':'Verificación corporativa formal para cuentas internacionales. En desarrollo para Q3 2026.',
-    'hon-h':'Nuestra posición','hon-p':'NodusPro es un directorio profesional, no una institución financiera. Nuestro proceso es manual y basado en fuentes públicas. No garantizamos cumplimiento regulatorio de transacciones — cada parte es responsable de su propio due diligence.',
+    'hon-h':'Nuestra posición','hon-p':'NodusPro es un directorio profesional, no una institución financiera. La verificación automatizada es una herramienta de apoyo — no constituye una certificación legal ni garantiza cumplimiento regulatorio de transacciones. Cada parte es responsable de su propio due diligence.',
     'price-label':'Planes','price-h2':'Simple. <em>Sin sorpresas.</em>','price-sub':'Gratis para siempre en el directorio. Paga solo cuando quieras ser encontrado primero — o encontrar a otros.',
     'btn-m':'Mensual','btn-a':'Anual','save-p':'-20%',
     'pt1':'Para profesionales','pn1':'Gratuito','pa1':'$0 <span>siempre</span>','pd1':'Tu perfil en el directorio. Visible para quien busca. Sin límite de tiempo.',
     'pf1':'<li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Perfil verificado en el directorio</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Visibilidad en búsquedas</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Toggle de disponibilidad</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Mensajería entrante</li>',
-    'pt2':'Para empresas locales','pn2':'Destacado','ps2':'/ mes','pd2':'Apareces primero. Eres contactado primero. Un proyecto encontrado paga este plan muchas veces.',
+    'pt2':'Para empresas locales','pn2':'Destacado','ps2':'/ mes','pd2':'Precio introductorio todo el 2026. Apareces primero y eres contactado primero. Un proyecto encontrado paga este plan muchas veces.',
     'pf2':'<li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Todo lo del plan Gratuito</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Posición prioritaria</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Contacto directo visible</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Listas curadas</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Acceso anticipado</li>',
     'pt3':'Para empresas internacionales','pn3':'Acceso','ps3':'/ mes','pd3':'Reemplaza semanas de due diligence manual y miles en consultores.',
     'pf3':'<li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Búsqueda avanzada con filtros</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Contacto directo con todos</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Reportes de mercado</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Actualizaciones regulatorias</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Soporte prioritario</li>',
@@ -1075,7 +1118,7 @@ const T={
     'cta-p':'El acceso fundador gratuito cierra el 30 de abril de 2026. El sector se está moviendo ahora — las primeras empresas internacionales ya están mirando Venezuela.',
     'cta-btn':'Unirme gratis','cta-email':'Tu correo profesional','cta-note':'Sin tarjeta de crédito · Pago seguro con Stripe · Sin spam',
     'comp2-label':'Legal y Cumplimiento',
-    'cc1':'SDN check manual','cc1p':'Cada perfil verificado contra listas públicas internacionales antes de activación.',
+    'cc1':'Verificación internacional de sanciones','cc1p':'Cada perfil verificado contra listas públicas internacionales antes de activación.',
     'cc2':'Tu información es tuya','cc2p':'Nunca vendemos ni compartimos tus datos sin consentimiento. Elimina tu perfil cuando quieras.',
     'cc3':'Solo directorio','cc3p':'No procesamos pagos entre usuarios ni garantizamos transacciones.',
     'cc4':'Infraestructura segura','cc4p':'Cifrado SSL 256-bit, autenticación sin contraseña, Row-Level Security. Certificaciones ISC2 y CyberOps.',
@@ -1089,19 +1132,19 @@ const T={
     'nav-cta':'Early Access','hero-pill':'The Venezuelan O&G marketplace',
     'hero-h1':'You have LinkedIn.<br>Now you have something<br><em>more specific.</em>',
     'hero-sub':'The verified directory of Venezuelan O&G talent. Where international companies find exactly what they need — and you get found.',
-    'vt1':'LinkedIn: global network','vt2':'NodusPro: Venezuela O&G',
+    
     'hero-cta-btn':'Join free','hero-email':'Your professional email',
     'hero-note':'Free for founding members · Secure payment via Stripe · No spam',
     'deadline-text':'Free founding member access closes <strong>April 30, 2026.</strong> After that, paid.',
     'back-txt':'Back',
     'comp-label':'Complementary, not competing','comp-h2':'LinkedIn and NodusPro:<br><em>each built for its purpose.</em>',
-    'li-name':'Your global professional network','np-name':'Your verified O&G Venezuela identity',
-    'li1':'1 billion professionals from every sector in the world',
-    'li2':'Open profiles — you define your experience, ideal for global visibility',
-    'li3':'Connect and message your entire global professional network',
-    'li4':'Professional presence and credibility in the global market',
-    'li5':'Essential tool for any professional — we use LinkedIn to verify you',
-    'np1':'100% Venezuelan O&G — specialization LinkedIn cannot have by design',
+    'li-name':'The global corporate network','np-name':'Your verified O&G Venezuela identity',
+    'li1':'1 billion profiles from every sector — an ocean of noise',
+    'li2':'Self-declared profiles — no verification of technical credentials',
+    'li3':'No project availability toggle — you don\'t know who\'s free',
+    'li4':'No classification by specific field or region',
+    'li5':'Finding a Venezuelan O&G specialist takes weeks of manual search',
+    'np1':'100% Venezuelan O&G — specialization no global network can achieve',
     'np2':'Verified credentials + SDN/sanctions check before activating each profile',
     'np3':'Project availability toggle — with visible start date',
     'np4':'Classified by Venezuelan field — Faja, Lake, East, Monagas, Offshore',
@@ -1109,28 +1152,28 @@ const T={
     'demo-label':'What a NodusPro profile looks like','demo-h2':'Verified. Visible.<br><em>Ready to work.</em>',
     'demo-sub':'Each active profile shows only what matters to connect with a company in seconds.',
     'dc-btn':'Contact directly',
-    'prom-label':'What NodusPro guarantees','prom-h2':'Three things<br>LinkedIn <em>cannot do.</em>',
+    'prom-label':'What NodusPro guarantees','prom-h2':'Three things<br><em>no global network can do.</em>',
     'prom-sub':'Not features. The reasons a Venezuelan O&G professional chooses NodusPro.',
     'p1h':'You\'ll be found this week','p1p':'Companies that join NodusPro specifically seek Venezuelan O&G talent. You\'re not competing with 1 billion profiles.','p1t':'Only O&G Venezuela — zero noise',
-    'p2h':'Your profile is worth something real','p2p':'The "Verified NodusPro" badge means our team reviewed your credentials and checked your name against international sanctions lists.','p2t':'Manual verification · SDN checked',
+    'p2h':'Your profile is worth something real','p2p':'The "Verified NodusPro" badge means our team reviewed your credentials and checked your name against international sanctions lists.','p2t':'Automated verification · Sanctions checked',
     'p3h':'Direct contact, no filters','p3p':'No connection requests. A company that wants to contact you does it directly. You decide whether to respond.','p3t':'Direct for Access accounts',
     'spec-label':'Specialties','spec-h2':'The most complete directory<br>of Venezuelan <em>O&G.</em>','spec-sub':'Every profile classified by technical specialty and region of experience within Venezuela.',
     'sp1':'Drilling','sp2':'Production','sp3':'EPC Engineering','sp4':'Contracts & Legal','sp5':'Geology','sp6':'Infrastructure','sp7':'Technology','sp8':'HSE',
     'how-label':'How it works','how-h2':'Simple. <em>Direct.</em> Verified.','how-sub':'No complex processes. Everything on one screen. All automatic — except the final approval click.',
     'sh1':'Register and complete your profile','sp1t':'Enter your email and complete the progressive form — 5 simple steps, without leaving the page. Less than 8 minutes.',
-    'sh2':'Automatic verification','sp2t':'The system automatically checks your LinkedIn, verifies your email and consults against international sanctions lists. All in parallel. In less than 4 hours you have a response.',
+    'sh2':'Automatic verification','sp2t':'The system automatically verifies your professional profile, your email, and screens against international sanctions lists. All in parallel, no manual steps.',
     'sh3':'Connect and work','sp3t':'Your verified profile appears in the directory. Companies with Access plan find you and contact you directly.',
     'ver-label':'Verification','ver-h2':'What we do today.<br><em>What\'s coming.</em>','ver-sub':'No empty promises. This is the real verification process we apply at this stage.',
     'vc1h':'Email & profile','vc1p':'Functional email confirmation. Manual review of data — name, specialty, company and declared experience.',
-    'vc2h':'SDN / Sanctions check','vc2p':'Automatic check against public international sanctions lists. Result documented before activating the profile.',
-    'vc3h':'LinkedIn or alternative','vc3p':'We confirm LinkedIn or accept CV, letter of recommendation or reference from a verified colleague.',
+    'vc2h':'Verificación de sanciones — automática','vc2p':'At registration, the system automatically screens against international sanctions lists including OFAC SDN. Result is documented. No manual step required.',
+    'vc3h':'Verified professional profile','vc3p':'We verify your profile on the leading global corporate network, or accept a CV, recommendation letter or reference from a verified NodusPro colleague.',
     'vc4h':'Formal KYB/KYC','vc4p':'Formal corporate verification for international accounts. In development for Q3 2026.',
-    'hon-h':'Our position','hon-p':'NodusPro is a professional directory, not a financial institution. Our process is manual and based on public sources. We do not guarantee regulatory compliance of any transaction — each party is responsible for their own legal due diligence.',
+    'hon-h':'Our position','hon-p':'NodusPro is a professional directory, not a financial institution. Automated verification is a support tool — it does not constitute legal certification or guarantee regulatory compliance. Each party is responsible for their own due diligence.',
     'price-label':'Pricing','price-h2':'Simple. <em>No surprises.</em>','price-sub':'Free forever in the directory. Pay only when you want to be found first — or find others.',
     'btn-m':'Monthly','btn-a':'Annual','save-p':'-20%',
     'pt1':'For professionals','pn1':'Free','pa1':'$0 <span>forever</span>','pd1':'Your profile in the directory. Visible to those who search. No time limit.',
     'pf1':'<li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Verified professional profile</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Search visibility</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Availability toggle</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Inbound messaging</li>',
-    'pt2':'For local companies','pn2':'Featured','ps2':'/ month','pd2':'You appear first. You get contacted first. One project found pays for this plan many times.',
+    'pt2':'For local companies','pn2':'Featured','ps2':'/ month','pd2':'Introductory price all of 2026. You appear first and get contacted first. One project found pays for this plan many times over.',
     'pf2':'<li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Free</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority placement</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Direct contact visible</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Curated lists</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="rgba(255,255,255,.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Early access</li>',
     'pt3':'For international companies','pn3':'Access','ps3':'/ month','pd3':'Replaces weeks of manual due diligence and thousands in consultants.',
     'pf3':'<li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Advanced search with filters</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Direct contact with all profiles</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Venezuela market reports</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Regulatory updates</li><li><svg class="check-svg" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority support</li>',
@@ -1150,7 +1193,7 @@ const T={
     'cta-p':'Free founding member access closes April 30, 2026. The sector is moving now — the first international companies are already looking at Venezuela.',
     'cta-btn':'Join free','cta-email':'Your professional email','cta-note':'No credit card · Secure payment via Stripe · No spam',
     'comp2-label':'Legal & Compliance',
-    'cc1':'Manual SDN check','cc1p':'Every profile verified against public international lists before activation.',
+    'cc1':'International sanctions screening','cc1p':'Automatic screening against international sanctions lists (OFAC SDN and others) at the time of registration. No manual intervention.',
     'cc2':'Your information is yours','cc2p':'We never sell or share your data without consent. Delete your profile anytime.',
     'cc3':'Directory only','cc3p':'We do not process payments between users or guarantee transactions.',
     'cc4':'Secure infrastructure','cc4p':'256-bit SSL encryption, passwordless auth, Row-Level Security. ISC2 and CyberOps certifications.',
@@ -1174,6 +1217,51 @@ function setLang(l){
   updatePricing();
   if(document.getElementById('form-overlay').classList.contains('show'))renderStep();
 }
+
+/* ── DEADLINE LOGIC ── */
+const DEADLINE = new Date('2026-04-30T23:59:59');
+function updateDeadline(){
+  const now = new Date();
+  const banner = document.getElementById('deadline-banner');
+  const span = document.getElementById('deadline-text');
+  if(!banner || !span) return;
+  if(now > DEADLINE){
+    // Past deadline — hide the founder banner, show paid message
+    banner.style.display = 'none';
+    // Update hero CTA context
+    const noteEl = document.getElementById('hero-note');
+    if(noteEl) noteEl.innerHTML = lang==='es'
+      ? '<span class="note-dot"></span>El acceso fundador ha cerrado. El registro ahora es de pago.'
+      : '<span class="note-dot"></span>Founding member access has closed. Registration is now paid.';
+  } else {
+    // Before deadline — show countdown
+    const diff = DEADLINE - now;
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hrs  = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    let msg = '';
+    if(days > 1){
+      msg = lang==='es'
+        ? `Acceso fundador gratuito hasta el <strong>30 de abril de 2026</strong> — quedan <strong>${days} días.</strong>`
+        : `Free founding access until <strong>April 30, 2026</strong> — <strong>${days} days</strong> remaining.`;
+    } else if(days === 1){
+      msg = lang==='es'
+        ? `Acceso fundador gratuito — queda <strong>1 día.</strong> Mañana pasa a ser de pago.`
+        : `Free founding access — <strong>1 day</strong> left. Paid registration starts tomorrow.`;
+    } else if(hrs > 0){
+      msg = lang==='es'
+        ? `Acceso fundador gratuito — quedan <strong>${hrs} horas.</strong> Cierra hoy.`
+        : `Free founding access — <strong>${hrs} hours</strong> left. Closes today.`;
+    } else {
+      msg = lang==='es'
+        ? `Acceso fundador gratuito — cierra en <strong>menos de 1 hora.</strong>`
+        : `Free founding access — closes in <strong>less than 1 hour.</strong>`;
+    }
+    span.innerHTML = msg;
+    banner.style.display = 'inline-flex';
+  }
+}
+updateDeadline();
+setInterval(updateDeadline, 60000); // actualiza cada minuto
 
 /* init */
 (function(){
