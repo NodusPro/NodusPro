@@ -782,9 +782,56 @@ const SB='https://eettdimwdjyqniodefop.supabase.co';
 const SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
 
 (function(){
+  // Capture referral code from URL
   const p=new URLSearchParams(window.location.search);
   const r=p.get('ref');
   if(r&&r.length>0&&r.length<=10) sessionStorage.setItem('np_ref',r.toUpperCase().replace(/[^A-Z0-9]/g,''));
+
+  // Handle Google OAuth callback - access_token comes back in the hash
+  const hash=window.location.hash;
+  if(hash&&hash.includes('access_token=')){
+    const params=new URLSearchParams(hash.replace('#',''));
+    const accessToken=params.get('access_token');
+    const refreshToken=params.get('refresh_token');
+    if(accessToken){
+      // Store tokens
+      sessionStorage.setItem('np_access_token', accessToken);
+      if(refreshToken) sessionStorage.setItem('np_refresh_token', refreshToken);
+      // Clean URL
+      history.replaceState(null,'',window.location.pathname);
+      // Get user info and pre-fill form
+      fetch('https://eettdimwdjyqniodefop.supabase.co/auth/v1/user',{
+        headers:{
+          'apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk',
+          'Authorization':'Bearer '+accessToken
+        }
+      }).then(r=>r.json()).then(user=>{
+        if(user&&user.email){
+          // Pre-fill email
+          fd.email=user.email;
+          // Try to pre-fill name from Google metadata
+          const meta=user.user_metadata||{};
+          if(meta.full_name){
+            const parts=meta.full_name.trim().split(' ');
+            fd.fn=parts[0]||'';
+            if(parts.length>1) fd.ln1=parts[parts.length-1];
+          }else if(meta.name){
+            const parts=meta.name.trim().split(' ');
+            fd.fn=parts[0]||'';
+            if(parts.length>1) fd.ln1=parts[parts.length-1];
+          }
+          // Open form at step 1 (name) since we have the email
+          document.getElementById('hero-landing').style.display='none';
+          document.getElementById('form-wrap').classList.add('open');
+          step=1;
+          render();
+          // Show welcome message
+          showToastGreen((document.documentElement.lang==='es'?
+            'Google conectado — completa tu perfil':'Google connected — complete your profile'));
+        }
+      }).catch(e=>console.error('User fetch error:',e));
+    }
+  }
 })();
 
 let lang='es',billing='m';
@@ -844,6 +891,18 @@ function showErr(msg){
   document.getElementById('form-body').prepend(el);
   el.scrollIntoView({behavior:'smooth',block:'nearest'});
   setTimeout(()=>el.remove(),4000);
+}
+
+function showToastGreen(msg){
+  // Simple toast notification
+  const existing=document.getElementById('np-toast');
+  if(existing)existing.remove();
+  const t=document.createElement('div');
+  t.id='np-toast';
+  t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#059669;color:white;font-family:Inter,sans-serif;font-size:13px;font-weight:500;padding:11px 20px;border-radius:8px;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,.3);transition:opacity .3s';
+  t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300);},3000);
 }
 
 function s0(es){return`
