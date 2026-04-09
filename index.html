@@ -812,8 +812,17 @@ function startFromCTA(){
   document.getElementById('hero').scrollIntoView({behavior:'smooth'});
   setTimeout(openForm,300);
 }
-function loginGoogle(){
-  window.location.href=SB+'/auth/v1/authorize?provider=google&redirect_to='+encodeURIComponent(window.location.origin+'?google=1');
+async function loginGoogle(){
+  const btn=document.getElementById('google-btn');
+  if(btn){btn.style.opacity='.5';btn.style.pointerEvents='none';}
+  try{
+    const redirectTo=encodeURIComponent('https://noduspro.net');
+    window.location.href=SB+'/auth/v1/authorize?provider=google&redirect_to='+redirectTo;
+  }catch(e){
+    console.error('Google auth error:',e);
+    if(btn){btn.style.opacity='';btn.style.pointerEvents='';}
+    alert('Error al conectar con Google. Intenta de nuevo.');
+  }
 }
 
 function render(){
