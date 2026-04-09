@@ -500,7 +500,7 @@ tbody tr:hover td{background:var(--surface2)}
 
 <script>
 const SB='https://eettdimwdjyqniodefop.supabase.co';
-const SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDUzMDg0OSwiZXhwIjoyMDkwMTA2ODQ5fQ.Kl8oc-kH_gAEGRxiXD4GVFSxjdEPNJSNLQvM7HUyZck';
+const SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDUzMDg0OSwiZXhwIjoyMDkwMTA2ODQ5fQ.6cyobQCOmfuM1hyqlCGm1tF6IEZyyf16GO6MXVK9RiU';
 
 const ADMIN_PASS = 'NodusAdmin2026!';
 
@@ -534,10 +534,19 @@ function showPage(page){
 
 async function api(path, opts={}){
   const r=await fetch(SB+path,{
-    headers:{'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':'application/json',...(opts.headers||{})},
+    headers:{
+      'apikey':SK,
+      'Authorization':'Bearer '+SK,
+      'Content-Type':'application/json',
+      'Prefer':'return=representation',
+      ...(opts.headers||{})
+    },
     ...opts
   });
-  if(!r.ok)throw new Error(await r.text());
+  if(!r.ok){
+    const txt=await r.text();
+    throw new Error(txt);
+  }
   const t=r.headers.get('content-type');
   return t&&t.includes('json')?r.json():r.text();
 }
