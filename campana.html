@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Registro Profesional Venezuela - NodusPro</title>
+<meta name="description" content="El directorio verificado de profesionales venezolanos. Registro de Miembros Fundadores abierto.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+:root{
+  --navy:#071428;--navy2:#0C1E3E;
+  --blue:#1B4FD8;--blue2:#1340B8;
+  --gold:#F4C300;--red:#CF142B;--vblue:#002B7F;
+  --white:#FFFFFF;--ink:#0A0F1E;--ink3:#6B7280;
+  --border:#E5E7EB;--bg:#F7F9FC;
+  --green:#047857;
+}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden}
+.abar{background:var(--red);padding:9px 20px;text-align:center;font-size:13px;font-weight:600;color:white}
+.adot{display:inline-block;width:7px;height:7px;background:white;border-radius:50%;margin-right:8px;animation:blink .9s ease-in-out infinite alternate;vertical-align:middle}
+@keyframes blink{from{opacity:1}to{opacity:.3}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(244,195,0,.4)}50%{box-shadow:0 0 0 12px rgba(244,195,0,.0)}}
+.nav{position:sticky;top:0;z-index:100;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:var(--navy);border-bottom:3px solid var(--gold)}
+.nname{font-size:16px;font-weight:800;color:white;letter-spacing:-.3px}
+.nname span{color:var(--gold)}
+.nsub{font-size:9px;font-weight:600;letter-spacing:1.5px;color:rgba(255,255,255,.35);text-transform:uppercase;margin-top:2px}
+.nmark{width:34px;height:34px;background:var(--blue);border-radius:7px;display:flex;align-items:center;justify-content:center}
+.ncta{font-size:14px;font-weight:800;padding:9px 20px;background:var(--gold);color:var(--navy);border:none;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:-.2px}
+.ncta:hover{background:#FFD700}
+.hero{background:var(--navy);padding:52px 24px 48px;text-align:center;position:relative;overflow:hidden}
+.stripe{position:absolute;top:0;left:0;right:0;height:5px;display:flex}
+.s1{flex:1;background:var(--vblue)}.s2{flex:1;background:var(--red)}.s3{flex:1;background:var(--gold)}
+.livepill{display:inline-flex;align-items:center;gap:8px;background:rgba(244,195,0,.12);border:1px solid rgba(244,195,0,.3);border-radius:6px;padding:7px 16px;margin-bottom:22px}
+.lpulse{width:8px;height:8px;background:var(--gold);border-radius:50%;animation:blink .9s ease-in-out infinite alternate}
+.ltext{font-size:13px;font-weight:700;color:var(--gold)}
+.seal{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:7px 14px;margin-bottom:18px}
+.stxt{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.hero h1{font-size:clamp(34px,8vw,76px);font-weight:900;line-height:1.0;letter-spacing:-3px;color:white;margin-bottom:16px;max-width:780px;margin-left:auto;margin-right:auto}
+.gold{color:var(--gold)}.dim{color:rgba(255,255,255,.25);font-weight:300}
+.herosub{font-size:17px;font-weight:400;color:rgba(255,255,255,.55);max-width:480px;margin:0 auto 36px;line-height:1.7}
+.herosub strong{color:rgba(255,255,255,.9);font-weight:700}
+.ctabtn{display:block;width:100%;max-width:500px;margin:0 auto;padding:17px 24px;background:var(--gold);color:var(--navy);border:none;border-radius:8px;font-family:'Inter',sans-serif;font-size:18px;font-weight:900;cursor:pointer;animation:glow 2.5s ease-in-out infinite}
+.ctabtn:hover{background:#FFD700;transform:translateY(-2px)}
+.orrow{display:flex;align-items:center;gap:10px;max-width:500px;margin:14px auto 12px}
+.orline{flex:1;height:1px;background:rgba(255,255,255,.1)}
+.ortxt{font-size:11px;color:rgba(255,255,255,.25);font-weight:600;letter-spacing:.5px}
+.gbtn{display:flex;align-items:center;justify-content:center;gap:10px;max-width:500px;width:100%;margin:0 auto 20px;padding:14px 20px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.8);cursor:pointer}
+.gbtn:hover{background:rgba(255,255,255,.12)}
+.trustrow{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.titem{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.35)}
+.tstar{width:10px;height:10px;background:var(--gold);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);flex-shrink:0}
+.costrip{border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);padding:18px 20px;background:rgba(255,255,255,.03);margin-top:40px}
+.colbl{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);text-align:center;margin-bottom:14px}
+.corow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.cocard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:7px;padding:10px 16px;text-align:center;min-width:110px}
+.coname{font-size:14px;font-weight:800;color:rgba(255,255,255,.75)}
+.cosec{font-size:10px;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.5px;margin-top:2px;text-transform:uppercase}
+.pbar{background:var(--navy2);padding:16px 20px;display:flex;justify-content:center;gap:48px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.06)}
+.pitem{text-align:center}
+.pnum{font-size:22px;font-weight:900;color:var(--gold);letter-spacing:-.5px;line-height:1}
+.plbl{font-size:11px;color:rgba(255,255,255,.4);font-weight:500;margin-top:3px}
+.pmeta{font-size:10px;color:rgba(255,255,255,.2);margin-top:2px}
+.tsec{background:white;padding:56px 24px;border-bottom:3px solid var(--gold)}
+.tinner{max-width:820px;margin:0 auto;text-align:center}
+.th2{font-size:clamp(24px,4vw,40px);font-weight:900;letter-spacing:-1.5px;color:var(--navy);margin-bottom:8px;line-height:1.1}
+.tsub{font-size:15px;color:var(--ink3);max-width:460px;margin:0 auto 36px;line-height:1.7}
+.tlogos{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:700px;margin:0 auto}
+.tcard{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:16px 12px;text-align:center}
+.tcard:hover{border-color:var(--blue)}
+.tcname{font-size:14px;font-weight:900}
+.tcsec{font-size:10px;font-weight:600;color:var(--ink3);letter-spacing:.5px;text-transform:uppercase;margin-top:3px}
+.tdisc{font-size:11px;color:var(--ink3);text-align:center;margin-top:14px;font-style:italic}
+.urgsec{background:var(--red);padding:40px 24px;text-align:center}
+.urgh{font-size:clamp(22px,4vw,36px);font-weight:900;color:white;letter-spacing:-1px;margin-bottom:8px}
+.urgp{font-size:15px;color:rgba(255,255,255,.75);margin-bottom:28px;max-width:400px;margin-left:auto;margin-right:auto}
+.urgbtn{display:inline-block;padding:15px 36px;background:white;color:var(--red);font-family:'Inter',sans-serif;font-size:16px;font-weight:900;border:none;border-radius:7px;cursor:pointer}
+.urgbtn:hover{background:var(--gold);color:var(--navy)}
+.bsec{background:var(--bg);padding:64px 24px}
+.binner{max-width:820px;margin:0 auto}
+.btag{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;text-align:center}
+.bh2{font-size:clamp(22px,4vw,36px);font-weight:900;letter-spacing:-1.5px;color:var(--navy);margin-bottom:8px;text-align:center;line-height:1.1}
+.bsub2{font-size:15px;color:var(--ink3);text-align:center;max-width:440px;margin:0 auto 32px;line-height:1.7}
+.bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.bcard{background:var(--navy);border-radius:10px;padding:24px}
+.bnum{width:38px;height:38px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:var(--navy);margin-bottom:14px}
+.bh{font-size:15px;font-weight:800;color:white;margin-bottom:6px}
+.bp{font-size:13px;color:rgba(255,255,255,.5);line-height:1.65}
+.timeline{background:white;border:1.5px solid var(--border);border-radius:10px;padding:24px;max-width:820px;margin:0 auto}
+.tltag{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:16px}
+.tlrows{display:flex;flex-direction:column;gap:12px}
+.tlrow{display:flex;align-items:flex-start;gap:14px}
+.tlnum{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:white;flex-shrink:0}
+.n1{background:var(--vblue)}.n2{background:var(--red)}.n3{background:#D4A800}.n4{background:var(--navy)}
+.tlh{font-size:14px;font-weight:700;color:var(--navy)}
+.tlp{font-size:13px;color:var(--ink3)}
+.segsec{background:white;padding:64px 24px;text-align:center;border-top:1px solid var(--border)}
+.segh{font-size:clamp(22px,4vw,36px);font-weight:900;letter-spacing:-1.5px;color:var(--navy);margin-bottom:8px}
+.segsub{font-size:15px;color:var(--ink3);margin-bottom:32px}
+.seggrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:820px;margin:0 auto 32px}
+.segcard{background:var(--bg);border:2px solid var(--border);border-radius:10px;padding:18px 12px;cursor:pointer;text-align:center;transition:all .2s}
+.segcard:hover,.segcard.on{border-color:var(--blue);background:rgba(27,79,216,.07)}
+.segnm{font-size:13px;font-weight:700;color:var(--navy)}
+.segbtn{padding:14px 40px;background:var(--blue);color:white;border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:16px;font-weight:800;cursor:pointer}
+.segbtn:hover{background:var(--blue2)}
+.ssec{background:var(--navy);padding:56px 24px;text-align:center}
+.sh{font-size:clamp(22px,3.5vw,34px);font-weight:900;color:white;letter-spacing:-1px;margin-bottom:8px}
+.sp{font-size:14px;color:rgba(255,255,255,.45);margin-bottom:32px;max-width:440px;margin-left:auto;margin-right:auto}
+.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:680px;margin:0 auto 32px}
+.scard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:18px;text-align:center}
+.sico2{width:36px;height:36px;background:rgba(27,79,216,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
+.sh2{font-size:13px;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:4px}
+.sp2{font-size:11px;color:rgba(255,255,255,.35);line-height:1.5}
+.scta{display:inline-block;padding:14px 36px;background:var(--gold);color:var(--navy);font-family:'Inter',sans-serif;font-size:15px;font-weight:900;border:none;border-radius:7px;cursor:pointer}
+.fsec{background:linear-gradient(180deg,var(--vblue) 0%,var(--navy) 100%);padding:80px 24px;text-align:center;border-top:4px solid var(--gold)}
+.fh{font-size:clamp(30px,6vw,60px);font-weight:900;color:white;letter-spacing:-2px;margin-bottom:12px;line-height:1.05}
+.fp{font-size:16px;font-weight:300;color:rgba(255,255,255,.55);max-width:400px;margin:0 auto 36px;line-height:1.7}
+.fform{display:flex;max-width:480px;margin:0 auto 12px;border-radius:8px;overflow:hidden;border:2px solid var(--gold)}
+.fform input{flex:1;border:none;background:rgba(255,255,255,.08);padding:14px 18px;font-size:15px;font-family:'Inter',sans-serif;color:white;outline:none}
+.fform input::placeholder{color:rgba(255,255,255,.3)}
+.fform button{background:var(--gold);color:var(--navy);border:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:900;padding:14px 22px;cursor:pointer;white-space:nowrap}
+.fnote{font-size:12px;color:rgba(255,255,255,.25);margin-bottom:16px}
+.fgor{display:flex;align-items:center;gap:10px;max-width:480px;margin:12px auto}
+.fgoline{flex:1;height:1px;background:rgba(255,255,255,.1)}
+.fgotxt{font-size:11px;color:rgba(255,255,255,.25);font-weight:600;letter-spacing:.5px}
+.fgbtn{display:flex;align-items:center;justify-content:center;gap:10px;max-width:480px;width:100%;margin:0 auto;padding:13px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.75);cursor:pointer}
+.fgbtn:hover{background:rgba(255,255,255,.12)}
+footer{background:var(--navy);padding:22px 32px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.07)}
+.fbl{font-size:13px;font-weight:800;color:rgba(255,255,255,.4)}.fbl span{color:var(--gold)}
+.fbr{display:flex;gap:14px}.fbr a{font-size:11px;color:rgba(255,255,255,.2);text-decoration:none}
+.ov{display:none;position:fixed;inset:0;background:rgba(7,20,40,.88);z-index:500;align-items:center;justify-content:center;padding:16px}
+.ov.open{display:flex}
+.mbox{background:var(--navy2);border:1px solid rgba(255,255,255,.15);border-top:4px solid var(--gold);border-radius:12px;width:100%;max-width:460px;padding:28px;position:relative;max-height:92vh;overflow-y:auto}
+.mclose{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:6px;color:rgba(255,255,255,.4);font-size:13px;cursor:pointer;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif}
+.mprog{height:3px;background:rgba(255,255,255,.1);border-radius:2px;margin-bottom:24px}
+.mbar{height:100%;background:var(--gold);border-radius:2px;transition:width .35s}
+.mback{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.3);background:none;border:none;cursor:pointer;padding:0;margin-bottom:14px;font-family:'Inter',sans-serif}
+.mt{font-size:22px;font-weight:900;color:white;letter-spacing:-.5px;margin-bottom:5px;line-height:1.2}
+.ms{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px;line-height:1.6;font-weight:300}
+.ml{display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:5px}
+.mi{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:white;font-family:'Inter',sans-serif;font-size:15px;padding:11px 13px;outline:none;transition:border-color .15s}
+.mi:focus{border-color:var(--gold)}
+.mi::placeholder{color:rgba(255,255,255,.2)}
+.mg{margin-bottom:13px}
+.mgr{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:13px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chip{padding:6px 11px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:5px;font-size:13px;color:rgba(255,255,255,.55);cursor:pointer;user-select:none;font-family:'Inter',sans-serif}
+.chip:hover{border-color:rgba(255,255,255,.3)}
+.chip.on{background:var(--blue);border-color:var(--blue);color:white;font-weight:600}
+.ow{display:none;margin-top:7px}.ow.show{display:block}
+.trow{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:7px;cursor:pointer;margin-bottom:7px}
+.trow:hover,.trow.on{border-color:var(--gold);background:rgba(244,195,0,.07)}
+.tlabel{font-size:14px;color:rgba(255,255,255,.8);font-weight:500}
+.tsub2{font-size:11px;color:rgba(255,255,255,.3);margin-top:2px}
+.tpill{width:34px;height:19px;border-radius:10px;background:rgba(255,255,255,.15);position:relative;flex-shrink:0}
+.tpill.on{background:var(--gold)}
+.tthumb{width:15px;height:15px;border-radius:50%;background:white;position:absolute;top:2px;left:2px;transition:left .2s}
+.tpill.on .tthumb{left:17px}
+.dw{display:none;margin:6px 0 8px}.dw.show{display:block}
+.mbtn{width:100%;padding:14px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:15px;font-weight:900;cursor:pointer;margin-top:10px}
+.mbtn:disabled{opacity:.4;cursor:not-allowed}
+.merr{display:flex;align-items:flex-start;gap:7px;background:rgba(207,20,43,.2);border:1px solid rgba(207,20,43,.4);border-radius:6px;padding:9px 12px;font-size:13px;color:#FCA5A5;margin-bottom:12px}
+.cbox{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:7px;padding:13px;margin-top:6px}
+.cbox p{font-size:12px;color:rgba(255,255,255,.45);margin-bottom:9px;line-height:1.5}
+.cres{display:none;border:1px solid rgba(255,255,255,.12);border-radius:7px;overflow:hidden;margin-top:5px;background:#0A1628}
+.crow{display:flex;align-items:center;gap:9px;padding:9px 12px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.06)}
+.crow:hover{background:rgba(255,255,255,.06)}
+.cav{width:28px;height:28px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:white;flex-shrink:0}
+.csel{display:none;align-items:center;gap:8px;background:rgba(4,120,87,.15);border:1px solid rgba(4,120,87,.3);border-radius:7px;padding:8px 12px;font-size:13px;color:#6EE7B7;margin-top:5px}
+.vstep{border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:14px;margin-bottom:12px}
+.vsr{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.vsr:last-child{border-bottom:none}
+.vi{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.vi.ok{background:rgba(4,120,87,.2);border:1px solid rgba(4,120,87,.3)}
+.vi.pend{background:rgba(27,79,216,.2);border:1px solid rgba(27,79,216,.3)}
+.vn{font-size:13px;font-weight:600;color:rgba(255,255,255,.85)}
+.vd{font-size:11px;color:rgba(255,255,255,.3);margin-top:1px}
+.vb{font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;font-family:'Inter',sans-serif}
+.vb.ok{background:rgba(4,120,87,.2);color:#6EE7B7}
+.vb.pend{background:rgba(27,79,216,.2);color:#93B4F5}
+.sico3{width:42px;height:42px;border-radius:50%;background:rgba(4,120,87,.2);border:1px solid rgba(4,120,87,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.rrow{display:flex;margin-bottom:10px}
+.rin{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-right:none;border-radius:7px 0 0 7px;font-size:12px;color:rgba(255,255,255,.5);padding:9px 11px;outline:none;font-family:monospace}
+.rcp{background:var(--gold);color:var(--navy);border:none;font-size:12px;font-weight:800;padding:9px 13px;border-radius:0 7px 7px 0;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap}
+.rcp.done{background:var(--green);color:white}
+.sbrow{display:flex;gap:7px;flex-wrap:wrap}
+.sbtn2{display:inline-flex;align-items:center;gap:5px;padding:7px 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:5px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);cursor:pointer;font-family:'Inter',sans-serif;text-decoration:none}
+.mgor{display:flex;align-items:center;gap:10px;margin:12px 0 10px}
+.mgorline{flex:1;height:1px;background:rgba(255,255,255,.1)}
+.mgortxt{font-size:11px;color:rgba(255,255,255,.2);font-weight:600;letter-spacing:.5px}
+.mgbtn{width:100%;padding:11px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.7);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px}
+.mgbtn:hover{background:rgba(255,255,255,.1)}
+@media(max-width:680px){
+  .nav{padding:0 16px}
+  .tlogos,.bgrid,.sgrid{grid-template-columns:repeat(2,1fr)}
+  .seggrid{grid-template-columns:repeat(2,1fr)}
+  .pbar{gap:20px}
+  .fform{flex-direction:column}
+  .fform input{border-radius:7px 7px 0 0;border-right:2px solid var(--gold);border-bottom:none}
+  .fform button{border-radius:0 0 7px 7px}
+  footer{flex-direction:column;gap:12px;text-align:center}
+  .fbr{justify-content:center}
+  .mgr{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="abar">
+  <span class="adot"></span>
+  Registro de Miembros Fundadores abierto — plazas limitadas por capacidad de verificacion
+</div>
+
+<nav class="nav">
+  <div style="display:flex;align-items:center;gap:10px">
+    <div class="nmark">
+      <svg viewBox="0 0 16 16" fill="none" width="16" height="16">
+        <circle cx="8" cy="8" r="2" fill="white"/>
+        <circle cx="2.5" cy="3" r="1.5" fill="white" opacity=".7"/>
+        <circle cx="13.5" cy="3" r="1.5" fill="white" opacity=".7"/>
+        <circle cx="2.5" cy="13" r="1.5" fill="white" opacity=".7"/>
+        <circle cx="13.5" cy="13" r="1.5" fill="white" opacity=".7"/>
+      </svg>
+    </div>
+    <div>
+      <div class="nname"><span>Nodus</span>Pro</div>
+      <div class="nsub">Acceso Fundadores - Registro Abierto</div>
+    </div>
+  </div>
+  <button class="ncta" onclick="abrirModal()">Ser Miembro Fundador</button>
+</nav>
+
+<section class="hero">
+  <div class="stripe"><div class="s1"></div><div class="s2"></div><div class="s3"></div></div>
+  <div class="livepill">
+    <span class="lpulse"></span>
+    <span class="ltext"><span id="lnum" style="font-size:14px;font-weight:900;color:white">—</span> Miembros Fundadores registrados</span>
+  </div>
+  <div class="seal">
+    <div style="width:20px;height:20px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+      <svg viewBox="0 0 16 16" fill="none" width="11" height="11"><path d="M8 2l1.5 3 3.5.5-2.5 2.4.6 3.5L8 10l-3.1 1.4.6-3.5L3 5.5l3.5-.5z" fill="#071428"/></svg>
+    </div>
+    <span class="stxt">Membresia Fundadora - Plazas Limitadas - 2026</span>
+  </div>
+  <h1>Se uno de los<br><span class="gold">primeros</span><br><span class="dim">profesionales verificados.</span></h1>
+  <p class="herosub"><strong>El directorio esta en construccion.</strong> Los profesionales que se registren ahora seran los primeros que vean las empresas cuando abra. Esa ventaja no tiene precio.</p>
+  <button class="ctabtn" onclick="abrirModal()">Quiero ser Miembro Fundador</button>
+  <div class="orrow">
+    <div class="orline"></div><span class="ortxt">O CONTINUA CON</span><div class="orline"></div>
+  </div>
+  <button class="gbtn" onclick="loginGoogle()">
+    <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+    Registrarme con Google
+  </button>
+  <div class="trustrow">
+    <div class="titem"><div class="tstar"></div><span>Totalmente gratuito</span></div>
+    <div class="titem"><div class="tstar"></div><span>Verificado en menos de 4 horas</span></div>
+    <div class="titem"><div class="tstar"></div><span>Tu informacion, protegida</span></div>
+  </div>
+  <div class="costrip">
+    <p class="colbl">Empresas que van a buscar talento venezolano en el directorio</p>
+    <div class="corow">
+      <div class="cocard"><div class="coname" style="color:#60A5FA">Chevron</div><div class="cosec">Energia USA</div></div>
+      <div class="cocard"><div class="coname" style="color:#F87171">Repsol</div><div class="cosec">O&amp;G Espana</div></div>
+      <div class="cocard"><div class="coname" style="color:#F87171">TotalEnergies</div><div class="cosec">Energia Francia</div></div>
+      <div class="cocard"><div class="coname" style="color:#F87171">Halliburton</div><div class="cosec">OFS USA</div></div>
+      <div class="cocard"><div class="coname" style="color:#60A5FA">SLB</div><div class="cosec">OFS Global</div></div>
+      <div class="cocard"><div class="coname" style="color:#F97316">Woodside</div><div class="cosec">O&amp;G Australia</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="pbar">
+  <div class="pitem"><div class="pnum" id="pnum">—</div><div class="plbl">Miembros Fundadores registrados</div><div class="pmeta">actualizado en tiempo real</div></div>
+  <div class="pitem"><div class="pnum" style="font-size:16px">menos de 4h</div><div class="plbl">tiempo max. de verificacion</div><div class="pmeta">compromiso del equipo</div></div>
+  <div class="pitem"><div class="pnum">$0</div><div class="plbl">costo para profesionales</div><div class="pmeta">para siempre, sin excepciones</div></div>
+</div>
+
+<section class="tsec">
+  <div class="tinner">
+    <div style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:12px">Quienes van a buscar aqui</div>
+    <h2 class="th2">El directorio donde las<br>empresas serias van a buscar.</h2>
+    <p class="tsub">Cuando el directorio abra, estas empresas podran encontrar talento venezolano verificado directamente. Por eso verificamos cada perfil antes de publicarlo.</p>
+    <div class="tlogos">
+      <div class="tcard"><div class="tcname" style="color:#0068C7">Chevron</div><div class="tcsec">Energia USA</div></div>
+      <div class="tcard"><div class="tcname" style="color:#E41F13">Repsol</div><div class="tcsec">Petroleo Gas Espana</div></div>
+      <div class="tcard"><div class="tcname" style="color:#E6000A">TotalEnergies</div><div class="tcsec">Energia Francia</div></div>
+      <div class="tcard"><div class="tcname" style="color:#CF2029">Halliburton</div><div class="tcsec">OFS USA</div></div>
+      <div class="tcard"><div class="tcname" style="color:#009BD9">SLB</div><div class="tcsec">Servicios O&amp;G</div></div>
+      <div class="tcard"><div class="tcname" style="color:#E8401C">Woodside</div><div class="tcsec">O&amp;G Australia</div></div>
+      <div class="tcard"><div class="tcname" style="color:#005394">eni</div><div class="tcsec">Petroleo Italia</div></div>
+      <div class="tcard"><div class="tcname" style="color:#009900">bp</div><div class="tcsec">Energia UK</div></div>
+    </div>
+    <p class="tdisc">Los nombres de empresas se mencionan como referencia de mercado. NodusPro no tiene afiliacion oficial con ninguna de ellas.</p>
+  </div>
+</section>
+
+<section class="urgsec">
+  <p style="font-size:11px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,.5);text-transform:uppercase;margin-bottom:10px">No esperes mas</p>
+  <h2 class="urgh">Los primeros perfiles<br>son los mas vistos.</h2>
+  <p class="urgp">El directorio esta creciendo ahora mismo. Cada dia que esperas es un dia que otro profesional ocupa tu posicion.</p>
+  <button class="urgbtn" onclick="abrirModal()">Ser Miembro Fundador - es gratis</button>
+</section>
+
+<section class="bsec">
+  <div class="binner">
+    <div class="btag">Por que registrarte hoy</div>
+    <h2 class="bh2">Estamos en construccion.<br>Esa es exactamente la ventaja.</h2>
+    <p class="bsub2">El directorio no esta lleno todavia. Los primeros perfiles son los primeros que ven las empresas. Esa ventaja desaparece cuando el directorio crezca.</p>
+    <div class="bgrid">
+      <div class="bcard"><div class="bnum">1</div><div class="bh">Primero en el directorio</div><p class="bp">Cuando una empresa entre y busque talento, los perfiles mas antiguos aparecen primero. Ser fundador te da esa ventaja de forma permanente.</p></div>
+      <div class="bcard"><div class="bnum">2</div><div class="bh">Badge Miembro Fundador</div><p class="bp">Tu perfil lleva el sello de Miembro Fundador. Las empresas veran que fuiste de los primeros verificados. Eso genera confianza adicional.</p></div>
+      <div class="bcard"><div class="bnum">3</div><div class="bh">Plan Destacado gratis para siempre</div><p class="bp">Los Miembros Fundadores tienen el plan Destacado sin costo. Cuando el directorio abra al publico, ese plan costara $9.90 al mes. Los fundadores nunca pagan.</p></div>
+    </div>
+    <div class="timeline">
+      <div class="tltag">El proceso paso a paso</div>
+      <div class="tlrows">
+        <div class="tlrow"><div class="tlnum n1">1</div><div><span class="tlh">Te registras ahora</span> — <span class="tlp">Completas el formulario. Gratis. Sin tarjeta de credito.</span></div></div>
+        <div class="tlrow"><div class="tlnum n2">2</div><div><span class="tlh">El equipo verifica tu perfil</span> — <span class="tlp">En menos de 4 horas recibes confirmacion por email.</span></div></div>
+        <div class="tlrow"><div class="tlnum n3">3</div><div><span class="tlh">Tu perfil queda activo</span> — <span class="tlp">Con el badge de Miembro Fundador. Visible para empresas internacionales.</span></div></div>
+        <div class="tlrow"><div class="tlnum n4" style="color:var(--gold)">4</div><div><span class="tlh">Las empresas te contactan</span> — <span class="tlp">El mensaje llega a tu email. Tu decides si respondes.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="segsec">
+  <p style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:10px">Cual es tu sector</p>
+  <h2 class="segh">NodusPro es para todos<br>los profesionales venezolanos.</h2>
+  <p class="segsub">No importa tu industria. Si eres venezolano con experiencia y quieres conectar con el mundo, NodusPro es para ti.</p>
+  <div class="seggrid">
+    <div class="segcard on" onclick="selSector(this,'Petroleo y Gas')"><div style="font-size:20px;margin-bottom:6px">&#9981;</div><div class="segnm">Petroleo y Gas</div></div>
+    <div class="segcard" onclick="selSector(this,'Ingenieria')"><div style="font-size:20px;margin-bottom:6px">&#9881;</div><div class="segnm">Ingenieria</div></div>
+    <div class="segcard" onclick="selSector(this,'Negocios y Finanzas')"><div style="font-size:20px;margin-bottom:6px">&#128188;</div><div class="segnm">Negocios y Finanzas</div></div>
+    <div class="segcard" onclick="selSector(this,'Tecnologia')"><div style="font-size:20px;margin-bottom:6px">&#128187;</div><div class="segnm">Tecnologia</div></div>
+    <div class="segcard" onclick="selSector(this,'Construccion y EPC')"><div style="font-size:20px;margin-bottom:6px">&#127959;</div><div class="segnm">Construccion y EPC</div></div>
+    <div class="segcard" onclick="selSector(this,'Salud')"><div style="font-size:20px;margin-bottom:6px">&#9877;</div><div class="segnm">Salud</div></div>
+    <div class="segcard" onclick="selSector(this,'Legal')"><div style="font-size:20px;margin-bottom:6px">&#9878;</div><div class="segnm">Legal</div></div>
+    <div class="segcard" onclick="selSector(this,'Otro')"><div style="font-size:20px;margin-bottom:6px">&#10010;</div><div class="segnm">Otro sector</div></div>
+  </div>
+  <button class="segbtn" id="segbtn" onclick="abrirModal()">Registrarme en Petroleo y Gas</button>
+</section>
+
+<section class="ssec">
+  <p style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(244,195,0,.6);margin-bottom:10px">Tu informacion esta segura</p>
+  <h2 class="sh">Tus datos,<br>protegidos.</h2>
+  <p class="sp">Nos tomamos la seguridad de tu informacion tan en serio como las empresas mas grandes del mundo.</p>
+  <div class="sgrid">
+    <div class="scard">
+      <div class="sico2"><svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M12 2l7 4v6c0 5-3.5 9.7-7 11C8.5 21.7 5 17 5 12V6l7-4z" stroke="white" stroke-width="1.8" stroke-linecap="round"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <div class="sh2">Tu email es privado</div><p class="sp2">Las empresas no ven tu email. Tu decides cuando compartirlo.</p>
+    </div>
+    <div class="scard">
+      <div class="sico2"><svg viewBox="0 0 24 24" fill="none" width="18" height="18"><rect x="3" y="11" width="18" height="11" rx="2" stroke="white" stroke-width="1.8"/><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <div class="sh2">Cifrado total</div><p class="sp2">Infraestructura enterprise con cifrado SSL. El mismo estandar que usan los bancos globales.</p>
+    </div>
+    <div class="scard">
+      <div class="sico2"><svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <div class="sh2">Sal cuando quieras</div><p class="sp2">Elimina tu cuenta y todos tus datos con un clic. Sin formularios, sin esperas.</p>
+    </div>
+  </div>
+  <button class="scta" onclick="abrirModal()">Registrarme — es seguro y gratis</button>
+</section>
+
+<section class="fsec">
+  <div style="height:4px;max-width:200px;margin:0 auto 32px;border-radius:2px;overflow:hidden;display:flex">
+    <div style="flex:1;background:var(--vblue)"></div><div style="flex:1;background:var(--red)"></div><div style="flex:1;background:var(--gold)"></div>
+  </div>
+  <h2 class="fh">El talento venezolano<br>tiene su lugar<br>en el <span class="gold">mundo.</span></h2>
+  <p class="fp">Registro gratuito. Sin tarjeta de credito. El directorio siempre sera gratis para profesionales venezolanos.</p>
+  <div class="fform">
+    <input type="email" id="femail" placeholder="tu@correo.com" onkeydown="if(event.key==='Enter')iniciarDesdeForm()">
+    <button onclick="iniciarDesdeForm()">Registrarme</button>
+  </div>
+  <p class="fnote">Gratuito para siempre - Verificado - Sin spam - Sin tarjeta de credito</p>
+  <div class="fgor"><div class="fgoline"></div><span class="fgotxt">O</span><div class="fgoline"></div></div>
+  <button class="fgbtn" onclick="loginGoogle()">
+    <svg width="17" height="17" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+    Registrarme con Google
+  </button>
+</section>
+
+<footer>
+  <div class="fbl"><span>Nodus</span>Pro - noduspro.net</div>
+  <div class="fbr"><a href="/privacidad">Privacidad</a><a href="/terminos">Terminos</a><a href="/admin">Admin</a></div>
+</footer>
+
+<div class="ov" id="overlay" onclick="if(event.target===this)cerrarModal()">
+  <div class="mbox">
+    <button class="mclose" onclick="cerrarModal()">x</button>
+    <div class="mprog"><div class="mbar" id="mbar" style="width:20%"></div></div>
+    <div id="mbody"></div>
+  </div>
+</div>
+
+<script>
+var SB='https://eettdimwdjyqniodefop.supabase.co';
+var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
+var paso=0,sector='Petroleo y Gas';
+var fd={email:'',fn:'',sn:'',ln1:'',ln2:'',specs:[],specOther:'',regions:[],regionOther:'',years:'',tieneLinkedIn:true,profileUrl:'',colegaId:null,colegaNombre:'',disponibilidad:'now',fechaDisp:''};
+
+(function(){
+  try{
+    var p=new URLSearchParams(window.location.search);
+    var r=p.get('ref');
+    if(r&&r.length>0&&r.length<=10)sessionStorage.setItem('np_ref',r.toUpperCase().replace(/[^A-Z0-9]/g,''));
+    var hash=window.location.hash;
+    if(hash&&hash.indexOf('access_token=')!==-1){
+      var hp=new URLSearchParams(hash.replace('#',''));
+      var at=hp.get('access_token');
+      if(at){
+        sessionStorage.setItem('np_at',at);
+        history.replaceState(null,'',location.pathname);
+        fetch(SB+'/auth/v1/user',{headers:{'apikey':SK,'Authorization':'Bearer '+at}})
+          .then(function(r){return r.json();}).then(function(u){
+            if(u&&u.email){
+              fd.email=u.email;
+              var m=u.user_metadata||{};
+              var nm=((m.full_name||m.name||'').trim()).split(' ');
+              fd.fn=nm[0]||'';
+              if(nm.length>1)fd.ln1=nm[nm.length-1];
+              abrirModal();paso=1;renderModal();
+            }
+          }).catch(function(){});
+      }
+    }
+  }catch(e){}
+})();
+
+function cargarContador(){
+  fetch(SB+'/rest/v1/waitlist?select=id&profile_status=neq.rejected',{
+    headers:{'apikey':SK,'Authorization':'Bearer '+SK,'Prefer':'count=exact','Range':'0-0'}
+  }).then(function(r){
+    var ct=parseInt((r.headers.get('content-range')||'').split('/')[1]||'0');
+    var e1=document.getElementById('lnum');var e2=document.getElementById('pnum');
+    if(e1)e1.textContent=ct;if(e2)e2.textContent=ct;
+  }).catch(function(){});
+}
+cargarContador();setInterval(cargarContador,30000);
+
+function selSector(el,nombre){
+  document.querySelectorAll('.segcard').forEach(function(c){c.classList.remove('on');});
+  el.classList.add('on');sector=nombre;fd.specs=[];
+  var btn=document.getElementById('segbtn');
+  if(btn)btn.textContent='Registrarme en '+nombre;
+}
+
+function abrirModal(){
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  paso=0;renderModal();
+}
+function cerrarModal(){
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function iniciarDesdeForm(){
+  var e=document.getElementById('femail');
+  if(e&&e.value.trim())fd.email=e.value.trim();
+  abrirModal();
+}
+function loginGoogle(){
+  window.location.href=SB+'/auth/v1/authorize?provider=google&redirect_to='+encodeURIComponent('https://noduspro.net/venezuela');
+}
+
+var GSVG='<svg width="17" height="17" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>';
+
+function renderModal(){
+  var pct=((paso+1)/5*100);
+  document.getElementById('mbar').style.width=pct+'%';
+  var b=document.getElementById('mbody');
+  if(paso===0)b.innerHTML=p0();
+  else if(paso===1)b.innerHTML=p1();
+  else if(paso===2)b.innerHTML=p2();
+  else if(paso===3)b.innerHTML=p3();
+  else b.innerHTML=pFin();
+}
+
+function p0(){
+  return '<div class="mt">Cual es tu correo?</div>'+
+    '<div class="ms">Sin contrasena. Te enviamos un acceso seguro.</div>'+
+    '<div class="mg"><label class="ml">Correo electronico *</label>'+
+    '<input class="mi" type="email" id="ie" placeholder="tu@correo.com" value="'+fd.email+'"></div>'+
+    '<button class="mbtn" onclick="avanzar()">Continuar</button>'+
+    '<div class="mgor"><div class="mgorline"></div><span class="mgortxt">O</span><div class="mgorline"></div></div>'+
+    '<button class="mgbtn" onclick="loginGoogle()">'+GSVG+' Continuar con Google</button>';
+}
+
+function p1(){
+  return '<button class="mback" onclick="paso--;renderModal()">VOLVER</button>'+
+    '<div class="mt">Como te llamas?</div>'+
+    '<div class="ms">Los campos * son obligatorios.</div>'+
+    '<div class="mgr">'+
+    '<div><label class="ml">Primer nombre *</label><input class="mi" id="ifn" placeholder="Carlos" value="'+fd.fn+'"></div>'+
+    '<div><label class="ml">Segundo nombre</label><input class="mi" id="isn" placeholder="opcional" value="'+fd.sn+'"></div>'+
+    '</div><div class="mgr">'+
+    '<div><label class="ml">Primer apellido *</label><input class="mi" id="iln1" placeholder="Rodriguez" value="'+fd.ln1+'"></div>'+
+    '<div><label class="ml">Segundo apellido</label><input class="mi" id="iln2" placeholder="Mendez" value="'+fd.ln2+'"></div>'+
+    '</div>'+
+    '<button class="mbtn" onclick="avanzar()">Continuar</button>';
+}
+
+function p2(){
+  var SP={'Petroleo y Gas':['Produccion','Perforacion','EPC','Geologia','HSE','Contratos','Infraestructura'],
+    'Ingenieria':['Civil','Mecanica','Electrica','Estructural','Ambiental','Industrial'],
+    'Tecnologia':['Software','Data','Ciberseguridad','IA y ML','Cloud','Sistemas'],
+    'default':['Consultoria','Gestion de proyectos','Finanzas','Legal','Salud','Educacion']};
+  var specs=SP[sector]||SP['default'];
+  var RG=['Monagas','Faja del Orinoco','Zulia','Anzoategui','Offshore','Nacional','Internacional'];
+  var YR=['1-5 anos','6-10 anos','11-20 anos','20+ anos'];
+  var cs=specs.map(function(s){return '<span class="chip'+(fd.specs.indexOf(s)!==-1?' on':'')+'" onclick="togC(this,\'spec\',\''+s+'\')">'+s+'</span>';}).join('')+
+    '<span class="chip'+(fd.specOther?' on':'')+'" onclick="togO(\'spo\',this)">+ Otro</span>';
+  var cr=RG.map(function(r){return '<span class="chip'+(fd.regions.indexOf(r)!==-1?' on':'')+'" onclick="togC(this,\'reg\',\''+r+'\')">'+r+'</span>';}).join('')+
+    '<span class="chip'+(fd.regionOther?' on':'')+'" onclick="togO(\'rgo\',this)">+ Otra</span>';
+  var cy=YR.map(function(y){return '<span class="chip'+(fd.years===y?' on':'')+'" onclick="setS(this,\'years\',\''+y+'\')">'+y+'</span>';}).join('');
+  return '<button class="mback" onclick="paso--;renderModal()">VOLVER</button>'+
+    '<div class="mt">Tu experiencia</div>'+
+    '<div class="ms">Especialidad y region son obligatorios *</div>'+
+    '<div class="mg"><label class="ml">Especialidad *</label><div class="chips">'+cs+'</div>'+
+    '<div class="ow'+(fd.specOther?' show':'')+'" id="spo-w"><input class="mi" id="spo-i" placeholder="Tu especialidad..." style="margin-top:7px" value="'+fd.specOther+'" oninput="fd.specOther=this.value"></div></div>'+
+    '<div class="mg"><label class="ml">Region en Venezuela *</label><div class="chips">'+cr+'</div>'+
+    '<div class="ow'+(fd.regionOther?' show':'')+'" id="rgo-w"><input class="mi" id="rgo-i" placeholder="La region..." style="margin-top:7px" value="'+fd.regionOther+'" oninput="fd.regionOther=this.value"></div></div>'+
+    '<div class="mg"><label class="ml">Anos de experiencia (opcional)</label><div class="chips">'+cy+'</div></div>'+
+    '<button class="mbtn" onclick="avanzar()" style="margin-top:6px">Continuar</button>';
+}
+
+function p3(){
+  var today=new Date().toISOString().split('T')[0];
+  return '<button class="mback" onclick="paso--;renderModal()">VOLVER</button>'+
+    '<div class="mt">Ultimo paso</div>'+
+    '<div class="ms">Confirma tu identidad y disponibilidad.</div>'+
+    '<div class="mg"><label class="ml">Verificacion *</label>'+
+    '<div class="chips" style="margin-bottom:10px">'+
+    '<span class="chip'+(fd.tieneLinkedIn?' on':'')+'" onclick="setLI(true)">LinkedIn</span>'+
+    '<span class="chip'+(!fd.tieneLinkedIn?' on':'')+'" onclick="setLI(false)">Colega verificado</span>'+
+    '</div>'+
+    '<div id="li-area" style="display:'+(fd.tieneLinkedIn?'block':'none')+'">'+
+    '<input class="mi" id="li-url" placeholder="linkedin.com/in/tu-nombre" value="'+(fd.profileUrl||'')+'" oninput="fd.profileUrl=this.value">'+
+    '<p style="font-size:11px;color:rgba(255,255,255,.25);margin-top:4px">Solo para confirmar tu identidad profesional.</p></div>'+
+    '<div id="co-area" style="display:'+(!fd.tieneLinkedIn?'block':'none')+'">'+
+    '<div class="cbox"><p>Busca a un colega verificado en NodusPro para que te avale.</p>'+
+    '<input class="mi" id="cq" placeholder="Buscar por nombre..." oninput="buscarColega(this.value)" autocomplete="off" style="margin-bottom:0">'+
+    '<div class="cres" id="cr"></div>'+
+    '<div class="csel" id="cs" style="display:'+(fd.colegaId?'flex':'none')+'">'+
+    '<svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#6EE7B7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'+
+    '<span id="csn">'+(fd.colegaNombre||'')+'</span>'+
+    '<button onclick="limpiarColega()" style="margin-left:auto;background:none;border:none;cursor:pointer;font-size:11px;color:#6EE7B7;font-family:Inter,sans-serif">cambiar</button>'+
+    '</div></div></div></div>'+
+    '<div class="mg"><label class="ml">Disponibilidad *</label>'+
+    '<div class="trow'+(fd.disponibilidad==='now'?' on':'')+'" onclick="setDisp(\'now\')">'+
+    '<div><div class="tlabel">Disponible ahora</div><div class="tsub2">Las empresas pueden contactarte de inmediato</div></div>'+
+    '<div class="tpill'+(fd.disponibilidad==='now'?' on':'')+'"><div class="tthumb"></div></div></div>'+
+    '<div class="trow'+(fd.disponibilidad==='date'?' on':'')+'" onclick="setDisp(\'date\')">'+
+    '<div><div class="tlabel">Disponible desde una fecha</div><div class="tsub2">Especifica cuando estaras disponible</div></div>'+
+    '<div class="tpill'+(fd.disponibilidad==='date'?' on':'')+'"><div class="tthumb"></div></div></div>'+
+    '<div class="dw'+(fd.disponibilidad==='date'?' show':'')+'" id="dw">'+
+    '<input type="date" class="mi" id="di" min="'+today+'" value="'+(fd.fechaDisp||'')+'" onchange="fd.fechaDisp=this.value" style="margin-bottom:0"></div>'+
+    '<div class="trow'+(fd.disponibilidad==='no'?' on':'')+'" onclick="setDisp(\'no\')">'+
+    '<div><div class="tlabel">No disponible por ahora</div><div class="tsub2">Puedes cambiarlo cuando quieras</div></div>'+
+    '<div class="tpill'+(fd.disponibilidad==='no'?' on':'')+'"><div class="tthumb"></div></div></div></div>'+
+    '<button class="mbtn" id="btnEnviar" onclick="enviar()">Registrarme ahora</button>';
+}
+
+function pFin(){
+  var code=(fd.email.split('@')[0]||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8);
+  var wa='Acabo de registrarme en NodusPro, el directorio verificado de profesionales venezolanos.\n\nLos primeros que se registren quedan primero en el directorio. Es gratis: noduspro.net/venezuela?ref='+code;
+  return '<div style="text-align:center;padding:8px 0 16px">'+
+    '<div class="sico3"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="#059669" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'+
+    '<div class="mt" style="text-align:center">Estas registrado!</div>'+
+    '<div class="ms" style="text-align:center">El equipo revisara tu perfil en menos de 4 horas y recibiras confirmacion por email.</div></div>'+
+    '<div class="vstep">'+
+    '<div class="vsr"><div class="vi ok"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'+
+    '<div style="flex:1"><div class="vn">Registrado</div><div class="vd">Tu perfil esta en cola de verificacion</div></div><span class="vb ok">LISTO</span></div>'+
+    '<div class="vsr" style="border-bottom:none"><div class="vi pend"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="#93B4F5" stroke-width="1.2"/><path d="M8 5.5v2.5l1.5 1.5" stroke="#93B4F5" stroke-width="1.2" stroke-linecap="round"/></svg></div>'+
+    '<div style="flex:1"><div class="vn">Revision del equipo</div><div class="vd">Menos de 4 horas</div></div><span class="vb pend">EN PROCESO</span></div></div>'+
+    '<div style="background:rgba(244,195,0,.1);border:1px solid rgba(244,195,0,.25);border-radius:8px;padding:14px">'+
+    '<p style="font-size:11px;font-weight:800;letter-spacing:.8px;color:var(--gold);margin-bottom:8px;text-transform:uppercase">Comparte con tus colegas venezolanos</p>'+
+    '<div class="rrow"><input class="rin" value="noduspro.net/venezuela?ref='+code+'" readonly><button class="rcp" id="rc" onclick="copiarRef(\''+code+'\')">Copiar</button></div>'+
+    '<div class="sbrow">'+
+    '<a class="sbtn2" href="https://wa.me/?text='+encodeURIComponent(wa)+'" target="_blank">WhatsApp</a>'+
+    '<a class="sbtn2" href="https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent('https://noduspro.net/venezuela?ref='+code)+'" target="_blank">LinkedIn</a>'+
+    '</div></div>';
+}
+
+function mostrarError(msg){
+  var prev=document.querySelector('.merr');if(prev)prev.remove();
+  var el=document.createElement('div');el.className='merr';
+  el.innerHTML='<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#FCA5A5" stroke-width="1.2"/><path d="M8 5v4M8 11v.5" stroke="#FCA5A5" stroke-width="1.3" stroke-linecap="round"/></svg><span>'+msg+'</span>';
+  document.getElementById('mbody').prepend(el);
+  setTimeout(function(){if(el.parentNode)el.remove();},5000);
+}
+
+async function avanzar(){
+  if(paso===0){
+    var e=document.getElementById('ie');
+    if(!e)return;
+    var val=e.value.trim();
+    if(!val||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)){mostrarError('Por favor ingresa un correo valido.');return;}
+    fd.email=val;
+    try{
+      var r=await fetch(SB+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(val)+'&select=id,profile_status',{headers:{'apikey':SK,'Authorization':'Bearer '+SK}});
+      var ex=await r.json();
+      if(ex&&ex.length>0){
+        var st=ex[0].profile_status;
+        mostrarError('Este correo ya esta registrado. Estado: '+(st==='approved'?'Perfil activo.':'En revision — revisa tu email.'));
+        return;
+      }
+    }catch(e){}
+  }
+  if(paso===1){
+    var fn=document.getElementById('ifn');var ln=document.getElementById('iln1');
+    if(!fn||!fn.value.trim()){mostrarError('El primer nombre es obligatorio.');return;}
+    if(!ln||!ln.value.trim()){mostrarError('El primer apellido es obligatorio.');return;}
+    fd.fn=fn.value.trim();fd.sn=(document.getElementById('isn')||{value:''}).value.trim();
+    fd.ln1=ln.value.trim();fd.ln2=(document.getElementById('iln2')||{value:''}).value.trim();
+  }
+  if(paso===2){
+    var sp=fd.specs.concat(fd.specOther?[fd.specOther]:[]).filter(Boolean);
+    var rg=fd.regions.concat(fd.regionOther?[fd.regionOther]:[]).filter(Boolean);
+    if(!sp.length){mostrarError('Selecciona al menos una especialidad.');return;}
+    if(!rg.length){mostrarError('Selecciona al menos una region.');return;}
+  }
+  paso++;renderModal();
+}
+
+async function enviar(){
+  if(fd.tieneLinkedIn&&!fd.profileUrl.trim()){mostrarError('Por favor ingresa tu URL de LinkedIn.');return;}
+  if(!fd.tieneLinkedIn&&!fd.colegaId){mostrarError('Busca y selecciona un colega verificado.');return;}
+  if(fd.disponibilidad==='date'&&!fd.fechaDisp){mostrarError('Selecciona tu fecha de disponibilidad.');return;}
+  var btn=document.getElementById('btnEnviar');
+  if(btn){btn.disabled=true;btn.textContent='Enviando...';}
+  var code=(fd.email.split('@')[0]||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8);
+  var ref='';try{ref=sessionStorage.getItem('np_ref')||'';}catch(e){}
+  try{
+    await fetch(SB+'/rest/v1/waitlist',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SK,'Authorization':'Bearer '+SK,'Prefer':'return=minimal'},
+      body:JSON.stringify({email:fd.email,lang:'es',source:'campaign_ve',referral_code:code,referred_by:ref||null,
+        first_name:fd.fn,second_name:fd.sn,last_name:fd.ln1,second_last_name:fd.ln2,
+        specialty:fd.specs.concat(fd.specOther?[fd.specOther]:[]).filter(Boolean).join(','),
+        region:fd.regions.concat(fd.regionOther?[fd.regionOther]:[]).filter(Boolean).join(','),
+        years_experience:fd.years,availability:fd.disponibilidad,
+        avail_date:fd.fechaDisp||null,profile_url:fd.profileUrl||null})
+    });
+    if(!fd.tieneLinkedIn&&fd.colegaId){
+      await fetch(SB+'/rest/v1/rpc/request_colleague_reference',{
+        method:'POST',headers:{'Content-Type':'application/json','apikey':SK,'Authorization':'Bearer '+SK},
+        body:JSON.stringify({p_applicant_email:fd.email,p_applicant_name:(fd.fn+' '+fd.ln1).trim(),p_colleague_id:fd.colegaId})
+      });
+    }
+    cargarContador();
+  }catch(e){
+    console.error(e);
+    if(btn){btn.disabled=false;btn.textContent='Registrarme ahora';}
+    return;
+  }
+  paso=4;renderModal();
+}
+
+function togC(el,tipo,val){
+  el.classList.toggle('on');
+  var arr=tipo==='spec'?fd.specs:fd.regions;
+  var idx=arr.indexOf(val);
+  if(idx!==-1)arr.splice(idx,1);else arr.push(val);
+}
+function togO(id,el){
+  el.classList.toggle('on');
+  var w=document.getElementById(id+'-w');
+  if(w)w.classList.toggle('show',el.classList.contains('on'));
+}
+function setS(el,campo,val){
+  el.parentElement.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on');});
+  el.classList.add('on');fd[campo]=val;
+}
+function setLI(val){
+  fd.tieneLinkedIn=val;
+  var la=document.getElementById('li-area');var ca=document.getElementById('co-area');
+  if(la)la.style.display=val?'block':'none';
+  if(ca)ca.style.display=!val?'block':'none';
+}
+function setDisp(val){
+  fd.disponibilidad=val;
+  document.querySelectorAll('.trow').forEach(function(r){r.classList.remove('on');});
+  document.querySelectorAll('.tpill').forEach(function(p){p.classList.remove('on');});
+  var rows=document.querySelectorAll('.trow');
+  var m={now:0,date:1,no:2};
+  if(rows[m[val]]){
+    rows[m[val]].classList.add('on');
+    var pill=rows[m[val]].querySelector('.tpill');
+    if(pill)pill.classList.add('on');
+  }
+  var dw=document.getElementById('dw');
+  if(dw)dw.classList.toggle('show',val==='date');
+}
+var busTO=null;
+function buscarColega(q){
+  clearTimeout(busTO);
+  var r=document.getElementById('cr');if(!r)return;
+  if(!q||q.length<2){r.style.display='none';return;}
+  busTO=setTimeout(function(){
+    fetch(SB+'/rest/v1/rpc/search_verified_colleague',{
+      method:'POST',headers:{'Content-Type':'application/json','apikey':SK,'Authorization':'Bearer '+SK},
+      body:JSON.stringify({p_query:q})
+    }).then(function(res){return res.json();}).then(function(data){
+      if(!data||!data.length){
+        r.innerHTML='<div style="padding:10px 12px;font-size:12px;color:rgba(255,255,255,.3)">Sin resultados. El colega debe estar verificado en NodusPro.</div>';
+      }else{
+        r.innerHTML=data.map(function(c){
+          var n=(c.full_name||'').replace(/'/g,'&#39;');
+          var h=(c.email_hint||'').replace(/'/g,'&#39;');
+          return '<div class="crow" onclick="selColega(\''+c.id+'\',\''+n+'\',\''+h+'\')">'+
+            '<div class="cav">'+((c.full_name||'?')[0])+'</div>'+
+            '<div><div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.85)">'+(c.full_name||'')+'</div>'+
+            '<div style="font-size:11px;color:rgba(255,255,255,.3)">'+(c.email_hint||'')+'</div></div></div>';
+        }).join('');
+      }
+      r.style.display='block';
+    }).catch(function(){});
+  },350);
+}
+function selColega(id,nombre,hint){
+  fd.colegaId=id;fd.colegaNombre=nombre;
+  var cs=document.getElementById('cs');var csn=document.getElementById('csn');
+  var cr=document.getElementById('cr');var cq=document.getElementById('cq');
+  if(cs)cs.style.display='flex';if(csn)csn.textContent=nombre+(hint?' ('+hint+')':'');
+  if(cr)cr.style.display='none';if(cq)cq.value='';
+}
+function limpiarColega(){
+  fd.colegaId=null;fd.colegaNombre='';
+  var cs=document.getElementById('cs');if(cs)cs.style.display='none';
+}
+function copiarRef(code){
+  try{navigator.clipboard.writeText('https://noduspro.net/venezuela?ref='+code);}catch(e){}
+  var b=document.getElementById('rc');
+  if(b){var o=b.textContent;b.textContent='Copiado!';b.classList.add('done');setTimeout(function(){b.textContent=o;b.classList.remove('done');},2000);}
+}
+</script>
+</body>
+</html>
