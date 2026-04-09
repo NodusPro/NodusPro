@@ -661,7 +661,7 @@ footer{background:var(--navy);padding:24px 32px;display:flex;justify-content:spa
  </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 const SB='https://eettdimwdjyqniodefop.supabase.co';
 const SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
 
@@ -911,4 +911,10 @@ function cpT(enc){navigator.clipboard.writeText(decodeURIComponent(enc)).catch((
 
 function setLang(l){
  lang=l;document.documentElement.lang=l;
- document.querySelectorAll('.lb').forEach(b=>b.classList.t
+ document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('on',b.textContent===l.toUpperCase()));
+  for(const[id,v] of Object.entries(T[l]||{})){const el=document.getElementById(id);if(el)el.innerHTML=v;}
+  if(document.getElementById('mo').classList.contains('open'))renderMo();
+}
+</script>
+</body>
+</html>
