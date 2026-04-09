@@ -2,6 +2,7 @@
   "rewrites": [
     { "source": "/admin", "destination": "/admin.html" },
     { "source": "/privacidad", "destination": "/privacidad.html" },
-    { "source": "/terminos", "destination": "/terminos.html" }
+    { "source": "/terminos", "destination": "/terminos.html" },
+    { "source": "/venezuela", "destination": "/campana.html" }
   ]
 }
