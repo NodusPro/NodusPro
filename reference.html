@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Confirmacion de Referencia — NodusPro</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#071428;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.card{background:#0C1E3E;border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:40px;max-width:480px;width:100%;text-align:center}
+.logo{font-size:20px;font-weight:800;color:white;margin-bottom:32px}
+.logo span{color:#F4C300}
+.icon{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px}
+.icon.loading{background:rgba(45,107,228,.2);border:2px solid rgba(45,107,228,.3)}
+.icon.ok{background:rgba(4,120,87,.2);border:2px solid rgba(4,120,87,.3)}
+.icon.err{background:rgba(207,20,43,.2);border:2px solid rgba(207,20,43,.3)}
+h1{font-size:22px;font-weight:800;color:white;margin-bottom:10px;letter-spacing:-.5px}
+p{font-size:15px;color:rgba(255,255,255,.55);line-height:1.7;font-weight:300}
+.badge{display:inline-block;margin-top:16px;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.badge.ok{background:rgba(4,120,87,.2);color:#6EE7B7;border:1px solid rgba(4,120,87,.3)}
+.badge.err{background:rgba(207,20,43,.2);color:#FCA5A5;border:1px solid rgba(207,20,43,.3)}
+.back{display:inline-block;margin-top:24px;padding:11px 24px;background:#F4C300;color:#071428;font-family:'Inter',sans-serif;font-size:14px;font-weight:800;border-radius:7px;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo"><span>Nodus</span>Pro</div>
+  <div class="icon loading" id="icon">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#93B4F5" stroke-width="2"/><path d="M12 7v5l3 3" stroke="#93B4F5" stroke-width="2" stroke-linecap="round"/></svg>
+  </div>
+  <h1 id="title">Procesando...</h1>
+  <p id="msg">Por favor espera un momento.</p>
+  <div id="extra"></div>
+</div>
+
+<script>
+var SB='https://eettdimwdjyqniodefop.supabase.co';
+var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
+
+var params=new URLSearchParams(window.location.search);
+var action=params.get('action');
+var token=params.get('token');
+
+function setUI(type,title,msg,badge){
+  var ico=document.getElementById('icon');
+  ico.className='icon '+type;
+  if(type==='ok'){
+    ico.innerHTML='<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="#6EE7B7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  } else if(type==='err'){
+    ico.innerHTML='<svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#FCA5A5" stroke-width="2"/><path d="M12 8v4M12 16h.01" stroke="#FCA5A5" stroke-width="2" stroke-linecap="round"/></svg>';
+  }
+  document.getElementById('title').textContent=title;
+  document.getElementById('msg').textContent=msg;
+  if(badge){
+    document.getElementById('extra').innerHTML=
+      '<span class="badge '+type+'">'+badge+'</span><br>'+
+      '<a class="back" href="/">Ir a NodusPro</a>';
+  }
+}
+
+if(!token){
+  setUI('err','Enlace invalido','Este enlace no contiene la informacion necesaria.','Error');
+} else {
+  fetch(SB+'/rest/v1/rpc/process_reference_response',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','apikey':SK,'Authorization':'Bearer '+SK},
+    body:JSON.stringify({p_token:token,p_action:action==='confirm'?'confirm':'reject'})
+  }).then(function(r){return r.json();}).then(function(result){
+    if(result==='confirmed'){
+      setUI('ok',
+        'Referencia confirmada',
+        'Gracias. Tu confirmacion fue registrada. El equipo de NodusPro revisara el perfil y notificara al solicitante.',
+        'Confirmado correctamente');
+    } else if(result==='rejected'){
+      setUI('ok',
+        'Referencia rechazada',
+        'Entendido. No se registrara ninguna referencia de tu parte.',
+        'Respuesta registrada');
+    } else if(result==='invalid_or_expired_token'){
+      setUI('err',
+        'Enlace expirado',
+        'Este enlace ya fue usado o ha expirado. Si crees que es un error, contacta a hola@noduspro.net',
+        'Token invalido o expirado');
+    } else {
+      setUI('ok',
+        'Respuesta registrada',
+        'Tu respuesta fue procesada correctamente.',
+        'Listo');
+    }
+  }).catch(function(){
+    setUI('err',
+      'Error de conexion',
+      'No pudimos procesar tu respuesta. Intenta de nuevo o contacta a hola@noduspro.net',
+      'Error');
+  });
+}
+</script>
+</body>
+</html>
