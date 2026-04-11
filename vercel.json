@@ -4,5 +4,6 @@
     { "source": "/privacidad", "destination": "/privacidad.html" },
     { "source": "/terminos", "destination": "/terminos.html" },
     { "source": "/venezuela", "destination": "/campana.html" }
+    { "source": "/reference", "destination": "/reference.html" }
   ]
 }
