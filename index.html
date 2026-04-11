@@ -430,23 +430,42 @@ var fd={email:'',fn:'',sn:'',ln1:'',ln2:'',specs:[],specOther:'',regions:[],regi
 })();
 
 function cargarContador(){
-  fetch(SB+'/rest/v1/waitlist?select=id',{
+  // Use HEAD request with count=exact - most reliable method
+  fetch(SB+'/rest/v1/waitlist?select=*',{
+    method:'HEAD',
     headers:{
       'apikey':SK,
       'Authorization':'Bearer '+SK,
-      'Prefer':'count=exact',
-      'Range':'0-0',
-      'Range-Unit':'items'
+      'Prefer':'count=exact'
     }
   }).then(function(r){
     var hdr=r.headers.get('content-range')||'';
-    var parts=hdr.split('/');
-    var ct=parts.length>1?parseInt(parts[1]||'0'):0;
-    if(isNaN(ct))ct=0;
-    var e1=document.getElementById('lnum');var e2=document.getElementById('pnum');
-    if(e1)e1.textContent=ct>0?ct:'0';
-    if(e2)e2.textContent=ct>0?ct:'0';
-  }).catch(function(e){console.log('Counter error:',e);});
+    // content-range format: 0-24/25  or  */25
+    var total=0;
+    if(hdr.indexOf('/')!==-1){
+      total=parseInt(hdr.split('/')[1])||0;
+    }
+    if(total>0){
+      var e1=document.getElementById('lnum');
+      var e2=document.getElementById('pnum');
+      if(e1)e1.textContent=total;
+      if(e2)e2.textContent=total;
+    }
+  }).catch(function(){
+    // Fallback: direct count via RPC
+    fetch(SB+'/rest/v1/rpc/get_waitlist_count',{
+      method:'POST',
+      headers:{'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':'application/json'},
+      body:'{}'
+    }).then(function(r){return r.json();}).then(function(n){
+      if(n&&typeof n==='number'&&n>0){
+        var e1=document.getElementById('lnum');
+        var e2=document.getElementById('pnum');
+        if(e1)e1.textContent=n;
+        if(e2)e2.textContent=n;
+      }
+    }).catch(function(){});
+  });
 }
 cargarContador();setInterval(cargarContador,30000);
 
