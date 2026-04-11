@@ -198,7 +198,32 @@ tbody tr:hover td{background:var(--surface2)}
 .act-btn.reject:hover{background:var(--red);color:white;border-color:var(--red)}
 .act-btn.view{background:var(--surface2);border-color:var(--border);color:var(--text2)}
 .act-btn.view:hover{border-color:var(--blue);color:var(--blue)}
+.act-btn.edit{background:var(--purple-pale);border-color:rgba(137,87,229,.3);color:var(--purple)}
+.act-btn.edit:hover{background:var(--purple);color:white;border-color:var(--purple)}
+.act-btn.delete{background:var(--red-pale);border-color:var(--red-bd);color:var(--red)}
+.act-btn.delete:hover{background:var(--red);color:white;border-color:var(--red)}
 .act-btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* EDIT MODAL */
+.edit-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:center;justify-content:center;padding:16px}
+.edit-overlay.open{display:flex}
+.edit-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;padding:24px;position:relative}
+.edit-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:20px}
+.edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.edit-group{display:flex;flex-direction:column;gap:5px}
+.edit-group.full{grid-column:1/-1}
+.edit-label{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);font-family:'IBM Plex Mono',monospace}
+.edit-input{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:13px;color:var(--text);font-family:'IBM Plex Sans',sans-serif;outline:none;transition:border-color .15s}
+.edit-input:focus{border-color:var(--blue)}
+.edit-select{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:13px;color:var(--text);font-family:'IBM Plex Sans',sans-serif;outline:none}
+.edit-actions{display:flex;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.edit-save{flex:1;padding:9px;background:var(--blue);color:white;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:'IBM Plex Sans',sans-serif}
+.edit-save:hover{opacity:.9}
+.edit-cancel{padding:9px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;font-size:13px;color:var(--text2);cursor:pointer;font-family:'IBM Plex Sans',sans-serif}
+
+/* ADD NEW BUTTON */
+.add-btn{display:flex;align-items:center;gap:6px;padding:6px 14px;background:var(--green-pale);border:1px solid var(--green-bd);border-radius:6px;font-size:12px;color:var(--green);cursor:pointer;font-family:'IBM Plex Sans',sans-serif;transition:all .15s;font-weight:600}
+.add-btn:hover{background:var(--green);color:white}
 
 /* TOAST */
 .toast{
@@ -495,6 +520,45 @@ tbody tr:hover td{background:var(--surface2)}
   <div class="detail-actions" id="detail-actions"></div>
 </div>
 
+
+<!-- EDIT OVERLAY -->
+<div class="edit-overlay" id="edit-overlay" onclick="if(event.target===this)closeEdit()">
+  <div class="edit-box">
+    <div class="edit-title" id="edit-title">Editar perfil</div>
+    <input type="hidden" id="edit-email-orig">
+    <div class="edit-grid">
+      <div class="edit-group"><div class="edit-label">Primer nombre</div><input class="edit-input" id="e-fn" placeholder="Nombre"></div>
+      <div class="edit-group"><div class="edit-label">Primer apellido</div><input class="edit-input" id="e-ln" placeholder="Apellido"></div>
+      <div class="edit-group"><div class="edit-label">Especialidad</div><input class="edit-input" id="e-spec" placeholder="Produccion, HSE..."></div>
+      <div class="edit-group"><div class="edit-label">Region</div><input class="edit-input" id="e-reg" placeholder="Monagas, Zulia..."></div>
+      <div class="edit-group"><div class="edit-label">Anos experiencia</div><input class="edit-input" id="e-yrs" placeholder="6-10"></div>
+      <div class="edit-group"><div class="edit-label">Disponibilidad</div>
+        <select class="edit-select" id="e-avail">
+          <option value="now">Disponible ahora</option>
+          <option value="date">Desde una fecha</option>
+          <option value="no">No disponible</option>
+        </select>
+      </div>
+      <div class="edit-group"><div class="edit-label">Estado del perfil</div>
+        <select class="edit-select" id="e-status">
+          <option value="pending_verification">pending_verification</option>
+          <option value="pending_approval">pending_approval</option>
+          <option value="approved">approved</option>
+          <option value="rejected">rejected</option>
+          <option value="flagged">flagged</option>
+        </select>
+      </div>
+      <div class="edit-group"><div class="edit-label">URL perfil</div><input class="edit-input" id="e-url" placeholder="linkedin.com/in/..."></div>
+      <div class="edit-group full"><div class="edit-label">Notas internas</div><input class="edit-input" id="e-notes" placeholder="Notas del equipo..."></div>
+    </div>
+    <div class="edit-actions">
+      <button class="edit-save" onclick="saveEdit()">Guardar cambios</button>
+      <button class="edit-cancel" onclick="closeEdit()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD NEW OVERLAY (reuses edit overlay with blank fields) -->
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
@@ -523,6 +587,88 @@ function doLogout(){
   document.getElementById('login-screen').style.display='flex';
   document.getElementById('dashboard').style.display='none';
   document.getElementById('login-pass').value='';
+}
+
+// ── EDIT ──
+function openEdit(r){
+  document.getElementById('edit-title').textContent='Editar: '+(r.first_name||'')+' '+(r.last_name||'');
+  document.getElementById('edit-email-orig').value=r.email||'';
+  document.getElementById('e-fn').value=r.first_name||'';
+  document.getElementById('e-ln').value=r.last_name||'';
+  document.getElementById('e-spec').value=r.specialty||'';
+  document.getElementById('e-reg').value=r.region||'';
+  document.getElementById('e-yrs').value=r.years_experience||'';
+  document.getElementById('e-avail').value=r.availability||'now';
+  document.getElementById('e-status').value=r.profile_status||'pending_approval';
+  document.getElementById('e-url').value=r.profile_url||'';
+  document.getElementById('e-notes').value=r.sanctions_notes||'';
+  document.getElementById('edit-overlay').classList.add('open');
+}
+
+function openAdd(){
+  document.getElementById('edit-title').textContent='Agregar perfil manualmente';
+  document.getElementById('edit-email-orig').value='__new__';
+  ['e-fn','e-ln','e-spec','e-reg','e-yrs','e-url','e-notes'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('e-avail').value='now';
+  document.getElementById('e-status').value='pending_approval';
+  // Add email field dynamically
+  var existing=document.getElementById('e-email-new');
+  if(!existing){
+    var g=document.createElement('div');g.className='edit-group';g.id='e-email-new-group';
+    g.innerHTML='<div class="edit-label">Email *</div><input class="edit-input" id="e-email-new" placeholder="email@ejemplo.com">';
+    document.querySelector('.edit-grid').prepend(g);
+  }
+  document.getElementById('edit-overlay').classList.add('open');
+}
+
+function closeEdit(){
+  document.getElementById('edit-overlay').classList.remove('open');
+  var extra=document.getElementById('e-email-new-group');
+  if(extra)extra.remove();
+}
+
+async function saveEdit(){
+  var orig=document.getElementById('edit-email-orig').value;
+  var isNew=orig==='__new__';
+  var emailInput=document.getElementById('e-email-new');
+  var email=isNew?(emailInput?emailInput.value.trim():''):orig;
+  if(!email){showToast('Email requerido','error');return;}
+  var payload={
+    first_name:document.getElementById('e-fn').value.trim()||null,
+    last_name:document.getElementById('e-ln').value.trim()||null,
+    specialty:document.getElementById('e-spec').value.trim()||null,
+    region:document.getElementById('e-reg').value.trim()||null,
+    years_experience:document.getElementById('e-yrs').value.trim()||null,
+    availability:document.getElementById('e-avail').value,
+    profile_status:document.getElementById('e-status').value,
+    profile_url:document.getElementById('e-url').value.trim()||null,
+    sanctions_notes:document.getElementById('e-notes').value.trim()||null
+  };
+  try{
+    if(isNew){
+      payload.email=email;payload.lang='es';payload.source='manual_admin';
+      var r=await api('/rest/v1/waitlist',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify(payload)});
+      showToast('Perfil creado: '+email,'success');
+    } else {
+      await api('/rest/v1/waitlist?email=eq.'+encodeURIComponent(email),{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify(payload)});
+      showToast('Guardado: '+email,'success');
+    }
+    closeEdit();loadAll();
+  }catch(e){showToast('Error: '+e.message,'error');}
+}
+
+// ── DELETE ──
+async function confirmDelete(email,btn){
+  if(!confirm('Eliminar permanentemente el perfil de '+email+'?\n\nEsta accion no se puede deshacer.'))return;
+  btn.disabled=true;btn.textContent='...';
+  try{
+    await api('/rest/v1/waitlist?email=eq.'+encodeURIComponent(email),{method:'DELETE'});
+    showToast('Perfil eliminado: '+email,'success');
+    loadAll();
+  }catch(e){
+    showToast('Error al eliminar: '+e.message,'error');
+    btn.disabled=false;btn.textContent='Borrar';
+  }
 }
 
 function showPage(page){
@@ -625,8 +771,10 @@ function renderTable(tbodyId, rows, type){
     const name=fmtName(r);
     const actions=`<div class="action-row">
       <button class="act-btn view" onclick='showDetail(${JSON.stringify(r).replace(/'/g,"&#39;")})'>Ver</button>
-      ${r.profile_status!=='approved'?`<button class="act-btn approve" onclick="quickApprove('${r.email}',this)">✓ Aprobar</button>`:''}
+      ${r.profile_status!=='approved'?`<button class="act-btn approve" onclick="quickApprove('${r.email}',this)">✓</button>`:''}
       ${!['rejected'].includes(r.profile_status)?`<button class="act-btn reject" onclick="quickReject('${r.email}',this)">✕</button>`:''}
+      <button class="act-btn edit" onclick='openEdit(${JSON.stringify(r).replace(/'/g,"&#39;")})'>Editar</button>
+      <button class="act-btn delete" onclick="confirmDelete('${r.email}',this)">Borrar</button>
     </div>`;
 
     if(type==='overview'||type==='all'){
@@ -768,9 +916,10 @@ function showDetail(r){
   const isApproved=r.profile_status==='approved';
   const isRejected=r.profile_status==='rejected';
   document.getElementById('detail-actions').innerHTML=`
-    ${!isApproved&&!isRejected?`<button class="detail-btn approve" onclick="quickApprove('${r.email}',this)">✓ Aprobar perfil</button>`:''}
+    ${!isApproved&&!isRejected?`<button class="detail-btn approve" onclick="quickApprove('${r.email}',this)">✓ Aprobar</button>`:''}
     ${!isRejected?`<button class="detail-btn reject" onclick="quickReject('${r.email}',this)">✕ Rechazar</button>`:''}
-    ${isApproved?`<div style="font-size:13px;color:var(--green);padding:10px;text-align:center">✓ Perfil ya aprobado</div>`:''}
+    <button class="detail-btn" style="background:var(--purple-pale);border-color:rgba(137,87,229,.3);color:var(--purple)" onclick='closeDetail();openEdit(${JSON.stringify(r).replace(/'/g,"&#39;")})'>Editar</button>
+    <button class="detail-btn" style="background:var(--red-pale);border-color:var(--red-bd);color:var(--red)" onclick="closeDetail();confirmDelete('${r.email}',this)">Eliminar</button>
   `;
 }
 
