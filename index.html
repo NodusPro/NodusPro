@@ -771,10 +771,10 @@ footer{padding:36px 40px;display:flex;justify-content:space-between;align-items:
     <p class="foot-copy" id="foot-copy">© 2026 NodusPro · Venezuela · noduspro.net</p>
   </div>
   <div class="foot-links">
-    <a href="#" id="fl1">Privacidad</a>
-    <a href="#" id="fl2">Términos</a>
-    <a href="#" id="fl3">Seguridad</a>
-    <a href="#" id="fl4">Contacto</a>
+    <a href="/privacidad" id="fl1">Privacidad</a>
+    <a href="/terminos" id="fl2">Términos</a>
+    <a href="/privacidad#seguridad" id="fl3">Seguridad</a>
+    <a href="mailto:hola@noduspro.net" id="fl4">Contacto</a>
   </div>
 </footer>
 
@@ -1032,12 +1032,25 @@ function sDone(es){
   </div>
 </div>`;}
 
-function next(){
+async function next(){
   const es=lang==='es';
   if(step===0){
     const e=document.getElementById('fe')?.value.trim();
     if(!e||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)){showErr(es?'Por favor ingresa un correo válido.':'Please enter a valid email.');return;}
     fd.email=e;
+    try{
+      const chk=await fetch(SB+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(e)+'&select=id,profile_status',{
+        headers:{'apikey':SK,'Authorization':'Bearer '+SK}
+      });
+      const ex=await chk.json();
+      if(ex&&ex.length>0){
+        const st=ex[0].profile_status;
+        showErr(es?
+          'Este correo ya está registrado. Estado: '+(st==='approved'?'Perfil activo — ya eres visible.':'En revisión — recibirás confirmación por email.')
+          :'This email is already registered. Status: '+(st==='approved'?'Profile active.':'Under review — check your email.'));
+        return;
+      }
+    }catch(err){}
   }
   if(step===1){
     const fn=document.getElementById('fn1')?.value.trim();
