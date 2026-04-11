@@ -610,14 +610,31 @@ async function avanzar(){
     if(!val||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)){mostrarError('Por favor ingresa un correo valido.');return;}
     fd.email=val;
     try{
-      var r=await fetch(SB+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(val)+'&select=id,profile_status',{headers:{'apikey':SK,'Authorization':'Bearer '+SK}});
-      var ex=await r.json();
-      if(ex&&ex.length>0){
-        var st=ex[0].profile_status;
-        mostrarError('Este correo ya esta registrado. Estado: '+(st==='approved'?'Perfil activo.':'En revision — revisa tu email.'));
+      // Check duplicate via RPC function (bypasses RLS)
+      var chkR=await fetch(SB+'/rest/v1/rpc/check_email_exists',{
+        method:'POST',
+        headers:{'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':'application/json'},
+        body:JSON.stringify({p_email:val})
+      });
+      var chkData=await chkR.json();
+      if(chkData && chkData.exists){
+        mostrarError('Este correo ya esta registrado. '+(chkData.status==='approved'?'Tu perfil ya esta activo.':'Tu solicitud esta en revision — revisa tu email.'));
         return;
       }
-    }catch(e){}
+    }catch(e){
+      // Fallback: direct query
+      try{
+        var r2=await fetch(SB+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(val)+'&select=id,profile_status',{
+          headers:{'apikey':SK,'Authorization':'Bearer '+SK,'Accept':'application/json'}
+        });
+        var ex2=await r2.json();
+        if(Array.isArray(ex2)&&ex2.length>0){
+          var st2=ex2[0].profile_status;
+          mostrarError('Este correo ya esta registrado. '+(st2==='approved'?'Tu perfil ya esta activo.':'Tu solicitud esta en revision — revisa tu email.'));
+          return;
+        }
+      }catch(e2){}
+    }
   }
   if(paso===1){
     var fn=document.getElementById('ifn');var ln=document.getElementById('iln1');
