@@ -485,13 +485,12 @@ function loginGoogle(){
 var GSVG='<svg width="17" height="17" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>';
 
 function renderModal(){
-  var pct=((paso+1)/5*100);
+  var pct=((paso+1)/3*100);
   document.getElementById('mbar').style.width=pct+'%';
   var b=document.getElementById('mbody');
   if(paso===0)b.innerHTML=p0();
   else if(paso===1)b.innerHTML=p1();
   else if(paso===2)b.innerHTML=p2();
-  else if(paso===3)b.innerHTML=p3();
   else b.innerHTML=pFin();
 }
 
@@ -519,39 +518,34 @@ function p0(){
 function p1(){
   return '<button class="mback" onclick="paso--;renderModal()">VOLVER</button>'+
     '<div class="mt">Como te llamas?</div>'+
-    '<div class="ms">Los campos * son obligatorios.</div>'+
+    '<div class="ms">Solo nombre y apellido son obligatorios.</div>'+
     '<div class="mgr">'+
-    '<div><label class="ml">Primer nombre *</label><input class="mi" id="ifn" placeholder="Carlos" value="'+fd.fn+'"></div>'+
-    '<div><label class="ml">Segundo nombre</label><input class="mi" id="isn" placeholder="opcional" value="'+fd.sn+'"></div>'+
-    '</div><div class="mgr">'+
-    '<div><label class="ml">Primer apellido *</label><input class="mi" id="iln1" placeholder="Rodriguez" value="'+fd.ln1+'"></div>'+
-    '<div><label class="ml">Segundo apellido</label><input class="mi" id="iln2" placeholder="Mendez" value="'+fd.ln2+'"></div>'+
+    '<div><label class="ml">Nombre *</label><input class="mi" id="ifn" placeholder="Carlos" value="'+fd.fn+'"></div>'+
+    '<div><label class="ml">Apellido *</label><input class="mi" id="iln1" placeholder="Rodriguez" value="'+fd.ln1+'"></div>'+
     '</div>'+
     '<button class="mbtn" onclick="avanzar()">Continuar</button>';
 }
 
 function p2(){
-  var SP={'Petroleo y Gas':['Produccion','Perforacion','EPC','Geologia','HSE','Contratos','Infraestructura'],
-    'Ingenieria':['Civil','Mecanica','Electrica','Estructural','Ambiental','Industrial'],
-    'Tecnologia':['Software','Data','Ciberseguridad','IA y ML','Cloud','Sistemas'],
-    'default':['Consultoria','Gestion de proyectos','Finanzas','Legal','Salud','Educacion']};
-  var specs=SP[sector]||SP['default'];
-  var RG=['Monagas','Faja del Orinoco','Zulia','Anzoategui','Offshore','Nacional','Internacional'];
-  var YR=['1-5 anos','6-10 anos','11-20 anos','20+ anos'];
-  var cs=specs.map(function(s){return '<span class="chip'+(fd.specs.indexOf(s)!==-1?' on':'')+'" onclick="togC(this,\'spec\',\''+s+'\')">'+s+'</span>';}).join('')+
-    '<span class="chip'+(fd.specOther?' on':'')+'" onclick="togO(\'spo\',this)">+ Otro</span>';
-  var cr=RG.map(function(r){return '<span class="chip'+(fd.regions.indexOf(r)!==-1?' on':'')+'" onclick="togC(this,\'reg\',\''+r+'\')">'+r+'</span>';}).join('')+
-    '<span class="chip'+(fd.regionOther?' on':'')+'" onclick="togO(\'rgo\',this)">+ Otra</span>';
-  var cy=YR.map(function(y){return '<span class="chip'+(fd.years===y?' on':'')+'" onclick="setS(this,\'years\',\''+y+'\')">'+y+'</span>';}).join('');
+  var SP=['Petroleo y Gas','Ingenieria','Tecnologia','Negocios','Construccion','Salud','Legal','Otro'];
+  var cs=SP.map(function(s){
+    return '<span class="chip'+(fd.sector===s?' on':'')+'" onclick="setSector(this,''+s+'')">'+s+'</span>';
+  }).join('');
   return '<button class="mback" onclick="paso--;renderModal()">VOLVER</button>'+
-    '<div class="mt">Tu experiencia</div>'+
-    '<div class="ms">Especialidad y region son obligatorios *</div>'+
-    '<div class="mg"><label class="ml">Especialidad *</label><div class="chips">'+cs+'</div>'+
-    '<div class="ow'+(fd.specOther?' show':'')+'" id="spo-w"><input class="mi" id="spo-i" placeholder="Tu especialidad..." style="margin-top:7px" value="'+fd.specOther+'" oninput="fd.specOther=this.value"></div></div>'+
-    '<div class="mg"><label class="ml">Region en Venezuela *</label><div class="chips">'+cr+'</div>'+
-    '<div class="ow'+(fd.regionOther?' show':'')+'" id="rgo-w"><input class="mi" id="rgo-i" placeholder="La region..." style="margin-top:7px" value="'+fd.regionOther+'" oninput="fd.regionOther=this.value"></div></div>'+
-    '<div class="mg"><label class="ml">Anos de experiencia (opcional)</label><div class="chips">'+cy+'</div></div>'+
-    '<button class="mbtn" onclick="avanzar()" style="margin-top:6px">Continuar</button>';
+    '<div class="mt">Casi listo</div>'+
+    '<div class="ms">Podras completar tu experiencia profesional una vez que tu perfil este activo.</div>'+
+    '<div class="mg"><label class="ml">Tu sector (opcional)</label>'+
+    '<div class="chips">'+cs+'</div></div>'+
+    '<div class="mg"><label class="ml">Disponibilidad (opcional)</label>'+
+    '<div class="trow'+(fd.disponibilidad==='now'?' on':'')+'" onclick="setDisp('now')">'+
+    '<div><div class="tlabel">Disponible ahora</div></div>'+
+    '<div class="tpill'+(fd.disponibilidad==='now'?' on':'')+'"><div class="tthumb"></div></div></div>'+
+    '<div class="trow'+(fd.disponibilidad==='no'?' on':'')+'" onclick="setDisp('no')">'+
+    '<div><div class="tlabel">No disponible por ahora</div></div>'+
+    '<div class="tpill'+(fd.disponibilidad==='no'?' on':'')+'"><div class="tthumb"></div></div></div>'+
+    '</div>'+
+    '<button class="mbtn" onclick="enviar()">Registrarme gratis →</button>'+
+    '<button onclick="enviar()" style="width:100%;padding:10px;background:transparent;border:none;font-family:Inter,sans-serif;font-size:13px;color:rgba(255,255,255,.35);cursor:pointer;margin-top:6px">Omitir y registrarme</button>';
 }
 
 function p3(){
@@ -628,52 +622,34 @@ async function avanzar(){
     if(!val||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)){mostrarError('Por favor ingresa un correo valido.');return;}
     fd.email=val;
     try{
-      // Check duplicate via RPC function (bypasses RLS)
       var chkR=await fetch(SB+'/rest/v1/rpc/check_email_exists',{
         method:'POST',
         headers:{'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':'application/json'},
         body:JSON.stringify({p_email:val})
       });
       var chkData=await chkR.json();
-      if(chkData && chkData.exists){
+      if(chkData&&chkData.exists){
         mostrarError('Este correo ya esta registrado. '+(chkData.status==='approved'?'Tu perfil ya esta activo.':'Tu solicitud esta en revision — revisa tu email.'));
         return;
       }
-    }catch(e){
-      // Fallback: direct query
-      try{
-        var r2=await fetch(SB+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(val)+'&select=id,profile_status',{
-          headers:{'apikey':SK,'Authorization':'Bearer '+SK,'Accept':'application/json'}
-        });
-        var ex2=await r2.json();
-        if(Array.isArray(ex2)&&ex2.length>0){
-          var st2=ex2[0].profile_status;
-          mostrarError('Este correo ya esta registrado. '+(st2==='approved'?'Tu perfil ya esta activo.':'Tu solicitud esta en revision — revisa tu email.'));
-          return;
-        }
-      }catch(e2){}
-    }
+    }catch(e){}
   }
   if(paso===1){
-    var fn=document.getElementById('ifn');var ln=document.getElementById('iln1');
-    if(!fn||!fn.value.trim()){mostrarError('El primer nombre es obligatorio.');return;}
-    if(!ln||!ln.value.trim()){mostrarError('El primer apellido es obligatorio.');return;}
-    fd.fn=fn.value.trim();fd.sn=(document.getElementById('isn')||{value:''}).value.trim();
-    fd.ln1=ln.value.trim();fd.ln2=(document.getElementById('iln2')||{value:''}).value.trim();
+    var fn=document.getElementById('ifn');
+    var ln=document.getElementById('iln1');
+    if(!fn||!fn.value.trim()){mostrarError('El nombre es obligatorio.');return;}
+    if(!ln||!ln.value.trim()){mostrarError('El apellido es obligatorio.');return;}
+    fd.fn=fn.value.trim();
+    fd.sn=(document.getElementById('isn')||{value:''}).value.trim();
+    fd.ln1=ln.value.trim();
+    fd.ln2=(document.getElementById('iln2')||{value:''}).value.trim();
   }
-  if(paso===2){
-    var sp=fd.specs.concat(fd.specOther?[fd.specOther]:[]).filter(Boolean);
-    var rg=fd.regions.concat(fd.regionOther?[fd.regionOther]:[]).filter(Boolean);
-    if(!sp.length){mostrarError('Selecciona al menos una especialidad.');return;}
-    if(!rg.length){mostrarError('Selecciona al menos una region.');return;}
-  }
+  // Step 2 is fully optional — always allow continuing
   paso++;renderModal();
 }
 
 async function enviar(){
-  if(fd.tieneLinkedIn&&!fd.profileUrl.trim()){mostrarError('Por favor ingresa tu URL de LinkedIn.');return;}
-  if(!fd.tieneLinkedIn&&!fd.colegaId){mostrarError('Busca y selecciona un colega verificado.');return;}
-  if(fd.disponibilidad==='date'&&!fd.fechaDisp){mostrarError('Selecciona tu fecha de disponibilidad.');return;}
+  // No validation on optional fields
   var btn=document.getElementById('btnEnviar');
   if(btn){btn.disabled=true;btn.textContent='Enviando...';}
   var code=(fd.email.split('@')[0]||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8);
@@ -714,6 +690,11 @@ function togO(id,el){
   el.classList.toggle('on');
   var w=document.getElementById(id+'-w');
   if(w)w.classList.toggle('show',el.classList.contains('on'));
+}
+function setSector(el,val){
+  el.parentElement.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on');});
+  el.classList.add('on');
+  fd.sector=val;
 }
 function setS(el,campo,val){
   el.parentElement.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on');});
