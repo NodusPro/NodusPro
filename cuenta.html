@@ -3,99 +3,98 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Mi cuenta — NodusPro</title>
+<title>Mi cuenta - NodusPro</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A1628'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%232D6BE4'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-font-smoothing:antialiased}
-:root{--navy:#071428;--navy2:#0C1E3E;--blue:#1B4FD8;--gold:#F4C300;--red:#CF142B;--green:#047857;--bd:rgba(255,255,255,.1)}
+:root{--navy:#071428;--n2:#0C1E3E;--blue:#1B4FD8;--gold:#F4C300;--red:#CF142B;--green:#047857}
 body{font-family:'Inter',sans-serif;background:var(--navy);color:white;min-height:100vh}
 .nav{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-bottom:3px solid var(--gold)}
 .nlogo{display:flex;align-items:center;gap:9px;text-decoration:none}
 .nmark{width:30px;height:30px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center}
-.nname{font-size:15px;font-weight:800;color:white}.nname span{color:var(--gold)}
-.nav-right{display:flex;align-items:center;gap:12px}
-.nav-email{font-size:12px;color:rgba(255,255,255,.3)}
-.so-btn{font-size:12px;color:rgba(255,255,255,.3);background:none;border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:5px 10px;cursor:pointer;font-family:'Inter',sans-serif;display:none}
-.so-btn:hover{color:rgba(255,255,255,.6)}
+.nname{font-size:15px;font-weight:800;color:white}.nname em{color:var(--gold);font-style:normal}
+.nav-r{display:flex;align-items:center;gap:12px}
+.nem{font-size:12px;color:rgba(255,255,255,.3)}
+.sob{font-size:12px;color:rgba(255,255,255,.3);background:none;border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:5px 10px;cursor:pointer;font-family:'Inter',sans-serif;display:none}
 .wrap{max-width:600px;margin:0 auto;padding:40px 24px 80px}
-.screen{display:none}.screen.active{display:block}
-.spinner{width:36px;height:36px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:60px auto}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes blink{from{opacity:1}to{opacity:.3}}
-.login-hdr{text-align:center;margin-bottom:28px}
+.scr{display:none}.scr.on{display:block}
+.spin{width:36px;height:36px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--gold);border-radius:50%;animation:sp .8s linear infinite;margin:60px auto}
+@keyframes sp{to{transform:rotate(360deg)}}
+@keyframes bl{from{opacity:1}to{opacity:.3}}
+.lhdr{text-align:center;margin-bottom:28px}
 .ltag{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-.lh{font-size:28px;font-weight:900;letter-spacing:-.5px;margin-bottom:8px}
-.ls{font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;font-weight:300}
-.lbox{background:var(--navy2);border:1px solid var(--bd);border-radius:12px;padding:28px}
+.lh1{font-size:28px;font-weight:900;letter-spacing:-.5px;margin-bottom:8px}
+.lsub{font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;font-weight:300}
+.lbox{background:var(--n2);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:28px}
 .lbl{display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:6px}
 .inp{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:7px;color:white;font-family:'Inter',sans-serif;font-size:15px;padding:12px 14px;outline:none;transition:border-color .15s;margin-bottom:12px}
 .inp:focus{border-color:var(--gold)}.inp::placeholder{color:rgba(255,255,255,.2)}
-.pbtn{width:100%;padding:13px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:15px;font-weight:900;cursor:pointer;margin-bottom:14px}
-.pbtn:hover{background:#FFD700}.pbtn:disabled{opacity:.4;cursor:not-allowed}
-.divr{display:flex;align-items:center;gap:10px;margin:4px 0 14px}
-.divl{flex:1;height:1px;background:rgba(255,255,255,.08)}
-.divt{font-size:11px;color:rgba(255,255,255,.2);font-weight:600;letter-spacing:.5px}
-.gbtn{width:100%;padding:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.7);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px}
-.gbtn:hover{background:rgba(255,255,255,.1)}
-.msg-box{border-radius:10px;padding:16px;text-align:center;margin-top:16px;display:none}
-.msg-box.ok{background:rgba(4,120,87,.1);border:1px solid rgba(4,120,87,.3)}
-.msg-box.err{background:rgba(207,20,43,.1);border:1px solid rgba(207,20,43,.3)}
-.msg-box h3{font-size:15px;font-weight:700;margin-bottom:5px}
-.msg-box.ok h3{color:#6EE7B7}.msg-box.err h3{color:#FCA5A5}
-.msg-box p{font-size:13px;color:rgba(255,255,255,.4);line-height:1.6}
-.err-wrap{text-align:center;padding:60px 0}
-.err-h{font-size:18px;font-weight:700;margin-bottom:8px}
-.err-p{font-size:14px;color:rgba(255,255,255,.4);margin-bottom:22px;line-height:1.6}
-.ybtn{padding:10px 24px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;font-weight:800;cursor:pointer}
-.prof-hdr{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.08)}
-.avatar{width:52px;height:52px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;flex-shrink:0}
-.pname{font-size:19px;font-weight:800}
-.pemail{font-size:12px;color:rgba(255,255,255,.35);margin-top:2px}
-.pbadge{display:inline-flex;margin-top:5px;padding:3px 8px;background:rgba(244,195,0,.15);border:1px solid rgba(244,195,0,.3);border-radius:4px;font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.5px;text-transform:uppercase}
-.edit-btn2{margin-left:auto;padding:8px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:6px;font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,.6);cursor:pointer}
-.edit-btn2:hover{background:rgba(255,255,255,.1);color:white}
-.sec{background:var(--navy2);border:1px solid var(--bd);border-radius:10px;padding:18px;margin-bottom:14px}
-.sec-t{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:14px}
+.pb{width:100%;padding:13px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:15px;font-weight:900;cursor:pointer;margin-bottom:14px}
+.pb:hover{background:#FFD700}.pb:disabled{opacity:.4;cursor:not-allowed}
+.dv{display:flex;align-items:center;gap:10px;margin:4px 0 14px}
+.dvl{flex:1;height:1px;background:rgba(255,255,255,.08)}
+.dvt{font-size:11px;color:rgba(255,255,255,.2);font-weight:600;letter-spacing:.5px}
+.gb{width:100%;padding:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.7);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px}
+.gb:hover{background:rgba(255,255,255,.1)}
+.mb{border-radius:10px;padding:16px;text-align:center;margin-top:16px;display:none}
+.mb.ok{background:rgba(4,120,87,.1);border:1px solid rgba(4,120,87,.3)}
+.mb.err{background:rgba(207,20,43,.1);border:1px solid rgba(207,20,43,.3)}
+.mb h3{font-size:15px;font-weight:700;margin-bottom:5px}
+.mb.ok h3{color:#6EE7B7}.mb.err h3{color:#FCA5A5}
+.mb p{font-size:13px;color:rgba(255,255,255,.4);line-height:1.6}
+.ew{text-align:center;padding:60px 0}
+.eh{font-size:18px;font-weight:700;margin-bottom:8px}
+.ep{font-size:14px;color:rgba(255,255,255,.4);margin-bottom:22px;line-height:1.6}
+.yb{padding:10px 24px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;font-weight:800;cursor:pointer}
+.phdr{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.08)}
+.av{width:52px;height:52px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;flex-shrink:0}
+.pnm{font-size:19px;font-weight:800}
+.pem{font-size:12px;color:rgba(255,255,255,.35);margin-top:2px}
+.pbg{display:inline-flex;margin-top:5px;padding:3px 8px;background:rgba(244,195,0,.15);border:1px solid rgba(244,195,0,.3);border-radius:4px;font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.5px;text-transform:uppercase}
+.eb{margin-left:auto;padding:8px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:6px;font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,.6);cursor:pointer}
+.eb:hover{background:rgba(255,255,255,.1);color:white}
+.sec{background:var(--n2);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:18px;margin-bottom:14px}
+.st{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:14px}
 .fg{margin-bottom:13px}
 .fg label{display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:5px}
-.fg label .opt{color:rgba(255,255,255,.15);font-weight:400;text-transform:none;letter-spacing:0;font-size:10px}
+.fg label .op{color:rgba(255,255,255,.15);font-weight:400;text-transform:none;letter-spacing:0;font-size:10px}
 .fv{font-size:14px;color:rgba(255,255,255,.8);line-height:1.6}
 .fv.em{color:rgba(255,255,255,.2);font-style:italic;font-size:13px}
 .fi{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:7px;color:white;font-family:'Inter',sans-serif;font-size:14px;padding:10px 12px;outline:none;transition:border-color .15s}
 .fi:focus{border-color:var(--gold)}.fi::placeholder{color:rgba(255,255,255,.2)}
 textarea.fi{resize:vertical;min-height:80px;line-height:1.6}
 select.fi{cursor:pointer}
-select.fi option{background:var(--navy2)}
+select.fi option{background:var(--n2)}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .ao{padding:9px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;cursor:pointer;font-size:13px;color:rgba(255,255,255,.5);text-align:center;transition:all .15s;user-select:none}
 .ao:hover{border-color:rgba(255,255,255,.2)}
 .ao.on{border-color:var(--gold);background:rgba(244,195,0,.08);color:white;font-weight:600}
-.ag4{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.ag3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.save-btn{flex:1;padding:12px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;font-weight:900;cursor:pointer}
-.save-btn:hover{background:#FFD700}.save-btn:disabled{opacity:.4;cursor:not-allowed}
-.canc-btn{padding:12px 18px;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;color:rgba(255,255,255,.5);cursor:pointer}
-.canc-btn:hover{color:white}
-.act-row{display:flex;gap:10px;margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
-.del-zone{background:rgba(207,20,43,.06);border:1px solid rgba(207,20,43,.2);border-radius:10px;padding:18px;margin-top:20px}
-.del-t{font-size:13px;font-weight:700;color:#FCA5A5;margin-bottom:5px}
-.del-d{font-size:13px;color:rgba(255,255,255,.3);line-height:1.6;margin-bottom:12px}
-.del-btn{padding:9px 18px;background:rgba(207,20,43,.15);border:1px solid rgba(207,20,43,.35);border-radius:6px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#FCA5A5;cursor:pointer}
-.del-btn:hover{background:var(--red);color:white}
-.cv-drop{border:1px dashed rgba(255,255,255,.15);border-radius:8px;padding:16px;text-align:center;cursor:pointer;position:relative;transition:all .15s}
-.cv-drop:hover{border-color:rgba(244,195,0,.4);background:rgba(244,195,0,.03)}
-.cv-drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.cv-txt{font-size:13px;color:rgba(255,255,255,.35)}
-.ai-tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:rgba(244,195,0,.7);margin-bottom:5px}
-.ai-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;animation:blink 1s ease-in-out infinite alternate}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);padding:12px 20px;border-radius:8px;font-size:14px;font-weight:600;display:none;z-index:9999;white-space:nowrap}
-.toast.ok{background:var(--navy2);border:1px solid rgba(4,120,87,.4);color:#6EE7B7}
-.toast.err{background:var(--navy2);border:1px solid rgba(207,20,43,.4);color:#FCA5A5}
-.back-btn{background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:22px;padding:0;margin-right:10px;vertical-align:middle;line-height:1}
-.back-btn:hover{color:white}
-@media(max-width:600px){.r2,.ag4,.ag3{grid-template-columns:1fr}.act-row{flex-direction:column}}
+.g4{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.svb{flex:1;padding:12px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;font-weight:900;cursor:pointer}
+.svb:hover{background:#FFD700}.svb:disabled{opacity:.4;cursor:not-allowed}
+.cb{padding:12px 18px;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;color:rgba(255,255,255,.5);cursor:pointer}
+.cb:hover{color:white}
+.ar{display:flex;gap:10px;margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
+.dz{background:rgba(207,20,43,.06);border:1px solid rgba(207,20,43,.2);border-radius:10px;padding:18px;margin-top:20px}
+.dt{font-size:13px;font-weight:700;color:#FCA5A5;margin-bottom:5px}
+.dd{font-size:13px;color:rgba(255,255,255,.3);line-height:1.6;margin-bottom:12px}
+.db{padding:9px 18px;background:rgba(207,20,43,.15);border:1px solid rgba(207,20,43,.35);border-radius:6px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#FCA5A5;cursor:pointer}
+.db:hover{background:var(--red);color:white}
+.cvd{border:1px dashed rgba(255,255,255,.15);border-radius:8px;padding:16px;text-align:center;cursor:pointer;position:relative;transition:all .15s}
+.cvd:hover{border-color:rgba(244,195,0,.4);background:rgba(244,195,0,.03)}
+.cvd input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.cvt{font-size:13px;color:rgba(255,255,255,.35)}
+.ait{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:rgba(244,195,0,.7);margin-bottom:5px}
+.aid{width:5px;height:5px;background:var(--gold);border-radius:50%;animation:bl 1s ease-in-out infinite alternate}
+.tst{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);padding:12px 20px;border-radius:8px;font-size:14px;font-weight:600;display:none;z-index:9999;white-space:nowrap}
+.tst.ok{background:var(--n2);border:1px solid rgba(4,120,87,.4);color:#6EE7B7}
+.tst.err{background:var(--n2);border:1px solid rgba(207,20,43,.4);color:#FCA5A5}
+.bk{background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:22px;padding:0;margin-right:10px;vertical-align:middle;line-height:1}
+.bk:hover{color:white}
+@media(max-width:600px){.r2,.g4,.g3{grid-template-columns:1fr}.ar{flex-direction:column}}
 </style>
 </head>
 <body>
@@ -110,108 +109,108 @@ select.fi option{background:var(--navy2)}
         <circle cx="13.5" cy="13" r="1.5" fill="white" opacity=".7"/>
       </svg>
     </div>
-    <div class="nname"><span>Nodus</span>Pro</div>
+    <div class="nname"><em>Nodus</em>Pro</div>
   </a>
-  <div class="nav-right">
-    <span class="nav-email" id="nav-email"></span>
-    <button class="so-btn" id="so-btn" onclick="doSignOut()">Cerrar sesion</button>
+  <div class="nav-r">
+    <span class="nem" id="nem"></span>
+    <button class="sob" id="sob" onclick="doOut()">Cerrar sesion</button>
   </div>
 </nav>
 
 <div class="wrap">
 
-  <div class="screen active" id="s-login">
-    <div class="login-hdr">
+  <div class="scr on" id="s-login">
+    <div class="lhdr">
       <div class="ltag">Mi cuenta</div>
-      <h1 class="lh">Accede a tu perfil</h1>
-      <p class="ls">Introduce tu correo y te enviamos un enlace de acceso seguro. Sin contrasena.</p>
+      <h1 class="lh1">Accede a tu perfil</h1>
+      <p class="lsub">Introduce tu correo y te enviamos un enlace seguro. Sin contrasena.</p>
     </div>
     <div class="lbox">
       <label class="lbl">Tu correo de registro</label>
-      <input type="email" class="inp" id="lemail" placeholder="tu@correo.com" onkeydown="if(event.key==='Enter')doMagicLink()">
-      <button class="pbtn" id="lbtn" onclick="doMagicLink()">Enviarme el enlace de acceso</button>
-      <div class="divr"><div class="divl"></div><span class="divt">O</span><div class="divl"></div></div>
-      <button class="gbtn" onclick="doGoogle()">
+      <input type="email" class="inp" id="lem" placeholder="tu@correo.com" onkeydown="if(event.key==='Enter')doML()">
+      <button class="pb" id="lbtn" onclick="doML()">Enviarme el enlace de acceso</button>
+      <div class="dv"><div class="dvl"></div><span class="dvt">O</span><div class="dvl"></div></div>
+      <button class="gb" onclick="doGG()">
         <svg width="17" height="17" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
         Acceder con Google
       </button>
-      <div class="msg-box" id="msg-box">
-        <h3 id="msg-h">Enlace enviado</h3>
-        <p id="msg-p">Revisa tu correo y haz clic en el enlace.</p>
+      <div class="mb" id="mbox">
+        <h3 id="mh">Enlace enviado</h3>
+        <p id="mp">Revisa tu correo. Si no lo ves, revisa Spam o Promociones.</p>
       </div>
     </div>
   </div>
 
-  <div class="screen" id="s-loading"><div class="spinner"></div></div>
+  <div class="scr" id="s-load"><div class="spin"></div></div>
 
-  <div class="screen" id="s-error">
-    <div class="err-wrap">
+  <div class="scr" id="s-err">
+    <div class="ew">
       <div style="font-size:36px;margin-bottom:14px">!</div>
-      <div class="err-h" id="err-h">Error</div>
-      <p class="err-p" id="err-p"></p>
-      <button class="ybtn" onclick="show('s-login')">Volver</button>
+      <div class="eh" id="eh">Error</div>
+      <p class="ep" id="ep"></p>
+      <button class="yb" onclick="show('s-login')">Volver</button>
     </div>
   </div>
 
-  <div class="screen" id="s-profile">
-    <div id="view-mode">
-      <div class="prof-hdr">
-        <div class="avatar" id="p-av">?</div>
+  <div class="scr" id="s-prof">
+    <div id="vm">
+      <div class="phdr">
+        <div class="av" id="pav">?</div>
         <div>
-          <div class="pname" id="p-name">-</div>
-          <div class="pemail" id="p-email-v">-</div>
-          <div class="pbadge">Miembro Fundador</div>
+          <div class="pnm" id="pnm">-</div>
+          <div class="pem" id="pem">-</div>
+          <div class="pbg">Miembro Fundador</div>
         </div>
-        <button class="edit-btn2" onclick="startEdit()">Editar perfil</button>
+        <button class="eb" onclick="startEdit()">Editar perfil</button>
       </div>
       <div class="sec">
-        <div class="sec-t">Informacion profesional</div>
+        <div class="st">Informacion profesional</div>
         <div class="r2">
-          <div class="fg"><label>Cargo actual</label><div class="fv em" id="v-pos">Sin completar</div></div>
-          <div class="fg"><label>Empresa</label><div class="fv em" id="v-co">Sin completar</div></div>
+          <div class="fg"><label>Cargo actual</label><div class="fv em" id="vpos">Sin completar</div></div>
+          <div class="fg"><label>Empresa</label><div class="fv em" id="vco">Sin completar</div></div>
         </div>
-        <div class="fg"><label>Especialidad</label><div class="fv em" id="v-sp">Sin completar</div></div>
+        <div class="fg"><label>Especialidad</label><div class="fv em" id="vsp">Sin completar</div></div>
         <div class="r2">
-          <div class="fg"><label>Experiencia</label><div class="fv em" id="v-yr">Sin completar</div></div>
-          <div class="fg"><label>Ubicacion</label><div class="fv em" id="v-loc">Sin completar</div></div>
+          <div class="fg"><label>Experiencia</label><div class="fv em" id="vyr">Sin completar</div></div>
+          <div class="fg"><label>Ubicacion</label><div class="fv em" id="vloc">Sin completar</div></div>
         </div>
-        <div class="fg"><label>Sobre mi</label><div class="fv em" id="v-bio">Sin completar</div></div>
+        <div class="fg"><label>Sobre mi</label><div class="fv em" id="vbio">Sin completar</div></div>
         <div class="r2">
-          <div class="fg"><label>Nivel de ingles</label><div class="fv em" id="v-eng">Sin completar</div></div>
-          <div class="fg"><label>Otros idiomas</label><div class="fv em" id="v-lang">Sin completar</div></div>
-        </div>
-        <div class="r2">
-          <div class="fg"><label>Educacion</label><div class="fv em" id="v-edu">Sin completar</div></div>
-          <div class="fg"><label>Modalidad</label><div class="fv em" id="v-mod">Sin completar</div></div>
+          <div class="fg"><label>Nivel de ingles</label><div class="fv em" id="veng">Sin completar</div></div>
+          <div class="fg"><label>Otros idiomas</label><div class="fv em" id="vlang">Sin completar</div></div>
         </div>
         <div class="r2">
-          <div class="fg"><label>LinkedIn</label><div class="fv em" id="v-li">Sin completar</div></div>
-          <div class="fg"><label>CV</label><div class="fv em" id="v-cv">Sin subir</div></div>
+          <div class="fg"><label>Educacion</label><div class="fv em" id="vedu">Sin completar</div></div>
+          <div class="fg"><label>Modalidad</label><div class="fv em" id="vmod">Sin completar</div></div>
         </div>
-        <div class="fg"><label>Disponibilidad</label><div class="fv em" id="v-av">Sin indicar</div></div>
+        <div class="r2">
+          <div class="fg"><label>LinkedIn</label><div class="fv em" id="vli">Sin completar</div></div>
+          <div class="fg"><label>CV</label><div class="fv em" id="vcv">Sin subir</div></div>
+        </div>
+        <div class="fg"><label>Disponibilidad</label><div class="fv em" id="vav">Sin indicar</div></div>
       </div>
-      <div class="del-zone">
-        <div class="del-t">Eliminar mi cuenta</div>
-        <div class="del-d">Se borraran permanentemente tu perfil y todos tus datos. Esta accion no se puede deshacer.</div>
-        <button class="del-btn" onclick="doDelete()">Eliminar mi cuenta y todos mis datos</button>
+      <div class="dz">
+        <div class="dt">Eliminar mi cuenta</div>
+        <div class="dd">Se borraran permanentemente tu perfil y todos tus datos. Esta accion no se puede deshacer.</div>
+        <button class="db" onclick="doDel()">Eliminar mi cuenta y todos mis datos</button>
       </div>
     </div>
 
-    <div id="edit-mode" style="display:none">
+    <div id="em" style="display:none">
       <div style="display:flex;align-items:center;margin-bottom:22px">
-        <button class="back-btn" onclick="cancelEdit()">&#8592;</button>
+        <button class="bk" onclick="cancelEdit()">&#8592;</button>
         <div style="font-size:18px;font-weight:800">Editar mi perfil</div>
       </div>
       <div class="sec">
-        <div class="sec-t">Informacion profesional</div>
+        <div class="st">Informacion profesional</div>
         <div class="r2">
-          <div class="fg"><label>Cargo actual <span class="opt">(opcional)</span></label><input type="text" class="fi" id="e-pos" placeholder="Ej: Ingeniero de Produccion"></div>
-          <div class="fg"><label>Empresa <span class="opt">(opcional)</span></label><input type="text" class="fi" id="e-co" placeholder="Ej: Repsol, PDVSA..."></div>
+          <div class="fg"><label>Cargo actual <span class="op">(opcional)</span></label><input type="text" class="fi" id="epos" placeholder="Ej: Ingeniero de Produccion"></div>
+          <div class="fg"><label>Empresa <span class="op">(opcional)</span></label><input type="text" class="fi" id="eco" placeholder="Ej: Repsol, PDVSA..."></div>
         </div>
-        <div class="fg"><label>Especialidad <span class="opt">(opcional)</span></label><input type="text" class="fi" id="e-sp" placeholder="Ej: Ingenieria de Yacimientos, Ciberseguridad..."></div>
+        <div class="fg"><label>Especialidad <span class="op">(opcional)</span></label><input type="text" class="fi" id="esp" placeholder="Ej: Ingenieria de Yacimientos..."></div>
         <div class="r2">
-          <div class="fg"><label>Anos de experiencia <span class="opt">(opcional)</span></label>
-            <select class="fi" id="e-yr">
+          <div class="fg"><label>Anos de experiencia <span class="op">(opcional)</span></label>
+            <select class="fi" id="eyr">
               <option value="">Seleccionar...</option>
               <option>Menos de 1 ano</option>
               <option>1-5 anos</option>
@@ -220,16 +219,16 @@ select.fi option{background:var(--navy2)}
               <option>Mas de 20 anos</option>
             </select>
           </div>
-          <div class="fg"><label>Ciudad <span class="opt">(opcional)</span></label><input type="text" class="fi" id="e-city" placeholder="Ej: Caracas, Madrid..."></div>
+          <div class="fg"><label>Ciudad <span class="op">(opcional)</span></label><input type="text" class="fi" id="ecity" placeholder="Ej: Caracas, Madrid..."></div>
         </div>
-        <div class="fg"><label>Pais <span class="opt">(opcional)</span></label><input type="text" class="fi" id="e-ctry" placeholder="Ej: Venezuela, Espana..."></div>
-        <div class="fg"><label>Sobre mi <span class="opt">(opcional)</span></label><textarea class="fi" id="e-bio" placeholder="Un parrafo sobre tu experiencia y lo que buscas..."></textarea></div>
+        <div class="fg"><label>Pais <span class="op">(opcional)</span></label><input type="text" class="fi" id="ectry" placeholder="Ej: Venezuela, Espana..."></div>
+        <div class="fg"><label>Sobre mi <span class="op">(opcional)</span></label><textarea class="fi" id="ebio" placeholder="Un parrafo sobre tu experiencia y lo que buscas..."></textarea></div>
       </div>
       <div class="sec">
-        <div class="sec-t">Idiomas y educacion</div>
+        <div class="st">Idiomas y educacion</div>
         <div class="r2">
-          <div class="fg"><label>Nivel de ingles <span class="opt">(opcional)</span></label>
-            <select class="fi" id="e-eng">
+          <div class="fg"><label>Nivel de ingles <span class="op">(opcional)</span></label>
+            <select class="fi" id="eeng">
               <option value="">Seleccionar...</option>
               <option>Basico</option>
               <option>Intermedio</option>
@@ -238,11 +237,11 @@ select.fi option{background:var(--navy2)}
               <option>Nativo</option>
             </select>
           </div>
-          <div class="fg"><label>Otros idiomas <span class="opt">(opcional)</span></label><input type="text" class="fi" id="e-lang" placeholder="Ej: Italiano B2, Frances A2"></div>
+          <div class="fg"><label>Otros idiomas <span class="op">(opcional)</span></label><input type="text" class="fi" id="elang" placeholder="Ej: Italiano B2, Frances A2"></div>
         </div>
         <div class="r2">
-          <div class="fg"><label>Nivel educativo <span class="opt">(opcional)</span></label>
-            <select class="fi" id="e-edu">
+          <div class="fg"><label>Nivel educativo <span class="op">(opcional)</span></label>
+            <select class="fi" id="eedu">
               <option value="">Seleccionar...</option>
               <option>Tecnico Superior</option>
               <option>Licenciatura / Ingenieria</option>
@@ -251,224 +250,191 @@ select.fi option{background:var(--navy2)}
               <option>Doctorado</option>
             </select>
           </div>
-          <div class="fg"><label>Area de estudios <span class="opt">(opcional)</span></label><input type="text" class="fi" id="e-deg" placeholder="Ej: Ingenieria de Petroleo"></div>
+          <div class="fg"><label>Area de estudios <span class="op">(opcional)</span></label><input type="text" class="fi" id="edeg" placeholder="Ej: Ingenieria de Petroleo"></div>
         </div>
       </div>
       <div class="sec">
-        <div class="sec-t">Disponibilidad y modalidad</div>
+        <div class="st">Disponibilidad y modalidad</div>
         <div class="fg"><label>Disponibilidad</label>
-          <div class="ag4">
-            <div class="ao on" id="av-now" onclick="setAv('now')">Disponible ahora</div>
-            <div class="ao" id="av-soon" onclick="setAv('soon')">Proximos meses</div>
-            <div class="ao" id="av-open" onclick="setAv('open')">Abierto a propuestas</div>
-            <div class="ao" id="av-no" onclick="setAv('no')">No disponible</div>
+          <div class="g4">
+            <div class="ao on" id="avn" onclick="setAv('now')">Disponible ahora</div>
+            <div class="ao" id="avs" onclick="setAv('soon')">Proximos meses</div>
+            <div class="ao" id="avo" onclick="setAv('open')">Abierto a propuestas</div>
+            <div class="ao" id="avx" onclick="setAv('no')">No disponible</div>
           </div>
         </div>
         <div class="fg"><label>Modalidad de trabajo</label>
-          <div class="ag3">
-            <div class="ao" id="mod-remote" onclick="setMod('remote')">Remoto</div>
-            <div class="ao" id="mod-hybrid" onclick="setMod('hybrid')">Hibrido</div>
-            <div class="ao" id="mod-onsite" onclick="setMod('onsite')">Presencial</div>
+          <div class="g3">
+            <div class="ao" id="mr" onclick="setMod('remote')">Remoto</div>
+            <div class="ao" id="mh" onclick="setMod('hybrid')">Hibrido</div>
+            <div class="ao" id="mo" onclick="setMod('onsite')">Presencial</div>
           </div>
         </div>
       </div>
       <div class="sec">
-        <div class="sec-t">LinkedIn y CV</div>
-        <div class="fg"><label>LinkedIn <span class="opt">(opcional)</span></label><input type="url" class="fi" id="e-li" placeholder="https://linkedin.com/in/tu-perfil"></div>
+        <div class="st">LinkedIn y CV</div>
+        <div class="fg"><label>LinkedIn <span class="op">(opcional)</span></label><input type="url" class="fi" id="eli" placeholder="https://linkedin.com/in/tu-perfil"></div>
         <div class="fg">
-          <label>Subir CV <span class="opt">(PDF o Word)</span></label>
-          <div class="ai-tag"><div class="ai-dot"></div>La IA completa los campos automaticamente</div>
-          <div class="cv-drop">
-            <input type="file" id="cv-inp" accept=".pdf,.doc,.docx" onchange="handleCv(this.files[0])">
-            <div class="cv-txt" id="cv-txt">Arrastra tu CV aqui o haz clic — PDF o Word — Max. 5 MB</div>
+          <label>Subir CV <span class="op">(PDF o Word)</span></label>
+          <div class="ait"><div class="aid"></div>La IA completa los campos automaticamente</div>
+          <div class="cvd">
+            <input type="file" id="cvinp" accept=".pdf,.doc,.docx" onchange="handleCv(this.files[0])">
+            <div class="cvt" id="cvt">Arrastra tu CV aqui o haz clic - PDF o Word - Max. 5 MB</div>
           </div>
         </div>
       </div>
-      <div class="act-row">
-        <button class="save-btn" id="save-btn" onclick="doSave()">Guardar cambios</button>
-        <button class="canc-btn" onclick="cancelEdit()">Cancelar</button>
+      <div class="ar">
+        <button class="svb" id="svb" onclick="doSave()">Guardar cambios</button>
+        <button class="cb" onclick="cancelEdit()">Cancelar</button>
       </div>
     </div>
   </div>
 
 </div>
-<div class="toast" id="toast"></div>
+<div class="tst" id="tst"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-var SURL='https://eettdimwdjyqniodefop.supabase.co';
-var SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
-var sb=supabase.createClient(SURL,SKEY);
-var reg=null,avail='now',modality='',cvFilename='',cvText='';
+var SU='https://eettdimwdjyqniodefop.supabase.co';
+var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
+var sb=supabase.createClient(SU,SK);
+var reg=null,avail='now',mod='',cvFn='',cvTx='';
 
-function show(id){
-  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
-  document.getElementById(id).classList.add('active');
-}
-function toast(msg,t){
-  var el=document.getElementById('toast');
-  el.textContent=msg;el.className='toast '+(t||'ok');el.style.display='block';
-  setTimeout(function(){el.style.display='none';},3500);
-}
-function showMsg(title,text,type){
-  var b=document.getElementById('msg-box');
-  b.className='msg-box '+(type||'ok');
-  document.getElementById('msg-h').textContent=title;
-  document.getElementById('msg-p').textContent=text;
-  b.style.display='block';
-}
+function show(id){document.querySelectorAll('.scr').forEach(function(s){s.classList.remove('on');});document.getElementById(id).classList.add('on');}
+function toast(m,t){var e=document.getElementById('tst');e.textContent=m;e.className='tst '+(t||'ok');e.style.display='block';setTimeout(function(){e.style.display='none';},3500);}
+function showMsg(t,p,tp){var b=document.getElementById('mbox');b.className='mb '+(tp||'ok');document.getElementById('mh').textContent=t;document.getElementById('mp').textContent=p;b.style.display='block';}
 
-async function doMagicLink(){
-  var email=document.getElementById('lemail').value.trim();
-  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){toast('Ingresa un correo valido','err');return;}
+async function doML(){
+  var em=document.getElementById('lem').value.trim();
+  if(!em||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){toast('Ingresa un correo valido','err');return;}
   var btn=document.getElementById('lbtn');
   btn.disabled=true;btn.textContent='Verificando...';
-  var chk=await sb.rpc('get_my_profile',{p_email:email});
+  var chk=await sb.rpc('get_my_profile',{p_email:em});
   if(chk.error||!chk.data){
     showMsg('Correo no encontrado','Este correo no esta registrado en NodusPro. Registrate primero desde la pagina principal.','err');
-    btn.disabled=false;btn.textContent='Enviarme el enlace de acceso';
-    return;
+    btn.disabled=false;btn.textContent='Enviarme el enlace de acceso';return;
   }
   btn.textContent='Enviando...';
-  var res=await sb.auth.signInWithOtp({
-    email:email,
-    options:{emailRedirectTo:'https://noduspro.net/cuenta'}
-  });
+  await sb.auth.signInWithOtp({email:em,options:{emailRedirectTo:'https://noduspro.net/cuenta'}});
   btn.disabled=false;btn.textContent='Reenviar enlace';
-  showMsg('Enlace enviado','Revisa tu correo y haz clic en el enlace. Tienes 10 minutos. Si no lo ves, revisa Spam o Promociones.','ok');
+  showMsg('Enlace enviado','Revisa tu correo y haz clic en el enlace. Tienes 10 minutos. Si no lo ves revisa Spam o Promociones.','ok');
 }
 
-async function doGoogle(){
-  await sb.auth.signInWithOAuth({
-    provider:'google',
-    options:{redirectTo:'https://noduspro.net/cuenta'}
-  });
+async function doGG(){
+  await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:'https://noduspro.net/cuenta'}});
 }
 
-async function doSignOut(){
-  await sb.auth.signOut();
-  reg=null;
-  document.getElementById('so-btn').style.display='none';
-  document.getElementById('nav-email').textContent='';
+async function doOut(){
+  await sb.auth.signOut();reg=null;
+  document.getElementById('sob').style.display='none';
+  document.getElementById('nem').textContent='';
   show('s-login');
 }
 
-sb.auth.onAuthStateChange(function(event,session){
-  if(event==='SIGNED_IN'&&session&&session.user){
-    show('s-loading');
-    loadProfile(session.user.email);
-  }else if(event==='SIGNED_OUT'){
-    show('s-login');
-  }
+sb.auth.onAuthStateChange(function(ev,ses){
+  if(ev==='SIGNED_IN'&&ses&&ses.user){show('s-load');loadProf(ses.user.email);}
+  else if(ev==='SIGNED_OUT'){show('s-login');}
 });
 
 async function init(){
-  show('s-loading');
-  var res=await sb.auth.getSession();
-  if(res.data&&res.data.session&&res.data.session.user){
-    await loadProfile(res.data.session.user.email);
-  }else{
-    show('s-login');
-  }
+  show('s-load');
+  var r=await sb.auth.getSession();
+  if(r.data&&r.data.session&&r.data.session.user){await loadProf(r.data.session.user.email);}
+  else{show('s-login');}
 }
 
-async function loadProfile(email){
+async function loadProf(email){
   var r=await sb.rpc('get_my_profile',{p_email:email});
   if(r.error||!r.data){
-    document.getElementById('err-h').textContent='Perfil no encontrado';
-    document.getElementById('err-p').textContent='El correo '+email+' no esta registrado en NodusPro. Si usas otro correo para registrarte, cierra sesion e intentalo con ese correo.';
-    var eb=document.getElementById('err-p');
-    eb.insertAdjacentHTML('afterend','<br><br><button class="ybtn" style="margin-top:10px" onclick="doSignOut()">Cerrar sesion e intentar de nuevo</button>');
-    show('s-error');return;
+    document.getElementById('eh').textContent='Perfil no encontrado';
+    document.getElementById('ep').textContent='El correo '+email+' no esta registrado en NodusPro. Cierra sesion e intenta con el correo con que te registraste.';
+    document.getElementById('ep').insertAdjacentHTML('afterend','<br><br><button class="yb" style="margin-top:10px" onclick="doOut()">Cerrar sesion</button>');
+    show('s-err');return;
   }
   reg=r.data;
-  document.getElementById('nav-email').textContent=email;
-  document.getElementById('so-btn').style.display='block';
-  renderView();
-  show('s-profile');
+  document.getElementById('nem').textContent=email;
+  document.getElementById('sob').style.display='block';
+  renderV();show('s-prof');
 }
 
-function setFv(id,val,isLink){
+function sv(id,val,lnk){
   var el=document.getElementById(id);
   if(val&&String(val).trim()){
     el.className='fv';
-    el.innerHTML=isLink?('<a href="'+val+'" target="_blank" style="color:var(--gold)">'+val+'</a>'):String(val);
-  }else{
-    el.className='fv em';el.textContent='Sin completar';
-  }
+    el.innerHTML=lnk?('<a href="'+val+'" target="_blank" style="color:var(--gold)">'+val+'</a>'):String(val);
+  }else{el.className='fv em';el.textContent='Sin completar';}
 }
 
-function renderView(){
+function renderV(){
   var r=reg;
-  document.getElementById('p-av').textContent=(r.first_name||'?')[0].toUpperCase();
-  document.getElementById('p-name').textContent=((r.first_name||'')+' '+(r.last_name||'')).trim()||'-';
-  document.getElementById('p-email-v').textContent=document.getElementById('nav-email').textContent;
-  setFv('v-pos',r.current_position);
-  setFv('v-co',r.current_company);
-  setFv('v-sp',r.specialty);
-  setFv('v-yr',r.years_experience);
-  setFv('v-loc',[r.location_city,r.location_country].filter(Boolean).join(', '));
-  setFv('v-bio',r.bio);
-  setFv('v-eng',r.english_level);
-  setFv('v-lang',r.other_languages);
-  setFv('v-edu',[r.education_level,r.degree_field].filter(Boolean).join(' - '));
+  document.getElementById('pav').textContent=(r.first_name||'?')[0].toUpperCase();
+  document.getElementById('pnm').textContent=((r.first_name||'')+' '+(r.last_name||'')).trim()||'-';
+  document.getElementById('pem').textContent=document.getElementById('nem').textContent;
+  sv('vpos',r.current_position);sv('vco',r.current_company);sv('vsp',r.specialty);
+  sv('vyr',r.years_experience);
+  sv('vloc',[r.location_city,r.location_country].filter(Boolean).join(', '));
+  sv('vbio',r.bio);sv('veng',r.english_level);sv('vlang',r.other_languages);
+  sv('vedu',[r.education_level,r.degree_field].filter(Boolean).join(' - '));
   var mm={remote:'Remoto',hybrid:'Hibrido',onsite:'Presencial'};
-  setFv('v-mod',mm[r.work_modality]||r.work_modality);
-  setFv('v-li',r.linkedin_url||r.profile_url,true);
-  setFv('v-cv',r.cv_filename);
+  sv('vmod',mm[r.work_modality]||r.work_modality);
+  sv('vli',r.linkedin_url||r.profile_url,true);sv('vcv',r.cv_filename);
   var am={now:'Disponible ahora',soon:'Proximos meses',open:'Abierto a propuestas',no:'No disponible'};
-  setFv('v-av',am[r.availability]||r.availability);
+  sv('vav',am[r.availability]||r.availability);
 }
 
-function selOpt(id,val){
+function selO(id,val){
   if(!val)return;
-  var sel=document.getElementById(id);
+  var s=document.getElementById(id);
   var v=String(val).toLowerCase().trim();
-  for(var i=0;i<sel.options.length;i++){
-    var ov=sel.options[i].value.toLowerCase().trim();
-    var ot=sel.options[i].text.toLowerCase().trim();
-    if(ov===v||ot===v){sel.selectedIndex=i;return;}
+  for(var i=0;i<s.options.length;i++){
+    if(s.options[i].value.toLowerCase().trim()===v||s.options[i].text.toLowerCase().trim()===v){s.selectedIndex=i;return;}
   }
 }
 
 function startEdit(){
   var r=reg;
-  document.getElementById('e-pos').value=r.current_position||'';
-  document.getElementById('e-co').value=r.current_company||'';
-  document.getElementById('e-sp').value=r.specialty||'';
-  document.getElementById('e-city').value=r.location_city||'';
-  document.getElementById('e-ctry').value=r.location_country||'';
-  document.getElementById('e-bio').value=r.bio||'';
-  document.getElementById('e-li').value=r.linkedin_url||r.profile_url||'';
-  document.getElementById('e-lang').value=r.other_languages||'';
-  document.getElementById('e-deg').value=r.degree_field||'';
-  selOpt('e-yr',r.years_experience);
-  selOpt('e-eng',r.english_level);
-  selOpt('e-edu',r.education_level);
+  document.getElementById('epos').value=r.current_position||'';
+  document.getElementById('eco').value=r.current_company||'';
+  document.getElementById('esp').value=r.specialty||'';
+  document.getElementById('ecity').value=r.location_city||'';
+  document.getElementById('ectry').value=r.location_country||'';
+  document.getElementById('ebio').value=r.bio||'';
+  document.getElementById('eli').value=r.linkedin_url||r.profile_url||'';
+  document.getElementById('elang').value=r.other_languages||'';
+  document.getElementById('edeg').value=r.degree_field||'';
+  selO('eyr',r.years_experience);selO('eeng',r.english_level);selO('eedu',r.education_level);
   avail=r.availability||'now';
-  ['now','soon','open','no'].forEach(function(v){document.getElementById('av-'+v).classList.toggle('on',v===avail);});
-  modality=r.work_modality||'';
-  ['remote','hybrid','onsite'].forEach(function(v){document.getElementById('mod-'+v).classList.toggle('on',v===modality);});
-  cvFilename='';cvText='';
-  document.getElementById('cv-txt').textContent=r.cv_filename?'CV actual: '+r.cv_filename+' - arrastra para reemplazar':'Arrastra tu CV aqui o haz clic - PDF o Word - Max. 5 MB';
-  document.getElementById('view-mode').style.display='none';
-  document.getElementById('edit-mode').style.display='block';
+  ['avn','avs','avo','avx'].forEach(function(id){document.getElementById(id).classList.remove('on');});
+  var amap={now:'avn',soon:'avs',open:'avo',no:'avx'};
+  if(amap[avail])document.getElementById(amap[avail]).classList.add('on');
+  mod=r.work_modality||'';
+  ['mr','mh','mo'].forEach(function(id){document.getElementById(id).classList.remove('on');});
+  var mmap={remote:'mr',hybrid:'mh',onsite:'mo'};
+  if(mmap[mod])document.getElementById(mmap[mod]).classList.add('on');
+  cvFn='';cvTx='';
+  document.getElementById('cvt').textContent=r.cv_filename?'CV actual: '+r.cv_filename+' - arrastra para reemplazar':'Arrastra tu CV aqui o haz clic - PDF o Word - Max. 5 MB';
+  document.getElementById('vm').style.display='none';
+  document.getElementById('em').style.display='block';
 }
 
 function cancelEdit(){
-  document.getElementById('view-mode').style.display='block';
-  document.getElementById('edit-mode').style.display='none';
+  document.getElementById('vm').style.display='block';
+  document.getElementById('em').style.display='none';
 }
 
-function setAv(val){
-  avail=val;
-  ['now','soon','open','no'].forEach(function(v){document.getElementById('av-'+v).classList.toggle('on',v===val);});
+function setAv(v){
+  avail=v;
+  var map={now:'avn',soon:'avs',open:'avo',no:'avx'};
+  Object.values(map).forEach(function(id){document.getElementById(id).classList.remove('on');});
+  if(map[v])document.getElementById(map[v]).classList.add('on');
 }
-function setMod(val){
-  modality=val;
-  ['remote','hybrid','onsite'].forEach(function(v){document.getElementById('mod-'+v).classList.toggle('on',v===val);});
+function setMod(v){
+  mod=v;
+  ['mr','mh','mo'].forEach(function(id){document.getElementById(id).classList.remove('on');});
+  var map={remote:'mr',hybrid:'mh',onsite:'mo'};
+  if(map[v])document.getElementById(map[v]).classList.add('on');
 }
 
 async function handleCv(file){
@@ -476,102 +442,91 @@ async function handleCv(file){
   if(file.size>5*1024*1024){toast('El archivo supera los 5 MB','err');return;}
   var ext=file.name.split('.').pop().toLowerCase();
   if(!['pdf','doc','docx'].includes(ext)){toast('Solo PDF o Word','err');return;}
-  cvFilename=file.name;
-  document.getElementById('cv-txt').innerHTML='<span style="color:var(--gold)">Analizando CV con IA...</span>';
+  cvFn=file.name;
+  document.getElementById('cvt').innerHTML='<span style="color:var(--gold)">Analizando CV con IA...</span>';
   try{
-    var payload={};
+    var txt='';
     if(ext==='pdf'){
       var b64=await toB64(file);
-      var pdfData=atob(b64);
-      var pdfArr=new Uint8Array(pdfData.length);
-      for(var i=0;i<pdfData.length;i++)pdfArr[i]=pdfData.charCodeAt(i);
+      var raw=atob(b64);
+      var arr=new Uint8Array(raw.length);
+      for(var i=0;i<raw.length;i++)arr[i]=raw.charCodeAt(i);
       pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-      var pdf=await pdfjsLib.getDocument({data:pdfArr}).promise;
-      var texts=[];
+      var pdf=await pdfjsLib.getDocument({data:arr}).promise;
+      var pages=[];
       for(var p=1;p<=Math.min(pdf.numPages,10);p++){
         var pg=await pdf.getPage(p);
         var tc=await pg.getTextContent();
-        texts.push(tc.items.map(function(i){return i.str;}).join(' '));
+        pages.push(tc.items.map(function(it){return it.str;}).join(' '));
       }
-      cvText=texts.join('
-').slice(0,8000);
-      payload={text:cvText};
+      txt=pages.join('\n');
     }else{
       var ab=await file.arrayBuffer();
       var res=await mammoth.extractRawText({arrayBuffer:ab});
-      cvText=res.value.slice(0,8000);
-      payload={text:cvText};
+      txt=res.value;
     }
-    var cvTextToSend=payload.text||'';
-    if(!cvTextToSend&&payload.base64){
-      // For PDF: extract text using PDF.js would be needed
-      // For now, show message asking to use Word format
-      throw new Error('PDF directo no soportado aun — usa formato Word para extraccion automatica');
-    }
-    var r=await sb.rpc('extract_cv_data',{p_cv_text:cvTextToSend});
+    cvTx=txt.slice(0,8000);
+    var r=await sb.rpc('extract_cv_data',{p_cv_text:cvTx});
     if(r.error)throw new Error(r.error.message);
     var d=r.data||{};
+    if(typeof d==='string'){try{d=JSON.parse(d);}catch(e){d={};}}
     var filled=Object.keys(d).filter(function(k){return d[k]&&String(d[k]).trim();}).length;
     fillAI(d);
     if(filled>0){
-      document.getElementById('cv-txt').innerHTML='<span style="color:#6EE7B7">&#10003; '+cvFilename+' - '+filled+' campos completados automaticamente</span>';
+      document.getElementById('cvt').innerHTML='<span style="color:#6EE7B7">&#10003; '+cvFn+' - '+filled+' campos completados automaticamente</span>';
       toast(filled+' campos completados con IA','ok');
     }else{
-      document.getElementById('cv-txt').innerHTML='<span style="color:rgba(255,255,255,.5)">&#10003; '+cvFilename+' adjuntado - completa los campos manualmente</span>';
+      document.getElementById('cvt').innerHTML='<span style="color:rgba(255,255,255,.5)">&#10003; '+cvFn+' adjuntado</span>';
+      toast('CV adjuntado. Completa los campos manualmente.','ok');
     }
   }catch(e){
-    console.error('CV extraction error:',e);
-    document.getElementById('cv-txt').innerHTML='<span style="color:rgba(255,255,255,.5)">&#10003; '+cvFilename+' adjuntado</span>';
+    console.error('CV error:',e);
+    document.getElementById('cvt').innerHTML='<span style="color:rgba(255,255,255,.5)">&#10003; '+cvFn+' adjuntado</span>';
     toast('CV adjuntado. Completa los campos manualmente.','ok');
   }
 }
 
-function toB64(file){
-  return new Promise(function(res,rej){
-    var rd=new FileReader();
-    rd.onload=function(){res(rd.result.split(',')[1]);};
-    rd.onerror=rej;
-    rd.readAsDataURL(file);
-  });
+function toB64(f){
+  return new Promise(function(res,rej){var rd=new FileReader();rd.onload=function(){res(rd.result.split(',')[1]);};rd.onerror=rej;rd.readAsDataURL(f);});
 }
 
 function fillAI(d){
   if(!d)return;
-  if(d.current_position)document.getElementById('e-pos').value=d.current_position;
-  if(d.current_company)document.getElementById('e-co').value=d.current_company;
-  if(d.specialty)document.getElementById('e-sp').value=d.specialty;
-  if(d.years_experience)selOpt('e-yr',d.years_experience);
-  if(d.location_city)document.getElementById('e-city').value=d.location_city;
-  if(d.location_country)document.getElementById('e-ctry').value=d.location_country;
-  if(d.bio)document.getElementById('e-bio').value=d.bio;
-  if(d.english_level)selOpt('e-eng',d.english_level);
-  if(d.other_languages)document.getElementById('e-lang').value=d.other_languages;
-  if(d.education_level)selOpt('e-edu',d.education_level);
-  if(d.degree_field)document.getElementById('e-deg').value=d.degree_field;
+  if(d.current_position)document.getElementById('epos').value=d.current_position;
+  if(d.current_company)document.getElementById('eco').value=d.current_company;
+  if(d.specialty)document.getElementById('esp').value=d.specialty;
+  if(d.years_experience)selO('eyr',d.years_experience);
+  if(d.location_city)document.getElementById('ecity').value=d.location_city;
+  if(d.location_country)document.getElementById('ectry').value=d.location_country;
+  if(d.bio)document.getElementById('ebio').value=d.bio;
+  if(d.english_level)selO('eeng',d.english_level);
+  if(d.other_languages)document.getElementById('elang').value=d.other_languages;
+  if(d.education_level)selO('eedu',d.education_level);
+  if(d.degree_field)document.getElementById('edeg').value=d.degree_field;
 }
 
 async function doSave(){
-  var btn=document.getElementById('save-btn');
+  var btn=document.getElementById('svb');
   btn.disabled=true;btn.textContent='Guardando...';
-  var email=document.getElementById('nav-email').textContent;
+  var email=document.getElementById('nem').textContent;
   var p={
     p_email:email,
-    p_current_position:document.getElementById('e-pos').value.trim(),
-    p_current_company:document.getElementById('e-co').value.trim(),
-    p_specialty:document.getElementById('e-sp').value.trim(),
-    p_years_experience:document.getElementById('e-yr').value,
-    p_location_city:document.getElementById('e-city').value.trim(),
-    p_location_country:document.getElementById('e-ctry').value.trim(),
-    p_bio:document.getElementById('e-bio').value.trim(),
-    p_linkedin_url:document.getElementById('e-li').value.trim(),
+    p_current_position:document.getElementById('epos').value.trim(),
+    p_current_company:document.getElementById('eco').value.trim(),
+    p_specialty:document.getElementById('esp').value.trim(),
+    p_years_experience:document.getElementById('eyr').value,
+    p_location_city:document.getElementById('ecity').value.trim(),
+    p_location_country:document.getElementById('ectry').value.trim(),
+    p_bio:document.getElementById('ebio').value.trim(),
+    p_linkedin_url:document.getElementById('eli').value.trim(),
     p_availability:avail,
-    p_cv_filename:cvFilename||reg.cv_filename||'',
-    p_cv_text:cvText,
-    p_english_level:document.getElementById('e-eng').value,
-    p_other_languages:document.getElementById('e-lang').value.trim(),
-    p_education_level:document.getElementById('e-edu').value,
-    p_degree_field:document.getElementById('e-deg').value.trim(),
-    p_work_modality:modality
+    p_cv_filename:cvFn||reg.cv_filename||'',
+    p_cv_text:cvTx,
+    p_english_level:document.getElementById('eeng').value,
+    p_other_languages:document.getElementById('elang').value.trim(),
+    p_education_level:document.getElementById('eedu').value,
+    p_degree_field:document.getElementById('edeg').value.trim(),
+    p_work_modality:mod
   };
   var r=await sb.rpc('update_profile_data',p);
   btn.disabled=false;btn.textContent='Guardar cambios';
@@ -585,22 +540,22 @@ async function doSave(){
     other_languages:p.p_other_languages,education_level:p.p_education_level,
     degree_field:p.p_degree_field,work_modality:p.p_work_modality
   });
-  renderView();cancelEdit();
+  renderV();cancelEdit();
   toast('Perfil actualizado correctamente','ok');
 }
 
-async function doDelete(){
+async function doDel(){
   if(!confirm('Estas seguro de que quieres eliminar tu cuenta?\n\nSe borraran permanentemente tu perfil y todos tus datos.\n\nEsta accion no se puede deshacer.'))return;
-  var email=document.getElementById('nav-email').textContent;
+  var email=document.getElementById('nem').textContent;
   if(!confirm('Ultima confirmacion: eliminar la cuenta de '+email+'?'))return;
   try{
-    await fetch(SURL+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(email),{
-      method:'DELETE',headers:{'apikey':SKEY,'Authorization':'Bearer '+SKEY}
+    await fetch(SU+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(email),{
+      method:'DELETE',headers:{'apikey':SK,'Authorization':'Bearer '+SK}
     });
     await sb.auth.signOut();
-    document.getElementById('err-h').textContent='Cuenta eliminada';
-    document.getElementById('err-p').textContent='Tu cuenta y todos tus datos han sido eliminados. Gracias por haber sido parte de NodusPro.';
-    show('s-error');
+    document.getElementById('eh').textContent='Cuenta eliminada';
+    document.getElementById('ep').textContent='Tu cuenta y todos tus datos han sido eliminados. Gracias por haber sido parte de NodusPro.';
+    show('s-err');
   }catch(e){toast('Error al eliminar. Escribe a hola@noduspro.net','err');}
 }
 
