@@ -192,7 +192,10 @@ footer{background:var(--navy);padding:20px 32px;display:flex;justify-content:spa
       <div class="nsub">Directorio profesional venezolano</div>
     </div>
   </div>
-  <button class="ncta" onclick="abrirModal()">Crear mi perfil gratis</button>
+  <div style="display:flex;align-items:center;gap:10px">
+    <a href="/cuenta" style="font-size:13px;font-weight:600;color:rgba(255,255,255,.5);text-decoration:none;padding:8px 14px;border:1px solid rgba(255,255,255,.15);border-radius:6px;transition:all .15s" onmouseover="this.style.color='white';this.style.borderColor='rgba(255,255,255,.4)'" onmouseout="this.style.color='rgba(255,255,255,.5)';this.style.borderColor='rgba(255,255,255,.15)'">Mi cuenta</a>
+    <button class="ncta" onclick="abrirModal()">Crear mi perfil gratis</button>
+  </div>
 </nav>
 
 <section class="hero">
@@ -330,9 +333,9 @@ footer{background:var(--navy);padding:20px 32px;display:flex;justify-content:spa
 <footer>
   <div class="fbl"><span>Nodus</span>Pro</div>
   <div class="fbr">
+    <a href="/cuenta">Mi cuenta</a>
     <a href="/privacidad">Privacidad</a>
-    <a href="/terminos">Terminos</a>
-    <a href="/admin">Admin</a>
+    <a href="/terminos">Términos</a>
   </div>
 </footer>
 
@@ -459,8 +462,14 @@ function p2(){
     '<div><div class="tlabel">No disponible por ahora</div></div>'+
     '<div class="tpill'+(fd.disponibilidad==='no'?' on':'')+'"><div class="tthumb"></div></div></div>'+
     '</div>'+
+    '<div style="border-top:1px solid rgba(255,255,255,.08);padding-top:16px;margin-top:4px">'+
+    '<label style="display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:8px">Sube tu CV ahora (opcional)</label>'+
+    '<div style="background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.15);border-radius:8px;padding:14px;text-align:center;cursor:pointer;position:relative;margin-bottom:12px" id="cv-drop" onclick="document.getElementById('cv-inp').click()">'+
+    '<input type="file" id="cv-inp" accept=".pdf,.doc,.docx" style="display:none" onchange="previewCV(this)">'+
+    '<div id="cv-preview" style="font-size:13px;color:rgba(255,255,255,.35)">PDF o Word · Máx. 5 MB · La IA completa tus datos automáticamente</div>'+
+    '</div></div>'+
     '<button class="mbtn" onclick="enviar()">Registrarme gratis</button>'+
-    '<button onclick="enviar()" style="width:100%;padding:10px;background:transparent;border:none;font-family:Inter,sans-serif;font-size:13px;color:rgba(255,255,255,.3);cursor:pointer;margin-top:4px">Omitir y registrarme</button>';
+    '<button onclick="enviar()" style="width:100%;padding:10px;background:transparent;border:none;font-family:Inter,sans-serif;font-size:13px;color:rgba(255,255,255,.3);cursor:pointer;margin-top:4px">Registrarme sin subir CV por ahora</button>';
 }
 
 function pFin(){
@@ -469,7 +478,7 @@ function pFin(){
   return '<div style="text-align:center;padding:4px 0 18px">'+
     '<div class="sico3"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="#059669" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'+
     '<div style="font-size:22px;font-weight:900;color:white;margin-bottom:8px">Listo!</div>'+
-    '<div style="font-size:14px;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:20px">El equipo revisara tu perfil en menos de 4 horas<br>y recibiras confirmacion por email.</div></div>'+
+    '<div style="font-size:14px;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:20px">El equipo revisará tu perfil en menos de 4 horas y recibirás confirmación por email con el enlace para completar tu experiencia profesional.</div></div>'+
     '<div class="vstep">'+
     '<div class="vsr"><div class="vi ok"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'+
     '<div style="flex:1"><div class="vn">Registrado</div><div class="vd">Tu perfil está en cola de verificación</div></div><span class="vb ok">LISTO</span></div>'+
@@ -481,7 +490,8 @@ function pFin(){
     '<div class="sbrow">'+
     '<a class="sbtn2" href="https://wa.me/?text='+encodeURIComponent(wa)+'" target="_blank">WhatsApp</a>'+
     '<a class="sbtn2" href="https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent('https://noduspro.net?ref='+code)+'" target="_blank">LinkedIn</a>'+
-    '</div></div>';
+    '</div></div>'+
+    '<p style="text-align:center;margin-top:20px;font-size:12px;color:rgba(255,255,255,.2)">¿Quieres eliminar tu registro? Escríbenos a <a href="mailto:hola@noduspro.net?subject=Eliminar mi perfil&body=Por favor elimina mi perfil: '+encodeURIComponent(fd.email)+'" style="color:rgba(255,255,255,.3)">hola@noduspro.net</a></p>';
 }
 
 async function avanzar(){
@@ -542,6 +552,17 @@ async function enviar(){
 function setSector(el,val){
   el.parentElement.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on');});
   el.classList.add('on');sector=val;
+}
+var cvFile=null;
+function previewCV(inp){
+  var f=inp.files[0];
+  if(!f)return;
+  if(f.size>5*1024*1024){alert('El archivo supera los 5 MB.');inp.value='';return;}
+  var ext=f.name.split('.').pop().toLowerCase();
+  if(!['pdf','doc','docx'].includes(ext)){alert('Solo PDF o Word (.doc, .docx)');inp.value='';return;}
+  cvFile=f;
+  var prev=document.getElementById('cv-preview');
+  if(prev)prev.innerHTML='<span style="color:#6EE7B7">&#10003; '+f.name+'</span> <span style="color:rgba(255,255,255,.25);font-size:11px">— se completará automáticamente</span>';
 }
 function setDisp(val){
   fd.disponibilidad=val;
