@@ -23,6 +23,7 @@ body{font-family:'Inter',sans-serif;background:var(--navy);color:white;min-heigh
 .screen{display:none}.screen.active{display:block}
 .spinner{width:36px;height:36px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:60px auto}
 @keyframes spin{to{transform:rotate(360deg)}}
+@keyframes blink{from{opacity:1}to{opacity:.3}}
 .login-hdr{text-align:center;margin-bottom:28px}
 .ltag{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
 .lh{font-size:28px;font-weight:900;letter-spacing:-.5px;margin-bottom:8px}
@@ -71,9 +72,8 @@ select.fi option{background:var(--navy2)}
 .ao{padding:9px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;cursor:pointer;font-size:13px;color:rgba(255,255,255,.5);text-align:center;transition:all .15s;user-select:none}
 .ao:hover{border-color:rgba(255,255,255,.2)}
 .ao.on{border-color:var(--gold);background:rgba(244,195,0,.08);color:white;font-weight:600}
-.ag2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.ag3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
 .ag4{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ag3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
 .save-btn{flex:1;padding:12px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;font-weight:900;cursor:pointer}
 .save-btn:hover{background:#FFD700}.save-btn:disabled{opacity:.4;cursor:not-allowed}
 .canc-btn{padding:12px 18px;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;color:rgba(255,255,255,.5);cursor:pointer}
@@ -88,19 +88,17 @@ select.fi option{background:var(--navy2)}
 .cv-drop:hover{border-color:rgba(244,195,0,.4);background:rgba(244,195,0,.03)}
 .cv-drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 .cv-txt{font-size:13px;color:rgba(255,255,255,.35)}
-.ai-tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:rgba(244,195,0,.6);margin-bottom:5px}
+.ai-tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:rgba(244,195,0,.7);margin-bottom:5px}
 .ai-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;animation:blink 1s ease-in-out infinite alternate}
-@keyframes blink{from{opacity:1}to{opacity:.3}}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);padding:12px 20px;border-radius:8px;font-size:14px;font-weight:600;display:none;z-index:9999;white-space:nowrap}
 .toast.ok{background:var(--navy2);border:1px solid rgba(4,120,87,.4);color:#6EE7B7}
 .toast.err{background:var(--navy2);border:1px solid rgba(207,20,43,.4);color:#FCA5A5}
 .back-btn{background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:22px;padding:0;margin-right:10px;vertical-align:middle;line-height:1}
 .back-btn:hover{color:white}
-@media(max-width:600px){.r2,.ag2,.ag3,.ag4{grid-template-columns:1fr}.act-row{flex-direction:column}}
+@media(max-width:600px){.r2,.ag4,.ag3{grid-template-columns:1fr}.act-row{flex-direction:column}}
 </style>
 </head>
 <body>
-
 <nav class="nav">
   <a class="nlogo" href="/">
     <div class="nmark">
@@ -139,7 +137,7 @@ select.fi option{background:var(--navy2)}
       </button>
       <div class="msg-box" id="msg-box">
         <h3 id="msg-h">Enlace enviado</h3>
-        <p id="msg-p">Revisa tu correo y haz clic en el enlace. Tienes 10 minutos. Si no lo ves, revisa Spam o Promociones.</p>
+        <p id="msg-p">Revisa tu correo y haz clic en el enlace.</p>
       </div>
     </div>
   </div>
@@ -156,18 +154,16 @@ select.fi option{background:var(--navy2)}
   </div>
 
   <div class="screen" id="s-profile">
-
     <div id="view-mode">
       <div class="prof-hdr">
         <div class="avatar" id="p-av">?</div>
         <div>
-          <div class="pname" id="p-name">—</div>
-          <div class="pemail" id="p-email-v">—</div>
+          <div class="pname" id="p-name">-</div>
+          <div class="pemail" id="p-email-v">-</div>
           <div class="pbadge">Miembro Fundador</div>
         </div>
         <button class="edit-btn2" onclick="startEdit()">Editar perfil</button>
       </div>
-
       <div class="sec">
         <div class="sec-t">Informacion profesional</div>
         <div class="r2">
@@ -194,10 +190,9 @@ select.fi option{background:var(--navy2)}
         </div>
         <div class="fg"><label>Disponibilidad</label><div class="fv em" id="v-av">Sin indicar</div></div>
       </div>
-
       <div class="del-zone">
         <div class="del-t">Eliminar mi cuenta</div>
-        <div class="del-d">Se borraran permanentemente tu perfil, todos tus datos y tu CV. Esta accion no se puede deshacer.</div>
+        <div class="del-d">Se borraran permanentemente tu perfil y todos tus datos. Esta accion no se puede deshacer.</div>
         <button class="del-btn" onclick="doDelete()">Eliminar mi cuenta y todos mis datos</button>
       </div>
     </div>
@@ -207,7 +202,6 @@ select.fi option{background:var(--navy2)}
         <button class="back-btn" onclick="cancelEdit()">&#8592;</button>
         <div style="font-size:18px;font-weight:800">Editar mi perfil</div>
       </div>
-
       <div class="sec">
         <div class="sec-t">Informacion profesional</div>
         <div class="r2">
@@ -231,7 +225,6 @@ select.fi option{background:var(--navy2)}
         <div class="fg"><label>Pais <span class="opt">(opcional)</span></label><input type="text" class="fi" id="e-ctry" placeholder="Ej: Venezuela, Espana..."></div>
         <div class="fg"><label>Sobre mi <span class="opt">(opcional)</span></label><textarea class="fi" id="e-bio" placeholder="Un parrafo sobre tu experiencia y lo que buscas..."></textarea></div>
       </div>
-
       <div class="sec">
         <div class="sec-t">Idiomas y educacion</div>
         <div class="r2">
@@ -261,7 +254,6 @@ select.fi option{background:var(--navy2)}
           <div class="fg"><label>Area de estudios <span class="opt">(opcional)</span></label><input type="text" class="fi" id="e-deg" placeholder="Ej: Ingenieria de Petroleo"></div>
         </div>
       </div>
-
       <div class="sec">
         <div class="sec-t">Disponibilidad y modalidad</div>
         <div class="fg"><label>Disponibilidad</label>
@@ -280,77 +272,71 @@ select.fi option{background:var(--navy2)}
           </div>
         </div>
       </div>
-
       <div class="sec">
         <div class="sec-t">LinkedIn y CV</div>
         <div class="fg"><label>LinkedIn <span class="opt">(opcional)</span></label><input type="url" class="fi" id="e-li" placeholder="https://linkedin.com/in/tu-perfil"></div>
         <div class="fg">
           <label>Subir CV <span class="opt">(PDF o Word)</span></label>
           <div class="ai-tag"><div class="ai-dot"></div>La IA completa los campos automaticamente</div>
-          <div class="cv-drop" id="cv-drop">
+          <div class="cv-drop">
             <input type="file" id="cv-inp" accept=".pdf,.doc,.docx" onchange="handleCv(this.files[0])">
             <div class="cv-txt" id="cv-txt">Arrastra tu CV aqui o haz clic — PDF o Word — Max. 5 MB</div>
           </div>
         </div>
       </div>
-
       <div class="act-row">
         <button class="save-btn" id="save-btn" onclick="doSave()">Guardar cambios</button>
         <button class="canc-btn" onclick="cancelEdit()">Cancelar</button>
       </div>
     </div>
-
   </div>
-</div>
 
+</div>
 <div class="toast" id="toast"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-var SB_URL='https://eettdimwdjyqniodefop.supabase.co';
-var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
-var sb=supabase.createClient(SB_URL,SB_KEY);
-
+var SURL='https://eettdimwdjyqniodefop.supabase.co';
+var SKEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
+var sb=supabase.createClient(SURL,SKEY);
 var reg=null,avail='now',modality='',cvFilename='',cvText='';
 
-function show(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});document.getElementById(id).classList.add('active');}
-
+function show(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById(id).classList.add('active');
+}
 function toast(msg,t){
   var el=document.getElementById('toast');
   el.textContent=msg;el.className='toast '+(t||'ok');el.style.display='block';
   setTimeout(function(){el.style.display='none';},3500);
 }
-
 function showMsg(title,text,type){
-  var box=document.getElementById('msg-box');
-  box.className='msg-box '+(type||'ok');
+  var b=document.getElementById('msg-box');
+  b.className='msg-box '+(type||'ok');
   document.getElementById('msg-h').textContent=title;
   document.getElementById('msg-p').textContent=text;
-  box.style.display='block';
+  b.style.display='block';
 }
 
-// Auth
 async function doMagicLink(){
   var email=document.getElementById('lemail').value.trim();
   if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){toast('Ingresa un correo valido','err');return;}
   var btn=document.getElementById('lbtn');
-  btn.disabled=true;btn.textContent='Enviando...';
-  // First verify email is in waitlist
+  btn.disabled=true;btn.textContent='Verificando...';
   var chk=await sb.rpc('get_my_profile',{p_email:email});
   if(chk.error||!chk.data){
     showMsg('Correo no encontrado','Este correo no esta registrado en NodusPro. Registrate primero desde la pagina principal.','err');
     btn.disabled=false;btn.textContent='Enviarme el enlace de acceso';
     return;
   }
-  // Email exists in waitlist — send magic link
+  btn.textContent='Enviando...';
   var res=await sb.auth.signInWithOtp({
     email:email,
     options:{emailRedirectTo:'https://noduspro.net/cuenta'}
   });
-  btn.disabled=false;
+  btn.disabled=false;btn.textContent='Reenviar enlace';
   showMsg('Enlace enviado','Revisa tu correo y haz clic en el enlace. Tienes 10 minutos. Si no lo ves, revisa Spam o Promociones.','ok');
-  btn.textContent='Reenviar enlace';
 }
 
 async function doGoogle(){
@@ -368,51 +354,46 @@ async function doSignOut(){
   show('s-login');
 }
 
-// Init — Supabase SDK handles PKCE automatically
-async function init(){
-  show('s-loading');
-  var res=await sb.auth.getSession();
-  var session=res.data&&res.data.session;
-  if(session&&session.user){
-    await loadProfile(session.user.email);
-  }else{
-    show('s-login');
-  }
-}
-
-// Also handle auth state changes (magic link callback)
 sb.auth.onAuthStateChange(function(event,session){
   if(event==='SIGNED_IN'&&session&&session.user){
+    show('s-loading');
     loadProfile(session.user.email);
   }else if(event==='SIGNED_OUT'){
     show('s-login');
   }
 });
 
-async function loadProfile(email){
-  try{
-    var r=await sb.rpc('get_my_profile',{p_email:email});
-    if(r.error||!r.data){
-      document.getElementById('err-h').textContent='Perfil no encontrado';
-      document.getElementById('err-p').textContent='El correo '+email+' no esta registrado en NodusPro. Si te registraste con otro correo, cierra sesion y usalo.';
-      document.getElementById('err-p').insertAdjacentHTML('afterend','<br><br><button class="ybtn" onclick="doSignOut()">Cerrar sesion</button>');
-      show('s-error');return;
-    }
-    reg=r.data;
-    document.getElementById('nav-email').textContent=email;
-    document.getElementById('so-btn').style.display='block';
-    renderView();
-    show('s-profile');
-  }catch(e){
+async function init(){
+  show('s-loading');
+  var res=await sb.auth.getSession();
+  if(res.data&&res.data.session&&res.data.session.user){
+    await loadProfile(res.data.session.user.email);
+  }else{
     show('s-login');
   }
+}
+
+async function loadProfile(email){
+  var r=await sb.rpc('get_my_profile',{p_email:email});
+  if(r.error||!r.data){
+    document.getElementById('err-h').textContent='Perfil no encontrado';
+    document.getElementById('err-p').textContent='El correo '+email+' no esta registrado en NodusPro. Si usas otro correo para registrarte, cierra sesion e intentalo con ese correo.';
+    var eb=document.getElementById('err-p');
+    eb.insertAdjacentHTML('afterend','<br><br><button class="ybtn" style="margin-top:10px" onclick="doSignOut()">Cerrar sesion e intentar de nuevo</button>');
+    show('s-error');return;
+  }
+  reg=r.data;
+  document.getElementById('nav-email').textContent=email;
+  document.getElementById('so-btn').style.display='block';
+  renderView();
+  show('s-profile');
 }
 
 function setFv(id,val,isLink){
   var el=document.getElementById(id);
   if(val&&String(val).trim()){
     el.className='fv';
-    el.innerHTML=isLink?('<a href="'+val+'" target="_blank" style="color:var(--gold)">'+val+'</a>'):val;
+    el.innerHTML=isLink?('<a href="'+val+'" target="_blank" style="color:var(--gold)">'+val+'</a>'):String(val);
   }else{
     el.className='fv em';el.textContent='Sin completar';
   }
@@ -421,7 +402,7 @@ function setFv(id,val,isLink){
 function renderView(){
   var r=reg;
   document.getElementById('p-av').textContent=(r.first_name||'?')[0].toUpperCase();
-  document.getElementById('p-name').textContent=((r.first_name||'')+' '+(r.last_name||'')).trim()||'—';
+  document.getElementById('p-name').textContent=((r.first_name||'')+' '+(r.last_name||'')).trim()||'-';
   document.getElementById('p-email-v').textContent=document.getElementById('nav-email').textContent;
   setFv('v-pos',r.current_position);
   setFv('v-co',r.current_company);
@@ -431,24 +412,23 @@ function renderView(){
   setFv('v-bio',r.bio);
   setFv('v-eng',r.english_level);
   setFv('v-lang',r.other_languages);
-  setFv('v-edu',[r.education_level,r.degree_field].filter(Boolean).join(' — '));
-  var modMap={remote:'Remoto',hybrid:'Hibrido',onsite:'Presencial'};
-  setFv('v-mod',modMap[r.work_modality]||r.work_modality);
-  var li=r.linkedin_url||r.profile_url;
-  setFv('v-li',li,true);
+  setFv('v-edu',[r.education_level,r.degree_field].filter(Boolean).join(' - '));
+  var mm={remote:'Remoto',hybrid:'Hibrido',onsite:'Presencial'};
+  setFv('v-mod',mm[r.work_modality]||r.work_modality);
+  setFv('v-li',r.linkedin_url||r.profile_url,true);
   setFv('v-cv',r.cv_filename);
-  var avMap={now:'Disponible ahora',soon:'Proximos meses',open:'Abierto a propuestas',no:'No disponible'};
-  setFv('v-av',avMap[r.availability]||r.availability);
+  var am={now:'Disponible ahora',soon:'Proximos meses',open:'Abierto a propuestas',no:'No disponible'};
+  setFv('v-av',am[r.availability]||r.availability);
 }
 
 function selOpt(id,val){
   if(!val)return;
   var sel=document.getElementById(id);
-  var v=val.toLowerCase().trim();
+  var v=String(val).toLowerCase().trim();
   for(var i=0;i<sel.options.length;i++){
-    if(sel.options[i].value===val||sel.options[i].value.toLowerCase().trim()===v||sel.options[i].text.toLowerCase().trim()===v){
-      sel.selectedIndex=i;return;
-    }
+    var ov=sel.options[i].value.toLowerCase().trim();
+    var ot=sel.options[i].text.toLowerCase().trim();
+    if(ov===v||ot===v){sel.selectedIndex=i;return;}
   }
 }
 
@@ -471,7 +451,7 @@ function startEdit(){
   modality=r.work_modality||'';
   ['remote','hybrid','onsite'].forEach(function(v){document.getElementById('mod-'+v).classList.toggle('on',v===modality);});
   cvFilename='';cvText='';
-  document.getElementById('cv-txt').textContent=r.cv_filename?'CV actual: '+r.cv_filename+' — arrastra para reemplazar':'Arrastra tu CV aqui o haz clic — PDF o Word — Max. 5 MB';
+  document.getElementById('cv-txt').textContent=r.cv_filename?'CV actual: '+r.cv_filename+' - arrastra para reemplazar':'Arrastra tu CV aqui o haz clic - PDF o Word - Max. 5 MB';
   document.getElementById('view-mode').style.display='none';
   document.getElementById('edit-mode').style.display='block';
 }
@@ -481,21 +461,26 @@ function cancelEdit(){
   document.getElementById('edit-mode').style.display='none';
 }
 
-function setAv(val){avail=val;['now','soon','open','no'].forEach(function(v){document.getElementById('av-'+v).classList.toggle('on',v===val);});}
-function setMod(val){modality=val;['remote','hybrid','onsite'].forEach(function(v){document.getElementById('mod-'+v).classList.toggle('on',v===val);});}
+function setAv(val){
+  avail=val;
+  ['now','soon','open','no'].forEach(function(v){document.getElementById('av-'+v).classList.toggle('on',v===val);});
+}
+function setMod(val){
+  modality=val;
+  ['remote','hybrid','onsite'].forEach(function(v){document.getElementById('mod-'+v).classList.toggle('on',v===val);});
+}
 
-// CV with AI via Edge Function
 async function handleCv(file){
   if(!file)return;
   if(file.size>5*1024*1024){toast('El archivo supera los 5 MB','err');return;}
   var ext=file.name.split('.').pop().toLowerCase();
-  if(!['pdf','doc','docx'].includes(ext)){toast('Solo PDF o Word (.doc, .docx)','err');return;}
+  if(!['pdf','doc','docx'].includes(ext)){toast('Solo PDF o Word','err');return;}
   cvFilename=file.name;
   document.getElementById('cv-txt').innerHTML='<span style="color:var(--gold)">Analizando CV con IA...</span>';
   try{
     var payload={};
     if(ext==='pdf'){
-      var b64=await toBase64(file);
+      var b64=await toB64(file);
       payload={base64:b64,mimeType:'application/pdf'};
     }else{
       var ab=await file.arrayBuffer();
@@ -504,30 +489,34 @@ async function handleCv(file){
       payload={text:cvText};
     }
     var r=await sb.functions.invoke('extract-cv',{body:payload});
-    if(r.error)throw new Error(r.error.message);
+    if(r.error)throw new Error(r.error.message||'Function error');
     var d=r.data;
-    console.log('Edge function response:', d);
-    var filled=Object.values(d).filter(function(v){return v&&v.trim();}).length;
-    fillFromAI(d);
+    if(typeof d==='string'){try{d=JSON.parse(d);}catch(e){d={};}}
+    var filled=Object.keys(d).filter(function(k){return d[k]&&String(d[k]).trim();}).length;
+    fillAI(d);
     if(filled>0){
-      document.getElementById('cv-txt').innerHTML='<span style="color:#6EE7B7">&#10003; '+cvFilename+' — '+filled+' campos completados automaticamente</span>';
-      toast('Perfil completado con IA: '+filled+' campos extraidos','ok');
+      document.getElementById('cv-txt').innerHTML='<span style="color:#6EE7B7">&#10003; '+cvFilename+' - '+filled+' campos completados automaticamente</span>';
+      toast(filled+' campos completados con IA','ok');
     }else{
-      document.getElementById('cv-txt').innerHTML='<span style="color:#FCA5A5">&#10003; '+cvFilename+' cargado — completa los campos manualmente</span>';
-      toast('CV cargado. La IA no pudo extraer datos — completa manualmente.','err');
-      console.log('Empty response from AI:', d);
+      document.getElementById('cv-txt').innerHTML='<span style="color:rgba(255,255,255,.5)">&#10003; '+cvFilename+' adjuntado - completa los campos manualmente</span>';
     }
   }catch(e){
-    document.getElementById('cv-txt').innerHTML='<span style="color:#6EE7B7">&#10003; '+cvFilename+' adjuntado</span>';
+    console.error('CV extraction error:',e);
+    document.getElementById('cv-txt').innerHTML='<span style="color:rgba(255,255,255,.5)">&#10003; '+cvFilename+' adjuntado</span>';
     toast('CV adjuntado. Completa los campos manualmente.','ok');
   }
 }
 
-function toBase64(file){
-  return new Promise(function(res,rej){var rd=new FileReader();rd.onload=function(){res(rd.result.split(',')[1]);};rd.onerror=rej;rd.readAsDataURL(file);});
+function toB64(file){
+  return new Promise(function(res,rej){
+    var rd=new FileReader();
+    rd.onload=function(){res(rd.result.split(',')[1]);};
+    rd.onerror=rej;
+    rd.readAsDataURL(file);
+  });
 }
 
-function fillFromAI(d){
+function fillAI(d){
   if(!d)return;
   if(d.current_position)document.getElementById('e-pos').value=d.current_position;
   if(d.current_company)document.getElementById('e-co').value=d.current_company;
@@ -545,8 +534,9 @@ function fillFromAI(d){
 async function doSave(){
   var btn=document.getElementById('save-btn');
   btn.disabled=true;btn.textContent='Guardando...';
-  var payload={
-    p_email:document.getElementById('nav-email').textContent,
+  var email=document.getElementById('nav-email').textContent;
+  var p={
+    p_email:email,
     p_current_position:document.getElementById('e-pos').value.trim(),
     p_current_company:document.getElementById('e-co').value.trim(),
     p_specialty:document.getElementById('e-sp').value.trim(),
@@ -564,36 +554,33 @@ async function doSave(){
     p_degree_field:document.getElementById('e-deg').value.trim(),
     p_work_modality:modality
   };
-  var r=await sb.rpc('update_profile_data',payload);
+  var r=await sb.rpc('update_profile_data',p);
   btn.disabled=false;btn.textContent='Guardar cambios';
   if(r.error){toast('Error al guardar. Intenta de nuevo.','err');return;}
-  // Update local
   Object.assign(reg,{
-    current_position:payload.p_current_position,current_company:payload.p_current_company,
-    specialty:payload.p_specialty,years_experience:payload.p_years_experience,
-    location_city:payload.p_location_city,location_country:payload.p_location_country,
-    bio:payload.p_bio,linkedin_url:payload.p_linkedin_url,availability:payload.p_availability,
-    cv_filename:payload.p_cv_filename||reg.cv_filename,english_level:payload.p_english_level,
-    other_languages:payload.p_other_languages,education_level:payload.p_education_level,
-    degree_field:payload.p_degree_field,work_modality:payload.p_work_modality
+    current_position:p.p_current_position,current_company:p.p_current_company,
+    specialty:p.p_specialty,years_experience:p.p_years_experience,
+    location_city:p.p_location_city,location_country:p.p_location_country,
+    bio:p.p_bio,linkedin_url:p.p_linkedin_url,availability:p.p_availability,
+    cv_filename:p.p_cv_filename||reg.cv_filename,english_level:p.p_english_level,
+    other_languages:p.p_other_languages,education_level:p.p_education_level,
+    degree_field:p.p_degree_field,work_modality:p.p_work_modality
   });
   renderView();cancelEdit();
   toast('Perfil actualizado correctamente','ok');
 }
 
 async function doDelete(){
-  if(!confirm('Estas seguro de que quieres eliminar tu cuenta?\n\nSe borraran permanentemente:\n- Tu perfil y todos tus datos\n- Tu CV\n\nEsta accion no se puede deshacer.'))return;
+  if(!confirm('Estas seguro de que quieres eliminar tu cuenta?\n\nSe borraran permanentemente tu perfil y todos tus datos.\n\nEsta accion no se puede deshacer.'))return;
   var email=document.getElementById('nav-email').textContent;
   if(!confirm('Ultima confirmacion: eliminar la cuenta de '+email+'?'))return;
   try{
-    await sb.rpc('update_profile_data',{p_email:email,p_current_position:'',p_current_company:'',p_specialty:'',p_years_experience:'',p_location_city:'',p_location_country:'',p_bio:'',p_linkedin_url:'',p_availability:'',p_cv_filename:'',p_cv_text:'',p_english_level:'',p_other_languages:'',p_education_level:'',p_degree_field:'',p_work_modality:''});
-    await fetch(SB_URL+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(email),{
-      method:'DELETE',
-      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+    await fetch(SURL+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(email),{
+      method:'DELETE',headers:{'apikey':SKEY,'Authorization':'Bearer '+SKEY}
     });
     await sb.auth.signOut();
     document.getElementById('err-h').textContent='Cuenta eliminada';
-    document.getElementById('err-p').textContent='Tu cuenta y todos tus datos han sido eliminados permanentemente. Gracias por haber sido parte de NodusPro.';
+    document.getElementById('err-p').textContent='Tu cuenta y todos tus datos han sido eliminados. Gracias por haber sido parte de NodusPro.';
     show('s-error');
   }catch(e){toast('Error al eliminar. Escribe a hola@noduspro.net','err');}
 }
