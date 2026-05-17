@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Completa tu perfil — NodusPro</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A1628'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%232D6BE4'/%3E%3Ccircle cx='5' cy='6' r='3' fill='white' opacity='.7'/%3E%3Ccircle cx='27' cy='6' r='3' fill='white' opacity='.7'/%3E%3Ccircle cx='5' cy='26' r='3' fill='white' opacity='.7'/%3E%3Ccircle cx='27' cy='26' r='3' fill='white' opacity='.7'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+:root{
+  --navy:#071428;--navy2:#0C1E3E;--blue:#1B4FD8;
+  --gold:#F4C300;--red:#CF142B;--green:#047857;
+  --ink:#0A0F1E;--ink3:#6B7280;--border:#E5E7EB;--bg:#F7F9FC;
+}
+body{font-family:'Inter',sans-serif;background:var(--navy);color:white;min-height:100vh}
+
+.nav{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-bottom:3px solid var(--gold)}
+.nlogo{display:flex;align-items:center;gap:9px}
+.nmark{width:30px;height:30px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.nname{font-size:15px;font-weight:800;color:white}.nname span{color:var(--gold)}
+.nemail{font-size:12px;color:rgba(255,255,255,.3)}
+
+.wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px}
+
+/* ESTADO */
+.screen{display:none}.screen.active{display:block}
+
+/* LOADING */
+.loading-wrap{text-align:center;padding:60px 0}
+.spinner{width:40px;height:40px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-size:14px;color:rgba(255,255,255,.4)}
+
+/* UPLOAD ZONE */
+.upload-header{margin-bottom:32px}
+.upload-tag{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.upload-h{font-size:clamp(22px,5vw,34px);font-weight:900;letter-spacing:-.5px;line-height:1.15;margin-bottom:10px}
+.upload-sub{font-size:15px;color:rgba(255,255,255,.5);line-height:1.7;font-weight:300}
+
+.dropzone{border:2px dashed rgba(255,255,255,.15);border-radius:14px;padding:48px 24px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:20px;position:relative}
+.dropzone:hover,.dropzone.drag{border-color:var(--gold);background:rgba(244,195,0,.04)}
+.dropzone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.dz-icon{width:52px;height:52px;background:rgba(244,195,0,.12);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.dz-icon svg{width:26px;height:26px}
+.dz-title{font-size:16px;font-weight:700;color:white;margin-bottom:6px}
+.dz-sub{font-size:13px;color:rgba(255,255,255,.4)}
+.dz-formats{font-size:11px;color:rgba(255,255,255,.25);margin-top:8px}
+
+.divider{display:flex;align-items:center;gap:10px;margin:20px 0}
+.divline{flex:1;height:1px;background:rgba(255,255,255,.08)}
+.divtxt{font-size:11px;color:rgba(255,255,255,.2);font-weight:600;letter-spacing:.5px}
+
+.skip-btn{width:100%;padding:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;color:rgba(255,255,255,.5);cursor:pointer;transition:all .15s}
+.skip-btn:hover{background:rgba(255,255,255,.08);color:rgba(255,255,255,.8)}
+
+/* EXTRACTING */
+.extract-wrap{text-align:center;padding:48px 0}
+.extract-icon{width:64px;height:64px;background:rgba(27,79,216,.2);border:1px solid rgba(27,79,216,.3);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.extract-h{font-size:20px;font-weight:800;margin-bottom:8px}
+.extract-p{font-size:14px;color:rgba(255,255,255,.4);line-height:1.6}
+.extract-file{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:8px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;font-size:12px;color:rgba(255,255,255,.5)}
+.dots span{animation:blink2 1.2s infinite both}
+.dots span:nth-child(2){animation-delay:.2s}
+.dots span:nth-child(3){animation-delay:.4s}
+@keyframes blink2{0%,80%,100%{opacity:0}40%{opacity:1}}
+
+/* FORM */
+.form-header{margin-bottom:28px}
+.form-tag{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.form-h{font-size:24px;font-weight:900;margin-bottom:6px;letter-spacing:-.3px}
+.form-sub{font-size:14px;color:rgba(255,255,255,.4);line-height:1.6}
+
+.cv-badge{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;background:rgba(4,120,87,.15);border:1px solid rgba(4,120,87,.3);border-radius:6px;font-size:12px;color:#6EE7B7;margin-bottom:20px}
+
+.field{margin-bottom:16px}
+.field label{display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:6px}
+.field label .opt{color:rgba(255,255,255,.2);font-weight:400;letter-spacing:0;text-transform:none;font-size:10px}
+.field input,.field textarea,.field select{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:white;font-family:'Inter',sans-serif;font-size:14px;padding:11px 13px;outline:none;transition:border-color .15s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold)}
+.field input::placeholder,.field textarea::placeholder{color:rgba(255,255,255,.2)}
+.field textarea{resize:vertical;min-height:90px;line-height:1.6}
+.field select{cursor:pointer}
+.field select option{background:var(--navy2);color:white}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.ai-tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:rgba(244,195,0,.6);margin-bottom:4px}
+.ai-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;opacity:.7}
+
+.avail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+.avail-opt{padding:10px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:7px;cursor:pointer;font-size:13px;color:rgba(255,255,255,.6);text-align:center;transition:all .15s;user-select:none}
+.avail-opt:hover{border-color:rgba(255,255,255,.25)}
+.avail-opt.on{border-color:var(--gold);background:rgba(244,195,0,.08);color:white;font-weight:600}
+
+.submit-btn{width:100%;padding:15px;background:var(--gold);color:var(--navy);border:none;border-radius:8px;font-family:'Inter',sans-serif;font-size:16px;font-weight:900;cursor:pointer;margin-top:8px;letter-spacing:-.2px}
+.submit-btn:hover{background:#FFD700}
+.submit-btn:disabled{opacity:.4;cursor:not-allowed}
+
+.delete-link{display:block;text-align:center;margin-top:28px;font-size:12px;color:rgba(255,255,255,.2);cursor:pointer;text-decoration:none}
+.delete-link:hover{color:#FCA5A5}
+
+/* SUCCESS */
+.success-wrap{text-align:center;padding:48px 0}
+.success-icon{width:64px;height:64px;background:rgba(4,120,87,.2);border:1px solid rgba(4,120,87,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.success-h{font-size:26px;font-weight:900;margin-bottom:10px;letter-spacing:-.5px}
+.success-p{font-size:15px;color:rgba(255,255,255,.5);line-height:1.7;max-width:400px;margin:0 auto 28px}
+.success-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:18px 20px;text-align:left;margin-bottom:20px}
+.sc-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:13px}
+.sc-row:last-child{border-bottom:none}
+.sc-label{color:rgba(255,255,255,.35)}
+.sc-val{color:rgba(255,255,255,.8);font-weight:500;text-align:right;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ERROR */
+.err-wrap{text-align:center;padding:60px 20px}
+.err-icon{font-size:40px;margin-bottom:16px}
+.err-h{font-size:20px;font-weight:800;margin-bottom:8px}
+.err-p{font-size:14px;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:24px}
+.err-link{display:inline-block;padding:11px 24px;background:var(--gold);color:var(--navy);font-family:'Inter',sans-serif;font-size:14px;font-weight:800;border-radius:7px;text-decoration:none}
+
+@media(max-width:600px){
+  .row2,.avail-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nlogo">
+    <div class="nmark">
+      <svg viewBox="0 0 16 16" fill="none" width="14" height="14">
+        <circle cx="8" cy="8" r="2" fill="white"/>
+        <circle cx="2.5" cy="3" r="1.5" fill="white" opacity=".7"/>
+        <circle cx="13.5" cy="3" r="1.5" fill="white" opacity=".7"/>
+        <circle cx="2.5" cy="13" r="1.5" fill="white" opacity=".7"/>
+        <circle cx="13.5" cy="13" r="1.5" fill="white" opacity=".7"/>
+      </svg>
+    </div>
+    <div>
+      <div class="nname"><span>Nodus</span>Pro</div>
+    </div>
+  </div>
+  <div class="nemail" id="nav-email"></div>
+</nav>
+
+<div class="wrap">
+
+  <!-- CARGANDO -->
+  <div class="screen active" id="s-loading">
+    <div class="loading-wrap">
+      <div class="spinner"></div>
+      <div class="loading-text">Verificando tu acceso...</div>
+    </div>
+  </div>
+
+  <!-- ERROR -->
+  <div class="screen" id="s-error">
+    <div class="err-wrap">
+      <div class="err-icon">!</div>
+      <div class="err-h" id="err-title">Enlace invalido</div>
+      <p class="err-p" id="err-msg">Este enlace no es valido o ha expirado. Cada enlace es de uso unico y personal.</p>
+      <a href="/" class="err-link">Ir a NodusPro</a>
+    </div>
+  </div>
+
+  <!-- SUBIR CV -->
+  <div class="screen" id="s-upload">
+    <div class="upload-header">
+      <div class="upload-tag">Tu perfil esta verificado</div>
+      <h1 class="upload-h">Ahora hagamos que<br>las empresas te encuentren.</h1>
+      <p class="upload-sub">Sube tu CV y la inteligencia artificial extrae tus datos automaticamente. Sin llenar campos uno por uno.</p>
+    </div>
+
+    <div class="dropzone" id="dropzone">
+      <input type="file" id="cv-file" accept=".pdf,.doc,.docx" onchange="handleFile(this.files[0])">
+      <div class="dz-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6M12 12v6M9 15l3-3 3 3" stroke="var(--gold)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="dz-title">Arrastra tu CV aqui</div>
+      <div class="dz-sub">o haz clic para seleccionarlo</div>
+      <div class="dz-formats">PDF, Word (.doc, .docx) — maximo 5 MB</div>
+    </div>
+
+    <div class="divider">
+      <div class="divline"></div>
+      <span class="divtxt">O</span>
+      <div class="divline"></div>
+    </div>
+
+    <button class="skip-btn" onclick="mostrarFormulario(null)">Llenar mis datos manualmente</button>
+
+    <a href="#" class="delete-link" onclick="confirmarBorrado();return false">Quiero eliminar mi perfil</a>
+  </div>
+
+  <!-- EXTRAYENDO -->
+  <div class="screen" id="s-extracting">
+    <div class="extract-wrap">
+      <div class="extract-icon">
+        <svg viewBox="0 0 24 24" fill="none" width="30" height="30"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z" stroke="#93B4F5" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      </div>
+      <h2 class="extract-h">Leyendo tu CV<span class="dots"><span>.</span><span>.</span><span>.</span></span></h2>
+      <p class="extract-p">La IA esta extrayendo tu experiencia, cargo, empresa y especialidad. Tardara solo unos segundos.</p>
+      <div class="extract-file" id="extract-filename"></div>
+    </div>
+  </div>
+
+  <!-- FORMULARIO -->
+  <div class="screen" id="s-form">
+    <div class="form-header">
+      <div class="form-tag">Confirma tus datos</div>
+      <h2 class="form-h">Tu perfil profesional</h2>
+      <p class="form-sub" id="form-sub">Revisa la informacion y completa o corrige lo que necesites.</p>
+    </div>
+
+    <div class="cv-badge" id="cv-badge" style="display:none">
+      <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8l4 4 6-6" stroke="#6EE7B7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span id="cv-badge-text">CV procesado con IA</span>
+    </div>
+
+    <div class="row2">
+      <div class="field">
+        <label>Cargo actual <span class="opt">(opcional)</span></label>
+        <div class="ai-tag" id="ai-position" style="display:none"><div class="ai-dot"></div>Extraido del CV</div>
+        <input type="text" id="f-position" placeholder="Ej: Ingeniero de Produccion">
+      </div>
+      <div class="field">
+        <label>Empresa actual <span class="opt">(opcional)</span></label>
+        <div class="ai-tag" id="ai-company" style="display:none"><div class="ai-dot"></div>Extraido del CV</div>
+        <input type="text" id="f-company" placeholder="Ej: PDVSA, Repsol...">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Especialidad o area principal <span class="opt">(opcional)</span></label>
+      <div class="ai-tag" id="ai-specialty" style="display:none"><div class="ai-dot"></div>Extraido del CV</div>
+      <input type="text" id="f-specialty" placeholder="Ej: Ingenieria de Yacimientos, Automatizacion, Derecho Corporativo...">
+    </div>
+
+    <div class="row2">
+      <div class="field">
+        <label>Anos de experiencia <span class="opt">(opcional)</span></label>
+        <div class="ai-tag" id="ai-years" style="display:none"><div class="ai-dot"></div>Extraido del CV</div>
+        <select id="f-years">
+          <option value="">Seleccionar...</option>
+          <option>Menos de 1 ano</option>
+          <option>1-5 anos</option>
+          <option>6-10 anos</option>
+          <option>11-20 anos</option>
+          <option>Mas de 20 anos</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Ciudad donde vives <span class="opt">(opcional)</span></label>
+        <div class="ai-tag" id="ai-city" style="display:none"><div class="ai-dot"></div>Extraido del CV</div>
+        <input type="text" id="f-city" placeholder="Ej: Caracas, Madrid, Bogota...">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Pais donde vives <span class="opt">(opcional)</span></label>
+      <div class="ai-tag" id="ai-country" style="display:none"><div class="ai-dot"></div>Extraido del CV</div>
+      <input type="text" id="f-country" placeholder="Ej: Venezuela, Espana, Colombia...">
+    </div>
+
+    <div class="field">
+      <label>Sobre ti <span class="opt">(opcional)</span></label>
+      <div class="ai-tag" id="ai-bio" style="display:none"><div class="ai-dot"></div>Extraido del CV</div>
+      <textarea id="f-bio" placeholder="Un parrafo breve sobre tu experiencia y lo que buscas. Esto es lo primero que ven las empresas."></textarea>
+    </div>
+
+    <div class="field">
+      <label>LinkedIn <span class="opt">(opcional)</span></label>
+      <input type="url" id="f-linkedin" placeholder="https://linkedin.com/in/tu-perfil">
+    </div>
+
+    <div class="field">
+      <label>Disponibilidad</label>
+      <div class="avail-grid">
+        <div class="avail-opt on" id="av-now" onclick="setAvail('now')">Disponible ahora</div>
+        <div class="avail-opt" id="av-soon" onclick="setAvail('soon')">En los proximos meses</div>
+        <div class="avail-opt" id="av-open" onclick="setAvail('open')">Abierto a propuestas</div>
+        <div class="avail-opt" id="av-no" onclick="setAvail('no')">No disponible</div>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="submit-btn" onclick="guardarPerfil()">Guardar mi perfil</button>
+
+    <a href="#" class="delete-link" onclick="confirmarBorrado();return false">Quiero eliminar mi perfil</a>
+  </div>
+
+  <!-- EXITO -->
+  <div class="screen" id="s-success">
+    <div class="success-wrap">
+      <div class="success-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="#6EE7B7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2 class="success-h">Perfil completo</h2>
+      <p class="success-p">Tu perfil ya esta visible para las empresas que buscan talento venezolano. Cuando alguien quiera contactarte, recibiras un email.</p>
+      <div class="success-card" id="success-card"></div>
+      <p style="font-size:12px;color:rgba(255,255,255,.2);line-height:1.7">Puedes actualizar tu perfil cuando quieras volviendo a este enlace.<br>Para eliminar tu perfil escribe a <a href="mailto:hola@noduspro.net" style="color:rgba(255,255,255,.35)">hola@noduspro.net</a></p>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script>
+var SB='https://eettdimwdjyqniodefop.supabase.co';
+var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
+
+var userEmail='';
+var userRecord=null;
+var cvExtracted=null;
+var cvFilename='';
+var cvText='';
+var availability='now';
+
+// Obtener email del URL
+var params=new URLSearchParams(window.location.search);
+userEmail=params.get('email')||'';
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById(id).classList.add('active');
+}
+
+function showError(title,msg){
+  document.getElementById('err-title').textContent=title;
+  document.getElementById('err-msg').textContent=msg;
+  show('s-error');
+}
+
+// Verificar que el email existe y esta aprobado
+async function init(){
+  if(!userEmail){showError('Enlace invalido','No se encontro el identificador en el enlace. Revisa el email de activacion.');return;}
+  document.getElementById('nav-email').textContent=userEmail;
+  try{
+    var r=await fetch(SB+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(userEmail)+'&select=*',{
+      headers:{'apikey':SK,'Authorization':'Bearer '+SK}
+    });
+    var data=await r.json();
+    if(!data||!data.length){showError('Perfil no encontrado','No encontramos un perfil con este correo. Verifica que usaste el enlace correcto.');return;}
+    userRecord=data[0];
+    if(userRecord.profile_status!=='approved'){showError('Perfil pendiente de verificacion','Tu perfil aun esta siendo revisado. Recibiras el enlace definitivo una vez que sea aprobado.');return;}
+    // Pre-fill form if data exists
+    if(userRecord.current_position)document.getElementById('f-position').value=userRecord.current_position;
+    if(userRecord.current_company)document.getElementById('f-company').value=userRecord.current_company;
+    if(userRecord.specialty)document.getElementById('f-specialty').value=userRecord.specialty;
+    if(userRecord.location_city)document.getElementById('f-city').value=userRecord.location_city;
+    if(userRecord.location_country)document.getElementById('f-country').value=userRecord.location_country;
+    if(userRecord.bio)document.getElementById('f-bio').value=userRecord.bio;
+    if(userRecord.linkedin_url||userRecord.profile_url)document.getElementById('f-linkedin').value=userRecord.linkedin_url||userRecord.profile_url||'';
+    if(userRecord.years_experience)document.getElementById('f-years').value=userRecord.years_experience;
+    show('s-upload');
+  }catch(e){showError('Error de conexion','No pudimos verificar tu perfil. Intenta de nuevo en unos minutos.');}
+}
+
+// Drag and drop
+var dz=document.getElementById('dropzone');
+dz.addEventListener('dragover',function(e){e.preventDefault();dz.classList.add('drag');});
+dz.addEventListener('dragleave',function(){dz.classList.remove('drag');});
+dz.addEventListener('drop',function(e){e.preventDefault();dz.classList.remove('drag');var f=e.dataTransfer.files[0];if(f)handleFile(f);});
+
+async function handleFile(file){
+  if(!file)return;
+  var maxSize=5*1024*1024;
+  if(file.size>maxSize){alert('El archivo supera los 5 MB. Por favor sube un archivo mas pequeno.');return;}
+  var ext=file.name.split('.').pop().toLowerCase();
+  if(!['pdf','doc','docx'].includes(ext)){alert('Solo se aceptan archivos PDF o Word (.doc, .docx)');return;}
+  cvFilename=file.name;
+  document.getElementById('extract-filename').textContent=file.name;
+  show('s-extracting');
+  try{
+    if(ext==='pdf'){
+      // Read PDF as base64
+      var base64=await fileToBase64(file);
+      await extractWithAI(null,base64,'application/pdf');
+    } else {
+      // Extract text from Word using mammoth
+      var arrayBuffer=await file.arrayBuffer();
+      var result=await mammoth.extractRawText({arrayBuffer:arrayBuffer});
+      cvText=result.value;
+      await extractWithAI(cvText,null,null);
+    }
+  }catch(e){
+    console.error(e);
+    // If extraction fails, show form anyway
+    mostrarFormulario(null);
+  }
+}
+
+function fileToBase64(file){
+  return new Promise(function(resolve,reject){
+    var reader=new FileReader();
+    reader.onload=function(){resolve(reader.result.split(',')[1]);};
+    reader.onerror=reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+async function extractWithAI(text,base64,mimeType){
+  var messages;
+  if(base64){
+    messages=[{role:'user',content:[
+      {type:'document',source:{type:'base64',media_type:mimeType,data:base64}},
+      {type:'text',text:'Analiza este CV y extrae la informacion profesional. Responde SOLO con un objeto JSON valido, sin texto adicional, sin markdown. El JSON debe tener estas claves exactas: current_position (cargo actual o mas reciente), current_company (empresa actual o mas reciente), specialty (especialidad o area principal, maximo 60 caracteres), years_experience (una de estas opciones exactas: "Menos de 1 ano", "1-5 anos", "6-10 anos", "11-20 anos", "Mas de 20 anos"), location_city (ciudad actual si aparece), location_country (pais actual si aparece), bio (resumen profesional de 2-3 oraciones en primera persona, en espanol). Si no encuentras algun dato, usa cadena vacia "".'}
+    ]}];
+  } else {
+    messages=[{role:'user',content:'Analiza este CV y extrae la informacion profesional. Responde SOLO con un objeto JSON valido, sin texto adicional, sin markdown. El JSON debe tener estas claves exactas: current_position (cargo actual o mas reciente), current_company (empresa actual o mas reciente), specialty (especialidad o area principal, maximo 60 caracteres), years_experience (una de estas opciones exactas: "Menos de 1 ano", "1-5 anos", "6-10 anos", "11-20 anos", "Mas de 20 anos"), location_city (ciudad actual si aparece), location_country (pais actual si aparece), bio (resumen profesional de 2-3 oraciones en primera persona, en espanol). Si no encuentras algun dato, usa cadena vacia "".\n\nCV:\n'+text}];
+  }
+
+  var response=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens:1000,
+      messages:messages
+    })
+  });
+  var data=await response.json();
+  var raw=data.content&&data.content[0]&&data.content[0].text||'{}';
+  var clean=raw.replace(/```json|```/g,'').trim();
+  try{
+    cvExtracted=JSON.parse(clean);
+    if(!base64)cvText=text;
+    mostrarFormulario(cvExtracted);
+  }catch(e){
+    mostrarFormulario(null);
+  }
+}
+
+function mostrarFormulario(data){
+  show('s-form');
+  if(!data){
+    document.getElementById('form-sub').textContent='Completa los campos que quieras. Todo es opcional excepto guardar al menos un dato.';
+    return;
+  }
+  // Show CV badge
+  document.getElementById('cv-badge').style.display='flex';
+  document.getElementById('cv-badge-text').textContent='CV procesado: '+cvFilename;
+  document.getElementById('form-sub').textContent='La IA extrajo tu informacion. Revisa que todo este correcto y corrige si es necesario.';
+
+  // Fill fields and show AI tags
+  var fields=[
+    ['f-position','ai-position',data.current_position],
+    ['f-company','ai-company',data.current_company],
+    ['f-specialty','ai-specialty',data.specialty],
+    ['f-city','ai-city',data.location_city],
+    ['f-country','ai-country',data.location_country],
+    ['f-bio','ai-bio',data.bio],
+  ];
+  fields.forEach(function(f){
+    var inp=document.getElementById(f[0]);
+    var tag=document.getElementById(f[1]);
+    if(f[2]&&f[2].trim()){
+      inp.value=f[2];
+      if(tag)tag.style.display='flex';
+    }
+  });
+
+  // Years
+  if(data.years_experience){
+    var sel=document.getElementById('f-years');
+    for(var i=0;i<sel.options.length;i++){
+      if(sel.options[i].value===data.years_experience){sel.selectedIndex=i;break;}
+    }
+    if(data.years_experience)document.getElementById('ai-years').style.display='flex';
+  }
+}
+
+function setAvail(val){
+  availability=val;
+  ['now','soon','open','no'].forEach(function(v){
+    document.getElementById('av-'+v).classList.remove('on');
+  });
+  document.getElementById('av-'+val).classList.add('on');
+}
+
+async function guardarPerfil(){
+  var btn=document.getElementById('submit-btn');
+  btn.disabled=true;btn.textContent='Guardando...';
+  var payload={
+    p_email:userEmail,
+    p_current_position:document.getElementById('f-position').value.trim(),
+    p_current_company:document.getElementById('f-company').value.trim(),
+    p_specialty:document.getElementById('f-specialty').value.trim(),
+    p_years_experience:document.getElementById('f-years').value,
+    p_location_city:document.getElementById('f-city').value.trim(),
+    p_location_country:document.getElementById('f-country').value.trim(),
+    p_bio:document.getElementById('f-bio').value.trim(),
+    p_linkedin_url:document.getElementById('f-linkedin').value.trim(),
+    p_availability:availability,
+    p_cv_filename:cvFilename,
+    p_cv_text:cvText.slice(0,8000)
+  };
+  try{
+    var r=await fetch(SB+'/rest/v1/rpc/update_profile_data',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SK,'Authorization':'Bearer '+SK},
+      body:JSON.stringify(payload)
+    });
+    var result=await r.json();
+    if(result==='not_found'){btn.disabled=false;btn.textContent='Guardar mi perfil';alert('No encontramos tu perfil. Verifica el enlace.');return;}
+    mostrarExito(payload);
+  }catch(e){
+    btn.disabled=false;btn.textContent='Guardar mi perfil';
+    alert('Error al guardar. Intenta de nuevo en unos minutos.');
+  }
+}
+
+function mostrarExito(d){
+  var rows=[
+    ['Cargo',d.p_current_position],
+    ['Empresa',d.p_current_company],
+    ['Especialidad',d.p_specialty],
+    ['Experiencia',d.p_years_experience],
+    ['Ubicacion',[d.p_location_city,d.p_location_country].filter(Boolean).join(', ')],
+    ['Disponibilidad',{now:'Disponible ahora',soon:'Proximos meses',open:'Abierto a propuestas',no:'No disponible'}[d.p_availability]||d.p_availability],
+  ].filter(function(r){return r[1];});
+  document.getElementById('success-card').innerHTML=rows.map(function(r){
+    return '<div class="sc-row"><span class="sc-label">'+r[0]+'</span><span class="sc-val">'+r[1]+'</span></div>';
+  }).join('');
+  show('s-success');
+}
+
+async function confirmarBorrado(){
+  if(!confirm('Estas seguro de que quieres eliminar tu perfil?\n\nEsta accion es permanente. Todos tus datos seran borrados inmediatamente.'))return;
+  try{
+    await fetch(SB+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(userEmail),{
+      method:'DELETE',
+      headers:{'apikey':SK,'Authorization':'Bearer '+SK}
+    });
+    showError('Perfil eliminado','Tu perfil y todos tus datos han sido eliminados permanentemente. Gracias por haber sido parte de NodusPro.');
+  }catch(e){
+    alert('Error al eliminar. Escribe a hola@noduspro.net y lo hacemos manualmente.');
+  }
+}
+
+// Iniciar
+init();
+</script>
+</body>
+</html>
