@@ -336,23 +336,21 @@ async function doMagicLink(){
   if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){toast('Ingresa un correo valido','err');return;}
   var btn=document.getElementById('lbtn');
   btn.disabled=true;btn.textContent='Enviando...';
+  // First verify email is in waitlist
+  var chk=await sb.rpc('get_my_profile',{p_email:email});
+  if(chk.error||!chk.data){
+    showMsg('Correo no encontrado','Este correo no esta registrado en NodusPro. Registrate primero desde la pagina principal.','err');
+    btn.disabled=false;btn.textContent='Enviarme el enlace de acceso';
+    return;
+  }
+  // Email exists in waitlist — send magic link
   var res=await sb.auth.signInWithOtp({
     email:email,
-    options:{emailRedirectTo:'https://noduspro.net/cuenta',shouldCreateUser:false}
+    options:{emailRedirectTo:'https://noduspro.net/cuenta'}
   });
   btn.disabled=false;
-  if(res.error){
-    var msg=res.error.message||'';
-    if(msg.indexOf('not found')!==-1||msg.indexOf('Signups not allowed')!==-1||res.error.status===422){
-      showMsg('Correo no encontrado','Este correo no esta registrado en NodusPro. Registrate primero en la pagina principal.','err');
-    }else{
-      showMsg('Enlace enviado','Revisa tu correo y haz clic en el enlace. Tienes 10 minutos. Si no lo ves, revisa Spam o Promociones.','ok');
-    }
-    btn.textContent='Reenviar enlace';
-  }else{
-    showMsg('Enlace enviado','Revisa tu correo y haz clic en el enlace. Tienes 10 minutos. Si no lo ves, revisa Spam o Promociones.','ok');
-    btn.textContent='Reenviar enlace';
-  }
+  showMsg('Enlace enviado','Revisa tu correo y haz clic en el enlace. Tienes 10 minutos. Si no lo ves, revisa Spam o Promociones.','ok');
+  btn.textContent='Reenviar enlace';
 }
 
 async function doGoogle(){
