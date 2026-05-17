@@ -354,7 +354,11 @@ async function enviarMagicLink(){
     var r=await fetch(SB+'/auth/v1/otp',{
       method:'POST',
       headers:{'apikey':SK,'Content-Type':'application/json'},
-      body:JSON.stringify({email:email,create_user:false})
+      body:JSON.stringify({
+        email:email,
+        create_user:false,
+        options:{redirectTo:'https://noduspro.net/cuenta'}
+      })
     });
     var d=await r.json();
     if(d.error){
@@ -426,7 +430,7 @@ async function cargarPerfil(){
 
     // Load waitlist record
     var r2=await fetch(SB+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(u.email)+'&select=*',{
-      headers:{'apikey':SK,'Authorization':'Bearer '+sesion.access_token}
+      headers:{'apikey':SK,'Authorization':'Bearer '+SK}
     });
     var data=await r2.json();
     if(!data||!data.length){
@@ -569,7 +573,7 @@ async function guardarCambios(){
   try{
     var r=await fetch(SB+'/rest/v1/rpc/update_profile_data',{
       method:'POST',
-      headers:{'Content-Type':'application/json','apikey':SK,'Authorization':'Bearer '+sesion.access_token},
+      headers:{'Content-Type':'application/json','apikey':SK,'Authorization':'Bearer '+SK},
       body:JSON.stringify(payload)
     });
     var result=await r.json();
@@ -607,7 +611,7 @@ async function confirmarBorrado(){
     // Delete from waitlist
     await fetch(SB+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(sesion.email),{
       method:'DELETE',
-      headers:{'apikey':SK,'Authorization':'Bearer '+sesion.access_token}
+      headers:{'apikey':SK,'Authorization':'Bearer '+SK}
     });
     // Sign out from Supabase Auth
     await fetch(SB+'/auth/v1/logout',{
