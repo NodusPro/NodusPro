@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Registro Profesional Venezuela - NodusPro</title>
-<meta name="description" content="El directorio verificado de profesionales venezolanos. Registro de Miembros Fundadores abierto.">
+<title>NodusPro — El directorio de profesionales venezolanos</title>
+<meta name="description" content="Tu experiencia es real. El problema es que nadie sabe que existes. NodusPro es el directorio de profesionales venezolanos.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A1628'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%232D6BE4'/%3E%3Ccircle cx='5' cy='6' r='3' fill='white' opacity='.7'/%3E%3Ccircle cx='27' cy='6' r='3' fill='white' opacity='.7'/%3E%3Ccircle cx='5' cy='26' r='3' fill='white' opacity='.7'/%3E%3Ccircle cx='27' cy='26' r='3' fill='white' opacity='.7'/%3E%3Cline x1='16' y1='16' x2='5' y2='6' stroke='white' stroke-width='1.5' opacity='.4'/%3E%3Cline x1='16' y1='16' x2='27' y2='6' stroke='white' stroke-width='1.5' opacity='.4'/%3E%3Cline x1='16' y1='16' x2='5' y2='26' stroke='white' stroke-width='1.5' opacity='.4'/%3E%3Cline x1='16' y1='16' x2='27' y2='26' stroke='white' stroke-width='1.5' opacity='.4'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -12,159 +12,136 @@
 html{-webkit-font-smoothing:antialiased}
 :root{
   --navy:#071428;--navy2:#0C1E3E;
-  --blue:#1B4FD8;--blue2:#1340B8;
-  --gold:#F4C300;--red:#CF142B;--vblue:#002B7F;
-  --white:#FFFFFF;--ink:#0A0F1E;--ink3:#6B7280;
+  --blue:#1B4FD8;--gold:#F4C300;--red:#CF142B;--vblue:#002B7F;
+  --white:#FFFFFF;--ink:#0A0F1E;--ink2:#374151;--ink3:#6B7280;
   --border:#E5E7EB;--bg:#F7F9FC;--green:#047857;
 }
 body{font-family:'Inter',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden}
-@keyframes blink{from{opacity:1}to{opacity:.3}}
-@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(244,195,0,.4)}50%{box-shadow:0 0 0 12px rgba(244,195,0,.0)}}
-.abar{background:var(--red);padding:9px 20px;text-align:center;font-size:13px;font-weight:600;color:white}
-.adot{display:inline-block;width:7px;height:7px;background:white;border-radius:50%;margin-right:8px;animation:blink .9s ease-in-out infinite alternate;vertical-align:middle}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(244,195,0,.4)}50%{box-shadow:0 0 0 14px rgba(244,195,0,.0)}}
+
+/* NAV */
 .nav{position:sticky;top:0;z-index:100;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:var(--navy);border-bottom:3px solid var(--gold)}
+.nlogo{display:flex;align-items:center;gap:10px}
+.nmark{width:34px;height:34px;background:var(--blue);border-radius:7px;display:flex;align-items:center;justify-content:center}
 .nname{font-size:16px;font-weight:800;color:white;letter-spacing:-.3px}
 .nname span{color:var(--gold)}
 .nsub{font-size:9px;font-weight:600;letter-spacing:1.5px;color:rgba(255,255,255,.35);text-transform:uppercase;margin-top:2px}
-.nmark{width:34px;height:34px;background:var(--blue);border-radius:7px;display:flex;align-items:center;justify-content:center}
-.ncta{font-size:14px;font-weight:800;padding:9px 20px;background:var(--gold);color:var(--navy);border:none;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:-.2px}
+.ncta{font-size:14px;font-weight:800;padding:9px 20px;background:var(--gold);color:var(--navy);border:none;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif}
 .ncta:hover{background:#FFD700}
-.hero{background:var(--navy);padding:52px 24px 48px;text-align:center;position:relative;overflow:hidden}
+
+/* HERO */
+.hero{background:var(--navy);padding:72px 24px 64px;text-align:center;position:relative;overflow:hidden}
 .stripe{position:absolute;top:0;left:0;right:0;height:5px;display:flex}
 .s1{flex:1;background:var(--vblue)}.s2{flex:1;background:var(--red)}.s3{flex:1;background:var(--gold)}
-.livepill{display:inline-flex;align-items:center;gap:8px;background:rgba(244,195,0,.12);border:1px solid rgba(244,195,0,.3);border-radius:6px;padding:7px 16px;margin-bottom:22px}
-.lpulse{width:8px;height:8px;background:var(--gold);border-radius:50%;animation:blink .9s ease-in-out infinite alternate}
-.ltext{font-size:13px;font-weight:700;color:var(--gold)}
-.seal{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:7px 14px;margin-bottom:18px}
-.stxt{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.6)}
-.hero h1{font-size:clamp(34px,8vw,76px);font-weight:900;line-height:1.0;letter-spacing:-3px;color:white;margin-bottom:16px;max-width:780px;margin-left:auto;margin-right:auto}
-.gold{color:var(--gold)}.dim{color:rgba(255,255,255,.25);font-weight:300}
-.herosub{font-size:17px;font-weight:400;color:rgba(255,255,255,.55);max-width:480px;margin:0 auto 36px;line-height:1.7}
-.herosub strong{color:rgba(255,255,255,.9);font-weight:700}
-.ctabtn{display:block;width:100%;max-width:500px;margin:0 auto;padding:17px 24px;background:var(--gold);color:var(--navy);border:none;border-radius:8px;font-family:'Inter',sans-serif;font-size:18px;font-weight:900;cursor:pointer;animation:glow 2.5s ease-in-out infinite}
+.hero h1{font-size:clamp(38px,8vw,80px);font-weight:900;line-height:1.0;letter-spacing:-3px;color:white;margin-bottom:20px;max-width:820px;margin-left:auto;margin-right:auto}
+.hero h1 .gold{color:var(--gold)}
+.hero h1 .light{color:rgba(255,255,255,.3);font-weight:300}
+.herosub{font-size:19px;font-weight:400;color:rgba(255,255,255,.6);max-width:540px;margin:0 auto 16px;line-height:1.75}
+.herosub strong{color:white;font-weight:700}
+.heronote{font-size:13px;color:rgba(255,255,255,.35);margin-bottom:36px;line-height:1.6}
+.heronote strong{color:rgba(255,255,255,.6);font-weight:600}
+.ctawrap{max-width:500px;margin:0 auto 12px}
+.ctabtn{display:block;width:100%;padding:18px 24px;background:var(--gold);color:var(--navy);border:none;border-radius:9px;font-family:'Inter',sans-serif;font-size:18px;font-weight:900;cursor:pointer;letter-spacing:-.3px;animation:glow 2.5s ease-in-out infinite}
 .ctabtn:hover{background:#FFD700;transform:translateY(-2px)}
 .orrow{display:flex;align-items:center;gap:10px;max-width:500px;margin:14px auto 12px}
 .orline{flex:1;height:1px;background:rgba(255,255,255,.1)}
-.ortxt{font-size:11px;color:rgba(255,255,255,.25);font-weight:600;letter-spacing:.5px}
-.gbtn{display:flex;align-items:center;justify-content:center;gap:10px;max-width:500px;width:100%;margin:0 auto 20px;padding:14px 20px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.8);cursor:pointer}
+.ortxt{font-size:11px;color:rgba(255,255,255,.2);font-weight:600;letter-spacing:.5px}
+.gbtn{display:flex;align-items:center;justify-content:center;gap:10px;max-width:500px;width:100%;margin:0 auto;padding:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.75);cursor:pointer}
 .gbtn:hover{background:rgba(255,255,255,.12)}
-.trustrow{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
-.titem{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.35)}
-.tstar{width:10px;height:10px;background:var(--gold);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);flex-shrink:0}
-.costrip{border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);padding:18px 20px;background:rgba(255,255,255,.03);margin-top:40px}
-.colbl{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);text-align:center;margin-bottom:14px}
-.corow{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
-.cocard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:7px;padding:10px 16px;text-align:center;min-width:110px}
-.coname{font-size:14px;font-weight:800;color:rgba(255,255,255,.75)}
-.cosec{font-size:10px;font-weight:600;color:rgba(255,255,255,.3);letter-spacing:.5px;margin-top:2px;text-transform:uppercase}
-.pbar{background:var(--navy2);padding:16px 20px;display:flex;justify-content:center;gap:48px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,.06)}
-.pitem{text-align:center}
-.pnum{font-size:22px;font-weight:900;color:var(--gold);letter-spacing:-.5px;line-height:1}
-.plbl{font-size:11px;color:rgba(255,255,255,.4);font-weight:500;margin-top:3px}
-.pmeta{font-size:10px;color:rgba(255,255,255,.2);margin-top:2px}
-.tsec{background:white;padding:56px 24px;border-bottom:3px solid var(--gold)}
-.tinner{max-width:820px;margin:0 auto;text-align:center}
-.th2{font-size:clamp(24px,4vw,40px);font-weight:900;letter-spacing:-1.5px;color:var(--navy);margin-bottom:8px;line-height:1.1}
-.tsub{font-size:15px;color:var(--ink3);max-width:460px;margin:0 auto 36px;line-height:1.7}
-.tlogos{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:700px;margin:0 auto}
-.tcard{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:16px 12px;text-align:center}
-.tcard:hover{border-color:var(--blue)}
-.tcname{font-size:14px;font-weight:900}
-.tcsec{font-size:10px;font-weight:600;color:var(--ink3);letter-spacing:.5px;text-transform:uppercase;margin-top:3px}
-.tdisc{font-size:11px;color:var(--ink3);text-align:center;margin-top:14px;font-style:italic}
-.urgsec{background:var(--red);padding:40px 24px;text-align:center}
-.urgh{font-size:clamp(22px,4vw,36px);font-weight:900;color:white;letter-spacing:-1px;margin-bottom:8px}
-.urgp{font-size:15px;color:rgba(255,255,255,.75);margin-bottom:28px;max-width:400px;margin-left:auto;margin-right:auto}
-.urgbtn{display:inline-block;padding:15px 36px;background:white;color:var(--red);font-family:'Inter',sans-serif;font-size:16px;font-weight:900;border:none;border-radius:7px;cursor:pointer}
-.urgbtn:hover{background:var(--gold);color:var(--navy)}
-.bsec{background:var(--bg);padding:64px 24px}
-.binner{max-width:820px;margin:0 auto}
-.btag{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;text-align:center}
-.bh2{font-size:clamp(22px,4vw,36px);font-weight:900;letter-spacing:-1.5px;color:var(--navy);margin-bottom:8px;text-align:center;line-height:1.1}
-.bsub2{font-size:15px;color:var(--ink3);text-align:center;max-width:440px;margin:0 auto 32px;line-height:1.7}
-.bgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
-.bcard{background:var(--navy);border-radius:10px;padding:24px}
-.bnum{width:38px;height:38px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:var(--navy);margin-bottom:14px}
-.bh{font-size:15px;font-weight:800;color:white;margin-bottom:6px}
-.bp{font-size:13px;color:rgba(255,255,255,.5);line-height:1.65}
-.timeline{background:white;border:1.5px solid var(--border);border-radius:10px;padding:24px;max-width:820px;margin:0 auto}
-.tltag{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:16px}
-.tlrows{display:flex;flex-direction:column;gap:12px}
-.tlrow{display:flex;align-items:flex-start;gap:14px}
-.tlnum{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:white;flex-shrink:0}
-.n1{background:var(--vblue)}.n2{background:var(--red)}.n3{background:#D4A800}.n4{background:var(--navy)}
-.tlh{font-size:14px;font-weight:700;color:var(--navy)}
-.tlp{font-size:13px;color:var(--ink3)}
-.segsec{background:white;padding:64px 24px;text-align:center;border-top:1px solid var(--border)}
-.segh{font-size:clamp(22px,4vw,36px);font-weight:900;letter-spacing:-1.5px;color:var(--navy);margin-bottom:8px}
-.segsub{font-size:15px;color:var(--ink3);margin-bottom:32px}
-.seggrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:820px;margin:0 auto 32px}
-.segcard{background:var(--bg);border:2px solid var(--border);border-radius:10px;padding:18px 12px;cursor:pointer;text-align:center;transition:all .2s}
-.segcard:hover,.segcard.on{border-color:var(--blue);background:rgba(27,79,216,.07)}
-.segnm{font-size:13px;font-weight:700;color:var(--navy)}
-.segbtn{padding:14px 40px;background:var(--blue);color:white;border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:16px;font-weight:800;cursor:pointer}
-.segbtn:hover{background:var(--blue2)}
-.ssec{background:var(--navy);padding:56px 24px;text-align:center}
-.sh{font-size:clamp(22px,3.5vw,34px);font-weight:900;color:white;letter-spacing:-1px;margin-bottom:8px}
-.sp{font-size:14px;color:rgba(255,255,255,.45);margin-bottom:32px;max-width:440px;margin-left:auto;margin-right:auto}
-.sgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:680px;margin:0 auto 32px}
-.scard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:18px;text-align:center}
-.sico2{width:36px;height:36px;background:rgba(27,79,216,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
-.sh2{font-size:13px;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:4px}
-.sp2{font-size:11px;color:rgba(255,255,255,.35);line-height:1.5}
-.scta{display:inline-block;padding:14px 36px;background:var(--gold);color:var(--navy);font-family:'Inter',sans-serif;font-size:15px;font-weight:900;border:none;border-radius:7px;cursor:pointer}
-.fsec{background:linear-gradient(180deg,var(--vblue) 0%,var(--navy) 100%);padding:80px 24px;text-align:center;border-top:4px solid var(--gold)}
-.fh{font-size:clamp(30px,6vw,60px);font-weight:900;color:white;letter-spacing:-2px;margin-bottom:12px;line-height:1.05}
-.fp{font-size:16px;font-weight:300;color:rgba(255,255,255,.55);max-width:400px;margin:0 auto 36px;line-height:1.7}
-.fform{display:flex;max-width:480px;margin:0 auto 12px;border-radius:8px;overflow:hidden;border:2px solid var(--gold)}
+
+/* CONFIANZA */
+.trust{background:var(--navy2);border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);padding:32px 24px}
+.trust-inner{max-width:760px;margin:0 auto}
+.trust-title{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:20px;text-align:center}
+.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.trust-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:18px 16px}
+.trust-icon{width:32px;height:32px;background:rgba(244,195,0,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.trust-h{font-size:14px;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:5px}
+.trust-p{font-size:12px;color:rgba(255,255,255,.4);line-height:1.65}
+
+/* COMO FUNCIONA */
+.how{background:white;padding:72px 24px}
+.how-inner{max-width:760px;margin:0 auto;text-align:center}
+.section-tag{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+.section-h{font-size:clamp(26px,4vw,42px);font-weight:900;letter-spacing:-1.5px;color:var(--navy);margin-bottom:8px;line-height:1.1}
+.section-sub{font-size:16px;color:var(--ink3);margin-bottom:40px;line-height:1.7;max-width:480px;margin-left:auto;margin-right:auto}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.step{background:var(--bg);border-radius:12px;padding:28px 20px;text-align:left}
+.step-n{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:var(--navy);margin-bottom:14px}
+.n1{background:var(--gold)}.n2{background:var(--gold)}.n3{background:var(--gold)}
+.step-h{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:6px}
+.step-p{font-size:13px;color:var(--ink3);line-height:1.65}
+
+/* PARA QUIEN */
+.who{background:var(--navy);padding:72px 24px;text-align:center}
+.who-inner{max-width:760px;margin:0 auto}
+.who-h{font-size:clamp(26px,4vw,42px);font-weight:900;letter-spacing:-1.5px;color:white;margin-bottom:12px;line-height:1.1}
+.who-sub{font-size:16px;color:rgba(255,255,255,.5);margin-bottom:36px;line-height:1.7;font-weight:300}
+.who-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:40px}
+.who-tag{padding:8px 16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:30px;font-size:14px;color:rgba(255,255,255,.7);font-weight:500}
+.who-cta{display:inline-block;padding:16px 40px;background:var(--gold);color:var(--navy);font-family:'Inter',sans-serif;font-size:16px;font-weight:900;border:none;border-radius:8px;cursor:pointer;letter-spacing:-.2px}
+.who-cta:hover{background:#FFD700}
+
+/* FINAL CTA */
+.final{background:linear-gradient(180deg,var(--vblue) 0%,var(--navy) 100%);padding:80px 24px;text-align:center;border-top:4px solid var(--gold)}
+.final-h{font-size:clamp(28px,5vw,52px);font-weight:900;color:white;letter-spacing:-2px;margin-bottom:12px;line-height:1.05}
+.final-h .gold{color:var(--gold)}
+.final-sub{font-size:16px;color:rgba(255,255,255,.5);margin:0 auto 36px;max-width:420px;line-height:1.7;font-weight:300}
+.fform{display:flex;max-width:480px;margin:0 auto 10px;border-radius:8px;overflow:hidden;border:2px solid var(--gold)}
 .fform input{flex:1;border:none;background:rgba(255,255,255,.08);padding:14px 18px;font-size:15px;font-family:'Inter',sans-serif;color:white;outline:none}
-.fform input::placeholder{color:rgba(255,255,255,.3)}
-.fform button{background:var(--gold);color:var(--navy);border:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:900;padding:14px 22px;cursor:pointer;white-space:nowrap}
-.fnote{font-size:12px;color:rgba(255,255,255,.25);margin-bottom:16px}
+.fform input::placeholder{color:rgba(255,255,255,.25)}
+.fform button{background:var(--gold);color:var(--navy);border:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:900;padding:14px 20px;cursor:pointer;white-space:nowrap}
+.fnote{font-size:12px;color:rgba(255,255,255,.2);margin-bottom:14px}
 .fgor{display:flex;align-items:center;gap:10px;max-width:480px;margin:12px auto}
-.fgoline{flex:1;height:1px;background:rgba(255,255,255,.1)}
-.fgotxt{font-size:11px;color:rgba(255,255,255,.25);font-weight:600;letter-spacing:.5px}
-.fgbtn{display:flex;align-items:center;justify-content:center;gap:10px;max-width:480px;width:100%;margin:0 auto;padding:13px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.75);cursor:pointer}
-.fgbtn:hover{background:rgba(255,255,255,.12)}
-footer{background:var(--navy);padding:22px 32px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.07)}
-.fbl{font-size:13px;font-weight:800;color:rgba(255,255,255,.4)}.fbl span{color:var(--gold)}
+.fgoline{flex:1;height:1px;background:rgba(255,255,255,.08)}
+.fgotxt{font-size:11px;color:rgba(255,255,255,.2);font-weight:600;letter-spacing:.5px}
+.fgbtn{display:flex;align-items:center;justify-content:center;gap:10px;max-width:480px;width:100%;margin:0 auto;padding:13px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.65);cursor:pointer}
+.fgbtn:hover{background:rgba(255,255,255,.1)}
+
+/* FOOTER */
+footer{background:var(--navy);padding:20px 32px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.07)}
+.fbl{font-size:13px;font-weight:800;color:rgba(255,255,255,.35)}.fbl span{color:var(--gold)}
 .fbr{display:flex;gap:14px}.fbr a{font-size:11px;color:rgba(255,255,255,.2);text-decoration:none}
-.ov{display:none;position:fixed;inset:0;background:rgba(7,20,40,.88);z-index:9999;align-items:center;justify-content:center;padding:16px}
+.fbr a:hover{color:rgba(255,255,255,.5)}
+
+/* MODAL */
+.ov{display:none;position:fixed;inset:0;background:rgba(7,20,40,.9);z-index:9999;align-items:center;justify-content:center;padding:16px}
 .ov.open{display:flex}
-.mbox{background:var(--navy2);border:1px solid rgba(255,255,255,.15);border-top:4px solid var(--gold);border-radius:14px;width:100%;max-width:480px;padding:32px;position:relative;max-height:92vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.6);z-index:10000}
-.mclose{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:6px;color:rgba(255,255,255,.4);font-size:13px;cursor:pointer;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif}
-.mclose:hover{background:rgba(255,255,255,.14)}
-.mprog{height:3px;background:rgba(255,255,255,.1);border-radius:2px;margin-bottom:24px}
+.mbox{background:var(--navy2);border:1px solid rgba(255,255,255,.12);border-top:4px solid var(--gold);border-radius:14px;width:100%;max-width:460px;padding:32px;position:relative;max-height:92vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.7)}
+.mclose{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.4);font-size:13px;cursor:pointer;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif}
+.mprog{height:3px;background:rgba(255,255,255,.08);border-radius:2px;margin-bottom:24px}
 .mbar{height:100%;background:var(--gold);border-radius:2px;transition:width .35s}
-.mback{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.3);background:none;border:none;cursor:pointer;padding:0;margin-bottom:14px;font-family:'Inter',sans-serif}
+.mback{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.25);background:none;border:none;cursor:pointer;padding:0;margin-bottom:14px;font-family:'Inter',sans-serif}
+.mback:hover{color:rgba(255,255,255,.5)}
 .mt{font-size:22px;font-weight:900;color:white;letter-spacing:-.5px;margin-bottom:5px;line-height:1.2}
-.ms{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px;line-height:1.6;font-weight:300}
-.ml{display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:5px}
-.mi{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:7px;color:white;font-family:'Inter',sans-serif;font-size:15px;padding:11px 13px;outline:none;transition:border-color .15s}
+.ms{font-size:13px;color:rgba(255,255,255,.35);margin-bottom:20px;line-height:1.6;font-weight:300}
+.ml{display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:5px}
+.mi{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:7px;color:white;font-family:'Inter',sans-serif;font-size:15px;padding:12px 14px;outline:none;transition:border-color .15s}
 .mi:focus{border-color:var(--gold)}
 .mi::placeholder{color:rgba(255,255,255,.2)}
 .mg{margin-bottom:13px}
 .mgr{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:13px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
-.chip{padding:6px 11px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:5px;font-size:13px;color:rgba(255,255,255,.55);cursor:pointer;user-select:none;font-family:'Inter',sans-serif}
+.chip{padding:6px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:5px;font-size:13px;color:rgba(255,255,255,.5);cursor:pointer;user-select:none;font-family:'Inter',sans-serif}
 .chip:hover{border-color:rgba(255,255,255,.3)}
 .chip.on{background:var(--blue);border-color:var(--blue);color:white;font-weight:600}
-.trow{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:7px;cursor:pointer;margin-bottom:7px}
-.trow:hover,.trow.on{border-color:var(--gold);background:rgba(244,195,0,.07)}
-.tlabel{font-size:14px;color:rgba(255,255,255,.8);font-weight:500}
-.tpill{width:34px;height:19px;border-radius:10px;background:rgba(255,255,255,.15);position:relative;flex-shrink:0}
+.trow{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:7px;cursor:pointer;margin-bottom:7px}
+.trow:hover,.trow.on{border-color:var(--gold);background:rgba(244,195,0,.06)}
+.tlabel{font-size:14px;color:rgba(255,255,255,.75);font-weight:500}
+.tpill{width:34px;height:19px;border-radius:10px;background:rgba(255,255,255,.12);position:relative;flex-shrink:0}
 .tpill.on{background:var(--gold)}
 .tthumb{width:15px;height:15px;border-radius:50%;background:white;position:absolute;top:2px;left:2px;transition:left .2s}
 .tpill.on .tthumb{left:17px}
-.mbtn{width:100%;padding:14px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:15px;font-weight:900;cursor:pointer;margin-top:10px}
+.mbtn{width:100%;padding:14px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:15px;font-weight:900;cursor:pointer;margin-top:10px;letter-spacing:-.2px}
+.mbtn:hover{background:#FFD700}
 .mbtn:disabled{opacity:.4;cursor:not-allowed}
-.merr{display:flex;align-items:flex-start;gap:7px;background:rgba(207,20,43,.2);border:1px solid rgba(207,20,43,.4);border-radius:6px;padding:9px 12px;font-size:13px;color:#FCA5A5;margin-bottom:12px}
+.merr{display:flex;align-items:flex-start;gap:7px;background:rgba(207,20,43,.15);border:1px solid rgba(207,20,43,.35);border-radius:6px;padding:9px 12px;font-size:13px;color:#FCA5A5;margin-bottom:12px}
 .mgor{display:flex;align-items:center;gap:10px;margin:12px 0 10px}
-.mgorline{flex:1;height:1px;background:rgba(255,255,255,.1)}
-.mgortxt{font-size:11px;color:rgba(255,255,255,.2);font-weight:600;letter-spacing:.5px}
-.mgbtn{width:100%;padding:11px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.7);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px}
-.mgbtn:hover{background:rgba(255,255,255,.1)}
-.vstep{border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:14px;margin-bottom:12px}
+.mgorline{flex:1;height:1px;background:rgba(255,255,255,.08)}
+.mgortxt{font-size:11px;color:rgba(255,255,255,.18);font-weight:600;letter-spacing:.5px}
+.mgbtn{width:100%;padding:11px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.6);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px}
+.mgbtn:hover{background:rgba(255,255,255,.09)}
+.vstep{border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:14px;margin-bottom:14px}
 .vsr{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07)}
 .vsr:last-child{border-bottom:none}
 .vi{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -175,36 +152,32 @@ footer{background:var(--navy);padding:22px 32px;display:flex;justify-content:spa
 .vb{font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;font-family:'Inter',sans-serif}
 .vb.ok{background:rgba(4,120,87,.2);color:#6EE7B7}
 .vb.pend{background:rgba(27,79,216,.2);color:#93B4F5}
-.sico3{width:42px;height:42px;border-radius:50%;background:rgba(4,120,87,.2);border:1px solid rgba(4,120,87,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.sico3{width:44px;height:44px;border-radius:50%;background:rgba(4,120,87,.2);border:1px solid rgba(4,120,87,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
 .rrow{display:flex;margin-bottom:10px}
-.rin{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-right:none;border-radius:7px 0 0 7px;font-size:12px;color:rgba(255,255,255,.5);padding:9px 11px;outline:none;font-family:monospace}
+.rin{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-right:none;border-radius:7px 0 0 7px;font-size:12px;color:rgba(255,255,255,.45);padding:9px 11px;outline:none;font-family:monospace}
 .rcp{background:var(--gold);color:var(--navy);border:none;font-size:12px;font-weight:800;padding:9px 13px;border-radius:0 7px 7px 0;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap}
 .rcp.done{background:var(--green);color:white}
 .sbrow{display:flex;gap:7px;flex-wrap:wrap}
-.sbtn2{display:inline-flex;align-items:center;gap:5px;padding:7px 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:5px;font-size:12px;font-weight:600;color:rgba(255,255,255,.6);cursor:pointer;font-family:'Inter',sans-serif;text-decoration:none}
+.sbtn2{display:inline-flex;align-items:center;gap:5px;padding:7px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:5px;font-size:12px;font-weight:600;color:rgba(255,255,255,.55);cursor:pointer;font-family:'Inter',sans-serif;text-decoration:none}
+
 @media(max-width:680px){
   .nav{padding:0 16px}
-  .tlogos,.bgrid,.sgrid{grid-template-columns:repeat(2,1fr)}
-  .seggrid{grid-template-columns:repeat(2,1fr)}
-  .pbar{gap:20px}
+  .hero h1{letter-spacing:-1.5px}
+  .trust-grid,.steps{grid-template-columns:1fr}
   .fform{flex-direction:column}
   .fform input{border-radius:7px 7px 0 0;border-right:2px solid var(--gold);border-bottom:none}
   .fform button{border-radius:0 0 7px 7px}
-  footer{flex-direction:column;gap:12px;text-align:center}
+  footer{flex-direction:column;gap:10px;text-align:center}
   .fbr{justify-content:center}
   .mgr{grid-template-columns:1fr}
+  .who-tags{gap:8px}
 }
 </style>
 </head>
 <body>
 
-<div class="abar">
-  <span class="adot"></span>
-  Registro de Miembros Fundadores abierto — plazas limitadas por capacidad de verificacion
-</div>
-
 <nav class="nav">
-  <div style="display:flex;align-items:center;gap:10px">
+  <div class="nlogo">
     <div class="nmark">
       <svg viewBox="0 0 16 16" fill="none" width="16" height="16">
         <circle cx="8" cy="8" r="2" fill="white"/>
@@ -216,156 +189,151 @@ footer{background:var(--navy);padding:22px 32px;display:flex;justify-content:spa
     </div>
     <div>
       <div class="nname"><span>Nodus</span>Pro</div>
-      <div class="nsub">Directorio Venezolano - Gratis</div>
+      <div class="nsub">Directorio profesional venezolano</div>
     </div>
   </div>
-  <button class="ncta" onclick="abrirModal()">Registrarme gratis</button>
+  <button class="ncta" onclick="abrirModal()">Crear mi perfil gratis</button>
 </nav>
 
 <section class="hero">
   <div class="stripe"><div class="s1"></div><div class="s2"></div><div class="s3"></div></div>
-  <div class="livepill">
-    <span class="lpulse"></span>
-    <span class="ltext"><span id="lnum" style="font-size:14px;font-weight:900;color:white">—</span> Miembros Fundadores registrados</span>
+
+  <h1>Tu experiencia es real.<br><span class="gold">El problema es que</span><br><span class="light">nadie sabe que existes.</span></h1>
+
+  <p class="herosub">
+    NodusPro es el directorio de profesionales venezolanos.
+    Creas tu perfil, lo verificamos, y las empresas que buscan
+    talento venezolano <strong>te encuentran a ti</strong> — no al revés.
+  </p>
+
+  <p class="heronote">
+    <strong>Sin costo. Sin cédula. Sin burocracia.</strong><br>
+    Solo tu nombre y tu experiencia.
+  </p>
+
+  <div class="ctawrap">
+    <button class="ctabtn" onclick="abrirModal()">Crear mi perfil gratis</button>
   </div>
-  <div class="seal">
-    <div style="width:20px;height:20px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-      <svg viewBox="0 0 16 16" fill="none" width="11" height="11"><path d="M8 2l1.5 3 3.5.5-2.5 2.4.6 3.5L8 10l-3.1 1.4.6-3.5L3 5.5l3.5-.5z" fill="#071428"/></svg>
-    </div>
-    <span class="stxt">Membresia Fundadora - Plazas Limitadas - 2026</span>
-  </div>
-  <h1>Se uno de los<br><span class="gold">primeros</span><br><span class="dim">profesionales verificados.</span></h1>
-  <p class="herosub"><strong>El directorio esta en construccion.</strong> Los profesionales que se registren ahora seran los primeros que vean las empresas cuando abra.</p>
-  <button class="ctabtn" onclick="abrirModal()">Crear mi perfil gratis</button>
+
   <div class="orrow">
     <div class="orline"></div><span class="ortxt">O CONTINUA CON</span><div class="orline"></div>
   </div>
+
   <button class="gbtn" onclick="loginGoogle()">
     <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-    Registrarme con Google
+    Continuar con Google
   </button>
-  <div class="trustrow">
-    <div class="titem"><div class="tstar"></div><span>Totalmente gratuito</span></div>
-    <div class="titem"><div class="tstar"></div><span>Verificado en menos de 4 horas</span></div>
-    <div class="titem"><div class="tstar"></div><span>Tu informacion, protegida</span></div>
-  </div>
-  <div class="costrip">
-    <p class="colbl">Empresas que van a buscar talento venezolano en el directorio</p>
-    <div class="corow">
-      <div class="cocard"><div class="coname" style="color:#60A5FA">Chevron</div><div class="cosec">Energia USA</div></div>
-      <div class="cocard"><div class="coname" style="color:#F87171">Repsol</div><div class="cosec">O&amp;G Espana</div></div>
-      <div class="cocard"><div class="coname" style="color:#F87171">TotalEnergies</div><div class="cosec">Energia Francia</div></div>
-      <div class="cocard"><div class="coname" style="color:#F87171">Halliburton</div><div class="cosec">OFS USA</div></div>
-      <div class="cocard"><div class="coname" style="color:#60A5FA">SLB</div><div class="cosec">OFS Global</div></div>
-      <div class="cocard"><div class="coname" style="color:#F97316">Woodside</div><div class="cosec">O&amp;G Australia</div></div>
-    </div>
-  </div>
 </section>
 
-<div class="pbar">
-  <div class="pitem"><div class="pnum" id="pnum">—</div><div class="plbl">Miembros Fundadores registrados</div><div class="pmeta">actualizado en tiempo real</div></div>
-  <div class="pitem"><div class="pnum" style="font-size:16px">menos de 4h</div><div class="plbl">tiempo max. de verificacion</div><div class="pmeta">compromiso del equipo</div></div>
-  <div class="pitem"><div class="pnum">$0</div><div class="plbl">costo para profesionales</div><div class="pmeta">para siempre, sin excepciones</div></div>
-</div>
-
-<section class="tsec">
-  <div class="tinner">
-    <div style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:12px">Quienes van a buscar aqui</div>
-    <h2 class="th2">El directorio donde las<br>empresas serias van a buscar.</h2>
-    <p class="tsub">Cuando el directorio abra, estas empresas podran encontrar talento venezolano verificado directamente. Por eso verificamos cada perfil antes de publicarlo.</p>
-    <div class="tlogos">
-      <div class="tcard"><div class="tcname" style="color:#0068C7">Chevron</div><div class="tcsec">Energia USA</div></div>
-      <div class="tcard"><div class="tcname" style="color:#E41F13">Repsol</div><div class="tcsec">Petroleo Gas Espana</div></div>
-      <div class="tcard"><div class="tcname" style="color:#E6000A">TotalEnergies</div><div class="tcsec">Energia Francia</div></div>
-      <div class="tcard"><div class="tcname" style="color:#CF2029">Halliburton</div><div class="tcsec">OFS USA</div></div>
-      <div class="tcard"><div class="tcname" style="color:#009BD9">SLB</div><div class="tcsec">Servicios O&amp;G</div></div>
-      <div class="tcard"><div class="tcname" style="color:#E8401C">Woodside</div><div class="tcsec">O&amp;G Australia</div></div>
-      <div class="tcard"><div class="tcname" style="color:#005394">eni</div><div class="tcsec">Petroleo Italia</div></div>
-      <div class="tcard"><div class="tcname" style="color:#009900">bp</div><div class="tcsec">Energia UK</div></div>
-    </div>
-    <p class="tdisc">Los nombres de empresas se mencionan como referencia de mercado. NodusPro no tiene afiliacion oficial con ninguna de ellas.</p>
-  </div>
-</section>
-
-<section class="urgsec">
-  <p style="font-size:11px;font-weight:800;letter-spacing:2px;color:rgba(255,255,255,.5);text-transform:uppercase;margin-bottom:10px">No esperes mas</p>
-  <h2 class="urgh">Los primeros perfiles<br>son los mas vistos.</h2>
-  <p class="urgp">El directorio esta creciendo ahora mismo. Cada dia que esperas es un dia que otro profesional ocupa tu posicion.</p>
-  <button class="urgbtn" onclick="abrirModal()">Crear mi perfil gratis</button>
-</section>
-
-<section class="bsec">
-  <div class="binner">
-    <div class="btag">Por que registrarte hoy</div>
-    <h2 class="bh2">Estamos en construccion.<br>Esa es exactamente la ventaja.</h2>
-    <p class="bsub2">Los primeros perfiles son los primeros que ven las empresas. Esa ventaja desaparece cuando el directorio crezca.</p>
-    <div class="bgrid">
-      <div class="bcard"><div class="bnum">1</div><div class="bh">Primero en el directorio</div><p class="bp">Cuando una empresa busque talento, los perfiles mas antiguos aparecen primero. Ser fundador te da esa ventaja de forma permanente.</p></div>
-      <div class="bcard"><div class="bnum">2</div><div class="bh">Badge Miembro Fundador</div><p class="bp">Tu perfil lleva el sello de Miembro Fundador. Las empresas veran que fuiste de los primeros verificados.</p></div>
-      <div class="bcard"><div class="bnum">3</div><div class="bh">Plan Destacado gratis para siempre</div><p class="bp">Los Miembros Fundadores tienen el plan Destacado sin costo. Cuando el directorio abra al publico, ese plan costara $9.90 al mes. Los fundadores nunca pagan.</p></div>
-    </div>
-    <div class="timeline">
-      <div class="tltag">El proceso paso a paso</div>
-      <div class="tlrows">
-        <div class="tlrow"><div class="tlnum n1">1</div><div><span class="tlh">Te registras ahora</span> — <span class="tlp">Gratis. Sin tarjeta de credito. En menos de 30 segundos.</span></div></div>
-        <div class="tlrow"><div class="tlnum n2">2</div><div><span class="tlh">El equipo verifica tu perfil</span> — <span class="tlp">En menos de 4 horas recibes confirmacion por email.</span></div></div>
-        <div class="tlrow"><div class="tlnum n3">3</div><div><span class="tlh">Tu perfil queda activo</span> — <span class="tlp">Con el badge de Miembro Fundador. Visible para empresas internacionales.</span></div></div>
-        <div class="tlrow"><div class="tlnum n4" style="color:var(--gold)">4</div><div><span class="tlh">Las empresas te contactan</span> — <span class="tlp">El mensaje llega a tu email. Tu decides si respondes.</span></div></div>
+<section class="trust">
+  <div class="trust-inner">
+    <div class="trust-title">Por que confiar en NodusPro</div>
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="trust-icon">
+          <svg viewBox="0 0 20 20" fill="none" width="18" height="18"><path d="M10 2l6 3v5c0 4-2.5 7-6 8-3.5-1-6-4-6-8V5l6-3z" stroke="#F4C300" stroke-width="1.5" stroke-linecap="round"/><path d="M7 10l2 2 4-4" stroke="#F4C300" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="trust-h">Sin cédula ni documentos</div>
+        <p class="trust-p">No pedimos cédula, dirección ni ningún dato que no sea tu nombre y correo.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">
+          <svg viewBox="0 0 20 20" fill="none" width="18" height="18"><rect x="3" y="9" width="14" height="9" rx="2" stroke="#F4C300" stroke-width="1.5"/><path d="M6 9V6a4 4 0 0 1 8 0v3" stroke="#F4C300" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="trust-h">Tus datos no se comparten</div>
+        <p class="trust-p">Tus datos no se comparten con ningúna institución pública ni privada. Solo tú decides quien puede contactarte.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">
+          <svg viewBox="0 0 20 20" fill="none" width="18" height="18"><path d="M15 5L5 15M5 5l10 10" stroke="#F4C300" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="trust-h">Sal cuando quieras</div>
+        <p class="trust-p">Eliminas tu perfil con un clic y no queda ningúna traza. Sin formularios, sin esperas, sin preguntas.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="segsec">
-  <p style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:10px">Cual es tu sector</p>
-  <h2 class="segh">NodusPro es para todos<br>los profesionales venezolanos.</h2>
-  <p class="segsub">No importa tu industria. Si eres venezolano con experiencia y quieres conectar con el mundo, NodusPro es para ti.</p>
-  <div class="seggrid">
-    <div class="segcard on" onclick="selSector(this,'Petroleo y Gas')"><div style="font-size:20px;margin-bottom:6px">&#9981;</div><div class="segnm">Petroleo y Gas</div></div>
-    <div class="segcard" onclick="selSector(this,'Ingenieria')"><div style="font-size:20px;margin-bottom:6px">&#9881;</div><div class="segnm">Ingenieria</div></div>
-    <div class="segcard" onclick="selSector(this,'Negocios y Finanzas')"><div style="font-size:20px;margin-bottom:6px">&#128188;</div><div class="segnm">Negocios y Finanzas</div></div>
-    <div class="segcard" onclick="selSector(this,'Tecnologia')"><div style="font-size:20px;margin-bottom:6px">&#128187;</div><div class="segnm">Tecnologia</div></div>
-    <div class="segcard" onclick="selSector(this,'Construccion y EPC')"><div style="font-size:20px;margin-bottom:6px">&#127959;</div><div class="segnm">Construccion y EPC</div></div>
-    <div class="segcard" onclick="selSector(this,'Salud')"><div style="font-size:20px;margin-bottom:6px">&#9877;</div><div class="segnm">Salud</div></div>
-    <div class="segcard" onclick="selSector(this,'Legal')"><div style="font-size:20px;margin-bottom:6px">&#9878;</div><div class="segnm">Legal</div></div>
-    <div class="segcard" onclick="selSector(this,'Otro')"><div style="font-size:20px;margin-bottom:6px">&#10010;</div><div class="segnm">Otro sector</div></div>
+<section class="how">
+  <div class="how-inner">
+    <div class="section-tag">Como funciona</div>
+    <h2 class="section-h">Asi de simple.</h2>
+    <p class="section-sub">Tres pasos. Menos de 30 segundos. Sin tramites.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n n1">1</div>
+        <div class="step-h">Creas tu perfil</div>
+        <p class="step-p">Solo tu nombre y tu email. En menos de 30 segundos. Gratis para siempre.</p>
+      </div>
+      <div class="step">
+        <div class="step-n n2">2</div>
+        <div class="step-h">Lo verificamos en menos de 4 horas</div>
+        <p class="step-p">El equipo revisa tu perfil y te confirma por email. Sin burocracia.</p>
+      </div>
+      <div class="step">
+        <div class="step-n n3">3</div>
+        <div class="step-h">Subes tu CV y la IA hace el resto</div>
+        <p class="step-p">Sube tu CV en PDF o Word y la inteligencia artificial extrae tu experiencia, cargo y especialidad automáticamente. Sin llenar campos uno por uno.</p>
+      </div>
+      <div class="step">
+        <div class="step-n n1">4</div>
+        <div class="step-h">Las empresas te encuentran</div>
+        <p class="step-p">Tu perfil completo queda visible para empresas que buscan talento venezolano. El contacto llega directamente a tu email.</p>
+      </div>
+    </div>
   </div>
-  <button class="segbtn" id="segbtn" onclick="abrirModal()">Crear mi perfil gratis</button>
 </section>
 
-<section class="ssec">
-  <p style="font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(244,195,0,.6);margin-bottom:10px">Tu informacion esta segura</p>
-  <h2 class="sh">Tus datos,<br>protegidos.</h2>
-  <p class="sp">Nos tomamos la seguridad de tu informacion tan en serio como las empresas mas grandes del mundo.</p>
-  <div class="sgrid">
-    <div class="scard"><div class="sico2"><svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M12 2l7 4v6c0 5-3.5 9.7-7 11C8.5 21.7 5 17 5 12V6l7-4z" stroke="white" stroke-width="1.8" stroke-linecap="round"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div><div class="sh2">Tu email es privado</div><p class="sp2">Las empresas no ven tu email. Tu decides cuando compartirlo.</p></div>
-    <div class="scard"><div class="sico2"><svg viewBox="0 0 24 24" fill="none" width="18" height="18"><rect x="3" y="11" width="18" height="11" rx="2" stroke="white" stroke-width="1.8"/><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div><div class="sh2">Cifrado total</div><p class="sp2">Infraestructura enterprise con cifrado SSL.</p></div>
-    <div class="scard"><div class="sico2"><svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div><div class="sh2">Sal cuando quieras</div><p class="sp2">Elimina tu cuenta con un clic. Sin formularios.</p></div>
+<section class="who">
+  <div class="who-inner">
+    <h2 class="who-h">Para venezolanos<br>con experiencia.<br>Donde estés.</h2>
+    <p class="who-sub">Ingeniero en Maracaibo o en Madrid. Médico en Caracas o en Bogota. Programador en Valencia o en Miami. Contador, abogado, técnico, arquitecto, enfermero. Si eres venezolano y tienes experiencia, tienes un lugar aquí.</p>
+    <div class="who-tags">
+      <span class="who-tag">Ingeniería</span>
+      <span class="who-tag">Petroleo y Gas</span>
+      <span class="who-tag">Tecnologia</span>
+      <span class="who-tag">Salud</span>
+      <span class="who-tag">Finanzas</span>
+      <span class="who-tag">Construcción</span>
+      <span class="who-tag">Legal</span>
+      <span class="who-tag">Educación</span>
+      <span class="who-tag">Administración</span>
+      <span class="who-tag">Logística</span>
+      <span class="who-tag">Marketing</span>
+      <span class="who-tag">Recursos Humanos</span>
+      <span class="who-tag">Y muchos mas</span>
+    </div>
+    <button class="who-cta" onclick="abrirModal()">Crear mi perfil gratis</button>
   </div>
-  <button class="scta" onclick="abrirModal()">Crear mi perfil gratis</button>
 </section>
 
-<section class="fsec">
-  <div style="height:4px;max-width:200px;margin:0 auto 32px;border-radius:2px;overflow:hidden;display:flex">
-    <div style="flex:1;background:var(--vblue)"></div><div style="flex:1;background:var(--red)"></div><div style="flex:1;background:var(--gold)"></div>
+<section class="final">
+  <div style="height:4px;max-width:180px;margin:0 auto 36px;border-radius:2px;overflow:hidden;display:flex">
+    <div style="flex:1;background:var(--vblue)"></div>
+    <div style="flex:1;background:var(--red)"></div>
+    <div style="flex:1;background:var(--gold)"></div>
   </div>
-  <h2 class="fh">El talento venezolano<br>tiene su lugar<br>en el <span class="gold">mundo.</span></h2>
-  <p class="fp">Registro gratuito. Sin tarjeta de credito. El directorio siempre sera gratis para profesionales venezolanos.</p>
+  <h2 class="final-h">Tu experiencia merece<br>ser <span class="gold">encontrada.</span></h2>
+  <p class="final-sub">Gratis para siempre. Sin tarjeta de credito. Sin tramites.</p>
   <div class="fform">
     <input type="email" id="femail" placeholder="tu@correo.com" onkeydown="if(event.key==='Enter')iniciarDesdeForm()">
     <button onclick="iniciarDesdeForm()">Registrarme</button>
   </div>
-  <p class="fnote">Gratuito para siempre - Verificado - Sin spam</p>
+  <p class="fnote">Sin costo · Sin cédula · Sin datos del gobierno · Sal cuando quieras</p>
   <div class="fgor"><div class="fgoline"></div><span class="fgotxt">O</span><div class="fgoline"></div></div>
   <button class="fgbtn" onclick="loginGoogle()">
     <svg width="17" height="17" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-    Registrarme con Google
+    Continuar con Google
   </button>
 </section>
 
 <footer>
-  <div class="fbl"><span>Nodus</span>Pro - noduspro.net</div>
-  <div class="fbr"><a href="/privacidad">Privacidad</a><a href="/terminos">Terminos</a><a href="/admin">Admin</a></div>
+  <div class="fbl"><span>Nodus</span>Pro</div>
+  <div class="fbr">
+    <a href="/privacidad">Privacidad</a>
+    <a href="/terminos">Terminos</a>
+    <a href="/admin">Admin</a>
+  </div>
 </footer>
 
 <div class="ov" id="overlay" onclick="if(event.target===this)cerrarModal()">
@@ -378,11 +346,10 @@ footer{background:var(--navy);padding:22px 32px;display:flex;justify-content:spa
 
 <script>
 var _exitShown=false;
-var COUNTER_OFFSET=1000;
 var SB='https://eettdimwdjyqniodefop.supabase.co';
 var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
 var paso=0;
-var sector='Petroleo y Gas';
+var sector='';
 var fd={email:'',fn:'',ln1:'',disponibilidad:'now'};
 
 (function(){
@@ -413,35 +380,12 @@ var fd={email:'',fn:'',ln1:'',disponibilidad:'now'};
   }catch(e){}
 })();
 
-function cargarContador(){
-  fetch(SB+'/rest/v1/rpc/get_waitlist_count',{
-    method:'POST',
-    headers:{'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':'application/json'},
-    body:'{}'
-  }).then(function(r){return r.json();}).then(function(n){
-    var total=typeof n==='number'?n:parseInt(n)||0;
-    var shown=total+COUNTER_OFFSET;
-    var e1=document.getElementById('lnum');
-    var e2=document.getElementById('pnum');
-    if(e1)e1.textContent=shown;
-    if(e2)e2.textContent=shown;
-  }).catch(function(){});
-}
-cargarContador();
-setInterval(cargarContador,30000);
-
-function selSector(el,nombre){
-  document.querySelectorAll('.segcard').forEach(function(c){c.classList.remove('on');});
-  el.classList.add('on');
-  sector=nombre;
-}
-
 function abrirModal(){
   _exitShown=true;
   document.getElementById('overlay').classList.add('open');
   document.body.style.overflow='hidden';
   paso=0;renderModal();
-  setTimeout(function(){var inp=document.getElementById('ie');if(inp)inp.focus();},150);
+  setTimeout(function(){var i=document.getElementById('ie');if(i)i.focus();},150);
 }
 function cerrarModal(){
   document.getElementById('overlay').classList.remove('open');
@@ -477,10 +421,9 @@ function mostrarError(msg){
 }
 
 function p0(){
-  return '<div style="text-align:center;margin-bottom:20px">'+
-    '<div style="font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Membresia Fundadora - Gratis</div>'+
-    '<div style="font-size:22px;font-weight:900;color:white;letter-spacing:-.5px;line-height:1.2;margin-bottom:6px">Tu perfil verificado<br>en menos de 4 horas.</div>'+
-    '<div style="font-size:13px;color:rgba(255,255,255,.4);line-height:1.5">Sin tarjeta de credito - Sin spam</div>'+
+  return '<div style="text-align:center;margin-bottom:22px">'+
+    '<div style="font-size:23px;font-weight:900;color:white;letter-spacing:-.5px;line-height:1.2;margin-bottom:8px">Tu perfil verificado<br>en menos de 4 horas.</div>'+
+    '<div style="font-size:13px;color:rgba(255,255,255,.35);line-height:1.6">Sin costo &middot; Sin cédula &middot; Sin datos del gobierno</div>'+
     '</div>'+
     '<div class="mg"><input class="mi" type="email" id="ie" placeholder="tu@correo.com" value="'+fd.email+'" style="font-size:16px;padding:14px;text-align:center"></div>'+
     '<button class="mbtn" onclick="avanzar()">Continuar</button>'+
@@ -491,7 +434,7 @@ function p0(){
 function p1(){
   return '<button class="mback" onclick="paso--;renderModal()">VOLVER</button>'+
     '<div class="mt">Como te llamas?</div>'+
-    '<div class="ms">Solo nombre y apellido son obligatorios.</div>'+
+    '<div class="ms">Nombre y apellido — nada más por ahora.</div>'+
     '<div class="mgr">'+
     '<div><label class="ml">Nombre *</label><input class="mi" id="ifn" placeholder="Carlos" value="'+fd.fn+'"></div>'+
     '<div><label class="ml">Apellido *</label><input class="mi" id="iln1" placeholder="Rodriguez" value="'+fd.ln1+'"></div>'+
@@ -500,16 +443,15 @@ function p1(){
 }
 
 function p2(){
-  var SP=['Petroleo y Gas','Ingenieria','Tecnologia','Negocios','Construccion','Salud','Legal','Otro'];
+  var SP=['Ingeniería','Petroleo y Gas','Tecnologia','Salud','Finanzas','Construcción','Legal','Educación','Administración','Logística','Marketing','Otro'];
   var cs=SP.map(function(s){
-    return '<span class="chip'+(sector===s?' on':'')+'" onclick="setSector2(this,\''+s+'\')">'+s+'</span>';
+    return '<span class="chip'+(sector===s?' on':'')+'" onclick="setSector(this,\''+s+'\')">'+s+'</span>';
   }).join('');
   return '<button class="mback" onclick="paso--;renderModal()">VOLVER</button>'+
     '<div class="mt">Casi listo</div>'+
     '<div class="ms">Podras completar tu experiencia profesional una vez que tu perfil este activo.</div>'+
-    '<div class="mg"><label class="ml">Tu sector (opcional)</label>'+
-    '<div class="chips">'+cs+'</div></div>'+
-    '<div class="mg"><label class="ml">Disponibilidad (opcional)</label>'+
+    '<div class="mg"><label class="ml">Tu sector (opciónal)</label><div class="chips">'+cs+'</div></div>'+
+    '<div class="mg"><label class="ml">Disponibilidad (opciónal)</label>'+
     '<div class="trow'+(fd.disponibilidad==='now'?' on':'')+'" onclick="setDisp(\'now\')">'+
     '<div><div class="tlabel">Disponible ahora</div></div>'+
     '<div class="tpill'+(fd.disponibilidad==='now'?' on':'')+'"><div class="tthumb"></div></div></div>'+
@@ -518,23 +460,23 @@ function p2(){
     '<div class="tpill'+(fd.disponibilidad==='no'?' on':'')+'"><div class="tthumb"></div></div></div>'+
     '</div>'+
     '<button class="mbtn" onclick="enviar()">Registrarme gratis</button>'+
-    '<button onclick="enviar()" style="width:100%;padding:10px;background:transparent;border:none;font-family:Inter,sans-serif;font-size:13px;color:rgba(255,255,255,.35);cursor:pointer;margin-top:4px">Omitir y registrarme</button>';
+    '<button onclick="enviar()" style="width:100%;padding:10px;background:transparent;border:none;font-family:Inter,sans-serif;font-size:13px;color:rgba(255,255,255,.3);cursor:pointer;margin-top:4px">Omitir y registrarme</button>';
 }
 
 function pFin(){
   var code=(fd.email.split('@')[0]||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8);
-  var wa='Registrate en NodusPro antes de que cierren el acceso fundador. Es el directorio que van a usar las petroleras internacionales para contratar venezolanos. Es gratis y los primeros en entrar quedan como fundadores para siempre y con plan destacado gratis de por vida. noduspro.net?ref='+code;
-  return '<div style="text-align:center;padding:8px 0 16px">'+
+  var wa='Registrate en NodusPro, el directorio de profesionales venezolanos. Es gratis y los primeros en entrar quedan como fundadores para siempre con plan destacado gratis de por vida. noduspro.net?ref='+code;
+  return '<div style="text-align:center;padding:4px 0 18px">'+
     '<div class="sico3"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 12l5 5L20 7" stroke="#059669" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'+
-    '<div class="mt" style="text-align:center">Listo!</div>'+
-    '<div class="ms" style="text-align:center">El equipo revisara tu perfil en menos de 4 horas y recibiras confirmacion por email.</div></div>'+
+    '<div style="font-size:22px;font-weight:900;color:white;margin-bottom:8px">Listo!</div>'+
+    '<div style="font-size:14px;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:20px">El equipo revisara tu perfil en menos de 4 horas<br>y recibiras confirmacion por email.</div></div>'+
     '<div class="vstep">'+
     '<div class="vsr"><div class="vi ok"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l4 4 6-6" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'+
-    '<div style="flex:1"><div class="vn">Registrado</div><div class="vd">Tu perfil esta en cola de verificacion</div></div><span class="vb ok">LISTO</span></div>'+
+    '<div style="flex:1"><div class="vn">Registrado</div><div class="vd">Tu perfil está en cola de verificación</div></div><span class="vb ok">LISTO</span></div>'+
     '<div class="vsr" style="border-bottom:none"><div class="vi pend"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="#93B4F5" stroke-width="1.2"/><path d="M8 5.5v2.5l1.5 1.5" stroke="#93B4F5" stroke-width="1.2" stroke-linecap="round"/></svg></div>'+
     '<div style="flex:1"><div class="vn">Revision del equipo</div><div class="vd">Menos de 4 horas</div></div><span class="vb pend">EN PROCESO</span></div></div>'+
-    '<div style="background:rgba(244,195,0,.1);border:1px solid rgba(244,195,0,.25);border-radius:8px;padding:14px">'+
-    '<p style="font-size:11px;font-weight:800;letter-spacing:.8px;color:var(--gold);margin-bottom:8px;text-transform:uppercase">Comparte con tus colegas</p>'+
+    '<div style="background:rgba(244,195,0,.08);border:1px solid rgba(244,195,0,.2);border-radius:8px;padding:14px">'+
+    '<p style="font-size:11px;font-weight:700;color:rgba(244,195,0,.8);margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px">Comparte con colegas venezolanos</p>'+
     '<div class="rrow"><input class="rin" value="noduspro.net?ref='+code+'" readonly><button class="rcp" id="rc" onclick="copiarRef(\''+code+'\')">Copiar</button></div>'+
     '<div class="sbrow">'+
     '<a class="sbtn2" href="https://wa.me/?text='+encodeURIComponent(wa)+'" target="_blank">WhatsApp</a>'+
@@ -557,7 +499,7 @@ async function avanzar(){
       });
       var d=await r.json();
       if(d&&d.exists){
-        mostrarError('Este correo ya esta registrado. '+(d.status==='approved'?'Tu perfil ya esta activo.':'Tu solicitud esta en revision — revisa tu email.'));
+        mostrarError('Este correo ya está registrado. '+(d.status==='approved'?'Tu perfil ya está activo.':'Tu solicitud está en revision — revisa tu email.'));
         return;
       }
     }catch(e){}
@@ -574,8 +516,8 @@ async function avanzar(){
 }
 
 async function enviar(){
-  var btn=document.querySelectorAll('.mbtn')[0];
-  if(btn){btn.disabled=true;btn.textContent='Enviando...';}
+  var btns=document.querySelectorAll('.mbtn');
+  btns.forEach(function(b){b.disabled=true;});
   var code=(fd.email.split('@')[0]||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8);
   var ref='';try{ref=sessionStorage.getItem('np_ref')||'';}catch(e){}
   try{
@@ -586,19 +528,18 @@ async function enviar(){
         email:fd.email,lang:'es',source:'campaign_ve',
         referral_code:code,referred_by:ref||null,
         first_name:fd.fn,last_name:fd.ln1,
-        specialty:sector,
+        specialty:sector||null,
         availability:fd.disponibilidad
       })
     });
-    cargarContador();
   }catch(e){
-    if(btn){btn.disabled=false;btn.textContent='Registrarme gratis';}
+    btns.forEach(function(b){b.disabled=false;});
     return;
   }
   paso=3;renderModal();
 }
 
-function setSector2(el,val){
+function setSector(el,val){
   el.parentElement.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on');});
   el.classList.add('on');sector=val;
 }
@@ -607,10 +548,10 @@ function setDisp(val){
   document.querySelectorAll('.trow').forEach(function(r){r.classList.remove('on');});
   document.querySelectorAll('.tpill').forEach(function(p){p.classList.remove('on');});
   var rows=document.querySelectorAll('.trow');
-  var m={now:0,no:1};
-  if(rows[m[val]]){
-    rows[m[val]].classList.add('on');
-    var pill=rows[m[val]].querySelector('.tpill');
+  var idx={now:0,no:1};
+  if(rows[idx[val]]){
+    rows[idx[val]].classList.add('on');
+    var pill=rows[idx[val]].querySelector('.tpill');
     if(pill)pill.classList.add('on');
   }
 }
@@ -625,7 +566,7 @@ setTimeout(function(){
   if(!_exitShown&&!document.getElementById('overlay').classList.contains('open')){
     _exitShown=true;abrirModal();
   }
-},5000);
+},7000);
 document.addEventListener('mouseleave',function(e){
   if(e.clientY<=0&&!_exitShown&&!document.getElementById('overlay').classList.contains('open')){
     _exitShown=true;abrirModal();
