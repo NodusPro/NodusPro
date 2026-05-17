@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Mi cuenta — NodusPro</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A1628'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%232D6BE4'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+:root{
+  --navy:#071428;--navy2:#0C1E3E;--blue:#1B4FD8;
+  --gold:#F4C300;--red:#CF142B;--green:#047857;
+  --border:rgba(255,255,255,.1);--bg2:rgba(255,255,255,.05);
+}
+body{font-family:'Inter',sans-serif;background:var(--navy);color:white;min-height:100vh}
+
+/* NAV */
+.nav{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-bottom:3px solid var(--gold)}
+.nlogo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.nmark{width:30px;height:30px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.nname{font-size:15px;font-weight:800;color:white}.nname span{color:var(--gold)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-email{font-size:12px;color:rgba(255,255,255,.3)}
+.signout-btn{font-size:12px;color:rgba(255,255,255,.3);background:none;border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:5px 10px;cursor:pointer;font-family:'Inter',sans-serif}
+.signout-btn:hover{color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.25)}
+
+.wrap{max-width:600px;margin:0 auto;padding:40px 24px 80px}
+.screen{display:none}.screen.active{display:block}
+
+/* LOGIN */
+.login-wrap{text-align:center;padding:40px 0}
+.login-tag{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.login-h{font-size:28px;font-weight:900;letter-spacing:-.5px;margin-bottom:8px}
+.login-sub{font-size:15px;color:rgba(255,255,255,.45);margin-bottom:32px;line-height:1.7;font-weight:300}
+.login-box{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:28px}
+.lbl{display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:6px}
+.inp{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:7px;color:white;font-family:'Inter',sans-serif;font-size:15px;padding:12px 14px;outline:none;transition:border-color .15s;margin-bottom:12px}
+.inp:focus{border-color:var(--gold)}
+.inp::placeholder{color:rgba(255,255,255,.2)}
+.prim-btn{width:100%;padding:13px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:15px;font-weight:900;cursor:pointer;margin-bottom:14px}
+.prim-btn:hover{background:#FFD700}
+.prim-btn:disabled{opacity:.4;cursor:not-allowed}
+.divider{display:flex;align-items:center;gap:10px;margin:4px 0 14px}
+.divline{flex:1;height:1px;background:rgba(255,255,255,.08)}
+.divtxt{font-size:11px;color:rgba(255,255,255,.2);font-weight:600;letter-spacing:.5px}
+.google-btn{width:100%;padding:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.7);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px}
+.google-btn:hover{background:rgba(255,255,255,.1)}
+.sent-box{background:rgba(4,120,87,.1);border:1px solid rgba(4,120,87,.3);border-radius:10px;padding:20px;text-align:center;margin-top:16px}
+.sent-h{font-size:16px;font-weight:700;color:#6EE7B7;margin-bottom:6px}
+.sent-p{font-size:13px;color:rgba(255,255,255,.45);line-height:1.6}
+
+/* SPINNER */
+.spinner{width:36px;height:36px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:40px auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* PROFILE VIEW */
+.profile-header{display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.avatar{width:56px;height:56px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:white;flex-shrink:0}
+.profile-name{font-size:20px;font-weight:800;letter-spacing:-.3px}
+.profile-email{font-size:13px;color:rgba(255,255,255,.35);margin-top:3px}
+.profile-badge{display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:3px 9px;background:rgba(244,195,0,.15);border:1px solid rgba(244,195,0,.3);border-radius:4px;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.5px;text-transform:uppercase}
+.edit-btn{margin-left:auto;padding:8px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:6px;font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,.6);cursor:pointer}
+.edit-btn:hover{background:rgba(255,255,255,.1);color:white}
+
+.field-group{margin-bottom:20px}
+.field-group label{display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:6px}
+.field-val{font-size:15px;color:rgba(255,255,255,.85);line-height:1.6}
+.field-val.empty{color:rgba(255,255,255,.2);font-style:italic;font-size:13px}
+.field-inp{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:7px;color:white;font-family:'Inter',sans-serif;font-size:14px;padding:11px 13px;outline:none;transition:border-color .15s}
+.field-inp:focus{border-color:var(--gold)}
+.field-inp::placeholder{color:rgba(255,255,255,.2)}
+textarea.field-inp{resize:vertical;min-height:90px;line-height:1.6}
+select.field-inp{cursor:pointer}
+select.field-inp option{background:var(--navy2)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.section{background:var(--navy2);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:16px}
+.section-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:16px}
+
+.avail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.avail-opt{padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;cursor:pointer;font-size:13px;color:rgba(255,255,255,.5);text-align:center;transition:all .15s;user-select:none}
+.avail-opt.on{border-color:var(--gold);background:rgba(244,195,0,.08);color:white;font-weight:600}
+
+.action-row{display:flex;gap:10px;margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08)}
+.save-btn{flex:1;padding:12px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;font-weight:900;cursor:pointer}
+.save-btn:hover{background:#FFD700}
+.save-btn:disabled{opacity:.4;cursor:not-allowed}
+.cancel-btn{padding:12px 20px;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;color:rgba(255,255,255,.5);cursor:pointer}
+.cancel-btn:hover{color:white;border-color:rgba(255,255,255,.3)}
+
+.delete-zone{background:rgba(207,20,43,.07);border:1px solid rgba(207,20,43,.25);border-radius:10px;padding:20px;margin-top:24px}
+.delete-title{font-size:13px;font-weight:700;color:#FCA5A5;margin-bottom:6px}
+.delete-desc{font-size:13px;color:rgba(255,255,255,.35);line-height:1.6;margin-bottom:14px}
+.delete-btn{padding:10px 20px;background:rgba(207,20,43,.2);border:1px solid rgba(207,20,43,.4);border-radius:6px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#FCA5A5;cursor:pointer;transition:all .15s}
+.delete-btn:hover{background:var(--red);color:white;border-color:var(--red)}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--navy2);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:12px 20px;font-size:14px;font-weight:600;display:none;z-index:999;white-space:nowrap}
+.toast.ok{color:#6EE7B7;border-color:rgba(4,120,87,.4)}
+.toast.err{color:#FCA5A5;border-color:rgba(207,20,43,.4)}
+
+/* CV upload */
+.cv-zone{border:1px dashed rgba(255,255,255,.15);border-radius:8px;padding:16px;text-align:center;cursor:pointer;position:relative;transition:all .15s}
+.cv-zone:hover{border-color:rgba(244,195,0,.4);background:rgba(244,195,0,.03)}
+.cv-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.cv-zone-txt{font-size:13px;color:rgba(255,255,255,.35)}
+
+@media(max-width:600px){
+  .row2,.avail-grid{grid-template-columns:1fr}
+  .action-row{flex-direction:column}
+  .cancel-btn{order:2}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nlogo" href="/">
+    <div class="nmark">
+      <svg viewBox="0 0 16 16" fill="none" width="14" height="14">
+        <circle cx="8" cy="8" r="2" fill="white"/>
+        <circle cx="2.5" cy="3" r="1.5" fill="white" opacity=".7"/>
+        <circle cx="13.5" cy="3" r="1.5" fill="white" opacity=".7"/>
+        <circle cx="2.5" cy="13" r="1.5" fill="white" opacity=".7"/>
+        <circle cx="13.5" cy="13" r="1.5" fill="white" opacity=".7"/>
+      </svg>
+    </div>
+    <div class="nname"><span>Nodus</span>Pro</div>
+  </a>
+  <div class="nav-right">
+    <span class="nav-email" id="nav-email"></span>
+    <button class="signout-btn" id="signout-btn" style="display:none" onclick="signOut()">Cerrar sesión</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- LOGIN -->
+  <div class="screen active" id="s-login">
+    <div class="login-wrap">
+      <div class="login-tag">Mi cuenta</div>
+      <h1 class="login-h">Accede a tu perfil</h1>
+      <p class="login-sub">Introduce tu correo y te enviamos un enlace de acceso seguro. Sin contraseña.</p>
+    </div>
+    <div class="login-box">
+      <label class="lbl">Tu correo de registro</label>
+      <input type="email" class="inp" id="login-email" placeholder="tu@correo.com" onkeydown="if(event.key==='Enter')enviarMagicLink()">
+      <button class="prim-btn" id="magic-btn" onclick="enviarMagicLink()">Enviarme el enlace de acceso</button>
+      <div class="divider"><div class="divline"></div><span class="divtxt">O</span><div class="divline"></div></div>
+      <button class="google-btn" onclick="loginGoogle()">
+        <svg width="17" height="17" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Acceder con Google
+      </button>
+      <div class="sent-box" id="sent-box" style="display:none">
+        <div class="sent-h">Enlace enviado</div>
+        <p class="sent-p">Revisa tu correo y haz clic en el enlace. Tienes 10 minutos para usarlo.<br>Si no lo ves, revisa la carpeta de Promociones o Spam.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARGANDO -->
+  <div class="screen" id="s-loading">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- ERROR -->
+  <div class="screen" id="s-error">
+    <div style="text-align:center;padding:60px 0">
+      <div style="font-size:40px;margin-bottom:16px">!</div>
+      <div style="font-size:18px;font-weight:700;margin-bottom:8px" id="err-title">Error</div>
+      <p style="font-size:14px;color:rgba(255,255,255,.4);margin-bottom:24px" id="err-msg"></p>
+      <button onclick="show('s-login')" style="padding:10px 24px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:Inter,sans-serif;font-size:14px;font-weight:800;cursor:pointer">Volver al inicio</button>
+    </div>
+  </div>
+
+  <!-- PERFIL -->
+  <div class="screen" id="s-profile">
+    <!-- Vista -->
+    <div id="view-mode">
+      <div class="profile-header">
+        <div class="avatar" id="p-avatar">?</div>
+        <div>
+          <div class="profile-name" id="p-name">—</div>
+          <div class="profile-email" id="p-email">—</div>
+          <div class="profile-badge">Miembro Fundador</div>
+        </div>
+        <button class="edit-btn" onclick="activarEdicion()">Editar perfil</button>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Información profesional</div>
+        <div class="row2">
+          <div class="field-group">
+            <label>Cargo actual</label>
+            <div class="field-val" id="v-position"><span class="empty">Sin completar</span></div>
+          </div>
+          <div class="field-group">
+            <label>Empresa</label>
+            <div class="field-val" id="v-company"><span class="empty">Sin completar</span></div>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Especialidad</label>
+          <div class="field-val" id="v-specialty"><span class="empty">Sin completar</span></div>
+        </div>
+        <div class="row2">
+          <div class="field-group">
+            <label>Experiencia</label>
+            <div class="field-val" id="v-years"><span class="empty">Sin completar</span></div>
+          </div>
+          <div class="field-group">
+            <label>Ubicación</label>
+            <div class="field-val" id="v-location"><span class="empty">Sin completar</span></div>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Sobre mí</label>
+          <div class="field-val" id="v-bio"><span class="empty">Sin completar</span></div>
+        </div>
+        <div class="field-group">
+          <label>LinkedIn</label>
+          <div class="field-val" id="v-linkedin"><span class="empty">Sin completar</span></div>
+        </div>
+        <div class="field-group">
+          <label>Disponibilidad</label>
+          <div class="field-val" id="v-avail"><span class="empty">Sin indicar</span></div>
+        </div>
+        <div class="field-group">
+          <label>CV</label>
+          <div class="field-val" id="v-cv"><span class="empty">Sin subir</span></div>
+        </div>
+      </div>
+
+      <div class="delete-zone">
+        <div class="delete-title">Eliminar mi cuenta</div>
+        <div class="delete-desc">Se borrarán permanentemente tu perfil, todos tus datos y tu CV. Esta acción no se puede deshacer.</div>
+        <button class="delete-btn" onclick="confirmarBorrado()">Eliminar mi cuenta y todos mis datos</button>
+      </div>
+    </div>
+
+    <!-- Edición -->
+    <div id="edit-mode" style="display:none">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
+        <button onclick="cancelarEdicion()" style="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:20px;padding:0">&#8592;</button>
+        <div style="font-size:18px;font-weight:800">Editar mi perfil</div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Información profesional</div>
+        <div class="row2">
+          <div class="field-group">
+            <label>Cargo actual</label>
+            <input type="text" class="field-inp" id="e-position" placeholder="Ej: Ingeniero de Producción">
+          </div>
+          <div class="field-group">
+            <label>Empresa</label>
+            <input type="text" class="field-inp" id="e-company" placeholder="Ej: Repsol, PDVSA...">
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Especialidad</label>
+          <input type="text" class="field-inp" id="e-specialty" placeholder="Ej: Ingeniería de Yacimientos, Ciberseguridad...">
+        </div>
+        <div class="row2">
+          <div class="field-group">
+            <label>Años de experiencia</label>
+            <select class="field-inp" id="e-years">
+              <option value="">Seleccionar...</option>
+              <option>Menos de 1 año</option>
+              <option>1-5 años</option>
+              <option>6-10 años</option>
+              <option>11-20 años</option>
+              <option>Más de 20 años</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Ciudad</label>
+            <input type="text" class="field-inp" id="e-city" placeholder="Ej: Caracas, Madrid...">
+          </div>
+        </div>
+        <div class="field-group">
+          <label>País</label>
+          <input type="text" class="field-inp" id="e-country" placeholder="Ej: Venezuela, España...">
+        </div>
+        <div class="field-group">
+          <label>Sobre mí</label>
+          <textarea class="field-inp" id="e-bio" placeholder="Un párrafo sobre tu experiencia y lo que buscas..."></textarea>
+        </div>
+        <div class="field-group">
+          <label>LinkedIn</label>
+          <input type="url" class="field-inp" id="e-linkedin" placeholder="https://linkedin.com/in/tu-perfil">
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Disponibilidad</div>
+        <div class="avail-grid">
+          <div class="avail-opt on" id="av-now" onclick="setAvail('now')">Disponible ahora</div>
+          <div class="avail-opt" id="av-soon" onclick="setAvail('soon')">En los próximos meses</div>
+          <div class="avail-opt" id="av-open" onclick="setAvail('open')">Abierto a propuestas</div>
+          <div class="avail-opt" id="av-no" onclick="setAvail('no')">No disponible</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Mi CV</div>
+        <div class="cv-zone" id="cv-zone">
+          <input type="file" id="cv-input" accept=".pdf,.doc,.docx" onchange="handleCv(this.files[0])">
+          <div class="cv-zone-txt" id="cv-zone-txt">Arrastra tu CV o haz clic · PDF o Word · Máx. 5 MB</div>
+        </div>
+      </div>
+
+      <div class="action-row">
+        <button class="save-btn" id="save-btn" onclick="guardarCambios()">Guardar cambios</button>
+        <button class="cancel-btn" onclick="cancelarEdicion()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script>
+var SB='https://eettdimwdjyqniodefop.supabase.co';
+var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
+
+var sesion=null;
+var registro=null;
+var availState='now';
+var cvFile=null;
+var cvFilename='';
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById(id).classList.add('active');
+}
+
+function toast(msg,tipo){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast '+(tipo||'ok');t.style.display='block';
+  setTimeout(function(){t.style.display='none';},3000);
+}
+
+// ── Auth ──────────────────────────────────────────────────
+async function enviarMagicLink(){
+  var email=document.getElementById('login-email').value.trim();
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){toast('Ingresa un correo válido','err');return;}
+  var btn=document.getElementById('magic-btn');
+  btn.disabled=true;btn.textContent='Enviando...';
+  try{
+    var r=await fetch(SB+'/auth/v1/otp',{
+      method:'POST',
+      headers:{'apikey':SK,'Content-Type':'application/json'},
+      body:JSON.stringify({email:email,create_user:false})
+    });
+    var d=await r.json();
+    if(d.error){
+      toast('Este correo no está registrado en NodusPro','err');
+      btn.disabled=false;btn.textContent='Enviarme el enlace de acceso';
+      return;
+    }
+    document.getElementById('sent-box').style.display='block';
+    btn.disabled=false;btn.textContent='Reenviar enlace';
+  }catch(e){
+    toast('Error al enviar. Intenta de nuevo.','err');
+    btn.disabled=false;btn.textContent='Enviarme el enlace de acceso';
+  }
+}
+
+function loginGoogle(){
+  window.location.href=SB+'/auth/v1/authorize?provider=google&redirect_to='+encodeURIComponent('https://noduspro.net/cuenta');
+}
+
+async function signOut(){
+  try{
+    await fetch(SB+'/auth/v1/logout',{
+      method:'POST',
+      headers:{'apikey':SK,'Authorization':'Bearer '+(sesion&&sesion.access_token||'')}
+    });
+  }catch(e){}
+  sesion=null;registro=null;
+  document.getElementById('signout-btn').style.display='none';
+  document.getElementById('nav-email').textContent='';
+  show('s-login');
+}
+
+// ── Init: check for magic link token in URL ───────────────
+async function init(){
+  var hash=window.location.hash;
+  if(hash&&hash.indexOf('access_token=')!==-1){
+    show('s-loading');
+    var hp=new URLSearchParams(hash.replace('#',''));
+    var at=hp.get('access_token');
+    var rt=hp.get('refresh_token');
+    history.replaceState(null,'',location.pathname);
+    if(at){
+      sesion={access_token:at,refresh_token:rt};
+      await cargarPerfil();
+      return;
+    }
+  }
+  // Check stored session
+  var stored=null;
+  try{stored=JSON.parse(sessionStorage.getItem('np_session'));}catch(e){}
+  if(stored&&stored.access_token){
+    sesion=stored;show('s-loading');
+    await cargarPerfil();
+    return;
+  }
+  show('s-login');
+}
+
+async function cargarPerfil(){
+  try{
+    // Get user from token
+    var r=await fetch(SB+'/auth/v1/user',{
+      headers:{'apikey':SK,'Authorization':'Bearer '+sesion.access_token}
+    });
+    var u=await r.json();
+    if(u.error||!u.email){show('s-login');return;}
+    sesion.email=u.email;
+    try{sessionStorage.setItem('np_session',JSON.stringify(sesion));}catch(e){}
+
+    // Load waitlist record
+    var r2=await fetch(SB+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(u.email)+'&select=*',{
+      headers:{'apikey':SK,'Authorization':'Bearer '+sesion.access_token}
+    });
+    var data=await r2.json();
+    if(!data||!data.length){
+      document.getElementById('err-title').textContent='Perfil no encontrado';
+      document.getElementById('err-msg').textContent='No encontramos un perfil con este correo en NodusPro.';
+      show('s-error');return;
+    }
+    registro=data[0];
+
+    // Update nav
+    document.getElementById('nav-email').textContent=u.email;
+    document.getElementById('signout-btn').style.display='block';
+
+    // Render profile view
+    renderVista();
+    show('s-profile');
+  }catch(e){
+    show('s-login');
+  }
+}
+
+function renderVista(){
+  var r=registro;
+  var nombre=(r.first_name||'')+' '+(r.last_name||'');
+  document.getElementById('p-avatar').textContent=(r.first_name||'?')[0].toUpperCase();
+  document.getElementById('p-name').textContent=nombre.trim()||'—';
+  document.getElementById('p-email').textContent=sesion.email;
+
+  function setVal(id,val){
+    var el=document.getElementById(id);
+    if(val&&val.trim()){el.innerHTML='<span>'+val+'</span>';}
+    else{el.innerHTML='<span class="empty">Sin completar</span>';}
+  }
+
+  setVal('v-position',r.current_position);
+  setVal('v-company',r.current_company);
+  setVal('v-specialty',r.specialty);
+  setVal('v-years',r.years_experience);
+
+  var loc=[r.location_city,r.location_country].filter(Boolean).join(', ');
+  setVal('v-location',loc);
+  setVal('v-bio',r.bio);
+
+  var li=r.linkedin_url||r.profile_url;
+  if(li&&li.trim()){
+    document.getElementById('v-linkedin').innerHTML='<a href="'+li+'" target="_blank" style="color:var(--gold)">'+li+'</a>';
+  } else {
+    document.getElementById('v-linkedin').innerHTML='<span class="empty">Sin completar</span>';
+  }
+
+  var availMap={now:'Disponible ahora',soon:'En los próximos meses',open:'Abierto a propuestas',no:'No disponible'};
+  setVal('v-avail',availMap[r.availability]||r.availability);
+  setVal('v-cv',r.cv_filename);
+}
+
+function activarEdicion(){
+  var r=registro;
+  document.getElementById('e-position').value=r.current_position||'';
+  document.getElementById('e-company').value=r.current_company||'';
+  document.getElementById('e-specialty').value=r.specialty||'';
+  document.getElementById('e-city').value=r.location_city||'';
+  document.getElementById('e-country').value=r.location_country||'';
+  document.getElementById('e-bio').value=r.bio||'';
+  document.getElementById('e-linkedin').value=r.linkedin_url||r.profile_url||'';
+  // Years
+  var sel=document.getElementById('e-years');
+  for(var i=0;i<sel.options.length;i++){
+    if(sel.options[i].value===(r.years_experience||'')){sel.selectedIndex=i;break;}
+  }
+  // Availability
+  availState=r.availability||'now';
+  ['now','soon','open','no'].forEach(function(v){
+    document.getElementById('av-'+v).classList.toggle('on',v===availState);
+  });
+  // CV
+  cvFile=null;cvFilename='';
+  document.getElementById('cv-zone-txt').textContent=r.cv_filename?
+    'CV actual: '+r.cv_filename+' · Arrastra para reemplazar':
+    'Arrastra tu CV o haz clic · PDF o Word · Máx. 5 MB';
+
+  document.getElementById('view-mode').style.display='none';
+  document.getElementById('edit-mode').style.display='block';
+}
+
+function cancelarEdicion(){
+  document.getElementById('view-mode').style.display='block';
+  document.getElementById('edit-mode').style.display='none';
+}
+
+function setAvail(val){
+  availState=val;
+  ['now','soon','open','no'].forEach(function(v){
+    document.getElementById('av-'+v).classList.toggle('on',v===val);
+  });
+}
+
+function handleCv(file){
+  if(!file)return;
+  if(file.size>5*1024*1024){toast('El archivo supera los 5 MB','err');return;}
+  var ext=file.name.split('.').pop().toLowerCase();
+  if(!['pdf','doc','docx'].includes(ext)){toast('Solo PDF o Word (.doc, .docx)','err');return;}
+  cvFile=file;cvFilename=file.name;
+  document.getElementById('cv-zone-txt').textContent='✓ '+file.name;
+}
+
+async function guardarCambios(){
+  var btn=document.getElementById('save-btn');
+  btn.disabled=true;btn.textContent='Guardando...';
+
+  var cvText='';
+  if(cvFile){
+    try{
+      var ext=cvFile.name.split('.').pop().toLowerCase();
+      if(ext==='pdf'){
+        // Send to Claude for extraction (fire and forget for now — just save filename)
+        cvText='[CV subido: '+cvFile.name+']';
+      } else {
+        var ab=await cvFile.arrayBuffer();
+        var result=await mammoth.extractRawText({arrayBuffer:ab});
+        cvText=result.value.slice(0,8000);
+      }
+    }catch(e){cvText='';}
+  }
+
+  var payload={
+    p_email:sesion.email,
+    p_current_position:document.getElementById('e-position').value.trim(),
+    p_current_company:document.getElementById('e-company').value.trim(),
+    p_specialty:document.getElementById('e-specialty').value.trim(),
+    p_years_experience:document.getElementById('e-years').value,
+    p_location_city:document.getElementById('e-city').value.trim(),
+    p_location_country:document.getElementById('e-country').value.trim(),
+    p_bio:document.getElementById('e-bio').value.trim(),
+    p_linkedin_url:document.getElementById('e-linkedin').value.trim(),
+    p_availability:availState,
+    p_cv_filename:cvFilename||registro.cv_filename||'',
+    p_cv_text:cvText
+  };
+
+  try{
+    var r=await fetch(SB+'/rest/v1/rpc/update_profile_data',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SK,'Authorization':'Bearer '+sesion.access_token},
+      body:JSON.stringify(payload)
+    });
+    var result=await r.json();
+    if(result==='not_found'){toast('Error al guardar. Intenta de nuevo.','err');btn.disabled=false;btn.textContent='Guardar cambios';return;}
+
+    // Update local record
+    registro.current_position=payload.p_current_position;
+    registro.current_company=payload.p_current_company;
+    registro.specialty=payload.p_specialty;
+    registro.years_experience=payload.p_years_experience;
+    registro.location_city=payload.p_location_city;
+    registro.location_country=payload.p_location_country;
+    registro.bio=payload.p_bio;
+    registro.linkedin_url=payload.p_linkedin_url;
+    registro.availability=payload.p_availability;
+    registro.cv_filename=payload.p_cv_filename||registro.cv_filename;
+
+    renderVista();
+    cancelarEdicion();
+    toast('Perfil actualizado correctamente','ok');
+  }catch(e){
+    toast('Error al guardar. Intenta de nuevo.','err');
+  }
+  btn.disabled=false;btn.textContent='Guardar cambios';
+}
+
+async function confirmarBorrado(){
+  var nombre=(registro.first_name||'tu cuenta');
+  var ok=confirm('¿Estás seguro de que quieres eliminar tu cuenta?\n\nSe borrarán permanentemente:\n- Tu perfil completo\n- Todos tus datos personales\n- Tu CV\n- Tu historial en NodusPro\n\nEsta acción no se puede deshacer.');
+  if(!ok)return;
+  var ok2=confirm('Última confirmación: ¿eliminar permanentemente la cuenta de '+sesion.email+'?');
+  if(!ok2)return;
+
+  try{
+    // Delete from waitlist
+    await fetch(SB+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(sesion.email),{
+      method:'DELETE',
+      headers:{'apikey':SK,'Authorization':'Bearer '+sesion.access_token}
+    });
+    // Sign out from Supabase Auth
+    await fetch(SB+'/auth/v1/logout',{
+      method:'POST',
+      headers:{'apikey':SK,'Authorization':'Bearer '+sesion.access_token}
+    });
+    try{sessionStorage.removeItem('np_session');}catch(e){}
+    document.getElementById('err-title').textContent='Cuenta eliminada';
+    document.getElementById('err-msg').textContent='Tu cuenta y todos tus datos han sido eliminados permanentemente. Gracias por haber sido parte de NodusPro.';
+    show('s-error');
+  }catch(e){
+    toast('Error al eliminar. Escríbenos a hola@noduspro.net','err');
+  }
+}
+
+// ── Start ─────────────────────────────────────────────────
+init();
+</script>
+</body>
+</html>
