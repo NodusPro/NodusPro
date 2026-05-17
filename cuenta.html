@@ -227,6 +227,22 @@ select.field-inp option{background:var(--navy2)}
           <div class="field-val" id="v-avail"><span class="empty">Sin indicar</span></div>
         </div>
         <div class="field-group">
+          <label>Nivel de inglés</label>
+          <div class="field-val" id="v-english"><span class="empty">Sin completar</span></div>
+        </div>
+        <div class="field-group">
+          <label>Otros idiomas</label>
+          <div class="field-val" id="v-languages"><span class="empty">Sin completar</span></div>
+        </div>
+        <div class="field-group">
+          <label>Educación</label>
+          <div class="field-val" id="v-education"><span class="empty">Sin completar</span></div>
+        </div>
+        <div class="field-group">
+          <label>Modalidad</label>
+          <div class="field-val" id="v-modality"><span class="empty">Sin indicar</span></div>
+        </div>
+        <div class="field-group">
           <label>CV</label>
           <div class="field-val" id="v-cv"><span class="empty">Sin subir</span></div>
         </div>
@@ -291,6 +307,48 @@ select.field-inp option{background:var(--navy2)}
           <label>LinkedIn</label>
           <input type="url" class="field-inp" id="e-linkedin" placeholder="https://linkedin.com/in/tu-perfil">
         </div>
+        <div class="row2">
+          <div class="field-group">
+            <label>Nivel de inglés</label>
+            <select class="field-inp" id="e-english">
+              <option value="">Seleccionar...</option>
+              <option>Básico</option>
+              <option>Intermedio</option>
+              <option>Avanzado</option>
+              <option>Fluido</option>
+              <option>Nativo</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Otros idiomas</label>
+            <input type="text" class="field-inp" id="e-languages" placeholder="Ej: Italiano B2, Francés A2">
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field-group">
+            <label>Nivel educativo</label>
+            <select class="field-inp" id="e-education">
+              <option value="">Seleccionar...</option>
+              <option>Técnico Superior</option>
+              <option>Licenciatura / Ingeniería</option>
+              <option>Especialización</option>
+              <option>Maestría</option>
+              <option>Doctorado</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Área de estudios</label>
+            <input type="text" class="field-inp" id="e-degree" placeholder="Ej: Ingeniería de Petróleo">
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Modalidad de trabajo</label>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px" id="modality-grid">
+            <div class="avail-opt" id="mod-remote" onclick="setModality('remote')">Remoto</div>
+            <div class="avail-opt" id="mod-hybrid" onclick="setModality('hybrid')">Híbrido</div>
+            <div class="avail-opt" id="mod-onsite" onclick="setModality('onsite')">Presencial</div>
+          </div>
+        </div>
       </div>
 
       <div class="section">
@@ -330,6 +388,7 @@ var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV
 var sesion=null;
 var registro=null;
 var availState='now';
+var modalityState='';
 var cvFile=null;
 var cvFilename='';
 
@@ -494,6 +553,12 @@ function renderVista(){
 
   var availMap={now:'Disponible ahora',soon:'En los próximos meses',open:'Abierto a propuestas',no:'No disponible'};
   setVal('v-avail',availMap[r.availability]||r.availability);
+  setVal('v-english',r.english_level);
+  setVal('v-languages',r.other_languages);
+  var edu=[r.education_level,r.degree_field].filter(Boolean).join(' — ');
+  setVal('v-education',edu);
+  var modalMap={remote:'Remoto',hybrid:'Híbrido',onsite:'Presencial'};
+  setVal('v-modality',modalMap[r.work_modality]||r.work_modality);
   setVal('v-cv',r.cv_filename);
 }
 
@@ -522,6 +587,16 @@ function activarEdicion(){
     'CV actual: '+r.cv_filename+' · Arrastra para reemplazar':
     'Arrastra tu CV o haz clic · PDF o Word · Máx. 5 MB';
 
+  // New fields
+  document.getElementById('e-english').value=r.english_level||'';
+  document.getElementById('e-languages').value=r.other_languages||'';
+  document.getElementById('e-education').value=r.education_level||'';
+  document.getElementById('e-degree').value=r.degree_field||'';
+  modalityState=r.work_modality||'';
+  ['remote','hybrid','onsite'].forEach(function(v){
+    var el=document.getElementById('mod-'+v);
+    if(el)el.classList.toggle('on',v===modalityState);
+  });
   document.getElementById('view-mode').style.display='none';
   document.getElementById('edit-mode').style.display='block';
 }
@@ -531,6 +606,12 @@ function cancelarEdicion(){
   document.getElementById('edit-mode').style.display='none';
 }
 
+function setModality(val){
+  modalityState=val;
+  ['remote','hybrid','onsite'].forEach(function(v){
+    document.getElementById('mod-'+v).classList.toggle('on',v===val);
+  });
+}
 function setAvail(val){
   availState=val;
   ['now','soon','open','no'].forEach(function(v){
@@ -545,6 +626,94 @@ function handleCv(file){
   if(!['pdf','doc','docx'].includes(ext)){toast('Solo PDF o Word (.doc, .docx)','err');return;}
   cvFile=file;cvFilename=file.name;
   document.getElementById('cv-zone-txt').textContent='✓ '+file.name;
+}
+
+async function handleCv(file){
+  if(!file)return;
+  if(file.size>5*1024*1024){alert('El archivo supera los 5 MB.');return;}
+  var ext=file.name.split('.').pop().toLowerCase();
+  if(!['pdf','doc','docx'].includes(ext)){alert('Solo PDF o Word (.doc, .docx)');return;}
+  cvFile=file;cvFilename=file.name;
+  document.getElementById('cv-zone-txt').innerHTML='<span style="color:var(--gold)">Leyendo CV con IA...</span>';
+
+  try{
+    var text='';
+    if(ext==='pdf'){
+      var base64=await fileToBase64(file);
+      await extractCvAI(null,base64,'application/pdf');
+    } else {
+      var ab=await file.arrayBuffer();
+      var r=await mammoth.extractRawText({arrayBuffer:ab});
+      text=r.value;
+      cvText=text.slice(0,8000);
+      await extractCvAI(text,null,null);
+    }
+  }catch(e){
+    document.getElementById('cv-zone-txt').innerHTML='<span style="color:#6EE7B7">✓ '+file.name+' adjuntado</span>';
+  }
+}
+
+function fileToBase64(file){
+  return new Promise(function(res,rej){
+    var reader=new FileReader();
+    reader.onload=function(){res(reader.result.split(',')[1]);};
+    reader.onerror=rej;
+    reader.readAsDataURL(file);
+  });
+}
+
+async function extractCvAI(text,base64,mimeType){
+  var prompt='Analiza este CV de un profesional venezolano y extrae su información. Responde SOLO con JSON válido, sin texto adicional ni markdown. Claves exactas: current_position (cargo más reciente), current_company (empresa más reciente), specialty (especialidad principal, max 80 chars), years_experience (una de: "Menos de 1 año","1-5 años","6-10 años","11-20 años","Más de 20 años"), location_city (ciudad actual), location_country (país actual), bio (resumen profesional 2-3 oraciones en primera persona en español), english_level (uno de: "Básico","Intermedio","Avanzado","Fluido","Nativo" — si no menciona inglés usa ""), other_languages (otros idiomas con nivel, ej: "Italiano B2"), education_level (uno de: "Técnico Superior","Licenciatura / Ingeniería","Especialización","Maestría","Doctorado"), degree_field (carrera o área de estudios). Usa "" para datos no encontrados.';
+
+  var messages;
+  if(base64){
+    messages=[{role:'user',content:[
+      {type:'document',source:{type:'base64',media_type:mimeType,data:base64}},
+      {type:'text',text:prompt}
+    ]}];
+  } else {
+    messages=[{role:'user',content:prompt+'
+
+CV:
+'+text}];
+  }
+
+  var resp=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:messages})
+  });
+  var data=await resp.json();
+  var raw=(data.content&&data.content[0]&&data.content[0].text)||'{}';
+  var clean=raw.replace(/```json|```/g,'').trim();
+
+  try{
+    var d=JSON.parse(clean);
+    if(d.current_position)document.getElementById('e-position').value=d.current_position;
+    if(d.current_company)document.getElementById('e-company').value=d.current_company;
+    if(d.specialty)document.getElementById('e-specialty').value=d.specialty;
+    if(d.years_experience){
+      var sel=document.getElementById('e-years');
+      for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===d.years_experience){sel.selectedIndex=i;break;}}
+    }
+    if(d.location_city)document.getElementById('e-city').value=d.location_city;
+    if(d.location_country)document.getElementById('e-country').value=d.location_country;
+    if(d.bio)document.getElementById('e-bio').value=d.bio;
+    if(d.english_level){
+      var esel=document.getElementById('e-english');
+      for(var j=0;j<esel.options.length;j++){if(esel.options[j].value===d.english_level){esel.selectedIndex=j;break;}}
+    }
+    if(d.other_languages)document.getElementById('e-languages').value=d.other_languages;
+    if(d.education_level){
+      var edsel=document.getElementById('e-education');
+      for(var k=0;k<edsel.options.length;k++){if(edsel.options[k].value===d.education_level){edsel.selectedIndex=k;break;}}
+    }
+    if(d.degree_field)document.getElementById('e-degree').value=d.degree_field;
+    if(!base64)cvText=text.slice(0,8000);
+    document.getElementById('cv-zone-txt').innerHTML='<span style="color:#6EE7B7">✓ '+cvFilename+' — campos completados automáticamente</span>';
+  }catch(e){
+    document.getElementById('cv-zone-txt').innerHTML='<span style="color:#6EE7B7">✓ '+cvFilename+' adjuntado</span>';
+  }
 }
 
 async function guardarCambios(){
@@ -578,7 +747,12 @@ async function guardarCambios(){
     p_linkedin_url:document.getElementById('e-linkedin').value.trim(),
     p_availability:availState,
     p_cv_filename:cvFilename||registro.cv_filename||'',
-    p_cv_text:cvText
+    p_cv_text:cvText,
+    p_english_level:document.getElementById('e-english').value,
+    p_other_languages:document.getElementById('e-languages').value.trim(),
+    p_education_level:document.getElementById('e-education').value,
+    p_degree_field:document.getElementById('e-degree').value.trim(),
+    p_work_modality:modalityState
   };
 
   try{
@@ -601,6 +775,11 @@ async function guardarCambios(){
     registro.linkedin_url=payload.p_linkedin_url;
     registro.availability=payload.p_availability;
     registro.cv_filename=payload.p_cv_filename||registro.cv_filename;
+    registro.english_level=payload.p_english_level;
+    registro.other_languages=payload.p_other_languages;
+    registro.education_level=payload.p_education_level;
+    registro.degree_field=payload.p_degree_field;
+    registro.work_modality=payload.p_work_modality;
 
     renderVista();
     cancelarEdicion();
