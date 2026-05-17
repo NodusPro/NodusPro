@@ -498,9 +498,16 @@ async function handleCv(file){
       cvText=res.value.slice(0,8000);
       payload={text:cvText};
     }
+    // Get current session token for authenticated request
+    var sessRes=await sb.auth.getSession();
+    var token=(sessRes.data&&sessRes.data.session&&sessRes.data.session.access_token)||SB_KEY;
     var r=await fetch(SB_URL+'/functions/v1/extract-cv',{
       method:'POST',
-      headers:{'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'},
+      headers:{
+        'Authorization':'Bearer '+token,
+        'apikey':SB_KEY,
+        'Content-Type':'application/json'
+      },
       body:JSON.stringify(payload)
     });
     var d=await r.json();
