@@ -3,7 +3,7 @@
     { "source": "/admin", "destination": "/admin.html" },
     { "source": "/privacidad", "destination": "/privacidad.html" },
     { "source": "/terminos", "destination": "/terminos.html" },
-    { "source": "/reference", "destination": "/reference.html" }
+    { "source": "/reference", "destination": "/reference.html" },
     { "source": "/perfil", "destination": "/perfil.html" }
   ]
 }
