@@ -9,108 +9,90 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-font-smoothing:antialiased}
-:root{
-  --navy:#071428;--navy2:#0C1E3E;--blue:#1B4FD8;
-  --gold:#F4C300;--red:#CF142B;--green:#047857;
-  --border:rgba(255,255,255,.1);--bg2:rgba(255,255,255,.05);
-}
+:root{--navy:#071428;--navy2:#0C1E3E;--blue:#1B4FD8;--gold:#F4C300;--red:#CF142B;--green:#047857;--bd:rgba(255,255,255,.1);--bg2:rgba(255,255,255,.05)}
 body{font-family:'Inter',sans-serif;background:var(--navy);color:white;min-height:100vh}
-
-/* NAV */
 .nav{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-bottom:3px solid var(--gold)}
 .nlogo{display:flex;align-items:center;gap:9px;text-decoration:none}
 .nmark{width:30px;height:30px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center}
 .nname{font-size:15px;font-weight:800;color:white}.nname span{color:var(--gold)}
 .nav-right{display:flex;align-items:center;gap:12px}
 .nav-email{font-size:12px;color:rgba(255,255,255,.3)}
-.signout-btn{font-size:12px;color:rgba(255,255,255,.3);background:none;border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:5px 10px;cursor:pointer;font-family:'Inter',sans-serif}
-.signout-btn:hover{color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.25)}
-
+.so-btn{font-size:12px;color:rgba(255,255,255,.3);background:none;border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:5px 10px;cursor:pointer;font-family:'Inter',sans-serif;display:none}
+.so-btn:hover{color:rgba(255,255,255,.6)}
 .wrap{max-width:600px;margin:0 auto;padding:40px 24px 80px}
 .screen{display:none}.screen.active{display:block}
-
-/* LOGIN */
-.login-wrap{text-align:center;padding:40px 0}
-.login-tag{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-.login-h{font-size:28px;font-weight:900;letter-spacing:-.5px;margin-bottom:8px}
-.login-sub{font-size:15px;color:rgba(255,255,255,.45);margin-bottom:32px;line-height:1.7;font-weight:300}
-.login-box{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:28px}
+.spinner{width:36px;height:36px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:60px auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.login-hdr{text-align:center;margin-bottom:28px}
+.ltag{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.lh{font-size:28px;font-weight:900;letter-spacing:-.5px;margin-bottom:8px}
+.ls{font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;font-weight:300}
+.lbox{background:var(--navy2);border:1px solid var(--bd);border-radius:12px;padding:28px}
 .lbl{display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:6px}
 .inp{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:7px;color:white;font-family:'Inter',sans-serif;font-size:15px;padding:12px 14px;outline:none;transition:border-color .15s;margin-bottom:12px}
 .inp:focus{border-color:var(--gold)}
 .inp::placeholder{color:rgba(255,255,255,.2)}
-.prim-btn{width:100%;padding:13px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:15px;font-weight:900;cursor:pointer;margin-bottom:14px}
-.prim-btn:hover{background:#FFD700}
-.prim-btn:disabled{opacity:.4;cursor:not-allowed}
-.divider{display:flex;align-items:center;gap:10px;margin:4px 0 14px}
-.divline{flex:1;height:1px;background:rgba(255,255,255,.08)}
-.divtxt{font-size:11px;color:rgba(255,255,255,.2);font-weight:600;letter-spacing:.5px}
-.google-btn{width:100%;padding:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.7);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px}
-.google-btn:hover{background:rgba(255,255,255,.1)}
-.sent-box{background:rgba(4,120,87,.1);border:1px solid rgba(4,120,87,.3);border-radius:10px;padding:20px;text-align:center;margin-top:16px}
-.sent-h{font-size:16px;font-weight:700;color:#6EE7B7;margin-bottom:6px}
-.sent-p{font-size:13px;color:rgba(255,255,255,.45);line-height:1.6}
-
-/* SPINNER */
-.spinner{width:36px;height:36px;border:3px solid rgba(255,255,255,.1);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:40px auto}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* PROFILE VIEW */
-.profile-header{display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.08)}
-.avatar{width:56px;height:56px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:white;flex-shrink:0}
-.profile-name{font-size:20px;font-weight:800;letter-spacing:-.3px}
-.profile-email{font-size:13px;color:rgba(255,255,255,.35);margin-top:3px}
-.profile-badge{display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:3px 9px;background:rgba(244,195,0,.15);border:1px solid rgba(244,195,0,.3);border-radius:4px;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.5px;text-transform:uppercase}
-.edit-btn{margin-left:auto;padding:8px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:6px;font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,.6);cursor:pointer}
-.edit-btn:hover{background:rgba(255,255,255,.1);color:white}
-
-.field-group{margin-bottom:20px}
-.field-group label{display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:6px}
-.field-val{font-size:15px;color:rgba(255,255,255,.85);line-height:1.6}
-.field-val.empty{color:rgba(255,255,255,.2);font-style:italic;font-size:13px}
-.field-inp{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:7px;color:white;font-family:'Inter',sans-serif;font-size:14px;padding:11px 13px;outline:none;transition:border-color .15s}
-.field-inp:focus{border-color:var(--gold)}
-.field-inp::placeholder{color:rgba(255,255,255,.2)}
-textarea.field-inp{resize:vertical;min-height:90px;line-height:1.6}
-select.field-inp{cursor:pointer}
-select.field-inp option{background:var(--navy2)}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-
-.section{background:var(--navy2);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:16px}
-.section-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:16px}
-
-.avail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.avail-opt{padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;cursor:pointer;font-size:13px;color:rgba(255,255,255,.5);text-align:center;transition:all .15s;user-select:none}
-.avail-opt.on{border-color:var(--gold);background:rgba(244,195,0,.08);color:white;font-weight:600}
-
-.action-row{display:flex;gap:10px;margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08)}
+.pbtn{width:100%;padding:13px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:15px;font-weight:900;cursor:pointer;margin-bottom:14px}
+.pbtn:hover{background:#FFD700}.pbtn:disabled{opacity:.4;cursor:not-allowed}
+.div{display:flex;align-items:center;gap:10px;margin:4px 0 14px}
+.divl{flex:1;height:1px;background:rgba(255,255,255,.08)}
+.divt{font-size:11px;color:rgba(255,255,255,.2);font-weight:600;letter-spacing:.5px}
+.gbtn{width:100%;padding:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.7);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px}
+.gbtn:hover{background:rgba(255,255,255,.1)}
+.sent{background:rgba(4,120,87,.1);border:1px solid rgba(4,120,87,.3);border-radius:10px;padding:18px;text-align:center;margin-top:16px;display:none}
+.sent h3{font-size:15px;font-weight:700;color:#6EE7B7;margin-bottom:5px}
+.sent p{font-size:13px;color:rgba(255,255,255,.4);line-height:1.6}
+.err-wrap{text-align:center;padding:60px 0}
+.err-icon{font-size:36px;margin-bottom:14px}
+.err-h{font-size:18px;font-weight:700;margin-bottom:8px}
+.err-p{font-size:14px;color:rgba(255,255,255,.4);margin-bottom:22px;line-height:1.6}
+.ybtn{padding:10px 24px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;font-weight:800;cursor:pointer}
+.prof-hdr{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.08)}
+.avatar{width:52px;height:52px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;flex-shrink:0}
+.pname{font-size:19px;font-weight:800}
+.pemail{font-size:12px;color:rgba(255,255,255,.35);margin-top:2px}
+.pbadge{display:inline-flex;align-items:center;gap:5px;margin-top:5px;padding:3px 8px;background:rgba(244,195,0,.15);border:1px solid rgba(244,195,0,.3);border-radius:4px;font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.5px;text-transform:uppercase}
+.edit-btn2{margin-left:auto;padding:8px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:6px;font-family:'Inter',sans-serif;font-size:13px;color:rgba(255,255,255,.6);cursor:pointer}
+.edit-btn2:hover{background:rgba(255,255,255,.1);color:white}
+.sec{background:var(--navy2);border:1px solid var(--bd);border-radius:10px;padding:18px;margin-bottom:14px}
+.sec-t{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:14px}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:5px}
+.fv{font-size:14px;color:rgba(255,255,255,.8);line-height:1.6}
+.fv.em{color:rgba(255,255,255,.2);font-style:italic;font-size:13px}
+.fi{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:7px;color:white;font-family:'Inter',sans-serif;font-size:14px;padding:10px 12px;outline:none;transition:border-color .15s}
+.fi:focus{border-color:var(--gold)}
+.fi::placeholder{color:rgba(255,255,255,.2)}
+textarea.fi{resize:vertical;min-height:80px;line-height:1.6}
+select.fi{cursor:pointer}
+select.fi option{background:var(--navy2)}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ao{padding:9px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;cursor:pointer;font-size:13px;color:rgba(255,255,255,.5);text-align:center;transition:all .15s;user-select:none}
+.ao.on{border-color:var(--gold);background:rgba(244,195,0,.08);color:white;font-weight:600}
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ag3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
 .save-btn{flex:1;padding:12px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;font-weight:900;cursor:pointer}
-.save-btn:hover{background:#FFD700}
-.save-btn:disabled{opacity:.4;cursor:not-allowed}
-.cancel-btn{padding:12px 20px;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;color:rgba(255,255,255,.5);cursor:pointer}
-.cancel-btn:hover{color:white;border-color:rgba(255,255,255,.3)}
-
-.delete-zone{background:rgba(207,20,43,.07);border:1px solid rgba(207,20,43,.25);border-radius:10px;padding:20px;margin-top:24px}
-.delete-title{font-size:13px;font-weight:700;color:#FCA5A5;margin-bottom:6px}
-.delete-desc{font-size:13px;color:rgba(255,255,255,.35);line-height:1.6;margin-bottom:14px}
-.delete-btn{padding:10px 20px;background:rgba(207,20,43,.2);border:1px solid rgba(207,20,43,.4);border-radius:6px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#FCA5A5;cursor:pointer;transition:all .15s}
-.delete-btn:hover{background:var(--red);color:white;border-color:var(--red)}
-
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--navy2);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:12px 20px;font-size:14px;font-weight:600;display:none;z-index:999;white-space:nowrap}
-.toast.ok{color:#6EE7B7;border-color:rgba(4,120,87,.4)}
-.toast.err{color:#FCA5A5;border-color:rgba(207,20,43,.4)}
-
-/* CV upload */
+.save-btn:hover{background:#FFD700}.save-btn:disabled{opacity:.4;cursor:not-allowed}
+.canc-btn{padding:12px 18px;background:transparent;border:1px solid rgba(255,255,255,.12);border-radius:7px;font-family:'Inter',sans-serif;font-size:14px;color:rgba(255,255,255,.5);cursor:pointer}
+.canc-btn:hover{color:white}
+.act-row{display:flex;gap:10px;margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
+.del-zone{background:rgba(207,20,43,.07);border:1px solid rgba(207,20,43,.2);border-radius:10px;padding:18px;margin-top:20px}
+.del-t{font-size:13px;font-weight:700;color:#FCA5A5;margin-bottom:5px}
+.del-d{font-size:13px;color:rgba(255,255,255,.3);line-height:1.6;margin-bottom:12px}
+.del-btn{padding:9px 18px;background:rgba(207,20,43,.15);border:1px solid rgba(207,20,43,.35);border-radius:6px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#FCA5A5;cursor:pointer}
+.del-btn:hover{background:var(--red);color:white}
 .cv-zone{border:1px dashed rgba(255,255,255,.15);border-radius:8px;padding:16px;text-align:center;cursor:pointer;position:relative;transition:all .15s}
 .cv-zone:hover{border-color:rgba(244,195,0,.4);background:rgba(244,195,0,.03)}
 .cv-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.cv-zone-txt{font-size:13px;color:rgba(255,255,255,.35)}
-
-@media(max-width:600px){
-  .row2,.avail-grid{grid-template-columns:1fr}
-  .action-row{flex-direction:column}
-  .cancel-btn{order:2}
-}
+.cv-txt{font-size:13px;color:rgba(255,255,255,.35)}
+.ai-note{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:rgba(244,195,0,.6);margin-bottom:4px}
+.ai-dot{width:5px;height:5px;background:var(--gold);border-radius:50%}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);padding:12px 20px;border-radius:8px;font-size:14px;font-weight:600;display:none;z-index:999;white-space:nowrap}
+.toast.ok{background:var(--navy2);border:1px solid rgba(4,120,87,.4);color:#6EE7B7}
+.toast.err{background:var(--navy2);border:1px solid rgba(207,20,43,.4);color:#FCA5A5}
+.back-btn{background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:20px;padding:0;margin-right:8px;vertical-align:middle}
+.back-btn:hover{color:white}
+@media(max-width:600px){.r2,.ag,.ag3{grid-template-columns:1fr}.act-row{flex-direction:column}}
 </style>
 </head>
 <body>
@@ -130,250 +112,190 @@ select.field-inp option{background:var(--navy2)}
   </a>
   <div class="nav-right">
     <span class="nav-email" id="nav-email"></span>
-    <button class="signout-btn" id="signout-btn" style="display:none" onclick="signOut()">Cerrar sesión</button>
+    <button class="so-btn" id="so-btn" onclick="signOut()">Cerrar sesion</button>
   </div>
 </nav>
 
 <div class="wrap">
 
-  <!-- LOGIN -->
   <div class="screen active" id="s-login">
-    <div class="login-wrap">
-      <div class="login-tag">Mi cuenta</div>
-      <h1 class="login-h">Accede a tu perfil</h1>
-      <p class="login-sub">Introduce tu correo y te enviamos un enlace de acceso seguro. Sin contraseña.</p>
+    <div class="login-hdr">
+      <div class="ltag">Mi cuenta</div>
+      <h1 class="lh">Accede a tu perfil</h1>
+      <p class="ls">Introduce tu correo y te enviamos un enlace de acceso seguro. Sin contrasena.</p>
     </div>
-    <div class="login-box">
+    <div class="lbox">
       <label class="lbl">Tu correo de registro</label>
-      <input type="email" class="inp" id="login-email" placeholder="tu@correo.com" onkeydown="if(event.key==='Enter')enviarMagicLink()">
-      <button class="prim-btn" id="magic-btn" onclick="enviarMagicLink()">Enviarme el enlace de acceso</button>
-      <div class="divider"><div class="divline"></div><span class="divtxt">O</span><div class="divline"></div></div>
-      <button class="google-btn" onclick="loginGoogle()">
+      <input type="email" class="inp" id="lemail" placeholder="tu@correo.com" onkeydown="if(event.key==='Enter')sendLink()">
+      <button class="pbtn" id="lbtn" onclick="sendLink()">Enviarme el enlace de acceso</button>
+      <div class="div"><div class="divl"></div><span class="divt">O</span><div class="divl"></div></div>
+      <button class="gbtn" onclick="loginGoogle()">
         <svg width="17" height="17" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
         Acceder con Google
       </button>
-      <div class="sent-box" id="sent-box" style="display:none">
-        <div class="sent-h">Enlace enviado</div>
-        <p class="sent-p">Revisa tu correo y haz clic en el enlace. Tienes 10 minutos para usarlo.<br>Si no lo ves, revisa la carpeta de Promociones o Spam.</p>
+      <div class="sent" id="sent">
+        <h3>Enlace enviado</h3>
+        <p id="sent-msg">Revisa tu correo y haz clic en el enlace. Tienes 10 minutos. Si no lo ves, revisa Spam o Promociones.</p>
       </div>
     </div>
   </div>
 
-  <!-- CARGANDO -->
-  <div class="screen" id="s-loading">
-    <div class="spinner"></div>
-  </div>
+  <div class="screen" id="s-loading"><div class="spinner"></div></div>
 
-  <!-- ERROR -->
   <div class="screen" id="s-error">
-    <div style="text-align:center;padding:60px 0">
-      <div style="font-size:40px;margin-bottom:16px">!</div>
-      <div style="font-size:18px;font-weight:700;margin-bottom:8px" id="err-title">Error</div>
-      <p style="font-size:14px;color:rgba(255,255,255,.4);margin-bottom:24px" id="err-msg"></p>
-      <button onclick="show('s-login')" style="padding:10px 24px;background:var(--gold);color:var(--navy);border:none;border-radius:7px;font-family:Inter,sans-serif;font-size:14px;font-weight:800;cursor:pointer">Volver al inicio</button>
+    <div class="err-wrap">
+      <div class="err-icon">!</div>
+      <div class="err-h" id="err-h">Error</div>
+      <p class="err-p" id="err-p"></p>
+      <button class="ybtn" onclick="show('s-login')">Volver</button>
     </div>
   </div>
 
-  <!-- PERFIL -->
   <div class="screen" id="s-profile">
-    <!-- Vista -->
+
     <div id="view-mode">
-      <div class="profile-header">
-        <div class="avatar" id="p-avatar">?</div>
+      <div class="prof-hdr">
+        <div class="avatar" id="p-av">?</div>
         <div>
-          <div class="profile-name" id="p-name">—</div>
-          <div class="profile-email" id="p-email">—</div>
-          <div class="profile-badge">Miembro Fundador</div>
+          <div class="pname" id="p-name">—</div>
+          <div class="pemail" id="p-email">—</div>
+          <div class="pbadge">Miembro Fundador</div>
         </div>
-        <button class="edit-btn" onclick="activarEdicion()">Editar perfil</button>
+        <button class="edit-btn2" onclick="startEdit()">Editar perfil</button>
       </div>
 
-      <div class="section">
-        <div class="section-title">Información profesional</div>
-        <div class="row2">
-          <div class="field-group">
-            <label>Cargo actual</label>
-            <div class="field-val" id="v-position"><span class="empty">Sin completar</span></div>
-          </div>
-          <div class="field-group">
-            <label>Empresa</label>
-            <div class="field-val" id="v-company"><span class="empty">Sin completar</span></div>
-          </div>
+      <div class="sec">
+        <div class="sec-t">Informacion profesional</div>
+        <div class="r2">
+          <div class="fg"><label>Cargo actual</label><div class="fv em" id="v-pos">Sin completar</div></div>
+          <div class="fg"><label>Empresa</label><div class="fv em" id="v-co">Sin completar</div></div>
         </div>
-        <div class="field-group">
-          <label>Especialidad</label>
-          <div class="field-val" id="v-specialty"><span class="empty">Sin completar</span></div>
+        <div class="fg"><label>Especialidad</label><div class="fv em" id="v-sp">Sin completar</div></div>
+        <div class="r2">
+          <div class="fg"><label>Experiencia</label><div class="fv em" id="v-yr">Sin completar</div></div>
+          <div class="fg"><label>Ubicacion</label><div class="fv em" id="v-loc">Sin completar</div></div>
         </div>
-        <div class="row2">
-          <div class="field-group">
-            <label>Experiencia</label>
-            <div class="field-val" id="v-years"><span class="empty">Sin completar</span></div>
-          </div>
-          <div class="field-group">
-            <label>Ubicación</label>
-            <div class="field-val" id="v-location"><span class="empty">Sin completar</span></div>
-          </div>
+        <div class="fg"><label>Sobre mi</label><div class="fv em" id="v-bio">Sin completar</div></div>
+        <div class="r2">
+          <div class="fg"><label>Nivel de ingles</label><div class="fv em" id="v-eng">Sin completar</div></div>
+          <div class="fg"><label>Otros idiomas</label><div class="fv em" id="v-lang">Sin completar</div></div>
         </div>
-        <div class="field-group">
-          <label>Sobre mí</label>
-          <div class="field-val" id="v-bio"><span class="empty">Sin completar</span></div>
+        <div class="r2">
+          <div class="fg"><label>Educacion</label><div class="fv em" id="v-edu">Sin completar</div></div>
+          <div class="fg"><label>Modalidad</label><div class="fv em" id="v-mod">Sin completar</div></div>
         </div>
-        <div class="field-group">
-          <label>LinkedIn</label>
-          <div class="field-val" id="v-linkedin"><span class="empty">Sin completar</span></div>
+        <div class="r2">
+          <div class="fg"><label>LinkedIn</label><div class="fv em" id="v-li">Sin completar</div></div>
+          <div class="fg"><label>CV</label><div class="fv em" id="v-cv">Sin subir</div></div>
         </div>
-        <div class="field-group">
-          <label>Disponibilidad</label>
-          <div class="field-val" id="v-avail"><span class="empty">Sin indicar</span></div>
-        </div>
-        <div class="field-group">
-          <label>Nivel de inglés</label>
-          <div class="field-val" id="v-english"><span class="empty">Sin completar</span></div>
-        </div>
-        <div class="field-group">
-          <label>Otros idiomas</label>
-          <div class="field-val" id="v-languages"><span class="empty">Sin completar</span></div>
-        </div>
-        <div class="field-group">
-          <label>Educación</label>
-          <div class="field-val" id="v-education"><span class="empty">Sin completar</span></div>
-        </div>
-        <div class="field-group">
-          <label>Modalidad</label>
-          <div class="field-val" id="v-modality"><span class="empty">Sin indicar</span></div>
-        </div>
-        <div class="field-group">
-          <label>CV</label>
-          <div class="field-val" id="v-cv"><span class="empty">Sin subir</span></div>
-        </div>
+        <div class="fg"><label>Disponibilidad</label><div class="fv em" id="v-av">Sin indicar</div></div>
       </div>
 
-      <div class="delete-zone">
-        <div class="delete-title">Eliminar mi cuenta</div>
-        <div class="delete-desc">Se borrarán permanentemente tu perfil, todos tus datos y tu CV. Esta acción no se puede deshacer.</div>
-        <button class="delete-btn" onclick="confirmarBorrado()">Eliminar mi cuenta y todos mis datos</button>
+      <div class="del-zone">
+        <div class="del-t">Eliminar mi cuenta</div>
+        <div class="del-d">Se borraran permanentemente tu perfil, todos tus datos y tu CV. Esta accion no se puede deshacer.</div>
+        <button class="del-btn" onclick="deleteAccount()">Eliminar mi cuenta y todos mis datos</button>
       </div>
     </div>
 
-    <!-- Edición -->
     <div id="edit-mode" style="display:none">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
-        <button onclick="cancelarEdicion()" style="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:20px;padding:0">&#8592;</button>
+      <div style="display:flex;align-items:center;margin-bottom:22px">
+        <button class="back-btn" onclick="cancelEdit()">&#8592;</button>
         <div style="font-size:18px;font-weight:800">Editar mi perfil</div>
       </div>
 
-      <div class="section">
-        <div class="section-title">Información profesional</div>
-        <div class="row2">
-          <div class="field-group">
-            <label>Cargo actual</label>
-            <input type="text" class="field-inp" id="e-position" placeholder="Ej: Ingeniero de Producción">
-          </div>
-          <div class="field-group">
-            <label>Empresa</label>
-            <input type="text" class="field-inp" id="e-company" placeholder="Ej: Repsol, PDVSA...">
-          </div>
+      <div class="sec">
+        <div class="sec-t">Informacion profesional</div>
+        <div class="r2">
+          <div class="fg"><label>Cargo actual</label><input type="text" class="fi" id="e-pos" placeholder="Ej: Ingeniero de Produccion"></div>
+          <div class="fg"><label>Empresa</label><input type="text" class="fi" id="e-co" placeholder="Ej: Repsol, PDVSA..."></div>
         </div>
-        <div class="field-group">
-          <label>Especialidad</label>
-          <input type="text" class="field-inp" id="e-specialty" placeholder="Ej: Ingeniería de Yacimientos, Ciberseguridad...">
-        </div>
-        <div class="row2">
-          <div class="field-group">
-            <label>Años de experiencia</label>
-            <select class="field-inp" id="e-years">
+        <div class="fg"><label>Especialidad</label><input type="text" class="fi" id="e-sp" placeholder="Ej: Ingenieria de Yacimientos, Ciberseguridad..."></div>
+        <div class="r2">
+          <div class="fg"><label>Anos de experiencia</label>
+            <select class="fi" id="e-yr">
               <option value="">Seleccionar...</option>
-              <option>Menos de 1 año</option>
-              <option>1-5 años</option>
-              <option>6-10 años</option>
-              <option>11-20 años</option>
-              <option>Más de 20 años</option>
+              <option>Menos de 1 ano</option>
+              <option>1-5 anos</option>
+              <option>6-10 anos</option>
+              <option>11-20 anos</option>
+              <option>Mas de 20 anos</option>
             </select>
           </div>
-          <div class="field-group">
-            <label>Ciudad</label>
-            <input type="text" class="field-inp" id="e-city" placeholder="Ej: Caracas, Madrid...">
-          </div>
+          <div class="fg"><label>Ciudad</label><input type="text" class="fi" id="e-city" placeholder="Ej: Caracas, Madrid..."></div>
         </div>
-        <div class="field-group">
-          <label>País</label>
-          <input type="text" class="field-inp" id="e-country" placeholder="Ej: Venezuela, España...">
-        </div>
-        <div class="field-group">
-          <label>Sobre mí</label>
-          <textarea class="field-inp" id="e-bio" placeholder="Un párrafo sobre tu experiencia y lo que buscas..."></textarea>
-        </div>
-        <div class="field-group">
-          <label>LinkedIn</label>
-          <input type="url" class="field-inp" id="e-linkedin" placeholder="https://linkedin.com/in/tu-perfil">
-        </div>
-        <div class="row2">
-          <div class="field-group">
-            <label>Nivel de inglés</label>
-            <select class="field-inp" id="e-english">
+        <div class="fg"><label>Pais</label><input type="text" class="fi" id="e-ctry" placeholder="Ej: Venezuela, Espana..."></div>
+        <div class="fg"><label>Sobre mi</label><textarea class="fi" id="e-bio" placeholder="Un parrafo sobre tu experiencia y lo que buscas..."></textarea></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-t">Idiomas y educacion</div>
+        <div class="r2">
+          <div class="fg"><label>Nivel de ingles</label>
+            <select class="fi" id="e-eng">
               <option value="">Seleccionar...</option>
-              <option>Básico</option>
+              <option>Basico</option>
               <option>Intermedio</option>
               <option>Avanzado</option>
               <option>Fluido</option>
               <option>Nativo</option>
             </select>
           </div>
-          <div class="field-group">
-            <label>Otros idiomas</label>
-            <input type="text" class="field-inp" id="e-languages" placeholder="Ej: Italiano B2, Francés A2">
-          </div>
+          <div class="fg"><label>Otros idiomas</label><input type="text" class="fi" id="e-lang" placeholder="Ej: Italiano B2, Frances A2"></div>
         </div>
-        <div class="row2">
-          <div class="field-group">
-            <label>Nivel educativo</label>
-            <select class="field-inp" id="e-education">
+        <div class="r2">
+          <div class="fg"><label>Nivel educativo</label>
+            <select class="fi" id="e-edu">
               <option value="">Seleccionar...</option>
-              <option>Técnico Superior</option>
-              <option>Licenciatura / Ingeniería</option>
-              <option>Especialización</option>
-              <option>Maestría</option>
+              <option>Tecnico Superior</option>
+              <option>Licenciatura / Ingenieria</option>
+              <option>Especializacion</option>
+              <option>Maestria</option>
               <option>Doctorado</option>
             </select>
           </div>
-          <div class="field-group">
-            <label>Área de estudios</label>
-            <input type="text" class="field-inp" id="e-degree" placeholder="Ej: Ingeniería de Petróleo">
+          <div class="fg"><label>Area de estudios</label><input type="text" class="fi" id="e-deg" placeholder="Ej: Ingenieria de Petroleo"></div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-t">Disponibilidad y modalidad</div>
+        <div class="fg"><label>Disponibilidad</label>
+          <div class="ag">
+            <div class="ao on" id="av-now" onclick="setAv('now')">Disponible ahora</div>
+            <div class="ao" id="av-soon" onclick="setAv('soon')">Proximos meses</div>
+            <div class="ao" id="av-open" onclick="setAv('open')">Abierto a propuestas</div>
+            <div class="ao" id="av-no" onclick="setAv('no')">No disponible</div>
           </div>
         </div>
-        <div class="field-group">
-          <label>Modalidad de trabajo</label>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px" id="modality-grid">
-            <div class="avail-opt" id="mod-remote" onclick="setModality('remote')">Remoto</div>
-            <div class="avail-opt" id="mod-hybrid" onclick="setModality('hybrid')">Híbrido</div>
-            <div class="avail-opt" id="mod-onsite" onclick="setModality('onsite')">Presencial</div>
+        <div class="fg"><label>Modalidad</label>
+          <div class="ag3">
+            <div class="ao" id="mod-remote" onclick="setMod('remote')">Remoto</div>
+            <div class="ao" id="mod-hybrid" onclick="setMod('hybrid')">Hibrido</div>
+            <div class="ao" id="mod-onsite" onclick="setMod('onsite')">Presencial</div>
           </div>
         </div>
       </div>
 
-      <div class="section">
-        <div class="section-title">Disponibilidad</div>
-        <div class="avail-grid">
-          <div class="avail-opt on" id="av-now" onclick="setAvail('now')">Disponible ahora</div>
-          <div class="avail-opt" id="av-soon" onclick="setAvail('soon')">En los próximos meses</div>
-          <div class="avail-opt" id="av-open" onclick="setAvail('open')">Abierto a propuestas</div>
-          <div class="avail-opt" id="av-no" onclick="setAvail('no')">No disponible</div>
+      <div class="sec">
+        <div class="sec-t">LinkedIn y CV</div>
+        <div class="fg"><label>LinkedIn</label><input type="url" class="fi" id="e-li" placeholder="https://linkedin.com/in/tu-perfil"></div>
+        <div class="fg">
+          <label>CV (PDF o Word)</label>
+          <div class="ai-note"><div class="ai-dot"></div>La IA completa los campos automaticamente al subir</div>
+          <div class="cv-zone" id="cv-zone">
+            <input type="file" id="cv-inp" accept=".pdf,.doc,.docx" onchange="handleCv(this.files[0])">
+            <div class="cv-txt" id="cv-txt">Arrastra tu CV aqui o haz clic — PDF o Word — Max 5 MB</div>
+          </div>
         </div>
       </div>
 
-      <div class="section">
-        <div class="section-title">Mi CV</div>
-        <div class="cv-zone" id="cv-zone">
-          <input type="file" id="cv-input" accept=".pdf,.doc,.docx" onchange="handleCv(this.files[0])">
-          <div class="cv-zone-txt" id="cv-zone-txt">Arrastra tu CV o haz clic · PDF o Word · Máx. 5 MB</div>
-        </div>
-      </div>
-
-      <div class="action-row">
-        <button class="save-btn" id="save-btn" onclick="guardarCambios()">Guardar cambios</button>
-        <button class="cancel-btn" onclick="cancelarEdicion()">Cancelar</button>
+      <div class="act-row">
+        <button class="save-btn" id="save-btn" onclick="saveChanges()">Guardar cambios</button>
+        <button class="canc-btn" onclick="cancelEdit()">Cancelar</button>
       </div>
     </div>
+
   </div>
 
 </div>
@@ -384,53 +306,28 @@ select.field-inp option{background:var(--navy2)}
 <script>
 var SB='https://eettdimwdjyqniodefop.supabase.co';
 var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
+var ses=null,reg=null,avail='now',modality='',cvFile=null,cvFilename='',cvText='';
 
-var sesion=null;
-var registro=null;
-var availState='now';
-var modalityState='';
-var cvFile=null;
-var cvFilename='';
+function show(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});document.getElementById(id).classList.add('active');}
+function toast(msg,t){var el=document.getElementById('toast');el.textContent=msg;el.className='toast '+(t||'ok');el.style.display='block';setTimeout(function(){el.style.display='none';},3000);}
 
-function show(id){
-  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
-  document.getElementById(id).classList.add('active');
-}
-
-function toast(msg,tipo){
-  var t=document.getElementById('toast');
-  t.textContent=msg;t.className='toast '+(tipo||'ok');t.style.display='block';
-  setTimeout(function(){t.style.display='none';},3000);
-}
-
-// ── Auth ──────────────────────────────────────────────────
-async function enviarMagicLink(){
-  var email=document.getElementById('login-email').value.trim();
-  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){toast('Ingresa un correo válido','err');return;}
-  var btn=document.getElementById('magic-btn');
+// Auth
+async function sendLink(){
+  var email=document.getElementById('lemail').value.trim();
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){toast('Ingresa un correo valido','err');return;}
+  var btn=document.getElementById('lbtn');
   btn.disabled=true;btn.textContent='Enviando...';
   try{
     var r=await fetch(SB+'/auth/v1/otp',{
       method:'POST',
       headers:{'apikey':SK,'Content-Type':'application/json'},
-      body:JSON.stringify({
-        email:email,
-        create_user:false,
-        options:{emailRedirectTo:'https://noduspro.net/cuenta'}
-      })
+      body:JSON.stringify({email:email,create_user:false,options:{emailRedirectTo:'https://noduspro.net/cuenta'}})
     });
     var d=await r.json();
-    if(d.error){
-      toast('Este correo no está registrado en NodusPro','err');
-      btn.disabled=false;btn.textContent='Enviarme el enlace de acceso';
-      return;
-    }
-    document.getElementById('sent-box').style.display='block';
-    btn.disabled=false;btn.textContent='Reenviar enlace';
-  }catch(e){
-    toast('Error al enviar. Intenta de nuevo.','err');
-    btn.disabled=false;btn.textContent='Enviarme el enlace de acceso';
-  }
+    if(d.error){toast('Correo no encontrado en NodusPro','err');btn.disabled=false;btn.textContent='Enviarme el enlace de acceso';return;}
+    document.getElementById('sent').style.display='block';
+    btn.textContent='Reenviar enlace';btn.disabled=false;
+  }catch(e){toast('Error al enviar. Intenta de nuevo.','err');btn.disabled=false;btn.textContent='Enviarme el enlace de acceso';}
 }
 
 function loginGoogle(){
@@ -438,386 +335,273 @@ function loginGoogle(){
 }
 
 async function signOut(){
-  try{
-    await fetch(SB+'/auth/v1/logout',{
-      method:'POST',
-      headers:{'apikey':SK,'Authorization':'Bearer '+(sesion&&sesion.access_token||'')}
-    });
-  }catch(e){}
-  sesion=null;registro=null;
-  document.getElementById('signout-btn').style.display='none';
+  try{await fetch(SB+'/auth/v1/logout',{method:'POST',headers:{'apikey':SK,'Authorization':'Bearer '+(ses&&ses.access_token||'')}});}catch(e){}
+  ses=null;reg=null;
+  try{sessionStorage.removeItem('np_ses');}catch(e){}
+  document.getElementById('so-btn').style.display='none';
   document.getElementById('nav-email').textContent='';
   show('s-login');
 }
 
-// ── Init: check for magic link token in URL ───────────────
+// Init
 async function init(){
   var hash=window.location.hash;
   if(hash&&hash.indexOf('access_token=')!==-1){
     show('s-loading');
     var hp=new URLSearchParams(hash.replace('#',''));
     var at=hp.get('access_token');
-    var rt=hp.get('refresh_token');
     history.replaceState(null,'',location.pathname);
-    if(at){
-      sesion={access_token:at,refresh_token:rt};
-      await cargarPerfil();
-      return;
-    }
+    if(at){ses={access_token:at};await loadProfile();return;}
   }
-  // Check stored session
-  var stored=null;
-  try{stored=JSON.parse(sessionStorage.getItem('np_session'));}catch(e){}
-  if(stored&&stored.access_token){
-    sesion=stored;show('s-loading');
-    await cargarPerfil();
-    return;
-  }
+  try{
+    var stored=JSON.parse(sessionStorage.getItem('np_ses')||'null');
+    if(stored&&stored.access_token){ses=stored;show('s-loading');await loadProfile();return;}
+  }catch(e){}
   show('s-login');
 }
 
-async function cargarPerfil(){
+async function loadProfile(){
   try{
-    // Get user from token
-    var r=await fetch(SB+'/auth/v1/user',{
-      headers:{'apikey':SK,'Authorization':'Bearer '+sesion.access_token}
-    });
+    var r=await fetch(SB+'/auth/v1/user',{headers:{'apikey':SK,'Authorization':'Bearer '+ses.access_token}});
     var u=await r.json();
     if(u.error||!u.email){show('s-login');return;}
-    sesion.email=u.email;
-    try{sessionStorage.setItem('np_session',JSON.stringify(sesion));}catch(e){}
+    ses.email=u.email;
+    try{sessionStorage.setItem('np_ses',JSON.stringify(ses));}catch(e){}
 
-    // Load waitlist record
     var r2=await fetch(SB+'/rest/v1/rpc/get_my_profile',{
       method:'POST',
       headers:{'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':'application/json'},
       body:JSON.stringify({p_email:u.email})
     });
-    var profileData=await r2.json();
-    var data=profileData?[profileData]:[];
-    if(!data||!data.length){
-      // Google email may differ from registered email
-      // Show login screen with helpful message instead of hard error
-      document.getElementById('sent-box').style.display='block';
-      document.getElementById('sent-box').style.background='rgba(207,20,43,.1)';
-      document.getElementById('sent-box').style.borderColor='rgba(207,20,43,.3)';
-      document.getElementById('sent-box').querySelector('.sent-h').textContent='Cuenta de Google no vinculada';
-      document.getElementById('sent-box').querySelector('.sent-h').style.color='#FCA5A5';
-      document.getElementById('sent-box').querySelector('.sent-p').textContent='El correo de tu cuenta Google ('+u.email+') no está registrado en NodusPro. Si te registraste con un correo distinto, úsalo abajo para recibir el enlace de acceso.';
-      document.getElementById('login-email').value=u.email;
-      show('s-login');
-      return;
+    var data=await r2.json();
+    if(!data){
+      // Not found — show helpful message
+      document.getElementById('sent').style.display='block';
+      document.getElementById('sent').style.background='rgba(207,20,43,.1)';
+      document.getElementById('sent').style.borderColor='rgba(207,20,43,.3)';
+      document.getElementById('sent').querySelector('h3').textContent='Cuenta no vinculada';
+      document.getElementById('sent').querySelector('h3').style.color='#FCA5A5';
+      document.getElementById('sent-msg').textContent='El correo '+u.email+' no esta registrado en NodusPro. Si te registraste con otro correo, usalo abajo.';
+      document.getElementById('lemail').value=u.email;
+      show('s-login');return;
     }
-    registro=data[0];
-
-    // Update nav
+    reg=data;
     document.getElementById('nav-email').textContent=u.email;
-    document.getElementById('signout-btn').style.display='block';
-
-    // Render profile view
-    renderVista();
+    document.getElementById('so-btn').style.display='block';
+    renderView();
     show('s-profile');
-  }catch(e){
-    show('s-login');
+  }catch(e){show('s-login');}
+}
+
+function setFv(id,val,link){
+  var el=document.getElementById(id);
+  if(val&&String(val).trim()){
+    el.className='fv';
+    el.innerHTML=link?'<a href="'+val+'" target="_blank" style="color:var(--gold)">'+val+'</a>':val;
+  }else{
+    el.className='fv em';el.textContent='Sin completar';
   }
 }
 
-function renderVista(){
-  var r=registro;
-  var nombre=(r.first_name||'')+' '+(r.last_name||'');
-  document.getElementById('p-avatar').textContent=(r.first_name||'?')[0].toUpperCase();
-  document.getElementById('p-name').textContent=nombre.trim()||'—';
-  document.getElementById('p-email').textContent=sesion.email;
-
-  function setVal(id,val){
-    var el=document.getElementById(id);
-    if(val&&val.trim()){el.innerHTML='<span>'+val+'</span>';}
-    else{el.innerHTML='<span class="empty">Sin completar</span>';}
-  }
-
-  setVal('v-position',r.current_position);
-  setVal('v-company',r.current_company);
-  setVal('v-specialty',r.specialty);
-  setVal('v-years',r.years_experience);
-
+function renderView(){
+  var r=reg;
+  document.getElementById('p-av').textContent=(r.first_name||'?')[0].toUpperCase();
+  document.getElementById('p-name').textContent=((r.first_name||'')+' '+(r.last_name||'')).trim()||'—';
+  document.getElementById('p-email').textContent=ses.email;
+  setFv('v-pos',r.current_position);
+  setFv('v-co',r.current_company);
+  setFv('v-sp',r.specialty);
+  setFv('v-yr',r.years_experience);
   var loc=[r.location_city,r.location_country].filter(Boolean).join(', ');
-  setVal('v-location',loc);
-  setVal('v-bio',r.bio);
-
-  var li=r.linkedin_url||r.profile_url;
-  if(li&&li.trim()){
-    document.getElementById('v-linkedin').innerHTML='<a href="'+li+'" target="_blank" style="color:var(--gold)">'+li+'</a>';
-  } else {
-    document.getElementById('v-linkedin').innerHTML='<span class="empty">Sin completar</span>';
-  }
-
-  var availMap={now:'Disponible ahora',soon:'En los próximos meses',open:'Abierto a propuestas',no:'No disponible'};
-  setVal('v-avail',availMap[r.availability]||r.availability);
-  setVal('v-english',r.english_level);
-  setVal('v-languages',r.other_languages);
+  setFv('v-loc',loc);
+  setFv('v-bio',r.bio);
+  setFv('v-eng',r.english_level);
+  setFv('v-lang',r.other_languages);
   var edu=[r.education_level,r.degree_field].filter(Boolean).join(' — ');
-  setVal('v-education',edu);
-  var modalMap={remote:'Remoto',hybrid:'Híbrido',onsite:'Presencial'};
-  setVal('v-modality',modalMap[r.work_modality]||r.work_modality);
-  setVal('v-cv',r.cv_filename);
+  setFv('v-edu',edu);
+  var modMap={remote:'Remoto',hybrid:'Hibrido',onsite:'Presencial'};
+  setFv('v-mod',modMap[r.work_modality]||r.work_modality);
+  var li=r.linkedin_url||r.profile_url;
+  setFv('v-li',li,true);
+  setFv('v-cv',r.cv_filename);
+  var avMap={now:'Disponible ahora',soon:'Proximos meses',open:'Abierto a propuestas',no:'No disponible'};
+  setFv('v-av',avMap[r.availability]||r.availability);
 }
 
-function activarEdicion(){
-  var r=registro;
-  document.getElementById('e-position').value=r.current_position||'';
-  document.getElementById('e-company').value=r.current_company||'';
-  document.getElementById('e-specialty').value=r.specialty||'';
+function startEdit(){
+  var r=reg;
+  document.getElementById('e-pos').value=r.current_position||'';
+  document.getElementById('e-co').value=r.current_company||'';
+  document.getElementById('e-sp').value=r.specialty||'';
   document.getElementById('e-city').value=r.location_city||'';
-  document.getElementById('e-country').value=r.location_country||'';
+  document.getElementById('e-ctry').value=r.location_country||'';
   document.getElementById('e-bio').value=r.bio||'';
-  document.getElementById('e-linkedin').value=r.linkedin_url||r.profile_url||'';
-  // Years
-  var sel=document.getElementById('e-years');
-  for(var i=0;i<sel.options.length;i++){
-    if(sel.options[i].value===(r.years_experience||'')){sel.selectedIndex=i;break;}
-  }
-  // Availability
-  availState=r.availability||'now';
-  ['now','soon','open','no'].forEach(function(v){
-    document.getElementById('av-'+v).classList.toggle('on',v===availState);
-  });
+  document.getElementById('e-li').value=r.linkedin_url||r.profile_url||'';
+  document.getElementById('e-lang').value=r.other_languages||'';
+  document.getElementById('e-deg').value=r.degree_field||'';
+  // Selects
+  selOpt('e-yr',r.years_experience);
+  selOpt('e-eng',r.english_level);
+  selOpt('e-edu',r.education_level);
+  // Avail
+  avail=r.availability||'now';
+  ['now','soon','open','no'].forEach(function(v){document.getElementById('av-'+v).classList.toggle('on',v===avail);});
+  // Modality
+  modality=r.work_modality||'';
+  ['remote','hybrid','onsite'].forEach(function(v){document.getElementById('mod-'+v).classList.toggle('on',v===modality);});
   // CV
-  cvFile=null;cvFilename='';
-  document.getElementById('cv-zone-txt').textContent=r.cv_filename?
-    'CV actual: '+r.cv_filename+' · Arrastra para reemplazar':
-    'Arrastra tu CV o haz clic · PDF o Word · Máx. 5 MB';
-
-  // New fields
-  document.getElementById('e-english').value=r.english_level||'';
-  document.getElementById('e-languages').value=r.other_languages||'';
-  document.getElementById('e-education').value=r.education_level||'';
-  document.getElementById('e-degree').value=r.degree_field||'';
-  modalityState=r.work_modality||'';
-  ['remote','hybrid','onsite'].forEach(function(v){
-    var el=document.getElementById('mod-'+v);
-    if(el)el.classList.toggle('on',v===modalityState);
-  });
+  cvFile=null;cvFilename='';cvText='';
+  document.getElementById('cv-txt').textContent=r.cv_filename?'CV actual: '+r.cv_filename+' — arrastra para reemplazar':'Arrastra tu CV aqui o haz clic — PDF o Word — Max 5 MB';
   document.getElementById('view-mode').style.display='none';
   document.getElementById('edit-mode').style.display='block';
 }
 
-function cancelarEdicion(){
+function cancelEdit(){
   document.getElementById('view-mode').style.display='block';
   document.getElementById('edit-mode').style.display='none';
 }
 
-function setModality(val){
-  modalityState=val;
-  ['remote','hybrid','onsite'].forEach(function(v){
-    document.getElementById('mod-'+v).classList.toggle('on',v===val);
-  });
-}
-function setAvail(val){
-  availState=val;
-  ['now','soon','open','no'].forEach(function(v){
-    document.getElementById('av-'+v).classList.toggle('on',v===val);
-  });
+function selOpt(id,val){
+  var sel=document.getElementById(id);
+  for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===val){sel.selectedIndex=i;return;}}
 }
 
-function handleCv(file){
+function setAv(val){
+  avail=val;
+  ['now','soon','open','no'].forEach(function(v){document.getElementById('av-'+v).classList.toggle('on',v===val);});
+}
+function setMod(val){
+  modality=val;
+  ['remote','hybrid','onsite'].forEach(function(v){document.getElementById('mod-'+v).classList.toggle('on',v===val);});
+}
+
+// CV with AI extraction
+async function handleCv(file){
   if(!file)return;
   if(file.size>5*1024*1024){toast('El archivo supera los 5 MB','err');return;}
   var ext=file.name.split('.').pop().toLowerCase();
   if(!['pdf','doc','docx'].includes(ext)){toast('Solo PDF o Word (.doc, .docx)','err');return;}
   cvFile=file;cvFilename=file.name;
-  document.getElementById('cv-zone-txt').textContent='✓ '+file.name;
-}
-
-async function handleCv(file){
-  if(!file)return;
-  if(file.size>5*1024*1024){alert('El archivo supera los 5 MB.');return;}
-  var ext=file.name.split('.').pop().toLowerCase();
-  if(!['pdf','doc','docx'].includes(ext)){alert('Solo PDF o Word (.doc, .docx)');return;}
-  cvFile=file;cvFilename=file.name;
-  document.getElementById('cv-zone-txt').innerHTML='<span style="color:var(--gold)">Leyendo CV con IA...</span>';
-
+  document.getElementById('cv-txt').innerHTML='<span style="color:var(--gold)">Leyendo CV con IA...</span>';
   try{
-    var text='';
     if(ext==='pdf'){
-      var base64=await fileToBase64(file);
-      await extractCvAI(null,base64,'application/pdf');
-    } else {
+      var b64=await toBase64(file);
+      await extractAI(null,b64,'application/pdf');
+    }else{
       var ab=await file.arrayBuffer();
-      var r=await mammoth.extractRawText({arrayBuffer:ab});
-      text=r.value;
-      cvText=text.slice(0,8000);
-      await extractCvAI(text,null,null);
+      var res=await mammoth.extractRawText({arrayBuffer:ab});
+      cvText=res.value.slice(0,8000);
+      await extractAI(cvText,null,null);
     }
   }catch(e){
-    document.getElementById('cv-zone-txt').innerHTML='<span style="color:#6EE7B7">✓ '+file.name+' adjuntado</span>';
+    document.getElementById('cv-txt').innerHTML='<span style="color:#6EE7B7">&#10003; '+file.name+' adjuntado</span>';
   }
 }
 
-function fileToBase64(file){
-  return new Promise(function(res,rej){
-    var reader=new FileReader();
-    reader.onload=function(){res(reader.result.split(',')[1]);};
-    reader.onerror=rej;
-    reader.readAsDataURL(file);
-  });
+function toBase64(file){
+  return new Promise(function(res,rej){var rd=new FileReader();rd.onload=function(){res(rd.result.split(',')[1]);};rd.onerror=rej;rd.readAsDataURL(file);});
 }
 
-async function extractCvAI(text,base64,mimeType){
-  var prompt='Analiza este CV de un profesional venezolano y extrae su información. Responde SOLO con JSON válido, sin texto adicional ni markdown. Claves exactas: current_position (cargo más reciente), current_company (empresa más reciente), specialty (especialidad principal, max 80 chars), years_experience (una de: "Menos de 1 año","1-5 años","6-10 años","11-20 años","Más de 20 años"), location_city (ciudad actual), location_country (país actual), bio (resumen profesional 2-3 oraciones en primera persona en español), english_level (uno de: "Básico","Intermedio","Avanzado","Fluido","Nativo" — si no menciona inglés usa ""), other_languages (otros idiomas con nivel, ej: "Italiano B2"), education_level (uno de: "Técnico Superior","Licenciatura / Ingeniería","Especialización","Maestría","Doctorado"), degree_field (carrera o área de estudios). Usa "" para datos no encontrados.';
-
-  var messages;
-  if(base64){
-    messages=[{role:'user',content:[
-      {type:'document',source:{type:'base64',media_type:mimeType,data:base64}},
-      {type:'text',text:prompt}
-    ]}];
-  } else {
-    messages=[{role:'user',content:prompt+'
-
-CV:
-'+text}];
-  }
-
+async function extractAI(text,b64,mime){
+  var prompt='Analiza este CV de un profesional venezolano. Responde SOLO con JSON valido, sin texto adicional ni markdown. Claves: current_position, current_company, specialty (max 80 chars), years_experience (exactamente uno de: "Menos de 1 ano","1-5 anos","6-10 anos","11-20 anos","Mas de 20 anos"), location_city, location_country, bio (2-3 oraciones primera persona espanol), english_level (exactamente uno de: "Basico","Intermedio","Avanzado","Fluido","Nativo" o ""), other_languages (otros idiomas con nivel), education_level (exactamente uno de: "Tecnico Superior","Licenciatura / Ingenieria","Especializacion","Maestria","Doctorado" o ""), degree_field. Usa "" para datos no encontrados.';
+  var msgs;
+  if(b64){msgs=[{role:'user',content:[{type:'document',source:{type:'base64',media_type:mime,data:b64}},{type:'text',text:prompt}]}];}
+  else{msgs=[{role:'user',content:prompt+'\n\nCV:\n'+text}];}
   var resp=await fetch('https://api.anthropic.com/v1/messages',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:messages})
+    body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:msgs})
   });
-  var data=await resp.json();
-  var raw=(data.content&&data.content[0]&&data.content[0].text)||'{}';
+  var d=await resp.json();
+  var raw=(d.content&&d.content[0]&&d.content[0].text)||'{}';
   var clean=raw.replace(/```json|```/g,'').trim();
-
   try{
-    var d=JSON.parse(clean);
-    if(d.current_position)document.getElementById('e-position').value=d.current_position;
-    if(d.current_company)document.getElementById('e-company').value=d.current_company;
-    if(d.specialty)document.getElementById('e-specialty').value=d.specialty;
-    if(d.years_experience){
-      var sel=document.getElementById('e-years');
-      for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===d.years_experience){sel.selectedIndex=i;break;}}
-    }
-    if(d.location_city)document.getElementById('e-city').value=d.location_city;
-    if(d.location_country)document.getElementById('e-country').value=d.location_country;
-    if(d.bio)document.getElementById('e-bio').value=d.bio;
-    if(d.english_level){
-      var esel=document.getElementById('e-english');
-      for(var j=0;j<esel.options.length;j++){if(esel.options[j].value===d.english_level){esel.selectedIndex=j;break;}}
-    }
-    if(d.other_languages)document.getElementById('e-languages').value=d.other_languages;
-    if(d.education_level){
-      var edsel=document.getElementById('e-education');
-      for(var k=0;k<edsel.options.length;k++){if(edsel.options[k].value===d.education_level){edsel.selectedIndex=k;break;}}
-    }
-    if(d.degree_field)document.getElementById('e-degree').value=d.degree_field;
-    if(!base64)cvText=text.slice(0,8000);
-    document.getElementById('cv-zone-txt').innerHTML='<span style="color:#6EE7B7">✓ '+cvFilename+' — campos completados automáticamente</span>';
+    var x=JSON.parse(clean);
+    if(x.current_position)document.getElementById('e-pos').value=x.current_position;
+    if(x.current_company)document.getElementById('e-co').value=x.current_company;
+    if(x.specialty)document.getElementById('e-sp').value=x.specialty;
+    if(x.years_experience)selOpt('e-yr',x.years_experience);
+    if(x.location_city)document.getElementById('e-city').value=x.location_city;
+    if(x.location_country)document.getElementById('e-ctry').value=x.location_country;
+    if(x.bio)document.getElementById('e-bio').value=x.bio;
+    if(x.english_level)selOpt('e-eng',x.english_level);
+    if(x.other_languages)document.getElementById('e-lang').value=x.other_languages;
+    if(x.education_level)selOpt('e-edu',x.education_level);
+    if(x.degree_field)document.getElementById('e-deg').value=x.degree_field;
+    document.getElementById('cv-txt').innerHTML='<span style="color:#6EE7B7">&#10003; '+cvFilename+' — campos completados automaticamente</span>';
   }catch(e){
-    document.getElementById('cv-zone-txt').innerHTML='<span style="color:#6EE7B7">✓ '+cvFilename+' adjuntado</span>';
+    document.getElementById('cv-txt').innerHTML='<span style="color:#6EE7B7">&#10003; '+cvFilename+' adjuntado</span>';
   }
 }
 
-async function guardarCambios(){
+async function saveChanges(){
   var btn=document.getElementById('save-btn');
   btn.disabled=true;btn.textContent='Guardando...';
-
-  var cvText='';
-  if(cvFile){
-    try{
-      var ext=cvFile.name.split('.').pop().toLowerCase();
-      if(ext==='pdf'){
-        // Send to Claude for extraction (fire and forget for now — just save filename)
-        cvText='[CV subido: '+cvFile.name+']';
-      } else {
-        var ab=await cvFile.arrayBuffer();
-        var result=await mammoth.extractRawText({arrayBuffer:ab});
-        cvText=result.value.slice(0,8000);
-      }
-    }catch(e){cvText='';}
-  }
-
   var payload={
-    p_email:sesion.email,
-    p_current_position:document.getElementById('e-position').value.trim(),
-    p_current_company:document.getElementById('e-company').value.trim(),
-    p_specialty:document.getElementById('e-specialty').value.trim(),
-    p_years_experience:document.getElementById('e-years').value,
+    p_email:ses.email,
+    p_current_position:document.getElementById('e-pos').value.trim(),
+    p_current_company:document.getElementById('e-co').value.trim(),
+    p_specialty:document.getElementById('e-sp').value.trim(),
+    p_years_experience:document.getElementById('e-yr').value,
     p_location_city:document.getElementById('e-city').value.trim(),
-    p_location_country:document.getElementById('e-country').value.trim(),
+    p_location_country:document.getElementById('e-ctry').value.trim(),
     p_bio:document.getElementById('e-bio').value.trim(),
-    p_linkedin_url:document.getElementById('e-linkedin').value.trim(),
-    p_availability:availState,
-    p_cv_filename:cvFilename||registro.cv_filename||'',
+    p_linkedin_url:document.getElementById('e-li').value.trim(),
+    p_availability:avail,
+    p_cv_filename:cvFilename||reg.cv_filename||'',
     p_cv_text:cvText,
-    p_english_level:document.getElementById('e-english').value,
-    p_other_languages:document.getElementById('e-languages').value.trim(),
-    p_education_level:document.getElementById('e-education').value,
-    p_degree_field:document.getElementById('e-degree').value.trim(),
-    p_work_modality:modalityState
+    p_english_level:document.getElementById('e-eng').value,
+    p_other_languages:document.getElementById('e-lang').value.trim(),
+    p_education_level:document.getElementById('e-edu').value,
+    p_degree_field:document.getElementById('e-deg').value.trim(),
+    p_work_modality:modality
   };
-
   try{
     var r=await fetch(SB+'/rest/v1/rpc/update_profile_data',{
       method:'POST',
       headers:{'Content-Type':'application/json','apikey':SK,'Authorization':'Bearer '+SK},
       body:JSON.stringify(payload)
     });
-    var result=await r.json();
-    if(result==='not_found'){toast('Error al guardar. Intenta de nuevo.','err');btn.disabled=false;btn.textContent='Guardar cambios';return;}
-
-    // Update local record
-    registro.current_position=payload.p_current_position;
-    registro.current_company=payload.p_current_company;
-    registro.specialty=payload.p_specialty;
-    registro.years_experience=payload.p_years_experience;
-    registro.location_city=payload.p_location_city;
-    registro.location_country=payload.p_location_country;
-    registro.bio=payload.p_bio;
-    registro.linkedin_url=payload.p_linkedin_url;
-    registro.availability=payload.p_availability;
-    registro.cv_filename=payload.p_cv_filename||registro.cv_filename;
-    registro.english_level=payload.p_english_level;
-    registro.other_languages=payload.p_other_languages;
-    registro.education_level=payload.p_education_level;
-    registro.degree_field=payload.p_degree_field;
-    registro.work_modality=payload.p_work_modality;
-
-    renderVista();
-    cancelarEdicion();
+    var res=await r.json();
+    if(res==='not_found'){toast('Error al guardar.','err');btn.disabled=false;btn.textContent='Guardar cambios';return;}
+    // Update local
+    reg.current_position=payload.p_current_position;
+    reg.current_company=payload.p_current_company;
+    reg.specialty=payload.p_specialty;
+    reg.years_experience=payload.p_years_experience;
+    reg.location_city=payload.p_location_city;
+    reg.location_country=payload.p_location_country;
+    reg.bio=payload.p_bio;
+    reg.linkedin_url=payload.p_linkedin_url;
+    reg.availability=payload.p_availability;
+    reg.cv_filename=payload.p_cv_filename||reg.cv_filename;
+    reg.english_level=payload.p_english_level;
+    reg.other_languages=payload.p_other_languages;
+    reg.education_level=payload.p_education_level;
+    reg.degree_field=payload.p_degree_field;
+    reg.work_modality=payload.p_work_modality;
+    renderView();cancelEdit();
     toast('Perfil actualizado correctamente','ok');
-  }catch(e){
-    toast('Error al guardar. Intenta de nuevo.','err');
-  }
+  }catch(e){toast('Error al guardar. Intenta de nuevo.','err');}
   btn.disabled=false;btn.textContent='Guardar cambios';
 }
 
-async function confirmarBorrado(){
-  var nombre=(registro.first_name||'tu cuenta');
-  var ok=confirm('¿Estás seguro de que quieres eliminar tu cuenta?\n\nSe borrarán permanentemente:\n- Tu perfil completo\n- Todos tus datos personales\n- Tu CV\n- Tu historial en NodusPro\n\nEsta acción no se puede deshacer.');
-  if(!ok)return;
-  var ok2=confirm('Última confirmación: ¿eliminar permanentemente la cuenta de '+sesion.email+'?');
-  if(!ok2)return;
-
+async function deleteAccount(){
+  if(!confirm('Estas seguro de que quieres eliminar tu cuenta?\n\nSe borraran permanentemente:\n- Tu perfil completo\n- Todos tus datos\n- Tu CV\n\nEsta accion no se puede deshacer.'))return;
+  if(!confirm('Ultima confirmacion: eliminar la cuenta de '+ses.email+'?'))return;
   try{
-    // Delete from waitlist
-    await fetch(SB+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(sesion.email),{
+    await fetch(SB+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(ses.email),{
       method:'DELETE',
       headers:{'apikey':SK,'Authorization':'Bearer '+SK}
     });
-    // Sign out from Supabase Auth
-    await fetch(SB+'/auth/v1/logout',{
-      method:'POST',
-      headers:{'apikey':SK,'Authorization':'Bearer '+sesion.access_token}
-    });
-    try{sessionStorage.removeItem('np_session');}catch(e){}
-    document.getElementById('err-title').textContent='Cuenta eliminada';
-    document.getElementById('err-msg').textContent='Tu cuenta y todos tus datos han sido eliminados permanentemente. Gracias por haber sido parte de NodusPro.';
+    await fetch(SB+'/auth/v1/logout',{method:'POST',headers:{'apikey':SK,'Authorization':'Bearer '+ses.access_token}});
+    try{sessionStorage.removeItem('np_ses');}catch(e){}
+    document.getElementById('err-h').textContent='Cuenta eliminada';
+    document.getElementById('err-p').textContent='Tu cuenta y todos tus datos han sido eliminados. Gracias por haber sido parte de NodusPro.';
     show('s-error');
-  }catch(e){
-    toast('Error al eliminar. Escríbenos a hola@noduspro.net','err');
-  }
+  }catch(e){toast('Error al eliminar. Escribe a hola@noduspro.net','err');}
 }
 
-// ── Start ─────────────────────────────────────────────────
 init();
 </script>
 </body>
