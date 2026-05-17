@@ -444,7 +444,12 @@ function renderView(){
 function selOpt(id,val){
   if(!val)return;
   var sel=document.getElementById(id);
-  for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===val){sel.selectedIndex=i;return;}}
+  var v=val.toLowerCase().trim();
+  for(var i=0;i<sel.options.length;i++){
+    if(sel.options[i].value===val||sel.options[i].value.toLowerCase().trim()===v||sel.options[i].text.toLowerCase().trim()===v){
+      sel.selectedIndex=i;return;
+    }
+  }
 }
 
 function startEdit(){
@@ -498,21 +503,20 @@ async function handleCv(file){
       cvText=res.value.slice(0,8000);
       payload={text:cvText};
     }
-    // Get current session token for authenticated request
-    var sessRes=await sb.auth.getSession();
-    var token=(sessRes.data&&sessRes.data.session&&sessRes.data.session.access_token)||SB_KEY;
-    var r=await fetch(SB_URL+'/functions/v1/extract-cv',{
-      method:'POST',
-      headers:{
-        'Authorization':'Bearer '+token,
-        'apikey':SB_KEY,
-        'Content-Type':'application/json'
-      },
-      body:JSON.stringify(payload)
-    });
-    var d=await r.json();
+    var r=await sb.functions.invoke('extract-cv',{body:payload});
+    if(r.error)throw new Error(r.error.message);
+    var d=r.data;
+    console.log('Edge function response:', d);
+    var filled=Object.values(d).filter(function(v){return v&&v.trim();}).length;
     fillFromAI(d);
-    document.getElementById('cv-txt').innerHTML='<span style="color:#6EE7B7">&#10003; '+cvFilename+' — campos completados automaticamente</span>';
+    if(filled>0){
+      document.getElementById('cv-txt').innerHTML='<span style="color:#6EE7B7">&#10003; '+cvFilename+' — '+filled+' campos completados automaticamente</span>';
+      toast('Perfil completado con IA: '+filled+' campos extraidos','ok');
+    }else{
+      document.getElementById('cv-txt').innerHTML='<span style="color:#FCA5A5">&#10003; '+cvFilename+' cargado — completa los campos manualmente</span>';
+      toast('CV cargado. La IA no pudo extraer datos — completa manualmente.','err');
+      console.log('Empty response from AI:', d);
+    }
   }catch(e){
     document.getElementById('cv-txt').innerHTML='<span style="color:#6EE7B7">&#10003; '+cvFilename+' adjuntado</span>';
     toast('CV adjuntado. Completa los campos manualmente.','ok');
