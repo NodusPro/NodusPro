@@ -295,6 +295,7 @@ select.fi option{background:var(--navy2)}
 <div class="toast" id="toast"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 var SURL='https://eettdimwdjyqniodefop.supabase.co';
@@ -481,20 +482,35 @@ async function handleCv(file){
     var payload={};
     if(ext==='pdf'){
       var b64=await toB64(file);
-      payload={base64:b64,mimeType:'application/pdf'};
+      var pdfData=atob(b64);
+      var pdfArr=new Uint8Array(pdfData.length);
+      for(var i=0;i<pdfData.length;i++)pdfArr[i]=pdfData.charCodeAt(i);
+      pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      var pdf=await pdfjsLib.getDocument({data:pdfArr}).promise;
+      var texts=[];
+      for(var p=1;p<=Math.min(pdf.numPages,10);p++){
+        var pg=await pdf.getPage(p);
+        var tc=await pg.getTextContent();
+        texts.push(tc.items.map(function(i){return i.str;}).join(' '));
+      }
+      cvText=texts.join('
+').slice(0,8000);
+      payload={text:cvText};
     }else{
       var ab=await file.arrayBuffer();
       var res=await mammoth.extractRawText({arrayBuffer:ab});
       cvText=res.value.slice(0,8000);
       payload={text:cvText};
     }
-    var resp=await fetch(SURL+'/functions/v1/extract-cv',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','apikey':SKEY},
-      body:JSON.stringify(payload)
-    });
-    if(!resp.ok)throw new Error('HTTP '+resp.status);
-    var d=await resp.json();
+    var cvTextToSend=payload.text||'';
+    if(!cvTextToSend&&payload.base64){
+      // For PDF: extract text using PDF.js would be needed
+      // For now, show message asking to use Word format
+      throw new Error('PDF directo no soportado aun — usa formato Word para extraccion automatica');
+    }
+    var r=await sb.rpc('extract_cv_data',{p_cv_text:cvTextToSend});
+    if(r.error)throw new Error(r.error.message);
+    var d=r.data||{};
     var filled=Object.keys(d).filter(function(k){return d[k]&&String(d[k]).trim();}).length;
     fillAI(d);
     if(filled>0){
