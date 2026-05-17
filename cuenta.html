@@ -357,7 +357,7 @@ async function enviarMagicLink(){
       body:JSON.stringify({
         email:email,
         create_user:false,
-        options:{redirectTo:'https://noduspro.net/cuenta'}
+        options:{emailRedirectTo:'https://noduspro.net/cuenta'}
       })
     });
     var d=await r.json();
@@ -429,10 +429,13 @@ async function cargarPerfil(){
     try{sessionStorage.setItem('np_session',JSON.stringify(sesion));}catch(e){}
 
     // Load waitlist record
-    var r2=await fetch(SB+'/rest/v1/waitlist?email=eq.'+encodeURIComponent(u.email)+'&select=*',{
-      headers:{'apikey':SK,'Authorization':'Bearer '+SK}
+    var r2=await fetch(SB+'/rest/v1/rpc/get_my_profile',{
+      method:'POST',
+      headers:{'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':'application/json'},
+      body:JSON.stringify({p_email:u.email})
     });
-    var data=await r2.json();
+    var profileData=await r2.json();
+    var data=profileData?[profileData]:[];
     if(!data||!data.length){
       // Google email may differ from registered email
       // Show login screen with helpful message instead of hard error
