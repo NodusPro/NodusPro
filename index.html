@@ -348,6 +348,14 @@ footer{background:var(--navy);padding:20px 32px;display:flex;justify-content:spa
 </div>
 
 <script>
+// Si llega con token de autenticacion, redirigir a /cuenta
+(function(){
+  var h=window.location.hash;
+  if(h&&h.indexOf('access_token=')!==-1){
+    window.location.replace('/cuenta'+h);
+  }
+})();
+
 var _exitShown=false;
 var SB='https://eettdimwdjyqniodefop.supabase.co';
 var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
