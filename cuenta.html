@@ -434,9 +434,17 @@ async function cargarPerfil(){
     });
     var data=await r2.json();
     if(!data||!data.length){
-      document.getElementById('err-title').textContent='Perfil no encontrado';
-      document.getElementById('err-msg').textContent='No encontramos un perfil con este correo en NodusPro.';
-      show('s-error');return;
+      // Google email may differ from registered email
+      // Show login screen with helpful message instead of hard error
+      document.getElementById('sent-box').style.display='block';
+      document.getElementById('sent-box').style.background='rgba(207,20,43,.1)';
+      document.getElementById('sent-box').style.borderColor='rgba(207,20,43,.3)';
+      document.getElementById('sent-box').querySelector('.sent-h').textContent='Cuenta de Google no vinculada';
+      document.getElementById('sent-box').querySelector('.sent-h').style.color='#FCA5A5';
+      document.getElementById('sent-box').querySelector('.sent-p').textContent='El correo de tu cuenta Google ('+u.email+') no está registrado en NodusPro. Si te registraste con un correo distinto, úsalo abajo para recibir el enlace de acceso.';
+      document.getElementById('login-email').value=u.email;
+      show('s-login');
+      return;
     }
     registro=data[0];
 
