@@ -471,8 +471,8 @@ async function handleCv(file){
     if(r1.error||!r1.data||r1.data<0)throw new Error('No se pudo encolar');
     var reqId=r1.data;
     // Paso 2: esperar 6 segundos y leer resultado
-    document.getElementById('cvt').innerHTML='<span style="color:var(--gold)">Procesando con IA (6 seg)...</span>';
-    await new Promise(function(res){setTimeout(res,6000);});
+    document.getElementById('cvt').innerHTML='<span style="color:var(--gold)">Procesando con IA...</span>';
+    await new Promise(function(res){setTimeout(res,8000);});
     var r2=await sb.rpc('get_cv_result',{p_request_id:reqId});
     if(r2.error)throw new Error(r2.error.message);
     var d=r2.data||{};
