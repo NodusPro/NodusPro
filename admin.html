@@ -19,7 +19,7 @@
 }
 html{-webkit-font-smoothing:antialiased}
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
 
 /* LOGIN */
 .login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
@@ -197,6 +197,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
   .detail-overlay{width:100%}
 }
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -368,15 +369,20 @@ async function api(path,opts){
 
 // ---- LOAD ----
 async function loadAll(){
+  var main=document.getElementById('mainContent');
+  if(main)main.innerHTML='<div style="padding:40px;text-align:center;color:var(--text3)">Cargando...</div>';
   try{
-    var data=await api('/rest/v1/waitlist?select=*&order=created_at.desc&limit=1000');
+    var data=await api('/rest/v1/waitlist?select=*&order=created_at.desc&limit=1000',{headers:{'Prefer':'return=representation'}});
     allData=data||[];
-    // Badge pendientes
     var pend=allData.filter(function(r){return r.profile_status==='pending_approval'||r.profile_status==='pending_verification';}).length;
     var badge=document.getElementById('badge-pend');
     if(badge)badge.textContent=pend>0?pend:'';
     renderTab(currentTab);
-  }catch(e){showToast('Error cargando datos','error');}
+  }catch(e){
+    console.error('loadAll error:',e);
+    if(main)main.innerHTML='<div style="padding:40px;text-align:center;color:#F87171">Error: '+e.message+'<br><br><button onclick="loadAll()" style="padding:8px 16px;background:var(--surface2);border:1px solid var(--border2);color:var(--text2);border-radius:6px;cursor:pointer;font-family:inherit">Reintentar</button></div>';
+    showToast('Error cargando datos: '+e.message,'error');
+  }
 }
 
 // ---- TABS ----
@@ -389,9 +395,14 @@ function showTab(tab){
 
 function renderTab(tab){
   var el=document.getElementById('mainContent');
-  if(tab==='dashboard'){el.innerHTML=renderDashboard();bindDashboardEvents();return;}
-  var filtered=filterData(tab);
-  el.innerHTML=renderTablePage(filtered,tab);
+  try{
+    if(tab==='dashboard'){el.innerHTML=renderDashboard();bindDashboardEvents();return;}
+    var filtered=filterData(tab);
+    el.innerHTML=renderTablePage(filtered,tab);
+  }catch(err){
+    console.error('renderTab error:',err);
+    el.innerHTML='<div style="padding:40px;text-align:center;color:#F87171">Error al renderizar: '+err.message+'</div>';
+  }
 }
 
 function filterData(tab){
@@ -434,7 +445,7 @@ function renderDashboard(){
     days.push(ds.slice(5));
     dayCounts.push(allData.filter(function(r){return (r.created_at||'').startsWith(ds);}).length);
   }
-  var maxDay=Math.max.apply(null,dayCounts)||1;
+  var maxDay=dayCounts.length>0?Math.max.apply(null,dayCounts)||1:1;
 
   // Disponibilidad
   var dispMap={'now':'Ahora','soon':'Pronto','date':'Fecha','no':'No disp','open':'Abierto'};
