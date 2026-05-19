@@ -207,7 +207,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
     <div class="login-logo"><span>Nodus</span>Pro</div>
     <div class="login-sub">Panel de Administracion</div>
     <label class="login-label" for="loginPass">Contrasena</label>
-    <input class="login-input" type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    <input class="login-input" type="password" id="loginPass" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" onkeydown="if(event.key==='Enter')doLogin()" >
     <button class="login-btn" onclick="doLogin()">Entrar</button>
     <div class="login-err" id="loginErr">Contrasena incorrecta</div>
   </div>
