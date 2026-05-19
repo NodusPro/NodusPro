@@ -300,7 +300,7 @@ select.fi option{background:var(--n2)}
 var SU='https://eettdimwdjyqniodefop.supabase.co';
 var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
 var sb=supabase.createClient(SU,SK);
-var reg=null,avail='now',mod='',cvFn='',cvTx='';
+var reg=null,avail='now',mod='',cvFn='',cvTx='',cvStoragePath='',cvStorageUrl='';
 
 function show(id){document.querySelectorAll('.scr').forEach(function(s){s.classList.remove('on');});document.getElementById(id).classList.add('on');}
 function toast(m,t){var e=document.getElementById('tst');e.textContent=m;e.className='tst '+(t||'ok');e.style.display='block';setTimeout(function(){e.style.display='none';},3500);}
@@ -443,6 +443,8 @@ async function handleCv(file){
   var ext=file.name.split('.').pop().toLowerCase();
   if(!['pdf','doc','docx'].includes(ext)){toast('Solo PDF o Word','err');return;}
   cvFn=file.name;
+  cvStoragePath='';
+  cvStorageUrl='';
   document.getElementById('cvt').innerHTML='<span style="color:var(--gold)">Analizando CV con IA...</span>';
   try{
     var txt='';
@@ -466,6 +468,21 @@ async function handleCv(file){
       txt=res.value;
     }
     cvTx=txt.slice(0,8000);
+    // Subir archivo fisico a Supabase Storage
+    try{
+      var userEmail=userProf&&userProf.email?userProf.email:'unknown';
+      var safeName=userEmail.replace(/[^a-z0-9]/gi,'_').slice(0,30)+'_'+Date.now()+'.'+ext;
+      var storagePath='cvs/'+safeName;
+      var uploadResp=await fetch(SU+'/storage/v1/object/cv-files/'+storagePath,{
+        method:'POST',
+        headers:{'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':file.type||'application/octet-stream','x-upsert':'true'},
+        body:file
+      });
+      if(uploadResp.ok){
+        cvStoragePath=storagePath;
+        cvStorageUrl=SU+'/storage/v1/object/public/cv-files/'+storagePath;
+      }
+    }catch(se){console.warn('Storage upload failed:',se);}
     // Paso 1: encolar solicitud
     var r1=await sb.rpc('queue_cv_extraction',{p_cv_text:cvTx});
     if(r1.error||!r1.data||r1.data<0)throw new Error('No se pudo encolar');
@@ -529,6 +546,7 @@ async function doSave(){
     p_linkedin_url:document.getElementById('eli').value.trim(),
     p_availability:avail,
     p_cv_filename:cvFn||reg.cv_filename||'',
+    p_cv_url:cvStorageUrl||reg.cv_url||'',
     p_cv_text:cvTx,
     p_english_level:document.getElementById('eeng').value,
     p_other_languages:document.getElementById('elang').value.trim(),
@@ -544,7 +562,7 @@ async function doSave(){
     specialty:p.p_specialty,years_experience:p.p_years_experience,
     location_city:p.p_location_city,location_country:p.p_location_country,
     bio:p.p_bio,linkedin_url:p.p_linkedin_url,availability:p.p_availability,
-    cv_filename:p.p_cv_filename||reg.cv_filename,english_level:p.p_english_level,
+    cv_filename:p.p_cv_filename||reg.cv_filename,cv_url:p.p_cv_url||reg.cv_url,english_level:p.p_english_level,
     other_languages:p.p_other_languages,education_level:p.p_education_level,
     degree_field:p.p_degree_field,work_modality:p.p_work_modality
   });
