@@ -3,653 +3,712 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NodusPro — Panel Admin</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>NodusPro Admin</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0D1117;--surface:#161B22;--surface2:#21262D;--surface3:#30363D;
-  --border:#30363D;--border2:#484F58;
-  --text:#E6EDF3;--text2:#8B949E;--text3:#656D76;
-  --blue:#2F81F7;--blue-pale:rgba(47,129,247,.12);--blue-bd:rgba(47,129,247,.3);
-  --green:#3FB950;--green-pale:rgba(63,185,80,.12);--green-bd:rgba(63,185,80,.3);
-  --red:#F85149;--red-pale:rgba(248,81,73,.12);--red-bd:rgba(248,81,73,.3);
-  --amber:#D29922;--amber-pale:rgba(210,153,34,.12);--amber-bd:rgba(210,153,34,.3);
-  --purple:#8957E5;--purple-pale:rgba(137,87,229,.12);
+  --bg:#0A0F1A;--surface:#111827;--surface2:#1C2333;--surface3:#243048;
+  --border:#1E2D45;--border2:#2A3F60;
+  --text:#E8EDF5;--text2:#8A9BB5;--text3:#4A5E78;
+  --blue:#2563EB;--blue2:#1D4ED8;--gold:#F4C300;--gold2:#D4A800;
+  --green:#059669;--green-pale:rgba(5,150,105,.12);--green-bd:rgba(5,150,105,.3);
+  --red:#DC2626;--red-pale:rgba(220,38,38,.1);--red-bd:rgba(220,38,38,.25);
+  --amber:#D97706;--amber-pale:rgba(217,119,6,.1);--amber-bd:rgba(217,119,6,.25);
+  --purple:#7C3AED;--purple-pale:rgba(124,58,237,.1);--purple-bd:rgba(124,58,237,.25);
+  --cyan:#0891B2;--cyan-pale:rgba(8,145,178,.1);
 }
-html{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;-webkit-font-smoothing:antialiased}
-body{min-height:100vh}
+html{-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* LOGIN */
-.login-screen{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
-  background:var(--bg)
-}
-.login-box{
-  width:340px;background:var(--surface);border:1px solid var(--border);
-  border-radius:12px;padding:32px;
-}
-.login-logo{text-align:center;margin-bottom:28px}
-.login-logo-mark{
-  width:40px;height:40px;background:var(--blue);border-radius:8px;
-  display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px
-}
-.login-wordmark{font-size:16px;font-weight:600;color:var(--text)}
-.login-wordmark span{color:#79C0FF}
-.login-sub{font-size:12px;color:var(--text3);margin-top:3px;font-family:'IBM Plex Mono',monospace;letter-spacing:.5px}
-.login-box label{display:block;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text2);margin-bottom:6px;font-family:'IBM Plex Mono',monospace}
-.login-box input{
-  width:100%;background:var(--bg);border:1px solid var(--border);border-radius:7px;
-  padding:10px 13px;font-size:14px;font-family:'IBM Plex Sans',sans-serif;
-  color:var(--text);outline:none;margin-bottom:14px;transition:border-color .15s
-}
-.login-box input:focus{border-color:var(--blue)}
-.login-btn{
-  width:100%;padding:11px;background:var(--blue);color:white;border:none;
-  border-radius:7px;font-size:14px;font-weight:600;cursor:pointer;
-  font-family:'IBM Plex Sans',sans-serif;transition:opacity .15s
-}
-.login-btn:hover{opacity:.9}
-.login-err{font-size:12px;color:var(--red);margin-bottom:12px;display:none}
+.login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+.login-box{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:12px;padding:32px;width:100%;max-width:360px}
+.login-logo{font-size:20px;font-weight:800;color:var(--text);margin-bottom:6px}.login-logo span{color:var(--gold)}
+.login-sub{font-size:12px;color:var(--text3);margin-bottom:24px;font-weight:500;letter-spacing:.5px;text-transform:uppercase}
+.login-label{display:block;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+.login-input{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:7px;padding:10px 14px;font-size:14px;color:var(--text);outline:none;font-family:inherit;transition:border .15s}
+.login-input:focus{border-color:var(--gold)}
+.login-btn{width:100%;margin-top:14px;padding:11px;background:var(--gold);color:#0A0F1A;border:none;border-radius:7px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit}
+.login-btn:hover{background:var(--gold2)}
+.login-err{color:#F87171;font-size:12px;margin-top:8px;display:none}
 
-/* DASHBOARD */
-.dashboard{display:none}
-.sidebar{
-  position:fixed;top:0;left:0;bottom:0;width:220px;
-  background:var(--surface);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;z-index:10
-}
-.sidebar-logo{
-  padding:20px 18px 16px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:8px
-}
-.sidebar-logo-mark{width:26px;height:26px;background:var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center}
-.sidebar-wordmark{font-size:14px;font-weight:600;color:var(--text)}
-.sidebar-wordmark span{color:#79C0FF}
-.sidebar-badge{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.5px;color:var(--text3);padding:2px 6px;background:var(--surface2);border:1px solid var(--border);border-radius:3px;margin-left:auto}
-.nav-section{padding:12px 10px 6px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--text3);text-transform:uppercase}
-.nav-item{
-  display:flex;align-items:center;gap:9px;padding:8px 14px;
-  font-size:13px;font-weight:400;color:var(--text2);cursor:pointer;
-  border-radius:6px;margin:1px 6px;transition:all .15s;user-select:none
-}
-.nav-item:hover{background:var(--surface2);color:var(--text)}
-.nav-item.active{background:var(--blue-pale);color:var(--blue);border:1px solid var(--blue-bd)}
-.nav-item svg{width:14px;height:14px;flex-shrink:0}
-.nav-badge{
-  margin-left:auto;font-size:10px;font-weight:700;
-  padding:1px 6px;border-radius:10px;font-family:'IBM Plex Mono',monospace
-}
-.nav-badge.red{background:var(--red-pale);color:var(--red);border:1px solid var(--red-bd)}
-.nav-badge.amber{background:var(--amber-pale);color:var(--amber);border:1px solid var(--amber-bd)}
-.sidebar-foot{
-  margin-top:auto;padding:14px;border-top:1px solid var(--border)
-}
-.logout-btn{
-  width:100%;padding:8px;background:transparent;border:1px solid var(--border);
-  border-radius:6px;font-size:12px;color:var(--text3);cursor:pointer;
-  font-family:'IBM Plex Sans',sans-serif;transition:all .15s
-}
-.logout-btn:hover{border-color:var(--red);color:var(--red)}
+/* LAYOUT */
+.app{display:none;height:100vh;overflow:hidden;flex-direction:column}
+.app.visible{display:flex}
+.topbar{height:52px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 20px;flex-shrink:0}
+.tb-left{display:flex;align-items:center;gap:12px}
+.tb-logo{font-size:15px;font-weight:800;color:var(--text)}.tb-logo span{color:var(--gold)}
+.tb-tag{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:2px 7px}
+.tb-right{display:flex;align-items:center;gap:8px}
+.tb-btn{font-size:12px;font-weight:600;padding:6px 12px;border-radius:6px;border:1px solid var(--border2);background:var(--surface2);color:var(--text2);cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:5px;transition:all .15s}
+.tb-btn:hover{border-color:var(--blue);color:var(--text)}
+.tb-btn.primary{background:var(--green-pale);border-color:var(--green-bd);color:var(--green)}
+.tb-btn.primary:hover{background:var(--green);color:white}
+.tb-refresh{font-size:12px;font-weight:600;padding:6px 12px;border-radius:6px;border:1px solid var(--border2);background:var(--surface2);color:var(--text2);cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:5px}
+.tb-refresh:hover{color:var(--text)}
 
-/* MAIN */
-.main{margin-left:220px;min-height:100vh}
-.topbar{
-  padding:16px 28px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  background:var(--bg);position:sticky;top:0;z-index:5
-}
-.page-title{font-size:16px;font-weight:600;color:var(--text)}
-.page-sub{font-size:12px;color:var(--text3);font-family:'IBM Plex Mono',monospace;letter-spacing:.3px;margin-top:2px}
-.topbar-right{display:flex;align-items:center;gap:10px}
-.refresh-btn{
-  display:flex;align-items:center;gap:6px;padding:6px 12px;
-  background:var(--surface2);border:1px solid var(--border);border-radius:6px;
-  font-size:12px;color:var(--text2);cursor:pointer;font-family:'IBM Plex Sans',sans-serif;
-  transition:all .15s
-}
-.refresh-btn:hover{border-color:var(--blue);color:var(--blue)}
-.refresh-btn svg{width:12px;height:12px}
+/* TABS */
+.tabs{display:flex;gap:2px;padding:10px 20px 0;border-bottom:1px solid var(--border);background:var(--surface);flex-shrink:0}
+.tab{font-size:12px;font-weight:600;padding:7px 14px;border-radius:6px 6px 0 0;color:var(--text3);cursor:pointer;border:1px solid transparent;border-bottom:none;transition:all .15s;position:relative;top:1px}
+.tab:hover{color:var(--text2)}
+.tab.active{background:var(--bg);border-color:var(--border);color:var(--text)}
 
-.content{padding:24px 28px}
+/* MAIN CONTENT */
+.main{flex:1;overflow-y:auto;padding:20px}
 
-/* STAT CARDS */
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
-.stat-card{
-  background:var(--surface);border:1px solid var(--border);border-radius:10px;
-  padding:18px 20px;transition:border-color .15s
-}
-.stat-card:hover{border-color:var(--border2)}
-.stat-label{font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);font-family:'IBM Plex Mono',monospace;margin-bottom:10px}
-.stat-num{font-size:32px;font-weight:600;color:var(--text);line-height:1;letter-spacing:-1px;font-family:'IBM Plex Mono',monospace}
-.stat-num.blue{color:var(--blue)}
-.stat-num.green{color:var(--green)}
-.stat-num.red{color:var(--red)}
-.stat-num.amber{color:var(--amber)}
-.stat-sub{font-size:11px;color:var(--text3);margin-top:5px;font-family:'IBM Plex Mono',monospace}
+/* METRIC CARDS */
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.metric-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px}
+.mc-label{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
+.mc-val{font-size:28px;font-weight:800;color:var(--text);line-height:1;margin-bottom:4px;font-family:'JetBrains Mono',monospace}
+.mc-sub{font-size:11px;color:var(--text3)}
+.mc-bar{height:3px;background:var(--border);border-radius:2px;margin-top:10px}
+.mc-fill{height:100%;border-radius:2px;transition:width .5s}
+
+/* CHARTS ROW */
+.charts-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px}
+.cc-title{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:14px}
+.bar-item{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.bar-label{font-size:12px;color:var(--text2);width:90px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-track{flex:1;height:6px;background:var(--border);border-radius:3px}
+.bar-fill{height:100%;border-radius:3px;transition:width .6s}
+.bar-count{font-size:11px;color:var(--text3);width:28px;text-align:right;font-family:'JetBrains Mono',monospace}
+.sparkline-row{display:flex;align-items:flex-end;gap:3px;height:40px;margin-top:8px}
+.spark-bar{flex:1;background:var(--blue);border-radius:2px 2px 0 0;opacity:.7;transition:opacity .2s;min-height:2px}
+.spark-bar:hover{opacity:1}
+.spark-labels{display:flex;justify-content:space-between;margin-top:4px}
+.spark-lbl{font-size:9px;color:var(--text3)}
 
 /* TABLE */
-.table-header{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:14px
-}
-.table-title{font-size:14px;font-weight:600;color:var(--text)}
-.filter-row{display:flex;gap:6px}
-.filter-btn{
-  padding:5px 12px;background:var(--surface2);border:1px solid var(--border);
-  border-radius:5px;font-size:12px;color:var(--text2);cursor:pointer;
-  font-family:'IBM Plex Mono',monospace;letter-spacing:.3px;transition:all .15s
-}
-.filter-btn:hover,.filter-btn.active{background:var(--blue-pale);border-color:var(--blue-bd);color:var(--blue)}
-.table-wrap{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:10px;overflow:hidden
-}
-.table-search{
-  padding:12px 16px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:8px
-}
-.table-search input{
-  flex:1;background:transparent;border:none;font-size:13px;
-  color:var(--text);font-family:'IBM Plex Sans',sans-serif;outline:none
-}
-.table-search input::placeholder{color:var(--text3)}
-table{width:100%;border-collapse:collapse}
-thead tr{background:var(--surface2)}
-th{
-  padding:10px 14px;font-size:10px;font-weight:700;letter-spacing:.8px;
-  text-transform:uppercase;color:var(--text3);text-align:left;
-  font-family:'IBM Plex Mono',monospace;border-bottom:1px solid var(--border);
-  white-space:nowrap
-}
-td{
-  padding:12px 14px;font-size:13px;color:var(--text2);
-  border-bottom:1px solid var(--border);vertical-align:top
-}
-tbody tr:last-child td{border-bottom:none}
-tbody tr:hover td{background:var(--surface2)}
-.td-name{font-weight:500;color:var(--text)}
-.td-email{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text3)}
-.td-spec{font-size:12px}
-
-/* STATUS BADGES */
-.status{
-  display:inline-flex;align-items:center;gap:4px;
-  font-size:10px;font-weight:700;letter-spacing:.5px;
-  padding:3px 8px;border-radius:4px;white-space:nowrap;
-  font-family:'IBM Plex Mono',monospace
-}
-.status.approved{background:var(--green-pale);color:var(--green);border:1px solid var(--green-bd)}
-.status.pending{background:var(--amber-pale);color:var(--amber);border:1px solid var(--amber-bd)}
-.status.flagged{background:var(--red-pale);color:var(--red);border:1px solid var(--red-bd)}
-.status.rejected{background:var(--surface2);color:var(--text3);border:1px solid var(--border)}
-.status-dot{width:5px;height:5px;border-radius:50%;background:currentColor}
-
-/* ACTION BUTTONS */
-.action-row{display:flex;gap:6px}
-.act-btn{
-  padding:5px 10px;border-radius:5px;font-size:11px;font-weight:600;
-  cursor:pointer;font-family:'IBM Plex Mono',monospace;border:1px solid;
-  transition:all .15s;white-space:nowrap
-}
-.act-btn.approve{background:var(--green-pale);border-color:var(--green-bd);color:var(--green)}
-.act-btn.approve:hover{background:var(--green);color:white;border-color:var(--green)}
-.act-btn.reject{background:var(--red-pale);border-color:var(--red-bd);color:var(--red)}
-.act-btn.reject:hover{background:var(--red);color:white;border-color:var(--red)}
-.act-btn.view{background:var(--surface2);border-color:var(--border);color:var(--text2)}
-.act-btn.view:hover{border-color:var(--blue);color:var(--blue)}
-.act-btn.edit{background:var(--purple-pale);border-color:rgba(137,87,229,.3);color:var(--purple)}
-.act-btn.edit:hover{background:var(--purple);color:white;border-color:var(--purple)}
-.act-btn.delete{background:var(--red-pale);border-color:var(--red-bd);color:var(--red)}
-.act-btn.delete:hover{background:var(--red);color:white;border-color:var(--red)}
-.act-btn:disabled{opacity:.4;cursor:not-allowed}
-
-/* EDIT MODAL */
-.edit-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:center;justify-content:center;padding:16px}
-.edit-overlay.open{display:flex}
-.edit-box{background:var(--surface);border:1px solid var(--border);border-radius:12px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;padding:24px;position:relative}
-.edit-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:20px}
-.edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-.edit-group{display:flex;flex-direction:column;gap:5px}
-.edit-group.full{grid-column:1/-1}
-.edit-label{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);font-family:'IBM Plex Mono',monospace}
-.edit-input{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:13px;color:var(--text);font-family:'IBM Plex Sans',sans-serif;outline:none;transition:border-color .15s}
-.edit-input:focus{border-color:var(--blue)}
-.edit-select{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:13px;color:var(--text);font-family:'IBM Plex Sans',sans-serif;outline:none}
-.edit-actions{display:flex;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
-.edit-save{flex:1;padding:9px;background:var(--blue);color:white;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;font-family:'IBM Plex Sans',sans-serif}
-.edit-save:hover{opacity:.9}
-.edit-cancel{padding:9px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;font-size:13px;color:var(--text2);cursor:pointer;font-family:'IBM Plex Sans',sans-serif}
-
-/* ADD NEW BUTTON */
-.add-btn{display:flex;align-items:center;gap:6px;padding:6px 14px;background:var(--green-pale);border:1px solid var(--green-bd);border-radius:6px;font-size:12px;color:var(--green);cursor:pointer;font-family:'IBM Plex Sans',sans-serif;transition:all .15s;font-weight:600}
-.add-btn:hover{background:var(--green);color:white}
-
-/* TOAST */
-.toast{
-  position:fixed;bottom:24px;right:24px;z-index:999;
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:8px;padding:12px 16px;font-size:13px;color:var(--text);
-  display:flex;align-items:center;gap:8px;min-width:220px;
-  transform:translateY(80px);opacity:0;transition:all .25s;pointer-events:none
-}
-.toast.show{transform:translateY(0);opacity:1}
-.toast.success{border-color:var(--green-bd);background:var(--green-pale)}
-.toast.error{border-color:var(--red-bd);background:var(--red-pale)}
+.table-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.th-title{font-size:13px;font-weight:600;color:var(--text)}
+.th-controls{display:flex;align-items:center;gap:8px}
+.search-input{background:var(--surface);border:1px solid var(--border2);border-radius:6px;padding:6px 12px;font-size:12px;color:var(--text);outline:none;font-family:inherit;width:200px}
+.search-input::placeholder{color:var(--text3)}
+.search-input:focus{border-color:var(--blue)}
+.filter-select{background:var(--surface);border:1px solid var(--border2);border-radius:6px;padding:6px 10px;font-size:12px;color:var(--text2);outline:none;font-family:inherit;cursor:pointer}
+.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{text-align:left;padding:9px 12px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap}
+.tbl td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:middle;color:var(--text2)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--surface2)}
+.name-cell{font-weight:600;color:var(--text);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.email-cell{font-family:'JetBrains Mono',monospace;font-size:11px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pill{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.3px;text-transform:uppercase;white-space:nowrap}
+.pill.approved{background:var(--green-pale);color:#34D399;border:1px solid var(--green-bd)}
+.pill.pending{background:var(--amber-pale);color:#FCD34D;border:1px solid var(--amber-bd)}
+.pill.rejected{background:var(--red-pale);color:#F87171;border:1px solid var(--red-bd)}
+.pill.flagged{background:var(--purple-pale);color:#A78BFA;border:1px solid var(--purple-bd)}
+.pill.verification{background:var(--cyan-pale);color:#67E8F9;border:1px solid rgba(8,145,178,.3)}
+.cv-badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:var(--purple-pale);color:#A78BFA;border:1px solid var(--purple-bd)}
+.actions-cell{display:flex;gap:4px;align-items:center}
+.act{font-size:11px;font-weight:600;padding:4px 9px;border-radius:5px;border:1px solid;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
+.act.view{background:var(--surface2);border-color:var(--border2);color:var(--text2)}
+.act.view:hover{border-color:var(--blue);color:var(--blue)}
+.act.approve{background:var(--green-pale);border-color:var(--green-bd);color:var(--green)}
+.act.approve:hover{background:var(--green);color:white}
+.act.reject{background:var(--red-pale);border-color:var(--red-bd);color:var(--red)}
+.act.reject:hover{background:var(--red);color:white}
+.act.edit{background:var(--purple-pale);border-color:var(--purple-bd);color:var(--purple)}
+.act.edit:hover{background:var(--purple);color:white}
+.act.del{background:var(--red-pale);border-color:var(--red-bd);color:var(--red)}
+.act.del:hover{background:var(--red);color:white}
+.act:disabled{opacity:.4;cursor:not-allowed}
+.pagination{display:flex;align-items:center;justify-content:space-between;margin-top:12px;font-size:12px;color:var(--text3)}
+.pg-btns{display:flex;gap:4px}
+.pg-btn{padding:4px 10px;border-radius:5px;border:1px solid var(--border2);background:var(--surface2);color:var(--text2);cursor:pointer;font-size:11px;font-family:inherit}
+.pg-btn:hover{border-color:var(--blue);color:var(--text)}
+.pg-btn.active{background:var(--blue);border-color:var(--blue);color:white}
+.pg-btn:disabled{opacity:.4;cursor:not-allowed}
 
 /* DETAIL PANEL */
-.detail-panel{
-  position:fixed;top:0;right:-440px;bottom:0;width:440px;
-  background:var(--surface);border-left:1px solid var(--border);
-  z-index:50;transition:right .25s;overflow-y:auto
-}
-.detail-panel.open{right:0}
-.detail-header{
-  padding:18px 20px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;background:var(--surface);z-index:1
-}
-.detail-header h3{font-size:15px;font-weight:600;color:var(--text)}
-.close-panel{
-  background:none;border:1px solid var(--border);border-radius:6px;
-  padding:4px 8px;color:var(--text3);cursor:pointer;font-size:12px;
-  font-family:'IBM Plex Mono',monospace
-}
-.close-panel:hover{border-color:var(--border2);color:var(--text)}
-.detail-body{padding:20px}
+.detail-overlay{position:fixed;top:0;right:0;bottom:0;width:480px;background:var(--surface);border-left:1px solid var(--border);z-index:100;display:none;flex-direction:column;box-shadow:-8px 0 32px rgba(0,0,0,.4)}
+.detail-overlay.open{display:flex}
+.detail-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.detail-name{font-size:16px;font-weight:700;color:var(--text)}
+.detail-email{font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;margin-top:2px}
+.detail-close{width:28px;height:28px;border-radius:6px;background:var(--surface2);border:1px solid var(--border2);color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;font-family:inherit}
+.detail-body{flex:1;overflow-y:auto;padding:20px}
 .detail-section{margin-bottom:20px}
-.detail-section-title{
-  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  color:var(--text3);font-family:'IBM Plex Mono',monospace;margin-bottom:10px
-}
-.detail-row{display:flex;gap:8px;margin-bottom:8px;font-size:13px}
-.detail-key{color:var(--text3);min-width:110px;flex-shrink:0;font-family:'IBM Plex Mono',monospace;font-size:11px}
-.detail-val{color:var(--text);word-break:break-all}
-.detail-actions{
-  display:flex;gap:8px;padding:16px 20px;
-  border-top:1px solid var(--border);
-  position:sticky;bottom:0;background:var(--surface)
-}
-.detail-btn{
-  flex:1;padding:10px;border-radius:7px;font-size:13px;font-weight:600;
-  cursor:pointer;font-family:'IBM Plex Sans',sans-serif;border:1px solid;
-  transition:all .15s
-}
-.detail-btn.approve{background:var(--green-pale);border-color:var(--green-bd);color:var(--green)}
-.detail-btn.approve:hover{background:var(--green);color:white}
-.detail-btn.reject{background:var(--red-pale);border-color:var(--red-bd);color:var(--red)}
-.detail-btn.reject:hover{background:var(--red);color:white}
-.detail-btn:disabled{opacity:.4;cursor:not-allowed}
-.overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:40;
-  display:none
-}
-.overlay.show{display:block}
+.ds-title{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.field{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:10px 12px}
+.field.full{grid-column:1/-1}
+.field-label{font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
+.field-val{font-size:13px;color:var(--text);font-weight:500;word-break:break-all}
+.field-val.mono{font-family:'JetBrains Mono',monospace;font-size:12px}
+.field-val.empty{color:var(--text3);font-style:italic;font-weight:400}
+.cv-section{background:var(--purple-pale);border:1px solid var(--purple-bd);border-radius:8px;padding:14px}
+.cv-dl{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;background:var(--purple);color:white;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none}
+.cv-dl:hover{opacity:.9}
+.detail-actions{padding:16px 20px;border-top:1px solid var(--border);display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap}
+.da-btn{flex:1;padding:9px;border-radius:7px;border:1px solid;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s;min-width:80px;text-align:center}
+.da-btn.approve{background:var(--green-pale);border-color:var(--green-bd);color:var(--green)}
+.da-btn.approve:hover{background:var(--green);color:white}
+.da-btn.reject{background:var(--red-pale);border-color:var(--red-bd);color:var(--red)}
+.da-btn.reject:hover{background:var(--red);color:white}
+.da-btn.edit{background:var(--purple-pale);border-color:var(--purple-bd);color:var(--purple)}
+.da-btn.edit:hover{background:var(--purple);color:white}
+.da-btn.del{background:var(--red-pale);border-color:var(--red-bd);color:var(--red)}
+.da-btn.del:hover{background:var(--red);color:white}
+
+/* EDIT MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--surface);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:12px;width:100%;max-width:540px;max-height:90vh;overflow-y:auto}
+.modal-head{padding:18px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-size:14px;font-weight:700;color:var(--text)}
+.modal-close{width:26px;height:26px;border-radius:5px;background:var(--surface2);border:1px solid var(--border2);color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit}
+.modal-body{padding:20px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group.full{grid-column:1/-1}
+.form-label{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3)}
+.form-input,.form-select,.form-textarea{background:var(--surface2);border:1px solid var(--border2);border-radius:6px;padding:8px 11px;font-size:13px;color:var(--text);font-family:inherit;outline:none;transition:border .15s;width:100%}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold)}
+.form-textarea{resize:vertical;min-height:70px}
+.modal-foot{padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:8px}
+.mf-save{flex:1;padding:10px;background:var(--gold);color:#0A0F1A;border:none;border-radius:7px;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit}
+.mf-save:hover{background:var(--gold2)}
+.mf-cancel{padding:10px 18px;background:var(--surface2);border:1px solid var(--border2);border-radius:7px;font-size:13px;color:var(--text2);cursor:pointer;font-family:inherit}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;padding:12px 18px;border-radius:8px;font-size:13px;font-weight:600;z-index:999;opacity:0;transition:opacity .2s;pointer-events:none;max-width:320px}
+.toast.show{opacity:1}
+.toast.success{background:#065F46;color:#6EE7B7;border:1px solid #047857}
+.toast.error{background:#7F1D1D;color:#FCA5A5;border:1px solid #991B1B}
+.toast.info{background:#1E3A5F;color:#93C5FD;border:1px solid #1D4ED8}
 
 /* EMPTY STATE */
 .empty{text-align:center;padding:48px 20px;color:var(--text3)}
-.empty svg{width:32px;height:32px;opacity:.3;margin-bottom:12px}
-.empty p{font-size:13px}
+.empty-ico{font-size:32px;margin-bottom:12px}
+.empty-txt{font-size:14px}
 
 /* LOADING */
-.loading{text-align:center;padding:32px;color:var(--text3);font-family:'IBM Plex Mono',monospace;font-size:12px}
+.skeleton{background:linear-gradient(90deg,var(--surface2) 25%,var(--surface3) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:4px}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-/* SECTION PAGES */
-.page{display:none}
-.page.active{display:block}
-
-/* REFERRAL TABLE */
-.ref-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+@media(max-width:900px){
+  .metrics-grid{grid-template-columns:repeat(2,1fr)}
+  .charts-row{grid-template-columns:1fr}
+  .detail-overlay{width:100%}
+}
 </style>
 </head>
 <body>
 
 <!-- LOGIN -->
-<div class="login-screen" id="login-screen">
+<div class="login-wrap" id="loginWrap">
   <div class="login-box">
-    <div class="login-logo">
-      <div class="login-logo-mark">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-          <circle cx="8" cy="8" r="2" fill="white"/>
-          <circle cx="2.5" cy="3" r="1.5" fill="white" opacity=".7"/>
-          <circle cx="13.5" cy="3" r="1.5" fill="white" opacity=".7"/>
-          <circle cx="2.5" cy="13" r="1.5" fill="white" opacity=".7"/>
-          <circle cx="13.5" cy="13" r="1.5" fill="white" opacity=".7"/>
-        </svg>
-      </div>
-      <div class="login-wordmark"><span>Nodus</span>Pro</div>
-      <div class="login-sub">PANEL DE CONTROL</div>
-    </div>
-    <div class="login-err" id="login-err">Contraseña incorrecta</div>
-    <label>Contraseña</label>
-    <input type="password" id="login-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <div class="login-logo"><span>Nodus</span>Pro</div>
+    <div class="login-sub">Panel de Administracion</div>
+    <label class="login-label" for="loginPass">Contrasena</label>
+    <input class="login-input" type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
     <button class="login-btn" onclick="doLogin()">Entrar</button>
+    <div class="login-err" id="loginErr">Contrasena incorrecta</div>
   </div>
 </div>
 
-<!-- DASHBOARD -->
-<div class="dashboard" id="dashboard">
+<!-- APP -->
+<div class="app" id="app">
 
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <div class="sidebar-logo">
-      <div class="sidebar-logo-mark">
-        <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2" fill="white"/><circle cx="2.5" cy="3" r="1.5" fill="white" opacity=".7"/><circle cx="13.5" cy="3" r="1.5" fill="white" opacity=".7"/><circle cx="2.5" cy="13" r="1.5" fill="white" opacity=".7"/><circle cx="13.5" cy="13" r="1.5" fill="white" opacity=".7"/></svg>
-      </div>
-      <span class="sidebar-wordmark"><span>Nodus</span>Pro</span>
-      <span class="sidebar-badge">ADMIN</span>
+  <div class="topbar">
+    <div class="tb-left">
+      <div class="tb-logo"><span>Nodus</span>Pro</div>
+      <div class="tb-tag">Admin</div>
     </div>
-
-    <div class="nav-section">Principal</div>
-    <div class="nav-item active" onclick="showPage('overview')" id="nav-overview">
-      <svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>
-      Resumen
-    </div>
-    <div class="nav-item" onclick="showPage('pending')" id="nav-pending">
-      <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v3l1.5 1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-      Pendientes
-      <span class="nav-badge amber" id="badge-pending">0</span>
-    </div>
-    <div class="nav-item" onclick="showPage('flagged')" id="nav-flagged">
-      <svg viewBox="0 0 16 16" fill="none"><path d="M8 2v6M8 10v.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/></svg>
-      Alertas
-      <span class="nav-badge red" id="badge-flagged">0</span>
-    </div>
-    <div class="nav-section">Directorio</div>
-    <div class="nav-item" onclick="showPage('all')" id="nav-all">
-      <svg viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h12M2 12h8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-      Todos los perfiles
-    </div>
-    <div class="nav-item" onclick="showPage('approved')" id="nav-approved">
-      <svg viewBox="0 0 16 16" fill="none"><path d="M2 8l4 4 8-8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Aprobados
-    </div>
-    <div class="nav-section">Programa</div>
-    <div class="nav-item" onclick="showPage('referrals')" id="nav-referrals">
-      <svg viewBox="0 0 16 16" fill="none"><path d="M10 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM14 4a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" stroke="currentColor" stroke-width="1.3"/><path d="M10 8c1 0 4 .5 4 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-      Referidos
-    </div>
-    <div class="sidebar-foot">
-      <div style="font-size:10px;color:var(--text3);font-family:'IBM Plex Mono',monospace;margin-bottom:8px;letter-spacing:.5px">ÚLTIMO ACCESO</div>
-      <div style="font-size:11px;color:var(--text2);font-family:'IBM Plex Mono',monospace" id="last-access">—</div>
-      <button class="logout-btn" style="margin-top:10px" onclick="doLogout()">Cerrar sesión</button>
+    <div class="tb-right">
+      <button class="tb-btn primary" onclick="openAdd()">+ Agregar</button>
+      <button class="tb-refresh" onclick="loadAll()">
+        <svg viewBox="0 0 16 16" fill="none" width="12" height="12"><path d="M13 8A5 5 0 1 1 8 3M13 3v5h-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Actualizar
+      </button>
+      <button class="tb-btn" onclick="doLogout()">Salir</button>
     </div>
   </div>
 
-  <!-- MAIN -->
-  <div class="main">
+  <div class="tabs">
+    <div class="tab active" id="tab-dashboard" onclick="showTab('dashboard')">Dashboard</div>
+    <div class="tab" id="tab-pendientes" onclick="showTab('pendientes')">Pendientes <span id="badge-pend" style="background:var(--amber-pale);color:#FCD34D;border:1px solid var(--amber-bd);border-radius:4px;padding:1px 6px;font-size:10px;font-weight:700;margin-left:4px"></span></div>
+    <div class="tab" id="tab-todos" onclick="showTab('todos')">Todos los perfiles</div>
+    <div class="tab" id="tab-aprobados" onclick="showTab('aprobados')">Aprobados</div>
+    <div class="tab" id="tab-rechazados" onclick="showTab('rechazados')">Rechazados</div>
+  </div>
 
-    <!-- OVERVIEW PAGE -->
-    <div class="page active" id="page-overview">
-      <div class="topbar">
-        <div><div class="page-title">Resumen</div><div class="page-sub" id="last-updated">Cargando datos...</div></div>
-        <div class="topbar-right">
-          <button class="refresh-btn" onclick="loadAll()"><svg viewBox="0 0 16 16" fill="none"><path d="M13 8A5 5 0 1 1 8 3M13 3v5h-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Actualizar</button>
-        </div>
-      </div>
-      <div class="content">
-        <div class="stats-row">
-          <div class="stat-card"><div class="stat-label">Total registros</div><div class="stat-num blue" id="stat-total">—</div><div class="stat-sub">acumulado</div></div>
-          <div class="stat-card"><div class="stat-label">Aprobados</div><div class="stat-num green" id="stat-approved">—</div><div class="stat-sub">perfiles activos</div></div>
-          <div class="stat-card"><div class="stat-label">Pendientes</div><div class="stat-num amber" id="stat-pending">—</div><div class="stat-sub">esperando revisión</div></div>
-          <div class="stat-card"><div class="stat-label">Alertas</div><div class="stat-num red" id="stat-flagged">—</div><div class="stat-sub">requieren atención</div></div>
-        </div>
+  <div class="main" id="mainContent">
+    <!-- Loaded dynamically -->
+  </div>
 
-        <div class="table-header"><div class="table-title">Actividad reciente</div></div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr>
-              <th>Nombre</th><th>Email</th><th>Especialidad</th><th>Estado</th><th>Registrado</th><th>Acciones</th>
-            </tr></thead>
-            <tbody id="overview-tbody"><tr><td colspan="6" class="loading">Cargando...</td></tr></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- PENDING PAGE -->
-    <div class="page" id="page-pending">
-      <div class="topbar">
-        <div><div class="page-title">Perfiles pendientes</div><div class="page-sub">Requieren revisión y aprobación</div></div>
-        <div class="topbar-right"><button class="refresh-btn" onclick="loadAll()"><svg viewBox="0 0 16 16" fill="none"><path d="M13 8A5 5 0 1 1 8 3M13 3v5h-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Actualizar</button></div>
-      </div>
-      <div class="content">
-        <div class="table-wrap">
-          <div class="table-search"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="color:var(--text3);flex-shrink:0"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.3"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><input type="text" placeholder="Buscar en pendientes..." id="search-pending" oninput="filterTable('pending-tbody',this.value)"/></div>
-          <table>
-            <thead><tr><th>Nombre</th><th>Email</th><th>Especialidad</th><th>Región</th><th>Seguridad</th><th>Registrado</th><th>Acciones</th></tr></thead>
-            <tbody id="pending-tbody"><tr><td colspan="7" class="loading">Cargando...</td></tr></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- FLAGGED PAGE -->
-    <div class="page" id="page-flagged">
-      <div class="topbar">
-        <div><div class="page-title">Alertas de seguridad</div><div class="page-sub">Perfiles que requieren revisión manual adicional</div></div>
-        <div class="topbar-right"><button class="refresh-btn" onclick="loadAll()"><svg viewBox="0 0 16 16" fill="none"><path d="M13 8A5 5 0 1 1 8 3M13 3v5h-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Actualizar</button></div>
-      </div>
-      <div class="content">
-        <div style="background:var(--red-pale);border:1px solid var(--red-bd);border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:var(--red)">
-          Estos perfiles tienen una posible coincidencia en chequeos de seguridad. Revisa el contexto antes de aprobar o rechazar.
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Nombre</th><th>Email</th><th>Notas seguridad</th><th>Estado perfil</th><th>Registrado</th><th>Acciones</th></tr></thead>
-            <tbody id="flagged-tbody"><tr><td colspan="6" class="loading">Cargando...</td></tr></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- ALL PROFILES PAGE -->
-    <div class="page" id="page-all">
-      <div class="topbar">
-        <div><div class="page-title">Todos los perfiles</div><div class="page-sub">Directorio completo</div></div>
-        <div class="topbar-right">
-          <div class="filter-row" id="all-filters">
-            <button class="filter-btn active" onclick="filterAll('all',this)">Todos</button>
-            <button class="filter-btn" onclick="filterAll('approved',this)">Aprobados</button>
-            <button class="filter-btn" onclick="filterAll('pending_approval',this)">Pendientes</button>
-            <button class="filter-btn" onclick="filterAll('rejected',this)">Rechazados</button>
-          </div>
-          <button class="refresh-btn" onclick="loadAll()"><svg viewBox="0 0 16 16" fill="none"><path d="M13 8A5 5 0 1 1 8 3M13 3v5h-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Actualizar</button>
-        </div>
-      </div>
-      <div class="content">
-        <div class="table-wrap">
-          <div class="table-search"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="color:var(--text3);flex-shrink:0"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.3"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><input type="text" placeholder="Buscar por nombre o email..." id="search-all" oninput="filterTable('all-tbody',this.value)"/></div>
-          <table>
-            <thead><tr><th>Nombre</th><th>Email</th><th>Especialidad</th><th>Región</th><th>Disponibilidad</th><th>Estado</th><th>Registrado</th><th></th></tr></thead>
-            <tbody id="all-tbody"><tr><td colspan="8" class="loading">Cargando...</td></tr></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- APPROVED PAGE -->
-    <div class="page" id="page-approved">
-      <div class="topbar">
-        <div><div class="page-title">Perfiles aprobados</div><div class="page-sub">Visibles en el directorio</div></div>
-        <div class="topbar-right"><button class="refresh-btn" onclick="loadAll()"><svg viewBox="0 0 16 16" fill="none"><path d="M13 8A5 5 0 1 1 8 3M13 3v5h-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Actualizar</button></div>
-      </div>
-      <div class="content">
-        <div class="table-wrap">
-          <div class="table-search"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" style="color:var(--text3);flex-shrink:0"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.3"/><path d="M10.5 10.5l3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><input type="text" placeholder="Buscar aprobados..." id="search-approved" oninput="filterTable('approved-tbody',this.value)"/></div>
-          <table>
-            <thead><tr><th>Nombre</th><th>Email</th><th>Especialidad</th><th>Región</th><th>Disponibilidad</th><th>Aprobado</th><th></th></tr></thead>
-          <tbody id="approved-tbody"><tr><td colspan="7" class="loading">Cargando...</td></tr></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- REFERRALS PAGE -->
-    <div class="page" id="page-referrals">
-      <div class="topbar">
-        <div><div class="page-title">Programa de referidos</div><div class="page-sub">Seguimiento de referidos activos</div></div>
-        <div class="topbar-right"><button class="refresh-btn" onclick="loadAll()"><svg viewBox="0 0 16 16" fill="none"><path d="M13 8A5 5 0 1 1 8 3M13 3v5h-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Actualizar</button></div>
-      </div>
-      <div class="content">
-        <div class="ref-stats">
-          <div class="stat-card"><div class="stat-label">Total referidos</div><div class="stat-num blue" id="ref-total">—</div></div>
-          <div class="stat-card"><div class="stat-label">Verificados</div><div class="stat-num green" id="ref-verified">—</div></div>
-          <div class="stat-card"><div class="stat-label">Pendientes</div><div class="stat-num amber" id="ref-pending">—</div></div>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Referidor</th><th>Referido</th><th>Estado</th><th>Fecha</th></tr></thead>
-            <tbody id="referral-tbody"><tr><td colspan="4" class="loading">Cargando...</td></tr></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /main -->
-</div><!-- /dashboard -->
+</div>
 
 <!-- DETAIL PANEL -->
-<div class="overlay" id="overlay" onclick="closeDetail()"></div>
-<div class="detail-panel" id="detail-panel">
+<div class="detail-overlay" id="detailPanel">
   <div class="detail-header">
-    <h3 id="detail-title">Perfil</h3>
-    <button class="close-panel" onclick="closeDetail()">✕ Cerrar</button>
+    <div>
+      <div class="detail-name" id="dpName">-</div>
+      <div class="detail-email" id="dpEmail">-</div>
+    </div>
+    <button class="detail-close" onclick="closeDetail()">x</button>
   </div>
-  <div class="detail-body" id="detail-body"></div>
-  <div class="detail-actions" id="detail-actions"></div>
+  <div class="detail-body" id="dpBody"></div>
+  <div class="detail-actions" id="dpActions"></div>
 </div>
 
-
-<!-- EDIT OVERLAY -->
-<div class="edit-overlay" id="edit-overlay" onclick="if(event.target===this)closeEdit()">
-  <div class="edit-box">
-    <div class="edit-title" id="edit-title">Editar perfil</div>
-    <input type="hidden" id="edit-email-orig">
-    <div class="edit-grid">
-      <div class="edit-group"><div class="edit-label">Primer nombre</div><input class="edit-input" id="e-fn" placeholder="Nombre"></div>
-      <div class="edit-group"><div class="edit-label">Primer apellido</div><input class="edit-input" id="e-ln" placeholder="Apellido"></div>
-      <div class="edit-group"><div class="edit-label">Especialidad</div><input class="edit-input" id="e-spec" placeholder="Produccion, HSE..."></div>
-      <div class="edit-group"><div class="edit-label">Region</div><input class="edit-input" id="e-reg" placeholder="Monagas, Zulia..."></div>
-      <div class="edit-group"><div class="edit-label">Anos experiencia</div><input class="edit-input" id="e-yrs" placeholder="6-10"></div>
-      <div class="edit-group"><div class="edit-label">Disponibilidad</div>
-        <select class="edit-select" id="e-avail">
-          <option value="now">Disponible ahora</option>
-          <option value="date">Desde una fecha</option>
-          <option value="no">No disponible</option>
-        </select>
-      </div>
-      <div class="edit-group"><div class="edit-label">Estado del perfil</div>
-        <select class="edit-select" id="e-status">
-          <option value="pending_verification">pending_verification</option>
-          <option value="pending_approval">pending_approval</option>
-          <option value="approved">approved</option>
-          <option value="rejected">rejected</option>
-          <option value="flagged">flagged</option>
-        </select>
-      </div>
-      <div class="edit-group"><div class="edit-label">URL perfil</div><input class="edit-input" id="e-url" placeholder="linkedin.com/in/..."></div>
-      <div class="edit-group full"><div class="edit-label">Notas internas</div><input class="edit-input" id="e-notes" placeholder="Notas del equipo..."></div>
+<!-- EDIT MODAL -->
+<div class="modal-overlay" id="editModal" onclick="if(event.target===this)closeEdit()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title" id="editModalTitle">Editar perfil</div>
+      <button class="modal-close" onclick="closeEdit()">x</button>
     </div>
-    <div class="edit-actions">
-      <button class="edit-save" onclick="saveEdit()">Guardar cambios</button>
-      <button class="edit-cancel" onclick="closeEdit()">Cancelar</button>
+    <div class="modal-body">
+      <input type="hidden" id="editEmailOrig">
+      <div class="form-grid" id="editFormGrid">
+        <div class="form-group"><div class="form-label">Primer nombre</div><input class="form-input" id="e-fn" placeholder="Carlos"></div>
+        <div class="form-group"><div class="form-label">Primer apellido</div><input class="form-input" id="e-ln" placeholder="Rodriguez"></div>
+        <div class="form-group"><div class="form-label">Email</div><input class="form-input" id="e-email" placeholder="email@..." disabled style="opacity:.5"></div>
+        <div class="form-group"><div class="form-label">Especialidad</div><input class="form-input" id="e-spec" placeholder="Produccion, HSE..."></div>
+        <div class="form-group"><div class="form-label">Region</div><input class="form-input" id="e-region" placeholder="Monagas, Zulia..."></div>
+        <div class="form-group"><div class="form-label">Anos experiencia</div><input class="form-input" id="e-yrs" placeholder="6-10"></div>
+        <div class="form-group"><div class="form-label">Cargo actual</div><input class="form-input" id="e-cargo" placeholder="Ing. de Produccion"></div>
+        <div class="form-group"><div class="form-label">Empresa actual</div><input class="form-input" id="e-empresa" placeholder="PDVSA, Repsol..."></div>
+        <div class="form-group"><div class="form-label">Ingles</div>
+          <select class="form-select" id="e-ingles">
+            <option value="">-</option>
+            <option value="Basico">Basico</option>
+            <option value="Intermedio">Intermedio</option>
+            <option value="Avanzado">Avanzado</option>
+            <option value="Fluido">Fluido</option>
+            <option value="Nativo">Nativo</option>
+          </select>
+        </div>
+        <div class="form-group"><div class="form-label">Disponibilidad</div>
+          <select class="form-select" id="e-disp">
+            <option value="now">Disponible ahora</option>
+            <option value="soon">Disponible pronto</option>
+            <option value="date">Desde una fecha</option>
+            <option value="no">No disponible</option>
+          </select>
+        </div>
+        <div class="form-group"><div class="form-label">Estado del perfil</div>
+          <select class="form-select" id="e-status">
+            <option value="pending_verification">pending_verification</option>
+            <option value="pending_approval">pending_approval</option>
+            <option value="approved">approved</option>
+            <option value="rejected">rejected</option>
+            <option value="flagged">flagged</option>
+          </select>
+        </div>
+        <div class="form-group"><div class="form-label">Sanciones</div>
+          <select class="form-select" id="e-sanctions">
+            <option value="clear">clear</option>
+            <option value="review">review</option>
+            <option value="flagged">flagged</option>
+          </select>
+        </div>
+        <div class="form-group full"><div class="form-label">LinkedIn URL</div><input class="form-input" id="e-li" placeholder="linkedin.com/in/..."></div>
+        <div class="form-group full"><div class="form-label">Bio</div><textarea class="form-textarea" id="e-bio" placeholder="Descripcion profesional..."></textarea></div>
+        <div class="form-group full"><div class="form-label">Notas internas (admin)</div><textarea class="form-textarea" id="e-notes" placeholder="Solo visible para el equipo..."></textarea></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="mf-save" onclick="saveEdit()">Guardar cambios</button>
+      <button class="mf-cancel" onclick="closeEdit()">Cancelar</button>
     </div>
   </div>
 </div>
 
-<!-- ADD NEW OVERLAY (reuses edit overlay with blank fields) -->
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-const SB='https://eettdimwdjyqniodefop.supabase.co';
-const SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDUzMDg0OSwiZXhwIjoyMDkwMTA2ODQ5fQ.6cyobQCOmfuM1hyqlCGm1tF6IEZyyf16GO6MXVK9RiU';
+var SB='https://eettdimwdjyqniodefop.supabase.co';
+var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
+var PASS='NodusAdmin2026!';
 
-const ADMIN_PASS = 'NodusAdmin2026!';
+var allData=[];
+var currentTab='dashboard';
+var currentPage=1;
+var pageSize=20;
+var searchQ='';
+var filterStatus='all';
+var currentDetail=null;
 
-let allData=[], currentFilter='all';
-
+// ---- AUTH ----
 function doLogin(){
-  const p=document.getElementById('login-pass').value;
-  if(p===ADMIN_PASS){
-    document.getElementById('login-screen').style.display='none';
-    document.getElementById('dashboard').style.display='block';
-    document.getElementById('last-access').textContent=new Date().toLocaleString('es-ES');
+  var p=document.getElementById('loginPass').value;
+  if(p===PASS){
+    document.getElementById('loginWrap').style.display='none';
+    document.getElementById('app').classList.add('visible');
     loadAll();
   } else {
-    document.getElementById('login-err').style.display='block';
-    document.getElementById('login-pass').value='';
+    document.getElementById('loginErr').style.display='block';
+    setTimeout(function(){document.getElementById('loginErr').style.display='none';},2000);
   }
 }
-
 function doLogout(){
-  document.getElementById('login-screen').style.display='flex';
-  document.getElementById('dashboard').style.display='none';
-  document.getElementById('login-pass').value='';
+  document.getElementById('loginWrap').style.display='flex';
+  document.getElementById('app').classList.remove('visible');
+  document.getElementById('loginPass').value='';
+}
+document.getElementById('loginPass').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+
+// ---- API ----
+async function api(path,opts){
+  var headers=Object.assign({'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':'application/json'},opts&&opts.headers||{});
+  var r=await fetch(SB+path,Object.assign({},opts,{headers:headers}));
+  if(!r.ok)throw new Error('API '+r.status);
+  var ct=r.headers.get('content-type')||'';
+  if(ct.includes('json')&&r.status!==204)return r.json();
+  return null;
 }
 
-// ── EDIT ──
+// ---- LOAD ----
+async function loadAll(){
+  try{
+    var data=await api('/rest/v1/waitlist?select=*&order=created_at.desc&limit=1000');
+    allData=data||[];
+    // Badge pendientes
+    var pend=allData.filter(function(r){return r.profile_status==='pending_approval'||r.profile_status==='pending_verification';}).length;
+    var badge=document.getElementById('badge-pend');
+    if(badge)badge.textContent=pend>0?pend:'';
+    renderTab(currentTab);
+  }catch(e){showToast('Error cargando datos','error');}
+}
+
+// ---- TABS ----
+function showTab(tab){
+  currentTab=tab;currentPage=1;searchQ='';filterStatus='all';
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  var el=document.getElementById('tab-'+tab);if(el)el.classList.add('active');
+  renderTab(tab);
+}
+
+function renderTab(tab){
+  var el=document.getElementById('mainContent');
+  if(tab==='dashboard'){el.innerHTML=renderDashboard();bindDashboardEvents();return;}
+  var filtered=filterData(tab);
+  el.innerHTML=renderTablePage(filtered,tab);
+}
+
+function filterData(tab){
+  var data=allData;
+  if(tab==='pendientes')data=data.filter(function(r){return r.profile_status==='pending_approval'||r.profile_status==='pending_verification';});
+  if(tab==='aprobados')data=data.filter(function(r){return r.profile_status==='approved';});
+  if(tab==='rechazados')data=data.filter(function(r){return r.profile_status==='rejected';});
+  if(searchQ){var q=searchQ.toLowerCase();data=data.filter(function(r){return (r.first_name||'').toLowerCase().includes(q)||(r.last_name||'').toLowerCase().includes(q)||(r.email||'').toLowerCase().includes(q)||(r.specialty||'').toLowerCase().includes(q)||(r.current_company||'').toLowerCase().includes(q);});}
+  if(filterStatus!=='all')data=data.filter(function(r){return r.profile_status===filterStatus;});
+  return data;
+}
+
+// ---- DASHBOARD ----
+function renderDashboard(){
+  var total=allData.length;
+  var approved=allData.filter(function(r){return r.profile_status==='approved';}).length;
+  var pending=allData.filter(function(r){return r.profile_status==='pending_approval'||r.profile_status==='pending_verification';}).length;
+  var withCV=allData.filter(function(r){return r.cv_url||r.cv_text;}).length;
+  var complete=allData.filter(function(r){return r.profile_complete||r.current_position;}).length;
+  var today=new Date().toISOString().split('T')[0];
+  var todayReg=allData.filter(function(r){return (r.created_at||'').startsWith(today);}).length;
+
+  // Sectores
+  var sectors={};
+  allData.forEach(function(r){var s=r.specialty||'Sin sector';sectors[s]=(sectors[s]||0)+1;});
+  var topSectors=Object.entries(sectors).sort(function(a,b){return b[1]-a[1];}).slice(0,6);
+  var maxS=topSectors[0]?topSectors[0][1]:1;
+
+  // Fuentes
+  var sources={};
+  allData.forEach(function(r){var s=r.source||'directo';sources[s]=(sources[s]||0)+1;});
+  var topSources=Object.entries(sources).sort(function(a,b){return b[1]-a[1];}).slice(0,5);
+  var maxSrc=topSources[0]?topSources[0][1]:1;
+
+  // Registros por dia (ultimos 14 dias)
+  var days=[];var dayCounts=[];
+  for(var i=13;i>=0;i--){
+    var d=new Date();d.setDate(d.getDate()-i);
+    var ds=d.toISOString().split('T')[0];
+    days.push(ds.slice(5));
+    dayCounts.push(allData.filter(function(r){return (r.created_at||'').startsWith(ds);}).length);
+  }
+  var maxDay=Math.max.apply(null,dayCounts)||1;
+
+  // Disponibilidad
+  var dispMap={'now':'Ahora','soon':'Pronto','date':'Fecha','no':'No disp','open':'Abierto'};
+  var disps={};
+  allData.forEach(function(r){var d=dispMap[r.availability]||r.availability||'N/A';disps[d]=(disps[d]||0)+1;});
+  var topDisps=Object.entries(disps).sort(function(a,b){return b[1]-a[1];});
+
+  var sectorBars=topSectors.map(function(s){
+    var pct=Math.round(s[1]/maxS*100);
+    var lbl=s[0].length>12?s[0].slice(0,12)+'...':s[0];
+    return '<div class="bar-item"><span class="bar-label" title="'+s[0]+'">'+lbl+'</span><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:var(--blue)"></div></div><span class="bar-count">'+s[1]+'</span></div>';
+  }).join('');
+
+  var sourceBars=topSources.map(function(s){
+    var pct=Math.round(s[1]/maxSrc*100);
+    var lbl=s[0].replace('campaign_','').slice(0,14);
+    return '<div class="bar-item"><span class="bar-label" title="'+s[0]+'">'+lbl+'</span><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:var(--gold)"></div></div><span class="bar-count">'+s[1]+'</span></div>';
+  }).join('');
+
+  var sparkBars=dayCounts.map(function(c,i){
+    var h=maxDay>0?Math.max(4,Math.round(c/maxDay*40)):4;
+    return '<div class="spark-bar" title="'+days[i]+': '+c+'" style="height:'+h+'px"></div>';
+  }).join('');
+
+  var dispBars=topDisps.map(function(d){
+    var pct=Math.round(d[1]/total*100);
+    return '<div class="bar-item"><span class="bar-label">'+d[0]+'</span><div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:var(--cyan)"></div></div><span class="bar-count">'+d[1]+'</span></div>';
+  }).join('');
+
+  var cvPct=total>0?Math.round(withCV/total*100):0;
+  var completePct=total>0?Math.round(complete/total*100):0;
+  var approvedPct=total>0?Math.round(approved/total*100):0;
+
+  return '<div class="metrics-grid">'+
+    '<div class="metric-card"><div class="mc-label">Total registrados</div><div class="mc-val">'+total+'</div><div class="mc-sub">+'+todayReg+' hoy</div><div class="mc-bar"><div class="mc-fill" style="width:100%;background:var(--blue)"></div></div></div>'+
+    '<div class="metric-card"><div class="mc-label">Aprobados</div><div class="mc-val">'+approved+'</div><div class="mc-sub">'+approvedPct+'% del total</div><div class="mc-bar"><div class="mc-fill" style="width:'+approvedPct+'%;background:var(--green)"></div></div></div>'+
+    '<div class="metric-card"><div class="mc-label">Pendientes</div><div class="mc-val">'+pending+'</div><div class="mc-sub">Requieren revision</div><div class="mc-bar"><div class="mc-fill" style="width:'+(total>0?Math.round(pending/total*100):0)+'%;background:var(--amber)"></div></div></div>'+
+    '<div class="metric-card"><div class="mc-label">CVs subidos</div><div class="mc-val">'+withCV+'</div><div class="mc-sub">'+cvPct+'% de usuarios</div><div class="mc-bar"><div class="mc-fill" style="width:'+cvPct+'%;background:var(--purple)"></div></div></div>'+
+    '</div>'+
+    '<div class="metrics-grid" style="grid-template-columns:repeat(4,1fr)">'+
+    '<div class="metric-card"><div class="mc-label">Perfiles completos</div><div class="mc-val">'+complete+'</div><div class="mc-sub">'+completePct+'% completado</div><div class="mc-bar"><div class="mc-fill" style="width:'+completePct+'%;background:var(--cyan)"></div></div></div>'+
+    '<div class="metric-card"><div class="mc-label">Rechazados</div><div class="mc-val">'+allData.filter(function(r){return r.profile_status==='rejected';}).length+'</div><div class="mc-sub">&nbsp;</div></div>'+
+    '<div class="metric-card"><div class="mc-label">Via referido</div><div class="mc-val">'+allData.filter(function(r){return r.referred_by;}).length+'</div><div class="mc-sub">De otro usuario</div></div>'+
+    '<div class="metric-card"><div class="mc-label">Disponibles ahora</div><div class="mc-val">'+allData.filter(function(r){return r.availability==='now';}).length+'</div><div class="mc-sub">Listos para contacto</div></div>'+
+    '</div>'+
+    '<div class="charts-row">'+
+    '<div class="chart-card"><div class="cc-title">Registros (14 dias)</div>'+sparkBars+'<div class="spark-labels"><span class="spark-lbl">'+days[0]+'</span><span class="spark-lbl">'+days[6]+'</span><span class="spark-lbl">'+days[13]+'</span></div></div>'+
+    '<div class="chart-card"><div class="cc-title">Por sector</div>'+sectorBars+'</div>'+
+    '<div class="chart-card"><div class="cc-title">Disponibilidad</div>'+dispBars+'</div>'+
+    '</div>'+
+    '<div class="charts-row" style="grid-template-columns:1fr 1fr">'+
+    '<div class="chart-card"><div class="cc-title">Por fuente de trafico</div>'+sourceBars+'</div>'+
+    '<div class="chart-card"><div class="cc-title">Ultimos 5 registros</div>'+allData.slice(0,5).map(function(r){
+      return '<div class="bar-item" style="cursor:pointer" onclick=\'showDetail('+JSON.stringify(r).replace(/'/g,"&#39;")+')\'><span class="bar-label" style="width:140px;color:var(--text)">'+(r.first_name||'')+(r.last_name?' '+r.last_name:'')+'</span><span style="font-size:11px;color:var(--text3)">'+statusPill(r.profile_status)+'</span></div>';
+    }).join('')+'</div>'+
+    '</div>'+
+    '<div style="margin-top:16px"><button onclick="showTab(\'pendientes\')" style="padding:10px 20px;background:var(--amber-pale);border:1px solid var(--amber-bd);color:#FCD34D;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Ver '+pending+' pendiente'+(pending!==1?'s':'')+' de revision &rarr;</button></div>';
+}
+
+function bindDashboardEvents(){}
+
+// ---- TABLE ----
+function renderTablePage(data,tab){
+  var start=(currentPage-1)*pageSize;
+  var page=data.slice(start,start+pageSize);
+  var totalPages=Math.ceil(data.length/pageSize);
+  var statusOpts=['all','pending_approval','pending_verification','approved','rejected','flagged'].map(function(s){
+    return '<option value="'+s+'"'+(filterStatus===s?' selected':'')+'>'+s+'</option>';
+  }).join('');
+
+  var rows=page.length===0?'<tr><td colspan="8" style="text-align:center;padding:32px;color:var(--text3)">Sin resultados</td></tr>':
+    page.map(function(r){
+      var name=(r.first_name||'')+(r.last_name?' '+r.last_name:'');
+      var hasCV=r.cv_url||r.cv_text;
+      return '<tr>'+
+        '<td class="name-cell" title="'+name+'">'+name+'</td>'+
+        '<td class="email-cell" title="'+r.email+'">'+r.email+'</td>'+
+        '<td>'+statusPill(r.profile_status)+'</td>'+
+        '<td style="font-size:11px;color:var(--text3)">'+(r.specialty||'-')+'</td>'+
+        '<td style="font-size:11px;color:var(--text3)">'+(r.location_city||r.region||'-')+'</td>'+
+        '<td>'+(hasCV?'<span class="cv-badge">CV</span>':'-')+'</td>'+
+        '<td style="font-size:11px;color:var(--text3)">'+(r.created_at?r.created_at.slice(0,10):'-')+'</td>'+
+        '<td class="actions-cell">'+
+        '<button class="act view" onclick=\'showDetail('+JSON.stringify(r).replace(/'/g,"&#39;")+')\'>Ver</button>'+
+        (r.profile_status!=='approved'?'<button class="act approve" onclick="quickApprove(\''+r.email+'\',this)">&#10003;</button>':'')+
+        (r.profile_status!=='rejected'?'<button class="act reject" onclick="quickReject(\''+r.email+'\',this)">&#10005;</button>':'')+
+        '<button class="act edit" onclick=\'openEdit('+JSON.stringify(r).replace(/'/g,"&#39;")+')\'>Editar</button>'+
+        '<button class="act del" onclick="confirmDel(\''+r.email+'\',this)">Borrar</button>'+
+        '</td></tr>';
+    }).join('');
+
+  var pgBtns='';
+  if(totalPages>1){
+    if(currentPage>1)pgBtns+='<button class="pg-btn" onclick="goPage('+(currentPage-1)+')">&#8249;</button>';
+    for(var i=Math.max(1,currentPage-2);i<=Math.min(totalPages,currentPage+2);i++){
+      pgBtns+='<button class="pg-btn'+(i===currentPage?' active':'')+'" onclick="goPage('+i+')">'+i+'</button>';
+    }
+    if(currentPage<totalPages)pgBtns+='<button class="pg-btn" onclick="goPage('+(currentPage+1)+')">&#8250;</button>';
+  }
+
+  return '<div class="table-header">'+
+    '<div class="th-title">'+data.length+' registros</div>'+
+    '<div class="th-controls">'+
+    '<input class="search-input" placeholder="Buscar..." value="'+searchQ+'" oninput="doSearch(this.value)">'+
+    (tab==='todos'?'<select class="filter-select" onchange="doFilter(this.value)">'+statusOpts+'</select>':'')+
+    '</div></div>'+
+    '<div class="table-wrap"><table class="tbl">'+
+    '<thead><tr><th>Nombre</th><th>Email</th><th>Estado</th><th>Especialidad</th><th>Ubicacion</th><th>CV</th><th>Registro</th><th>Acciones</th></tr></thead>'+
+    '<tbody>'+rows+'</tbody></table></div>'+
+    '<div class="pagination"><span>Pagina '+currentPage+' de '+Math.max(1,totalPages)+'</span><div class="pg-btns">'+pgBtns+'</div></div>';
+}
+
+function statusPill(s){
+  var map={approved:'approved',pending_approval:'pending',pending_verification:'verification',rejected:'rejected',flagged:'flagged'};
+  var cls=map[s]||'pending';
+  return '<span class="pill '+cls+'">'+s+'</span>';
+}
+function doSearch(q){searchQ=q;currentPage=1;renderTab(currentTab);}
+function doFilter(s){filterStatus=s;currentPage=1;renderTab(currentTab);}
+function goPage(p){currentPage=p;renderTab(currentTab);}
+
+// ---- DETAIL PANEL ----
+function showDetail(r){
+  currentDetail=r;
+  document.getElementById('dpName').textContent=(r.first_name||'')+(r.last_name?' '+r.last_name:'');
+  document.getElementById('dpEmail').textContent=r.email||'-';
+
+  var hasCV=r.cv_url||r.cv_text;
+  var cvSection=hasCV?'<div class="detail-section"><div class="ds-title">CV</div>'+
+    '<div class="cv-section">'+
+    '<div style="font-size:12px;color:var(--text2);margin-bottom:10px">'+(r.cv_filename||'Archivo de CV subido')+'</div>'+
+    (r.cv_url?'<a class="cv-dl" href="'+r.cv_url+'" target="_blank">&#8613; Descargar CV</a>':'')+
+    (r.cv_text&&!r.cv_url?'<div style="font-size:11px;color:var(--text3);margin-top:8px;max-height:80px;overflow-y:auto;font-family:JetBrains Mono,monospace">'+r.cv_text.slice(0,300)+'...</div>':'')+
+    '</div></div>':'';
+
+  document.getElementById('dpBody').innerHTML=
+    '<div class="detail-section"><div class="ds-title">Estado</div><div class="field-grid">'+
+    field('Estado',statusPill(r.profile_status))+
+    field('Sanciones','<span class="pill '+(r.sanctions_status==='clear'?'approved':'flagged')+'">'+r.sanctions_status+'</span>')+
+    field('Fuente',r.source||'-')+
+    field('Referido por',r.referred_by||'-')+
+    field('Codigo ref',r.referral_code||'-')+
+    field('Registro',r.created_at?r.created_at.slice(0,16).replace('T',' '):'-')+
+    '</div></div>'+
+    '<div class="detail-section"><div class="ds-title">Informacion personal</div><div class="field-grid">'+
+    field('Nombre completo',(r.first_name||'')+(r.second_name?' '+r.second_name:'')+(r.last_name?' '+r.last_name:'')+(r.second_last_name?' '+r.second_last_name:''))+
+    field('Email',r.email,'mono')+
+    field('Ciudad',r.location_city||'-')+
+    field('Pais',r.location_country||'-')+
+    '</div></div>'+
+    '<div class="detail-section"><div class="ds-title">Experiencia profesional</div><div class="field-grid">'+
+    field('Cargo actual',r.current_position)+
+    field('Empresa actual',r.current_company)+
+    field('Especialidad',r.specialty)+
+    field('Region Venezuela',r.region)+
+    field('Anos experiencia',r.years_experience)+
+    field('Disponibilidad',r.availability)+
+    field('Ingles',r.english_level)+
+    field('Otros idiomas',r.other_languages)+
+    field('Educacion',r.education_level)+
+    field('Area de estudios',r.degree_field)+
+    field('Modalidad',r.work_modality)+
+    '</div></div>'+
+    (r.bio?'<div class="detail-section"><div class="ds-title">Bio</div><div class="field"><div class="field-val">'+r.bio+'</div></div></div>':'')+
+    (r.linkedin_url||r.profile_url?'<div class="detail-section"><div class="ds-title">LinkedIn</div><div class="field"><div class="field-val mono"><a href="'+(r.linkedin_url||r.profile_url)+'" target="_blank" style="color:var(--blue)">'+(r.linkedin_url||r.profile_url)+'</a></div></div></div>':'')+
+    cvSection+
+    (r.sanctions_notes?'<div class="detail-section"><div class="ds-title">Notas internas</div><div class="field full"><div class="field-val">'+r.sanctions_notes+'</div></div></div>':'');
+
+  var isApproved=r.profile_status==='approved';
+  var isRejected=r.profile_status==='rejected';
+  document.getElementById('dpActions').innerHTML=
+    (!isApproved&&!isRejected?'<button class="da-btn approve" onclick="quickApprove(\''+r.email+'\',this)">&#10003; Aprobar</button>':'')+
+    (!isRejected?'<button class="da-btn reject" onclick="quickReject(\''+r.email+'\',this)">&#10005; Rechazar</button>':'')+
+    '<button class="da-btn edit" onclick=\'closeDetail();openEdit('+JSON.stringify(r).replace(/'/g,"&#39;")+')\'>Editar</button>'+
+    '<button class="da-btn del" onclick="closeDetail();confirmDel(\''+r.email+'\',null)">Eliminar</button>';
+
+  document.getElementById('detailPanel').classList.add('open');
+}
+function field(label,val,cls){
+  var empty=!val||val==='-'||val==='null';
+  return '<div class="field"><div class="field-label">'+label+'</div><div class="field-val'+(cls?' '+cls:'')+(empty?' empty':'')+'">'+(empty?'No informado':val)+'</div></div>';
+}
+function closeDetail(){document.getElementById('detailPanel').classList.remove('open');currentDetail=null;}
+
+// ---- QUICK ACTIONS ----
+async function quickApprove(email,btn){
+  if(btn){btn.disabled=true;btn.textContent='...';}
+  try{
+    await api('/rest/v1/waitlist?email=eq.'+encodeURIComponent(email),{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({profile_status:'approved'})});
+    showToast('Aprobado: '+email,'success');
+    loadAll();
+    if(currentDetail&&currentDetail.email===email){currentDetail.profile_status='approved';showDetail(currentDetail);}
+  }catch(e){showToast('Error: '+e.message,'error');if(btn){btn.disabled=false;btn.textContent='&#10003;';}}
+}
+async function quickReject(email,btn){
+  if(btn){btn.disabled=true;btn.textContent='...';}
+  try{
+    await api('/rest/v1/waitlist?email=eq.'+encodeURIComponent(email),{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({profile_status:'rejected'})});
+    showToast('Rechazado: '+email,'info');
+    loadAll();
+    if(currentDetail&&currentDetail.email===email){currentDetail.profile_status='rejected';showDetail(currentDetail);}
+  }catch(e){showToast('Error: '+e.message,'error');if(btn){btn.disabled=false;btn.textContent='&#10005;';}}
+}
+async function confirmDel(email){
+  if(!confirm('Eliminar permanentemente:\n'+email+'\n\nEsta accion no se puede deshacer.'))return;
+  try{
+    await api('/rest/v1/waitlist?email=eq.'+encodeURIComponent(email),{method:'DELETE'});
+    showToast('Eliminado: '+email,'info');
+    loadAll();
+  }catch(e){showToast('Error al eliminar','error');}
+}
+
+// ---- EDIT / ADD ----
 function openEdit(r){
-  document.getElementById('edit-title').textContent='Editar: '+(r.first_name||'')+' '+(r.last_name||'');
-  document.getElementById('edit-email-orig').value=r.email||'';
+  document.getElementById('editModalTitle').textContent='Editar: '+(r.first_name||'')+(r.last_name?' '+r.last_name:'');
+  document.getElementById('editEmailOrig').value=r.email||'';
+  document.getElementById('e-email').value=r.email||'';
+  document.getElementById('e-email').disabled=true;
   document.getElementById('e-fn').value=r.first_name||'';
   document.getElementById('e-ln').value=r.last_name||'';
   document.getElementById('e-spec').value=r.specialty||'';
-  document.getElementById('e-reg').value=r.region||'';
+  document.getElementById('e-region').value=r.region||'';
   document.getElementById('e-yrs').value=r.years_experience||'';
-  document.getElementById('e-avail').value=r.availability||'now';
+  document.getElementById('e-cargo').value=r.current_position||'';
+  document.getElementById('e-empresa').value=r.current_company||'';
+  document.getElementById('e-ingles').value=r.english_level||'';
+  document.getElementById('e-disp').value=r.availability||'now';
   document.getElementById('e-status').value=r.profile_status||'pending_approval';
-  document.getElementById('e-url').value=r.profile_url||'';
+  document.getElementById('e-sanctions').value=r.sanctions_status||'clear';
+  document.getElementById('e-li').value=r.linkedin_url||r.profile_url||'';
+  document.getElementById('e-bio').value=r.bio||'';
   document.getElementById('e-notes').value=r.sanctions_notes||'';
-  document.getElementById('edit-overlay').classList.add('open');
+  document.getElementById('editModal').classList.add('open');
 }
-
 function openAdd(){
-  document.getElementById('edit-title').textContent='Agregar perfil manualmente';
-  document.getElementById('edit-email-orig').value='__new__';
-  ['e-fn','e-ln','e-spec','e-reg','e-yrs','e-url','e-notes'].forEach(function(id){document.getElementById(id).value='';});
-  document.getElementById('e-avail').value='now';
+  document.getElementById('editModalTitle').textContent='Agregar perfil manualmente';
+  document.getElementById('editEmailOrig').value='__new__';
+  ['e-fn','e-ln','e-spec','e-region','e-yrs','e-cargo','e-empresa','e-li','e-bio','e-notes'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('e-email').value='';
+  document.getElementById('e-email').disabled=false;
+  document.getElementById('e-ingles').value='';
+  document.getElementById('e-disp').value='now';
   document.getElementById('e-status').value='pending_approval';
-  // Add email field dynamically
-  var existing=document.getElementById('e-email-new');
-  if(!existing){
-    var g=document.createElement('div');g.className='edit-group';g.id='e-email-new-group';
-    g.innerHTML='<div class="edit-label">Email *</div><input class="edit-input" id="e-email-new" placeholder="email@ejemplo.com">';
-    document.querySelector('.edit-grid').prepend(g);
-  }
-  document.getElementById('edit-overlay').classList.add('open');
+  document.getElementById('e-sanctions').value='clear';
+  document.getElementById('editModal').classList.add('open');
 }
-
-function closeEdit(){
-  document.getElementById('edit-overlay').classList.remove('open');
-  var extra=document.getElementById('e-email-new-group');
-  if(extra)extra.remove();
-}
-
+function closeEdit(){document.getElementById('editModal').classList.remove('open');}
 async function saveEdit(){
-  var orig=document.getElementById('edit-email-orig').value;
+  var orig=document.getElementById('editEmailOrig').value;
   var isNew=orig==='__new__';
-  var emailInput=document.getElementById('e-email-new');
-  var email=isNew?(emailInput?emailInput.value.trim():''):orig;
+  var email=isNew?document.getElementById('e-email').value.trim():orig;
   if(!email){showToast('Email requerido','error');return;}
   var payload={
     first_name:document.getElementById('e-fn').value.trim()||null,
     last_name:document.getElementById('e-ln').value.trim()||null,
     specialty:document.getElementById('e-spec').value.trim()||null,
-    region:document.getElementById('e-reg').value.trim()||null,
+    region:document.getElementById('e-region').value.trim()||null,
     years_experience:document.getElementById('e-yrs').value.trim()||null,
-    availability:document.getElementById('e-avail').value,
+    current_position:document.getElementById('e-cargo').value.trim()||null,
+    current_company:document.getElementById('e-empresa').value.trim()||null,
+    english_level:document.getElementById('e-ingles').value||null,
+    availability:document.getElementById('e-disp').value,
     profile_status:document.getElementById('e-status').value,
-    profile_url:document.getElementById('e-url').value.trim()||null,
+    sanctions_status:document.getElementById('e-sanctions').value,
+    linkedin_url:document.getElementById('e-li').value.trim()||null,
+    bio:document.getElementById('e-bio').value.trim()||null,
     sanctions_notes:document.getElementById('e-notes').value.trim()||null
   };
   try{
     if(isNew){
       payload.email=email;payload.lang='es';payload.source='manual_admin';
-      var r=await api('/rest/v1/waitlist',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify(payload)});
-      showToast('Perfil creado: '+email,'success');
-    } else {
+      await api('/rest/v1/waitlist',{method:'POST',headers:{'Prefer':'return=minimal'},body:JSON.stringify(payload)});
+      showToast('Perfil creado','success');
+    }else{
       await api('/rest/v1/waitlist?email=eq.'+encodeURIComponent(email),{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify(payload)});
       showToast('Guardado: '+email,'success');
     }
@@ -657,300 +716,19 @@ async function saveEdit(){
   }catch(e){showToast('Error: '+e.message,'error');}
 }
 
-// ── DELETE ──
-async function confirmDelete(email,btn){
-  if(!confirm('Eliminar permanentemente el perfil de '+email+'?\n\nEsta accion no se puede deshacer.'))return;
-  btn.disabled=true;btn.textContent='...';
-  try{
-    await api('/rest/v1/waitlist?email=eq.'+encodeURIComponent(email),{method:'DELETE'});
-    showToast('Perfil eliminado: '+email,'success');
-    loadAll();
-  }catch(e){
-    showToast('Error al eliminar: '+e.message,'error');
-    btn.disabled=false;btn.textContent='Borrar';
-  }
+// ---- TOAST ----
+var toastTO=null;
+function showToast(msg,type){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.className='toast '+type+' show';
+  clearTimeout(toastTO);
+  toastTO=setTimeout(function(){t.classList.remove('show');},3500);
 }
 
-function showPage(page){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  document.getElementById('page-'+page).classList.add('active');
-  document.getElementById('nav-'+page).classList.add('active');
-}
-
-async function api(path, opts={}){
-  const r=await fetch(SB+path,{
-    headers:{
-      'apikey':SK,
-      'Authorization':'Bearer '+SK,
-      'Content-Type':'application/json',
-      'Prefer':'return=representation',
-      ...(opts.headers||{})
-    },
-    ...opts
-  });
-  if(!r.ok){
-    const txt=await r.text();
-    throw new Error(txt);
-  }
-  const t=r.headers.get('content-type');
-  return t&&t.includes('json')?r.json():r.text();
-}
-
-async function loadAll(){
-  document.getElementById('last-updated').textContent='Actualizando...';
-  try{
-    const data=await api('/rest/v1/waitlist?select=*&order=created_at.desc');
-    allData=data;
-    renderAll(data);
-    document.getElementById('last-updated').textContent='Actualizado: '+new Date().toLocaleTimeString('es-ES');
-  }catch(e){
-    document.getElementById('last-updated').textContent='Error al cargar: '+e.message;
-    showToast('Error al cargar datos','error');
-  }
-
-  try{
-    const refs=await api('/rest/v1/referrals?select=*');
-    renderReferrals(refs);
-  }catch(e){}
-}
-
-function renderAll(data){
-  const total=data.length;
-  const approved=data.filter(d=>d.profile_status==='approved').length;
-  const pending=data.filter(d=>['pending_verification','pending_approval'].includes(d.profile_status)).length;
-  const flagged=data.filter(d=>d.profile_status==='flagged'||d.sanctions_status==='flagged_review').length;
-
-  document.getElementById('stat-total').textContent=total;
-  document.getElementById('stat-approved').textContent=approved;
-  document.getElementById('stat-pending').textContent=pending;
-  document.getElementById('stat-flagged').textContent=flagged;
-  document.getElementById('badge-pending').textContent=pending;
-  document.getElementById('badge-flagged').textContent=flagged;
-
-  renderTable('overview-tbody', data.slice(0,10), 'overview');
-  renderTable('pending-tbody', data.filter(d=>['pending_verification','pending_approval'].includes(d.profile_status)), 'pending');
-  renderTable('flagged-tbody', data.filter(d=>d.profile_status==='flagged'||d.sanctions_status==='flagged_review'), 'flagged');
-  renderTable('all-tbody', data, 'all');
-  renderTable('approved-tbody', data.filter(d=>d.profile_status==='approved'), 'approved');
-}
-
-function statusBadge(s, sec){
-  const map={
-    'approved':{label:'Aprobado',cls:'approved'},
-    'pending_verification':{label:'Verificando',cls:'pending'},
-    'pending_approval':{label:'Por aprobar',cls:'pending'},
-    'flagged':{label:'Alerta',cls:'flagged'},
-    'rejected':{label:'Rechazado',cls:'rejected'}
-  };
-  const b=map[s]||{label:s||'—',cls:'pending'};
-  let secBadge='';
-  if(sec==='flagged_review') secBadge=`<br><span class="status flagged" style="margin-top:4px"><span class="status-dot"></span>Seg. Alerta</span>`;
-  else if(sec==='clear') secBadge=`<br><span class="status approved" style="margin-top:4px"><span class="status-dot"></span>Seg. OK</span>`;
-  return `<span class="status ${b.cls}"><span class="status-dot"></span>${b.label}</span>${secBadge}`;
-}
-
-function fmtDate(d){
-  if(!d)return'—';
-  return new Date(d).toLocaleDateString('es-ES',{day:'2-digit',month:'short',year:'numeric'});
-}
-
-function fmtName(r){
-  const n=[r.first_name,r.last_name].filter(Boolean).join(' ');
-  return n||'Sin nombre';
-}
-
-function renderTable(tbodyId, rows, type){
-  const tb=document.getElementById(tbodyId);
-  if(!rows.length){
-    tb.innerHTML=`<tr><td colspan="8"><div class="empty"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><p>Sin registros</p></div></td></tr>`;
-    return;
-  }
-
-  tb.innerHTML=rows.map(r=>{
-    const name=fmtName(r);
-    const actions=`<div class="action-row">
-      <button class="act-btn view" onclick='showDetail(${JSON.stringify(r).replace(/'/g,"&#39;")})'>Ver</button>
-      ${r.profile_status!=='approved'?`<button class="act-btn approve" onclick="quickApprove('${r.email}',this)">✓</button>`:''}
-      ${!['rejected'].includes(r.profile_status)?`<button class="act-btn reject" onclick="quickReject('${r.email}',this)">✕</button>`:''}
-      <button class="act-btn edit" onclick='openEdit(${JSON.stringify(r).replace(/'/g,"&#39;")})'>Editar</button>
-      <button class="act-btn delete" onclick="confirmDelete('${r.email}',this)">Borrar</button>
-    </div>`;
-
-    if(type==='overview'||type==='all'){
-      return`<tr>
-        <td><div class="td-name">${name}</div><div class="td-email">${r.email}</div></td>
-        <td>${r.email}</td>
-        <td class="td-spec">${(r.specialty||'').split(',').slice(0,2).join(', ')||'—'}</td>
-        <td>${(r.region||'').split(',')[0]||'—'}</td>
-        <td>${r.availability||'—'}</td>
-        <td>${statusBadge(r.profile_status, r.sanctions_status)}</td>
-        <td style="white-space:nowrap">${fmtDate(r.created_at)}</td>
-        <td>${actions}</td>
-      </tr>`;
-    }
-    if(type==='pending'){
-      return`<tr>
-        <td><div class="td-name">${name}</div></td>
-        <td><div class="td-email">${r.email}</div></td>
-        <td class="td-spec">${(r.specialty||'—').split(',').slice(0,2).join(', ')}</td>
-        <td>${(r.region||'—').split(',')[0]}</td>
-        <td>${statusBadge(null, r.sanctions_status)}</td>
-        <td>${fmtDate(r.created_at)}</td>
-        <td>${actions}</td>
-      </tr>`;
-    }
-    if(type==='flagged'){
-      return`<tr>
-        <td><div class="td-name">${name}</div></td>
-        <td><div class="td-email">${r.email}</div></td>
-        <td style="font-size:12px;max-width:200px">${r.sanctions_notes||'—'}</td>
-        <td>${statusBadge(r.profile_status, r.sanctions_status)}</td>
-        <td>${fmtDate(r.created_at)}</td>
-        <td>${actions}</td>
-      </tr>`;
-    }
-    if(type==='approved'){
-      return`<tr>
-        <td><div class="td-name">${name}</div></td>
-        <td><div class="td-email">${r.email}</div></td>
-        <td class="td-spec">${(r.specialty||'—').split(',').slice(0,2).join(', ')}</td>
-        <td>${(r.region||'—').split(',')[0]}</td>
-        <td>${r.availability||'—'}</td>
-        <td>${fmtDate(r.created_at)}</td>
-        <td>${actions}</td>
-      </tr>`;
-    }
-  }).join('');
-}
-
-function renderReferrals(refs){
-  if(!refs) return;
-  const total=refs.length;
-  const verified=refs.filter(r=>r.status==='verified').length;
-  const pending=refs.filter(r=>r.status==='pending').length;
-  document.getElementById('ref-total').textContent=total;
-  document.getElementById('ref-verified').textContent=verified;
-  document.getElementById('ref-pending').textContent=pending;
-
-  const tb=document.getElementById('referral-tbody');
-  if(!refs.length){
-    tb.innerHTML=`<tr><td colspan="4"><div class="empty"><p>Sin referidos aún</p></div></td></tr>`;
-    return;
-  }
-  tb.innerHTML=refs.map(r=>`<tr>
-    <td><div class="td-email">${r.referrer_code||'—'}</div></td>
-    <td><div class="td-email">${r.referred_email||'—'}</div></td>
-    <td>${statusBadge(r.status==='verified'?'approved':r.status==='pending'?'pending_approval':'rejected')}</td>
-    <td>${fmtDate(r.referred_at)}</td>
-  </tr>`).join('');
-}
-
-async function quickApprove(email, btn){
-  btn.disabled=true;btn.textContent='...';
-  try{
-    await api('/rest/v1/rpc/approve_profile',{method:'POST',body:JSON.stringify({p_email:email})});
-    showToast('✓ '+email+' aprobado y notificado','success');
-    loadAll();
-  }catch(e){
-    showToast('Error: '+e.message,'error');
-    btn.disabled=false;btn.textContent='✓ Aprobar';
-  }
-}
-
-async function quickReject(email, btn){
-  const reason=prompt('Razón del rechazo (opcional):');
-  if(reason===null)return;
-  btn.disabled=true;
-  try{
-    await api('/rest/v1/rpc/reject_profile',{method:'POST',body:JSON.stringify({p_email:email,p_reason:reason||''})});
-    showToast('Perfil rechazado: '+email,'error');
-    loadAll();
-  }catch(e){
-    showToast('Error: '+e.message,'error');
-    btn.disabled=false;
-  }
-}
-
-function showDetail(r){
-  document.getElementById('detail-title').textContent=fmtName(r);
-  document.getElementById('overlay').classList.add('show');
-  document.getElementById('detail-panel').classList.add('open');
-
-  document.getElementById('detail-body').innerHTML=`
-    <div class="detail-section">
-      <div class="detail-section-title">Información personal</div>
-      <div class="detail-row"><span class="detail-key">Nombre</span><span class="detail-val">${fmtName(r)}</span></div>
-      <div class="detail-row"><span class="detail-key">Email</span><span class="detail-val">${r.email}</span></div>
-      <div class="detail-row"><span class="detail-key">Idioma</span><span class="detail-val">${(r.lang||'es').toUpperCase()}</span></div>
-      <div class="detail-row"><span class="detail-key">Registrado</span><span class="detail-val">${fmtDate(r.created_at)}</span></div>
-    </div>
-    <div class="detail-section">
-      <div class="detail-section-title">Experiencia</div>
-      <div class="detail-row"><span class="detail-key">Especialidad</span><span class="detail-val">${r.specialty||'—'}</span></div>
-      <div class="detail-row"><span class="detail-key">Región</span><span class="detail-val">${r.region||'—'}</span></div>
-      <div class="detail-row"><span class="detail-key">Empresas</span><span class="detail-val">${r.companies||'—'}</span></div>
-      <div class="detail-row"><span class="detail-key">Años exp.</span><span class="detail-val">${r.years_experience||'—'}</span></div>
-    </div>
-    <div class="detail-section">
-      <div class="detail-section-title">Disponibilidad</div>
-      <div class="detail-row"><span class="detail-key">Estado</span><span class="detail-val">${r.availability||'—'}</span></div>
-      <div class="detail-row"><span class="detail-key">Fecha</span><span class="detail-val">${r.avail_date||'—'}</span></div>
-      <div class="detail-row"><span class="detail-key">Perfil URL</span><span class="detail-val">${r.profile_url||'—'}</span></div>
-    </div>
-    <div class="detail-section">
-      <div class="detail-section-title">Verificación</div>
-      <div class="detail-row"><span class="detail-key">Perfil estado</span><span class="detail-val">${statusBadge(r.profile_status, r.sanctions_status)}</span></div>
-      <div class="detail-row"><span class="detail-key">Seguridad</span><span class="detail-val">${r.sanctions_status||'pending'}</span></div>
-      <div class="detail-row"><span class="detail-key">Método</span><span class="detail-val">${r.sanctions_method||'—'}</span></div>
-      <div class="detail-row"><span class="detail-key">Notas</span><span class="detail-val">${r.sanctions_notes||'—'}</span></div>
-      <div class="detail-row"><span class="detail-key">Chequeado</span><span class="detail-val">${fmtDate(r.sanctions_checked_at)}</span></div>
-    </div>
-    <div class="detail-section">
-      <div class="detail-section-title">Referidos</div>
-      <div class="detail-row"><span class="detail-key">Código</span><span class="detail-val">${r.referral_code||'—'}</span></div>
-      <div class="detail-row"><span class="detail-key">Referido por</span><span class="detail-val">${r.referred_by||'Orgánico'}</span></div>
-    </div>
-  `;
-
-  const isApproved=r.profile_status==='approved';
-  const isRejected=r.profile_status==='rejected';
-  document.getElementById('detail-actions').innerHTML=`
-    ${!isApproved&&!isRejected?`<button class="detail-btn approve" onclick="quickApprove('${r.email}',this)">✓ Aprobar</button>`:''}
-    ${!isRejected?`<button class="detail-btn reject" onclick="quickReject('${r.email}',this)">✕ Rechazar</button>`:''}
-    <button class="detail-btn" style="background:var(--purple-pale);border-color:rgba(137,87,229,.3);color:var(--purple)" onclick='closeDetail();openEdit(${JSON.stringify(r).replace(/'/g,"&#39;")})'>Editar</button>
-    <button class="detail-btn" style="background:var(--red-pale);border-color:var(--red-bd);color:var(--red)" onclick="closeDetail();confirmDelete('${r.email}',this)">Eliminar</button>
-  `;
-}
-
-function closeDetail(){
-  document.getElementById('overlay').classList.remove('show');
-  document.getElementById('detail-panel').classList.remove('open');
-}
-
-function filterTable(tbodyId, query){
-  const q=query.toLowerCase();
-  document.querySelectorAll(`#${tbodyId} tr`).forEach(tr=>{
-    tr.style.display=tr.textContent.toLowerCase().includes(q)?'':'none';
-  });
-}
-
-function filterAll(status, btn){
-  document.querySelectorAll('#all-filters .filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  currentFilter=status;
-  const filtered=status==='all'?allData:allData.filter(d=>d.profile_status===status);
-  renderTable('all-tbody', filtered, 'all');
-}
-
-function showToast(msg, type='success'){
-  const t=document.getElementById('toast');
-  t.textContent=msg;
-  t.className='toast show '+(type||'');
-  setTimeout(()=>t.className='toast',3000);
-}
-
-document.getElementById('login-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+// Keyboard shortcuts
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){closeDetail();closeEdit();}
+});
 </script>
 </body>
 </html>
