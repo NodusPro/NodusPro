@@ -342,7 +342,6 @@ var _exitShown=false;
 var paso=0;
 var sector='';
 var fd={email:'',fn:'',ln1:'',disponibilidad:'now'};
-var cvFile=null;
 
 (function(){
   var hash=window.location.hash;
@@ -419,12 +418,12 @@ function p1(){
 
 function p2(){
   var SP=['Ingenieria','Petroleo y Gas','Tecnologia','Salud','Finanzas','Construccion','Legal','Educacion','Administracion','Logistica','Marketing','Otro'];
-  var cs=SP.map(function(s){return '<span class="chip'+(sector===s?' on':'')+'" onclick="setSector(this,\''+s+'\')">'+s+'</span>';}).join('');
+  var cs=SP.map(function(s){return '<span class="chip'+(sector===s?' on':'')+'" onclick="setSector(this,\''+s+'\')">' +s+'</span>';}).join('');
   return '<button class="mback" onclick="paso--;renderModal()">VOLVER</button>'+
     '<div class="mt">Casi listo</div>'+
-    '<div class="ms">Podras completar tu experiencia profesional una vez que tu perfil este activo.</div>'+
+    '<div class="ms">Dos datos rapidos y listo.</div>'+
     '<div class="mg"><label class="ml">Tu sector (opcional)</label><div class="chips">'+cs+'</div></div>'+
-    '<div class="mg"><label class="ml">Disponibilidad (opcional)</label>'+
+    '<div class="mg"><label class="ml">Disponibilidad</label>'+
     '<div class="trow'+(fd.disponibilidad==='now'?' on':'')+'" onclick="setDisp(\'now\')">'+
     '<div><div class="tlabel">Disponible ahora</div></div>'+
     '<div class="tpill'+(fd.disponibilidad==='now'?' on':'')+'"><div class="tthumb"></div></div></div>'+
@@ -432,15 +431,13 @@ function p2(){
     '<div><div class="tlabel">No disponible por ahora</div></div>'+
     '<div class="tpill'+(fd.disponibilidad==='no'?' on':'')+'"><div class="tthumb"></div></div></div>'+
     '</div>'+
-    '<div style="border-top:1px solid rgba(255,255,255,.08);padding-top:16px;margin-top:4px">'+
-    '<label class="ml">Sube tu CV ahora (opcional)</label>'+
-    '<div class="cvdrop" id="cvdrop" onclick="document.getElementById(\'cvinp\').click()">'+
-    '<input type="file" id="cvinp" accept=".pdf,.doc,.docx" style="display:none" onchange="previewCV(this)">'+
-    '<div class="cvdrop-txt" id="cvdrop-txt">PDF o Word &middot; La IA completa tus datos autom&aacute;ticamente</div>'+
-    '</div></div>'+
-    '<button class="mbtn" onclick="enviar()">Registrarme gratis</button>'+
-    '<button onclick="enviar()" style="width:100%;padding:10px;background:transparent;border:none;font-family:Inter,sans-serif;font-size:13px;color:rgba(255,255,255,.3);cursor:pointer;margin-top:4px">Registrarme sin subir CV por ahora</button>';
+    '<div style="background:rgba(27,79,216,.12);border:1px solid rgba(27,79,216,.25);border-radius:8px;padding:12px;margin-bottom:14px">'+
+    '<div style="font-size:12px;font-weight:700;color:rgba(147,180,245,.9);margin-bottom:4px">Tu CV lo subes despues</div>'+
+    '<div style="font-size:11px;color:rgba(255,255,255,.4);line-height:1.6">Por seguridad, podras subir tu CV una vez que verifiquemos tu cuenta. Lo haras desde <strong style="color:rgba(255,255,255,.6)">Mi cuenta</strong> &mdash; la IA completara automaticamente tu cargo, empresa, idiomas, educacion y experiencia.</div>'+
+    '</div>'+
+    '<button class="mbtn" onclick="enviar()">Registrarme gratis</button>';
 }
+
 
 function pFin(){
   var code=(fd.email.split('@')[0]||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,8);
@@ -519,16 +516,6 @@ async function enviar(){
   paso=3;renderModal();
 }
 
-function previewCV(inp){
-  var f=inp&&inp.files&&inp.files[0];
-  if(!f)return;
-  if(f.size>5*1024*1024){alert('El archivo supera los 5 MB.');inp.value='';return;}
-  var ext=f.name.split('.').pop().toLowerCase();
-  if(!['pdf','doc','docx'].includes(ext)){alert('Solo PDF o Word (.doc, .docx)');inp.value='';return;}
-  cvFile=f;
-  var prev=document.getElementById('cvdrop-txt');
-  if(prev)prev.innerHTML='<span style="color:#6EE7B7">&#10003; '+f.name+'</span>';
-}
 
 function setSector(el,val){
   el.parentElement.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on');});
