@@ -654,22 +654,16 @@ function showDP(r){
 function closeDP(){document.getElementById('dp').classList.remove('on');curDetail=null;}
 
 async function dlCV(url){
-  if(!url)return;
-  var m=url.match(/cv-files\/(.+)$/);
-  if(!m){window.open(url,'_blank');return;}
-  var path=m[1];
-  try{
-    var r=await fetch(SU+'/storage/v1/object/sign/cv-files/'+path,{
-      method:'POST',
-      headers:{'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':'application/json'},
-      body:JSON.stringify({expiresIn:300})
-    });
-    if(r.ok){
-      var d=await r.json();
-      if(d.signedURL){window.open(SU+d.signedURL,'_blank');return;}
-    }
-  }catch(e){}
-  window.open(url,'_blank');
+  if(!url){toast('Sin URL de CV','err');return;}
+  // With public bucket - open directly
+  // Ensure URL uses public path format
+  var pubUrl=url;
+  if(url.includes('/object/cv-files/')){
+    // Already in public format
+  } else if(url.includes('/storage/v1/object/')){
+    pubUrl=url; // use as-is
+  }
+  window.open(pubUrl,'_blank');
 }
 
 async function quickAp(email,btn){
