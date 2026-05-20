@@ -352,6 +352,13 @@ var fd={email:'',fn:'',ln1:'',disponibilidad:'now'};
   var p=new URLSearchParams(window.location.search);
   var r=p.get('ref');
   if(r&&r.length>0&&r.length<=10)sessionStorage.setItem('np_ref',r.toUpperCase().replace(/[^A-Z0-9]/g,''));
+  // Auto-open modal if coming from cuenta.html sin perfil
+  var prereg=sessionStorage.getItem('np_prereg');
+  if(prereg){
+    sessionStorage.removeItem('np_prereg');
+    fd.email=prereg;
+    setTimeout(function(){abrirModal();},400);
+  }
 })();
 
 function abrirModal(){
