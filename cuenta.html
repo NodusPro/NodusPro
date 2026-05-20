@@ -607,7 +607,7 @@ async function handleCv(file){
     cvTx=txt.slice(0,8000);
     // Subir archivo fisico a Supabase Storage
     try{
-      var userEmail=userProf&&userProf.email?userProf.email:'unknown';
+      var userEmail=reg&&reg.email?reg.email:document.getElementById('nem').textContent||'unknown';
       var safeName=userEmail.replace(/[^a-z0-9]/gi,'_').slice(0,30)+'_'+Date.now()+'.'+ext;
       var storagePath='cvs/'+safeName;
       var uploadResp=await fetch(SU+'/storage/v1/object/cv-files/'+storagePath,{
@@ -669,7 +669,7 @@ function fillAI(d){
   if(d.bio)document.getElementById('ebio').value=d.bio;
   // Languages - structured array or fallback
   var langs=[];
-  if(d.languages_json){try{langs=JSON.parse(d.languages_json);}catch(e){}}
+  if(d.languages_json){try{langs=Array.isArray(d.languages_json)?d.languages_json:JSON.parse(d.languages_json);}catch(e){}}
   if(langs.length===0&&d.english_level)langs=[{lang:'Ingles',level:d.english_level}];
   for(var i=0;i<Math.min(langs.length,3);i++){
     selO('elng'+i,langs[i].lang||langs[i].l||'');
@@ -677,7 +677,7 @@ function fillAI(d){
   }
   // Education - structured array or fallback
   var edus=[];
-  if(d.education_json){try{edus=JSON.parse(d.education_json);}catch(e){}}
+  if(d.education_json){try{edus=Array.isArray(d.education_json)?d.education_json:JSON.parse(d.education_json);}catch(e){}}
   if(edus.length===0&&d.education_level)edus=[{degree:d.education_level,institution:d.degree_field||''}];
   for(var j=0;j<Math.min(edus.length,3);j++){
     selO('edeg'+j,edus[j].degree||edus[j].d||'');
@@ -686,7 +686,7 @@ function fillAI(d){
   }
   // Experiences
   var exps=[];
-  if(d.experience_json){try{exps=JSON.parse(d.experience_json);}catch(e){}}
+  if(d.experience_json){try{exps=Array.isArray(d.experience_json)?d.experience_json:JSON.parse(d.experience_json);}catch(e){}}
   for(var k=0;k<Math.min(exps.length,3);k++){
     var tit=document.getElementById('extit'+k);
     var co=document.getElementById('exco'+k);
