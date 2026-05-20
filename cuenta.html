@@ -438,12 +438,15 @@ async function init(){
 }
 
 async function loadProf(email){
-  var r=await sb.rpc('get_my_profile',{p_email:email});
+  var r;
+  try{
+    var timeout=new Promise(function(res){setTimeout(function(){res({error:{message:'timeout'},data:null});},8000);});
+    r=await Promise.race([sb.rpc('get_my_profile',{p_email:email}),timeout]);
+  }catch(e){r={error:e,data:null};}
   if(r.error||!r.data){
-    // No profile in DB - sign out and redirect to register with email pre-filled
     try{sessionStorage.setItem('np_prereg',email);}catch(e){}
-    try{await sb.auth.signOut();}catch(e){}
-    window.location.href='/';
+    try{sb.auth.signOut();}catch(e){}  // fire and forget - no await
+    window.location.replace('/');
     return;
   }
   reg=r.data;
