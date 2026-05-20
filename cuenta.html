@@ -732,7 +732,7 @@ async function doSave(){
   };
   var r=await sb.rpc('update_profile_data',p);
   btn.disabled=false;btn.textContent='Guardar cambios';
-  if(r.error){toast('Error al guardar. Intenta de nuevo.','err');return;}
+  if(r.error){toast('Error al guardar: '+JSON.stringify(r.error),'err');return;}
   Object.assign(reg,{
     current_position:p.p_current_position,current_company:p.p_current_company,
     specialty:p.p_specialty,years_experience:p.p_years_experience,
