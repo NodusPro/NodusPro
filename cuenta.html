@@ -425,7 +425,7 @@ async function doOut(){
   show('s-login');
 }
 
-sb.auth.var profLoaded=false;
+var profLoaded=false;
 
 sb.auth.onAuthStateChange(function(ev,ses){
   if((ev==='SIGNED_IN'||ev==='INITIAL_SESSION')&&ses&&ses.user){
