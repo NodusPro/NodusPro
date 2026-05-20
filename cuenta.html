@@ -527,9 +527,21 @@ function startEdit(){
   document.getElementById('ectry').value=r.location_country||'';
   document.getElementById('ebio').value=r.bio||'';
   document.getElementById('eli').value=r.linkedin_url||r.profile_url||'';
-  document.getElementById('elang').value=r.other_languages||'';
-  document.getElementById('edeg').value=r.degree_field||'';
-  selO('eyr',r.years_experience);selO('eeng',r.english_level);selO('eedu',r.education_level);
+  selO('eyr',r.years_experience);
+  // Languages
+  var langsArr=[];
+  try{langsArr=typeof r.languages_json==='string'?JSON.parse(r.languages_json):r.languages_json||[];}catch(e){}
+  if(langsArr.length===0&&r.english_level)langsArr=[{lang:'Ingles',level:r.english_level}];
+  for(var i=0;i<3;i++){var lng=langsArr[i]||{};selO('elng'+i,lng.lang||lng.l||'');selO('elvl'+i,lng.level||lng.v||'');}
+  // Education
+  var eduArr=[];
+  try{eduArr=typeof r.education_json==='string'?JSON.parse(r.education_json):r.education_json||[];}catch(e){}
+  if(eduArr.length===0&&r.education_level)eduArr=[{degree:r.education_level,institution:r.degree_field||''}];
+  for(var j=0;j<3;j++){var edu=eduArr[j]||{};selO('edeg'+j,edu.degree||edu.d||'');var inst=document.getElementById('einst'+j);if(inst)inst.value=edu.institution||edu.i||'';}
+  // Experience
+  var expArr=[];
+  try{expArr=typeof r.experience_json==='string'?JSON.parse(r.experience_json):r.experience_json||[];}catch(e){}
+  for(var k=0;k<3;k++){var exp=expArr[k]||{};var tit=document.getElementById('extit'+k);var co=document.getElementById('exco'+k);var per=document.getElementById('exper'+k);if(tit)tit.value=exp.title||exp.t||'';if(co)co.value=exp.company||exp.c||'';if(per)per.value=exp.period||exp.p||'';}
   avail=r.availability||'now';
   ['avn','avs','avo','avx'].forEach(function(id){document.getElementById(id).classList.remove('on');});
   var amap={now:'avn',soon:'avs',open:'avo',no:'avx'};
@@ -703,11 +715,14 @@ async function doSave(){
     p_cv_filename:cvFn||reg.cv_filename||'',
     p_cv_url:cvStorageUrl||reg.cv_url||'',
     p_cv_text:cvTx,
-    p_english_level:document.getElementById('eeng').value,
-    p_other_languages:document.getElementById('elang').value.trim(),
-    p_education_level:document.getElementById('eedu').value,
-    p_degree_field:document.getElementById('edeg').value.trim(),
-    p_work_modality:mod
+    p_english_level:(function(){var l=document.getElementById('elvl0');return l?l.value:'';})(),
+    p_other_languages:'',
+    p_education_level:(function(){var d=document.getElementById('edeg0');return d?d.value:'';})(),
+    p_degree_field:(function(){var i=document.getElementById('einst0');return i?i.value.trim():'';})(),
+    p_work_modality:mod,
+    p_languages_json:(function(){var arr=[];for(var i=0;i<3;i++){var l=document.getElementById('elng'+i);var v=document.getElementById('elvl'+i);if(l&&v&&l.value&&v.value)arr.push({lang:l.value,level:v.value});}return arr.length?JSON.stringify(arr):'';})(),
+    p_education_json:(function(){var arr=[];for(var j=0;j<3;j++){var d=document.getElementById('edeg'+j);var ins=document.getElementById('einst'+j);if(d&&d.value)arr.push({degree:d.value,institution:ins?ins.value.trim():''});}return arr.length?JSON.stringify(arr):'';})(),
+    p_experience_json:(function(){var arr=[];for(var k=0;k<3;k++){var t=document.getElementById('extit'+k);var co=document.getElementById('exco'+k);var p2=document.getElementById('exper'+k);if(t&&t.value.trim())arr.push({title:t.value.trim(),company:co?co.value.trim():'',period:p2?p2.value.trim():''});}return arr.length?JSON.stringify(arr):'';})()
   };
   var r=await sb.rpc('update_profile_data',p);
   btn.disabled=false;btn.textContent='Guardar cambios';
