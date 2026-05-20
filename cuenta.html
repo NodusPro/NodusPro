@@ -150,7 +150,7 @@ select.fi option{background:var(--n2)}
       <p class="ep" id="ep"></p>
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px">
         <button class="yb" onclick="doOut()">Cerrar sesion</button>
-        <a href="/" style="display:inline-block;padding:12px 24px;border:1px solid rgba(255,255,255,.2);border-radius:8px;color:rgba(255,255,255,.6);font-family:Inter,sans-serif;font-size:14px;font-weight:600;text-decoration:none">Ir a registrarse</a>
+        <button class="yb" onclick="goRegister(document.getElementById('ep').getAttribute('data-email'))" style="background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.7)">Ir a registrarse</button>
       </div>
     </div>
   </div>
@@ -410,6 +410,14 @@ async function doGG(){
   await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:'https://noduspro.net/cuenta'}});
 }
 
+async function goRegister(email){
+  try{
+    if(email)sessionStorage.setItem('np_prereg',email);
+    await sb.auth.signOut();
+  }catch(e){}
+  window.location.href='/';
+}
+
 async function doOut(){
   await sb.auth.signOut();reg=null;
   document.getElementById('sob').style.display='none';
@@ -434,6 +442,7 @@ async function loadProf(email){
   if(r.error||!r.data){
     document.getElementById('eh').textContent='Perfil no encontrado';
     document.getElementById('ep').textContent='El correo '+email+' no esta registrado en NodusPro. Puedes registrarte en la pagina principal o usa el correo con que te registraste.';
+    document.getElementById('ep').setAttribute('data-email',email);
     show('s-err');return;
   }
   reg=r.data;
