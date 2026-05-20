@@ -383,7 +383,7 @@ select.fi option{background:var(--n2)}
 <script>
 var SU='https://eettdimwdjyqniodefop.supabase.co';
 var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
-var sb=supabase.createClient(SU,SK,{auth:{flowType:"implicit",persistSession:true,autoRefreshToken:true}});
+var sb=supabase.createClient(SU,SK);
 var reg=null,avail='now',mod='',cvFn='',cvTx='',cvStoragePath='',cvStorageUrl='';
 
 function show(id){document.querySelectorAll('.scr').forEach(function(s){s.classList.remove('on');});document.getElementById(id).classList.add('on');}
@@ -425,18 +425,19 @@ async function doOut(){
   show('s-login');
 }
 
-var profLoaded=false;
-
 sb.auth.onAuthStateChange(function(ev,ses){
-  if((ev==='SIGNED_IN'||ev==='INITIAL_SESSION')&&ses&&ses.user){
-    if(!profLoaded){profLoaded=true;loadProf(ses.user.email);}
-  } else if(ev==='SIGNED_OUT'||(ev==='INITIAL_SESSION'&&!ses)){
-    show('s-login');
-  }
+  if(ev==='SIGNED_IN'&&ses&&ses.user){show('s-load');loadProf(ses.user.email);}
+  else if(ev==='SIGNED_OUT'){show('s-login');}
 });
 
-function init(){
+async function init(){
   show('s-load');
+  var r=await sb.auth.getSession();
+  if(r.data&&r.data.session&&r.data.session.user){
+    await loadProf(r.data.session.user.email);
+  } else {
+    show('s-login');
+  }
 }
 
 async function loadProf(email){
