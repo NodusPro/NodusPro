@@ -440,10 +440,11 @@ async function init(){
 async function loadProf(email){
   var r=await sb.rpc('get_my_profile',{p_email:email});
   if(r.error||!r.data){
-    document.getElementById('eh').textContent='Perfil no encontrado';
-    document.getElementById('ep').textContent='El correo '+email+' no esta registrado en NodusPro. Puedes registrarte en la pagina principal o usa el correo con que te registraste.';
-    document.getElementById('ep').setAttribute('data-email',email);
-    show('s-err');return;
+    // No profile in DB - sign out and redirect to register with email pre-filled
+    try{sessionStorage.setItem('np_prereg',email);}catch(e){}
+    try{await sb.auth.signOut();}catch(e){}
+    window.location.href='/';
+    return;
   }
   reg=r.data;
   document.getElementById('nem').textContent=email;
