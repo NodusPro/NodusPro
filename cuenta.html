@@ -148,7 +148,10 @@ select.fi option{background:var(--n2)}
       <div style="font-size:36px;margin-bottom:14px">!</div>
       <div class="eh" id="eh">Error</div>
       <p class="ep" id="ep"></p>
-      <button class="yb" onclick="show('s-login')">Volver</button>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+        <button class="yb" onclick="doOut()">Cerrar sesion</button>
+        <a href="/" style="display:inline-block;padding:12px 24px;border:1px solid rgba(255,255,255,.2);border-radius:8px;color:rgba(255,255,255,.6);font-family:Inter,sans-serif;font-size:14px;font-weight:600;text-decoration:none">Ir a registrarse</a>
+      </div>
     </div>
   </div>
 
@@ -175,13 +178,12 @@ select.fi option{background:var(--n2)}
           <div class="fg"><label>Ubicacion</label><div class="fv em" id="vloc">Sin completar</div></div>
         </div>
         <div class="fg"><label>Sobre mi</label><div class="fv em" id="vbio">Sin completar</div></div>
+        <div class="fg" id="vexprow" style="display:none"><label>Ultimas experiencias</label><div class="fv" id="vexps"></div></div>
+        <div class="fg"><label>Idiomas</label><div class="fv em" id="vlangs">Sin completar</div></div>
+        <div class="fg"><label>Educacion</label><div class="fv em" id="vedus">Sin completar</div></div>
         <div class="r2">
-          <div class="fg"><label>Nivel de ingles</label><div class="fv em" id="veng">Sin completar</div></div>
-          <div class="fg"><label>Otros idiomas</label><div class="fv em" id="vlang">Sin completar</div></div>
-        </div>
-        <div class="r2">
-          <div class="fg"><label>Educacion</label><div class="fv em" id="vedu">Sin completar</div></div>
           <div class="fg"><label>Modalidad</label><div class="fv em" id="vmod">Sin completar</div></div>
+          <div class="fg"><label>Nivel de ingles</label><div class="fv em" id="veng" style="display:none"></div></div>
         </div>
         <div class="r2">
           <div class="fg"><label>LinkedIn</label><div class="fv em" id="vli">Sin completar</div></div>
@@ -225,32 +227,114 @@ select.fi option{background:var(--n2)}
         <div class="fg"><label>Sobre mi <span class="op">(opcional)</span></label><textarea class="fi" id="ebio" placeholder="Un parrafo sobre tu experiencia y lo que buscas..."></textarea></div>
       </div>
       <div class="sec">
-        <div class="st">Idiomas y educacion</div>
+        <div class="st">Idiomas</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.35);margin-bottom:12px">Agrega hasta 3 idiomas con su nivel.</div>
         <div class="r2">
-          <div class="fg"><label>Nivel de ingles <span class="op">(opcional)</span></label>
-            <select class="fi" id="eeng">
-              <option value="">Seleccionar...</option>
-              <option>Basico</option>
-              <option>Intermedio</option>
-              <option>Avanzado</option>
-              <option>Fluido</option>
-              <option>Nativo</option>
+          <div class="fg"><label>Idioma 1</label>
+            <select class="fi" id="elng0" onchange="syncLngLevel(0)">
+              <option value="">-- Seleccionar --</option>
+              <option>Espanol</option><option>Ingles</option><option>Portugues</option>
+              <option>Frances</option><option>Italiano</option><option>Aleman</option>
+              <option>Mandarin</option><option>Arabe</option><option>Otro</option>
             </select>
           </div>
-          <div class="fg"><label>Otros idiomas <span class="op">(opcional)</span></label><input type="text" class="fi" id="elang" placeholder="Ej: Italiano B2, Frances A2"></div>
+          <div class="fg"><label>Nivel</label>
+            <select class="fi" id="elvl0">
+              <option value="">-- Nivel --</option>
+              <option>Basico</option><option>Intermedio</option><option>Avanzado</option><option>Fluido</option><option>Nativo</option>
+            </select>
+          </div>
         </div>
         <div class="r2">
-          <div class="fg"><label>Nivel educativo <span class="op">(opcional)</span></label>
-            <select class="fi" id="eedu">
-              <option value="">Seleccionar...</option>
-              <option>Tecnico Superior</option>
-              <option>Licenciatura / Ingenieria</option>
-              <option>Especializacion</option>
-              <option>Maestria</option>
-              <option>Doctorado</option>
+          <div class="fg"><label>Idioma 2</label>
+            <select class="fi" id="elng1">
+              <option value="">-- Seleccionar --</option>
+              <option>Espanol</option><option>Ingles</option><option>Portugues</option>
+              <option>Frances</option><option>Italiano</option><option>Aleman</option>
+              <option>Mandarin</option><option>Arabe</option><option>Otro</option>
             </select>
           </div>
-          <div class="fg"><label>Area de estudios <span class="op">(opcional)</span></label><input type="text" class="fi" id="edeg" placeholder="Ej: Ingenieria de Petroleo"></div>
+          <div class="fg"><label>Nivel</label>
+            <select class="fi" id="elvl1">
+              <option value="">-- Nivel --</option>
+              <option>Basico</option><option>Intermedio</option><option>Avanzado</option><option>Fluido</option><option>Nativo</option>
+            </select>
+          </div>
+        </div>
+        <div class="r2">
+          <div class="fg"><label>Idioma 3</label>
+            <select class="fi" id="elng2">
+              <option value="">-- Seleccionar --</option>
+              <option>Espanol</option><option>Ingles</option><option>Portugues</option>
+              <option>Frances</option><option>Italiano</option><option>Aleman</option>
+              <option>Mandarin</option><option>Arabe</option><option>Otro</option>
+            </select>
+          </div>
+          <div class="fg"><label>Nivel</label>
+            <select class="fi" id="elvl2">
+              <option value="">-- Nivel --</option>
+              <option>Basico</option><option>Intermedio</option><option>Avanzado</option><option>Fluido</option><option>Nativo</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="st">Educacion</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.35);margin-bottom:12px">Agrega hasta 3 titulos: licenciatura, maestria, doctorado, etc.</div>
+        <div class="r2">
+          <div class="fg"><label>Titulo 1</label>
+            <select class="fi" id="edeg0">
+              <option value="">-- Tipo de titulo --</option>
+              <option>Tecnico Superior</option><option>Licenciatura</option><option>Ingenieria</option>
+              <option>Especializacion</option><option>Maestria</option><option>MBA</option>
+              <option>Doctorado</option><option>PhD</option><option>Otro</option>
+            </select>
+          </div>
+          <div class="fg"><label>Institucion</label><input type="text" class="fi" id="einst0" placeholder="Ej: UCV, USB, IESA..."></div>
+        </div>
+        <div class="r2">
+          <div class="fg"><label>Titulo 2</label>
+            <select class="fi" id="edeg1">
+              <option value="">-- Tipo de titulo --</option>
+              <option>Tecnico Superior</option><option>Licenciatura</option><option>Ingenieria</option>
+              <option>Especializacion</option><option>Maestria</option><option>MBA</option>
+              <option>Doctorado</option><option>PhD</option><option>Otro</option>
+            </select>
+          </div>
+          <div class="fg"><label>Institucion</label><input type="text" class="fi" id="einst1" placeholder="Ej: UCAB, UNIMET..."></div>
+        </div>
+        <div class="r2">
+          <div class="fg"><label>Titulo 3</label>
+            <select class="fi" id="edeg2">
+              <option value="">-- Tipo de titulo --</option>
+              <option>Tecnico Superior</option><option>Licenciatura</option><option>Ingenieria</option>
+              <option>Especializacion</option><option>Maestria</option><option>MBA</option>
+              <option>Doctorado</option><option>PhD</option><option>Otro</option>
+            </select>
+          </div>
+          <div class="fg"><label>Institucion</label><input type="text" class="fi" id="einst2" placeholder="Ej: MIT, Harvard..."></div>
+        </div>
+      </div>
+      <div class="sec">
+        <div class="st">Ultimas experiencias</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.35);margin-bottom:12px">Las 3 experiencias mas recientes. La IA las extrae del CV automaticamente.</div>
+        <div style="border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:14px;margin-bottom:10px">
+          <div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:8px;font-weight:600">Experiencia 1 (mas reciente)</div>
+          <div class="r2"><div class="fg"><label>Cargo</label><input type="text" class="fi" id="extit0" placeholder="Ing. de Produccion"></div>
+          <div class="fg"><label>Empresa</label><input type="text" class="fi" id="exco0" placeholder="PDVSA, Repsol..."></div></div>
+          <div class="fg"><label>Periodo</label><input type="text" class="fi" id="exper0" placeholder="2018-2023"></div>
+        </div>
+        <div style="border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:14px;margin-bottom:10px">
+          <div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:8px;font-weight:600">Experiencia 2</div>
+          <div class="r2"><div class="fg"><label>Cargo</label><input type="text" class="fi" id="extit1" placeholder=""></div>
+          <div class="fg"><label>Empresa</label><input type="text" class="fi" id="exco1" placeholder=""></div></div>
+          <div class="fg"><label>Periodo</label><input type="text" class="fi" id="exper1" placeholder="2015-2018"></div>
+        </div>
+        <div style="border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:14px">
+          <div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:8px;font-weight:600">Experiencia 3</div>
+          <div class="r2"><div class="fg"><label>Cargo</label><input type="text" class="fi" id="extit2" placeholder=""></div>
+          <div class="fg"><label>Empresa</label><input type="text" class="fi" id="exco2" placeholder=""></div></div>
+          <div class="fg"><label>Periodo</label><input type="text" class="fi" id="exper2" placeholder=""></div>
         </div>
       </div>
       <div class="sec">
@@ -349,8 +433,7 @@ async function loadProf(email){
   var r=await sb.rpc('get_my_profile',{p_email:email});
   if(r.error||!r.data){
     document.getElementById('eh').textContent='Perfil no encontrado';
-    document.getElementById('ep').textContent='El correo '+email+' no esta registrado en NodusPro. Cierra sesion e intenta con el correo con que te registraste.';
-    document.getElementById('ep').insertAdjacentHTML('afterend','<br><br><button class="yb" style="margin-top:10px" onclick="doOut()">Cerrar sesion</button>');
+    document.getElementById('ep').textContent='El correo '+email+' no esta registrado en NodusPro. Puedes registrarte en la pagina principal o usa el correo con que te registraste.';
     show('s-err');return;
   }
   reg=r.data;
@@ -515,6 +598,12 @@ function toB64(f){
   return new Promise(function(res,rej){var rd=new FileReader();rd.onload=function(){res(rd.result.split(',')[1]);};rd.onerror=rej;rd.readAsDataURL(f);});
 }
 
+function syncLngLevel(i){
+  var lng=document.getElementById('elng'+i);
+  var lvl=document.getElementById('elvl'+i);
+  if(lng&&lvl&&lng.value&&!lvl.value){lvl.value='Fluido';}
+}
+
 function fillAI(d){
   if(!d)return;
   if(d.current_position)document.getElementById('epos').value=d.current_position;
@@ -524,10 +613,34 @@ function fillAI(d){
   if(d.location_city)document.getElementById('ecity').value=d.location_city;
   if(d.location_country)document.getElementById('ectry').value=d.location_country;
   if(d.bio)document.getElementById('ebio').value=d.bio;
-  if(d.english_level)selO('eeng',d.english_level);
-  if(d.other_languages)document.getElementById('elang').value=d.other_languages;
-  if(d.education_level)selO('eedu',d.education_level);
-  if(d.degree_field)document.getElementById('edeg').value=d.degree_field;
+  // Languages - structured array or fallback
+  var langs=[];
+  if(d.languages_json){try{langs=JSON.parse(d.languages_json);}catch(e){}}
+  if(langs.length===0&&d.english_level)langs=[{lang:'Ingles',level:d.english_level}];
+  for(var i=0;i<Math.min(langs.length,3);i++){
+    selO('elng'+i,langs[i].lang||langs[i].l||'');
+    selO('elvl'+i,langs[i].level||langs[i].v||'');
+  }
+  // Education - structured array or fallback
+  var edus=[];
+  if(d.education_json){try{edus=JSON.parse(d.education_json);}catch(e){}}
+  if(edus.length===0&&d.education_level)edus=[{degree:d.education_level,institution:d.degree_field||''}];
+  for(var j=0;j<Math.min(edus.length,3);j++){
+    selO('edeg'+j,edus[j].degree||edus[j].d||'');
+    var inst=document.getElementById('einst'+j);
+    if(inst)inst.value=edus[j].institution||edus[j].i||'';
+  }
+  // Experiences
+  var exps=[];
+  if(d.experience_json){try{exps=JSON.parse(d.experience_json);}catch(e){}}
+  for(var k=0;k<Math.min(exps.length,3);k++){
+    var tit=document.getElementById('extit'+k);
+    var co=document.getElementById('exco'+k);
+    var per=document.getElementById('exper'+k);
+    if(tit)tit.value=exps[k].title||exps[k].t||'';
+    if(co)co.value=exps[k].company||exps[k].c||'';
+    if(per)per.value=exps[k].period||exps[k].p||'';
+  }
 }
 
 async function doSave(){
@@ -562,9 +675,11 @@ async function doSave(){
     specialty:p.p_specialty,years_experience:p.p_years_experience,
     location_city:p.p_location_city,location_country:p.p_location_country,
     bio:p.p_bio,linkedin_url:p.p_linkedin_url,availability:p.p_availability,
-    cv_filename:p.p_cv_filename||reg.cv_filename,cv_url:p.p_cv_url||reg.cv_url,english_level:p.p_english_level,
-    other_languages:p.p_other_languages,education_level:p.p_education_level,
-    degree_field:p.p_degree_field,work_modality:p.p_work_modality
+    cv_filename:p.p_cv_filename||reg.cv_filename,cv_url:p.p_cv_url||reg.cv_url,
+    english_level:p.p_english_level,work_modality:p.p_work_modality,
+    languages_json:p.p_languages_json||reg.languages_json,
+    education_json:p.p_education_json||reg.education_json,
+    experience_json:p.p_experience_json||reg.experience_json
   });
   renderV();cancelEdit();
   toast('Perfil actualizado correctamente','ok');
