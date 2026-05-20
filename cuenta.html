@@ -477,8 +477,31 @@ function renderV(){
   sv('vpos',r.current_position);sv('vco',r.current_company);sv('vsp',r.specialty);
   sv('vyr',r.years_experience);
   sv('vloc',[r.location_city,r.location_country].filter(Boolean).join(', '));
-  sv('vbio',r.bio);sv('veng',r.english_level);sv('vlang',r.other_languages);
-  sv('vedu',[r.education_level,r.degree_field].filter(Boolean).join(' - '));
+  sv('vbio',r.bio);
+  // Languages
+  var langsArr=[];
+  try{langsArr=typeof r.languages_json==='string'?JSON.parse(r.languages_json):r.languages_json||[];}catch(e){}
+  if(langsArr&&langsArr.length>0){
+    sv('vlangs',langsArr.map(function(l){return (l.lang||l.l)+(l.level||l.v?' ('+( l.level||l.v)+')':'');}).join(' &middot; '));
+  } else if(r.english_level||r.other_languages){
+    sv('vlangs',[r.english_level?'Ingles ('+r.english_level+')':'',r.other_languages].filter(Boolean).join(' &middot; '));
+  } else { sv('vlangs',null); }
+  // Education
+  var eduArr=[];
+  try{eduArr=typeof r.education_json==='string'?JSON.parse(r.education_json):r.education_json||[];}catch(e){}
+  if(eduArr&&eduArr.length>0){
+    sv('vedus',eduArr.map(function(e){return (e.degree||e.d)+(e.institution||e.i?' &mdash; '+(e.institution||e.i):'');}).join('<br>'));
+  } else if(r.education_level||r.degree_field){
+    sv('vedus',[r.education_level,r.degree_field].filter(Boolean).join(' - '));
+  } else { sv('vedus',null); }
+  // Experiences
+  var expArr=[];
+  try{expArr=typeof r.experience_json==='string'?JSON.parse(r.experience_json):r.experience_json||[];}catch(e){}
+  if(expArr&&expArr.length>0){
+    var vexprow=document.getElementById('vexprow');
+    if(vexprow)vexprow.style.display='block';
+    sv('vexps',expArr.map(function(e){return '<div style="margin-bottom:6px"><strong>'+(e.title||e.t||'')+'</strong> &mdash; '+(e.company||e.c||'')+(e.period||e.p?' ('+( e.period||e.p)+')':'')+'</div>';}).join(''));
+  }
   var mm={remote:'Remoto',hybrid:'Hibrido',onsite:'Presencial'};
   sv('vmod',mm[r.work_modality]||r.work_modality);
   sv('vli',r.linkedin_url||r.profile_url,true);sv('vcv',r.cv_filename);
