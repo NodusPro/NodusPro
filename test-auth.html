@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>NodusPro - Auth Test</title>
+<style>
+body{font-family:monospace;background:#0a0f1a;color:#e0e8f0;padding:24px;max-width:700px}
+h2{color:#F4C300;margin-bottom:16px}
+.log{background:#111827;border:1px solid #1e2d45;border-radius:8px;padding:16px;margin-bottom:12px;font-size:13px;line-height:1.8}
+.ok{color:#6EE7B7}.err{color:#F87171}.warn{color:#FCD34D}.info{color:#93C5FD}
+button{padding:10px 20px;background:#F4C300;color:#0a0f1a;border:none;border-radius:6px;font-size:14px;font-weight:700;cursor:pointer;margin:6px 4px;font-family:monospace}
+button.sec{background:#1B4FD8;color:white}
+input{background:#1c2333;border:1px solid #2a3f60;color:white;padding:8px 12px;border-radius:6px;font-family:monospace;font-size:13px;width:280px}
+</style>
+</head>
+<body>
+<h2>NodusPro Auth Diagnostico</h2>
+
+<div class="log" id="log">Iniciando diagnostico...<br></div>
+
+<div style="margin-bottom:12px">
+  <input type="email" id="testEmail" placeholder="tu@correo.com">
+  <button onclick="testML()">Test Magic Link</button>
+  <button class="sec" onclick="testGoogle()">Test Google</button>
+</div>
+<button onclick="testSession()">Ver sesion actual</button>
+<button onclick="testProfile()">Test perfil en BD</button>
+<button onclick="clearAll()">Limpiar localStorage</button>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+var SU='https://eettdimwdjyqniodefop.supabase.co';
+var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
+
+var sb = supabase.createClient(SU, SK);
+var logEl = document.getElementById('log');
+
+function log(msg, type) {
+  var line = document.createElement('div');
+  line.className = type||'info';
+  line.textContent = new Date().toTimeString().slice(0,8) + ' ' + msg;
+  logEl.appendChild(line);
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+log('SDK cargado OK - version @2', 'ok');
+log('URL actual: ' + window.location.href, 'info');
+log('Hash: ' + (window.location.hash||'(vacio)'), 'info');
+log('Query: ' + (window.location.search||'(vacio)'), 'info');
+
+// Check localStorage
+var lsKeys = Object.keys(localStorage).filter(function(k){return k.includes('supabase')||k.includes('sb-');});
+log('localStorage keys de supabase: ' + (lsKeys.length ? lsKeys.join(', ') : '(ninguna)'), lsKeys.length?'ok':'warn');
+
+// Setup auth listener
+log('Configurando onAuthStateChange...', 'info');
+sb.auth.onAuthStateChange(function(ev, ses) {
+  log('EVENT: ' + ev + ' | user: ' + (ses&&ses.user?ses.user.email:'null'), ev==='SIGNED_IN'||ev==='INITIAL_SESSION'?'ok':'warn');
+});
+log('onAuthStateChange configurado OK', 'ok');
+
+// Test getSession with timing
+log('Llamando getSession()...', 'info');
+var t0 = Date.now();
+sb.auth.getSession().then(function(r) {
+  var ms = Date.now() - t0;
+  if(r.data && r.data.session) {
+    log('getSession() completado en '+ms+'ms - usuario: '+r.data.session.user.email, 'ok');
+  } else {
+    log('getSession() completado en '+ms+'ms - sin sesion', 'warn');
+  }
+}).catch(function(e) {
+  log('getSession() ERROR: ' + e.message, 'err');
+});
+
+// Timeout check
+setTimeout(function(){
+  log('--- 5 segundos transcurridos ---', 'warn');
+}, 5000);
+setTimeout(function(){
+  log('--- 15 segundos. Si getSession sigue pendiente, hay problema de red con Supabase ---', 'err');
+}, 15000);
+
+function testML() {
+  var em = document.getElementById('testEmail').value.trim();
+  if(!em){log('Introduce un email primero','err');return;}
+  log('Enviando magic link a: '+em, 'info');
+  sb.auth.signInWithOtp({email:em, options:{emailRedirectTo:'https://noduspro.net/cuenta'}})
+    .then(function(r){
+      if(r.error) log('Magic link ERROR: '+r.error.message, 'err');
+      else log('Magic link enviado OK - revisa tu correo', 'ok');
+    });
+}
+
+function testGoogle() {
+  log('Iniciando Google OAuth...', 'info');
+  sb.auth.signInWithOAuth({provider:'google', options:{redirectTo:'https://noduspro.net/cuenta'}});
+}
+
+async function testSession() {
+  log('Consultando sesion...', 'info');
+  var r = await sb.auth.getSession();
+  if(r.data&&r.data.session) log('Sesion activa: '+r.data.session.user.email+' - expira: '+new Date(r.data.session.expires_at*1000).toLocaleString(), 'ok');
+  else log('Sin sesion activa', 'warn');
+}
+
+async function testProfile() {
+  var em = document.getElementById('testEmail').value.trim();
+  if(!em){log('Introduce un email primero','err');return;}
+  log('Buscando perfil: '+em, 'info');
+  var r = await fetch(SU+'/rest/v1/rpc/get_my_profile', {
+    method:'POST',
+    headers:{'apikey':SK,'Authorization':'Bearer '+SK,'Content-Type':'application/json'},
+    body:JSON.stringify({p_email:em})
+  });
+  var d = await r.json();
+  log('Perfil: '+(d?JSON.stringify(d).slice(0,100):'null'), d?'ok':'warn');
+}
+
+function clearAll() {
+  lsKeys.forEach(function(k){localStorage.removeItem(k);});
+  log('localStorage limpiado - recarga la pagina', 'ok');
+}
+</script>
+</body>
+</html>
