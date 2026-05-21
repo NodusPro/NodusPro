@@ -305,6 +305,14 @@ body{font-family:'Inter',sans-serif;background:var(--navy);color:white;min-heigh
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <script>
+// Redirigir a /cuenta preservando hash y query params (auth tokens)
+(function(){
+  var dest = '/cuenta';
+  if(window.location.hash) dest += window.location.hash;
+  else if(window.location.search) dest += window.location.search;
+  window.location.replace(dest);
+})();
+
 var SB='https://eettdimwdjyqniodefop.supabase.co';
 var SK='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVldHRkaW13ZGp5cW5pb2RlZm9wIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MzA4NDksImV4cCI6MjA5MDEwNjg0OX0.orXdr4qf_Gn7EDwktEwZ6lYCvnXGtB_4AJx9V2C23Mk';
 
