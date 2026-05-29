@@ -441,6 +441,17 @@ sb.auth.onAuthStateChange(function(ev,ses){
 
 function init(){
   show('s-load');
+  // Pre-fill email from URL ?email= param (from activation email button)
+  try{
+    var urlp=new URLSearchParams(window.location.search);
+    var urlEmail=urlp.get('email')||'';
+    if(!urlEmail){urlEmail=sessionStorage.getItem('np_prereg')||'';}
+    if(urlEmail){
+      sessionStorage.removeItem('np_prereg');
+      var lemEl=document.getElementById('lem');
+      if(lemEl)lemEl.value=urlEmail;
+    }
+  }catch(e){}
 }
 
 async function loadProf(email){
